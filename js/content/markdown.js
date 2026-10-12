@@ -49,7 +49,7 @@
 /** @typedef {{children: InlineNode[], sublist: BlockNode|null, line: number}} ListItem */
 
 const LIST_MARKER = /^(\s*)([-*+]|\d+\.)\s+(.*)$/;
-const IMAGE_ONLY = /^!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"([^"]*)")?\s*\)$/;
+const IMAGE_ONLY = /^!\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+"([^"]*)")?\s*\)$/;
 const TODO_ONLY = /^\{\{\s*TODO:?\s*(.*?)\s*\}\}$/i;
 
 /**

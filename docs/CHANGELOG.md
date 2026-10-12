@@ -36,3 +36,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - PDF-Zertifikat (A4 quer) mit jsPDF 4.2.1, Lato eingebettet, Logo, Sektorstreifen, Prüfcode und Pflichthinweis zur Sicherheitsunterweisung.
 - Name wird erst beim Zertifikat abgefragt und bleibt im Browser.
 - Druckansicht als Ersatz, falls jsPDF nicht geladen werden kann.
+
+### Phase 7 – Editor (2026-10-13)
+- `editor.html`: Baukasten mit Kursstruktur, Seiten-Arbeitsfläche, Eigenschaften und Live-Vorschau.
+- Direktmodus (File System Access API, Ordner wird gemerkt) und Download-Modus.
+- Schema-gesteuerte Formulare, Spezialeditoren für Quiz und Hotspot, Glossar-Editor, Bildimport.
+- Quelltext-Ansicht; nicht lesbare Abschnitte bleiben erhalten.
+- Rückgängig/Wiederholen (50 Schritte), Sicherungskopien in `content/_backup/`, Konfliktprüfung, Warnung beim Verlassen.
+- Kapitel anlegen, umbenennen, duplizieren, umsortieren, deaktivieren, archivieren, wiederherstellen.
+- Freigabe von Sicherheitskapiteln wird bei jeder Änderung zurückgesetzt; Vorschlag „Version erhöhen" bei Quizänderungen.

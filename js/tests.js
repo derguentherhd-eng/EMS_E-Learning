@@ -27,6 +27,8 @@ import {
 } from './store.js';
 import { hashText } from './blocks/block-utils.js';
 import { certificateFileName, createVerificationCode, formatGermanDate } from './certificate.js';
+import { backupPath, chapterFileName, imageFileName, slugify } from './editor/names.js';
+import { createHistory, record, redo, undo } from './editor/history.js';
 
 /* ───────────────────────────── Mini-Testrahmen ───────────────────────────── */
 
@@ -295,6 +297,13 @@ test('Windows-Zeilenenden und BOM werden vereinheitlicht', () => {
 });
 
 test('Round-Trip Beispielkapitel', () => assertChapterRoundTrip(SAMPLE_CHAPTER));
+
+test('Unfertiges Bild ohne Pfad bleibt ein Bild-Element', () => {
+  const text = '---\ntitel: X\n---\n\n## S\n\nText.\n\n![]()\n';
+  const chapter = parseChapter(text, 'x.md');
+  assertEqual(chapter.pages[0].elements.map((element) => element.type), ['text', 'image']);
+  assertChapterRoundTrip(text);
+});
 
 test('Unbekannter Baustein bleibt als nicht lesbarer Abschnitt erhalten', () => {
   const text = '---\ntitel: X\n---\n\n## S\n\n:::gibtsnicht Titel\nInhalt bleibt\n:::\n';
@@ -599,6 +608,60 @@ test('Dateiname ist dateisystemsicher', () => {
 });
 
 test('Datum auf Deutsch', () => assertEqual(formatGermanDate('2026-03-01'), '1. März 2026'));
+
+/* ───────────────────────────── Editor-Logik ───────────────────────────── */
+
+group('Editor: Dateinamen und Verlauf');
+
+test('Dateiname aus Kapiteltitel: Umlaute, Sonderzeichen, Nummer', () => {
+  assertEqual(slugify('Größe & Übersicht: Straße!'), 'groesse-uebersicht-strasse');
+  assertEqual(chapterFileName('Boxengasse: Regeln & Tipps!', ['01-a.md', '06-b.md']), '07-boxengasse-regeln-tipps.md');
+  assertEqual(chapterFileName('Café Señor', []), '01-cafe-senor.md');
+});
+
+test('Dateiname: Dubletten bekommen -2, -3', () => {
+  assertEqual(chapterFileName('Test', ['01-test.md', '02-test.md']), '03-test.md');
+  assertEqual(imageFileName('Team Foto (1).JPG', ['team-foto-1.jpg']), 'team-foto-1-2.jpg');
+  assertEqual(imageFileName('virus.exe', []), null);
+});
+
+test('Sicherungskopie: Name mit Datum und Uhrzeit', () => {
+  assertEqual(backupPath('content/kapitel/01-a.md', new Date(2026, 9, 13, 9, 5)), 'content/_backup/01-a-2026-10-13-0905.md');
+});
+
+test('Verlauf: Rückgängig und Wiederholen', () => {
+  const history = createHistory();
+  let doc = { value: 1 };
+  record(history, structuredClone(doc), null, 0);
+  doc = { value: 2 };
+  record(history, structuredClone(doc), null, 10000);
+  doc = { value: 3 };
+  doc = undo(history, doc);
+  assertEqual(doc.value, 2);
+  doc = undo(history, doc);
+  assertEqual(doc.value, 1);
+  assertEqual(undo(history, doc), null, 'nichts mehr rückgängig zu machen');
+  doc = redo(history, doc);
+  assertEqual(doc.value, 2);
+});
+
+test('Verlauf: Tippen wird zu einem Schritt gebündelt, neue Änderung löscht „Wiederholen"', () => {
+  const history = createHistory();
+  record(history, { v: 'a' }, 'feld', 0);
+  record(history, { v: 'ab' }, 'feld', 500);
+  record(history, { v: 'abc' }, 'feld', 900);
+  assertEqual(history.past.length, 1);
+  undo(history, { v: 'abcd' });
+  record(history, { v: 'x' }, null, 5000);
+  assertEqual(history.future.length, 0);
+});
+
+test('Verlauf: höchstens 50 Schritte', () => {
+  const history = createHistory();
+  for (let i = 0; i < 60; i += 1) record(history, { i }, null, i * 10000);
+  assertEqual(history.past.length, 50);
+  assertEqual(history.past[0].i, 10);
+});
 
 /* ───────────────────────────── Kurs und Glossar ───────────────────────────── */
 

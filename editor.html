@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+  editor.html – Editor / Baukasten für die Kursinhalte (lokales Pflegewerkzeug)
+
+  Kapitel, Seiten und Elemente zusammenstellen, ohne Markdown tippen zu müssen. Die Dateien in
+  content/ bleiben die einzige Quelle: Der Editor liest und schreibt genau diese Dateien.
+  Anleitung: docs/PFLEGE.md, Abschnitt „Der Editor in 5 Minuten".
+
+  Am besten in Chrome oder Edge über das Startskript öffnen (http://localhost:8765/editor.html).
+  Diese Datei und den Ordner js/editor/ NICHT auf den öffentlichen Webspace hochladen.
+
+  Die Logik steht in js/editor/ (Einstieg: editor-main.js).
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editor – Rookie-Onboarding</title>
+    <meta name="description" content="Baukasten-Editor zum Pflegen der Inhalte des Rookie-Onboardings von Einstein Motorsport.">
+    <meta name="color-scheme" content="dark light">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <script src="js/theme-init.js"></script>
+    <script type="module" src="js/editor/editor-main.js"></script>
+  </head>
+  <body class="editor">
+    <a class="skip-link" href="#editor-main">Zum Arbeitsbereich springen</a>
+
+    <header class="editor-bar">
+      <a class="editor-bar__brand" href="index.html" target="_blank" rel="noopener" title="Kurs in neuem Tab öffnen">
+        <img src="assets/logo/logo.svg" alt="Einstein Motorsport" width="284" height="269" class="editor-bar__logo">
+      </a>
+      <p class="editor-bar__title"><span data-region="title">Editor</span></p>
+      <p class="editor-bar__mode" data-region="mode">Kein Ordner geöffnet</p>
+      <p class="editor-bar__dirty" data-region="dirty" aria-live="polite"></p>
+      <div class="editor-bar__actions">
+        <button type="button" class="button button--small" data-action="undo" disabled title="Strg/Cmd + Z">Rückgängig</button>
+        <button type="button" class="button button--small" data-action="redo" disabled title="Strg/Cmd + Umschalt + Z">Wiederholen</button>
+        <a class="button button--small" href="pruefen.html" target="_blank" rel="noopener">Prüfseite</a>
+        <button type="button" class="button button--primary button--small" data-action="save" title="Strg/Cmd + S">Speichern</button>
+      </div>
+    </header>
+
+    <section class="editor-start" data-region="start" aria-labelledby="start-title">
+      <h1 id="start-title">Editor für das Rookie-Onboarding</h1>
+      <p class="lead">Hier baust du Kapitel, Seiten und interaktive Elemente zusammen – ohne Markdown tippen zu müssen. Alles landet in den Dateien im Ordner <code>content/</code>.</p>
+      <p data-start-info></p>
+      <div class="editor-start__actions" data-start-actions></div>
+      <p class="notice notice--error" data-start-error role="alert" hidden></p>
+      <p class="editor-start__small">Der Editor ist für Bildschirme ab 1024 px Breite gedacht und vollständig per Tastatur bedienbar. Er nutzt keine KI und keine externen Dienste.</p>
+    </section>
+
+    <div class="editor-layout" data-region="layout" hidden>
+      <aside class="editor-column editor-column--tree" data-region="tree" aria-label="Kursstruktur"></aside>
+      <main class="editor-column editor-column--main" id="editor-main" data-region="middle" tabindex="-1"></main>
+      <aside class="editor-column editor-column--side" data-region="side" aria-label="Eigenschaften, Vorschau und Hinweise">
+        <div class="tabs" role="tablist" aria-label="Rechte Spalte">
+          <button type="button" role="tab" id="tab-properties" aria-controls="panel-properties" data-tab="properties" aria-selected="false" tabindex="-1">Eigenschaften</button>
+          <button type="button" role="tab" id="tab-preview" aria-controls="panel-preview" data-tab="preview" aria-selected="true">Vorschau</button>
+        </div>
+        <div class="tabs__panel" role="tabpanel" id="panel-properties" aria-labelledby="tab-properties" data-region="properties" hidden></div>
+        <div class="tabs__panel" role="tabpanel" id="panel-preview" aria-labelledby="tab-preview" data-region="preview"></div>
+        <section class="hints" data-region="hints" aria-label="Hinweise der Prüfung"></section>
+      </aside>
+    </div>
+
+    <footer class="editor-status">
+      <p data-region="status" role="status"></p>
+    </footer>
+  </body>
+</html>

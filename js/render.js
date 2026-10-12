@@ -117,6 +117,7 @@ function renderTable(table, options) {
  * @returns {HTMLElement}
  */
 export function renderFigure(src, alt, caption = '') {
+  if (!src) return el('p', { class: 'notice', role: 'note' }, 'Hier fehlt noch ein Bild.');
   return el(
     'figure',
     { class: 'figure' },

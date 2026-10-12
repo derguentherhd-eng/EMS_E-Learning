@@ -167,6 +167,9 @@ export function validateChapter(chapter, course, options = {}) {
         return;
       }
       if (element.type === 'image') {
+        if (element.src.trim() === '') {
+          errors.push({ file, line: element.line, severity: 'fehler', message: 'Ein Bild-Element hat noch keine Bilddatei.', fix: 'Im Editor „Bild wählen …" benutzen oder den Pfad eintragen, z. B. ![Beschreibung](assets/bilder/foto.webp).', ref: where });
+        }
         if (element.alt.trim() === '') {
           errors.push({ file, line: element.line, severity: 'fehler', message: `Dem Bild „${element.src}" fehlt der Alternativtext.`, fix: 'Beschreibe in den eckigen Klammern, was auf dem Bild zu sehen ist: ![Beschreibung](pfad). Menschen mit Screenreader hören diesen Text.', ref: where });
         }
@@ -246,7 +249,7 @@ export function collectImages(course) {
     for (const section of sections) {
       section.elements.forEach((element, elementIndex) => {
         const ref = { chapterId: chapter.id, page: section.index, element: elementIndex };
-        if (element.type === 'image') images.push({ src: element.src, file: chapter.path, line: element.line, ref });
+        if (element.type === 'image' && element.src) images.push({ src: element.src, file: chapter.path, line: element.line, ref });
         if (element.type === 'text') {
           walkMarkdown(parseMarkdown(element.markdown, element.line), (node, line) => {
             if (node.type === 'figure' || node.type === 'image') images.push({ src: node.src, file: chapter.path, line, ref });
@@ -260,7 +263,7 @@ export function collectImages(course) {
       });
     }
   }
-  return images.filter((image) => !/^(https?:|data:)/i.test(image.src));
+  return images.filter((image) => image.src && !/^(https?:|data:)/i.test(image.src));
 }
 
 /**

@@ -75,7 +75,8 @@ export const COURSE_KEYS = [
 
 const BLOCK_OPEN = /^:::\s*([A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß0-9-]*)(.*)$/;
 const PAGE_HEADING = /^##(?:\s+(.*?))?\s*$/;
-const IMAGE_ONLY = /^!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"([^"]*)")?\s*\)$/;
+// Leerer Pfad ist erlaubt (unfertiges Bild aus dem Editor) – die Prüfung meldet ihn.
+const IMAGE_ONLY = /^!\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+"([^"]*)")?\s*\)$/;
 
 /**
  * Bereitet Dateitext vor: Byte-Order-Mark entfernen, Windows-Zeilenenden vereinheitlichen.
