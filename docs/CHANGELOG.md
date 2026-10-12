@@ -31,3 +31,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Kapitelquiz: Pool mit Zufallsauswahl, Sicherheitsfragen immer, sofortiges Feedback mit Erklärung, Ergebnis mit Links zum Nachlesen.
 - Bestes Ergebnis bleibt; Sektor gelb (bestanden) bzw. lila (100 %); Versionserhöhung markiert „aktualisiert".
 - Qualifying mit Startampel (überspringbar, ohne Animation bei „Bewegung reduzieren").
+
+### Phase 6 – Zertifikat (2026-10-13)
+- PDF-Zertifikat (A4 quer) mit jsPDF 4.2.1, Lato eingebettet, Logo, Sektorstreifen, Prüfcode und Pflichthinweis zur Sicherheitsunterweisung.
+- Name wird erst beim Zertifikat abgefragt und bleibt im Browser.
+- Druckansicht als Ersatz, falls jsPDF nicht geladen werden kann.

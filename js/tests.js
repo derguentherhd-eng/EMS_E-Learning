@@ -26,6 +26,7 @@ import {
   normalizeState, recordQualifying, recordQuizResult,
 } from './store.js';
 import { hashText } from './blocks/block-utils.js';
+import { certificateFileName, createVerificationCode, formatGermanDate } from './certificate.js';
 
 /* ───────────────────────────── Mini-Testrahmen ───────────────────────────── */
 
@@ -578,6 +579,26 @@ test('Checklisten-Schlüssel hängt am Text', () => {
   assertEqual(hashText('Drive-Zugang beantragen'), hashText('Drive-Zugang beantragen'));
   assert(hashText('A') !== hashText('B'), 'verschiedene Texte, gleicher Schlüssel');
 });
+
+/* ───────────────────────────── Zertifikat ───────────────────────────── */
+
+group('Zertifikat');
+
+test('Prüfcode: deterministisch, Format XXXX-XXXX, ändert sich mit den Eingaben', () => {
+  const code = createVerificationCode('Jürgen Weiß-Özdemir', '2026-10-13', '1.0');
+  assert(/^[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.test(code), `Format: ${code}`);
+  assertEqual(createVerificationCode('  jürgen   weiß-özdemir ', '2026-10-13', '1.0'), code, 'Groß-/Kleinschreibung und Leerzeichen egal');
+  assert(createVerificationCode('Jürgen Weiß-Özdemir', '2026-10-14', '1.0') !== code, 'Datum fließt ein');
+  assert(createVerificationCode('Jürgen Weiß-Özdemir', '2026-10-13', '1.1') !== code, 'Version fließt ein');
+});
+
+test('Dateiname ist dateisystemsicher', () => {
+  assertEqual(certificateFileName('Jürgen Weiß-Özdemir'), 'Onboarding-Zertifikat-Juergen-Weiss-Oezdemir.pdf');
+  assertEqual(certificateFileName('  Anna / Bé <3 '), 'Onboarding-Zertifikat-Anna-Be-3.pdf');
+  assertEqual(certificateFileName('***'), 'Onboarding-Zertifikat-Teilnehmende.pdf');
+});
+
+test('Datum auf Deutsch', () => assertEqual(formatGermanDate('2026-03-01'), '1. März 2026'));
 
 /* ───────────────────────────── Kurs und Glossar ───────────────────────────── */
 
