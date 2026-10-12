@@ -233,6 +233,110 @@
     border-inline-start-color: var(--color-success);
     background-color: var(--color-success-bg);
   }
+
+  /* ── Prüfseite (pruefen.html) und Selbsttests (tests.html) ── */
+  .check-summary [data-summary] {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .check-summary__count--error {
+    color: var(--color-error);
+  }
+
+  .check-summary__ok {
+    color: var(--color-success);
+  }
+
+  .check-file {
+    margin-block-start: var(--space-xl);
+  }
+
+  .check-file__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding-block-end: var(--space-2xs);
+    border-block-end: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  .check-file__title {
+    font-size: var(--step-1);
+  }
+
+  .check-file__title code {
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .check-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .check-item {
+    max-inline-size: none;
+    padding: var(--space-xs) var(--space-s);
+    border-block-end: var(--border-thin) solid var(--color-line);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  .check-item p {
+    max-inline-size: 80ch;
+  }
+
+  .check-item--fehler {
+    border-inline-start-color: var(--color-error);
+  }
+
+  .check-item--warnung {
+    border-inline-start-color: var(--color-yellow);
+  }
+
+  .check-item--todo {
+    border-inline-start-color: var(--color-text-muted);
+  }
+
+  .check-item__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .check-item__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .check-item--fehler .check-item__badge {
+    color: var(--color-error);
+  }
+
+  .check-item__icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  .check-item__message {
+    margin-block-start: var(--space-3xs);
+  }
+
+  .check-item__fix {
+    margin-block-start: var(--space-3xs);
+    color: var(--color-text-muted);
+  }
+
+  .check-item__fix strong {
+    color: var(--color-text);
+  }
 }
 
 /* ── Hilfsklassen: dürfen als einzige Ebene !important nutzen ── */

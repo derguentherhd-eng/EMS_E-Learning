@@ -31,4 +31,4 @@ echo "Editor:     ${URL}editor.html"
 echo "Prüfseite:  ${URL}pruefen.html"
 echo "Beenden mit Ctrl+C."
 (sleep 1 && xdg-open "$URL" >/dev/null 2>&1) &
-exec python3 -m http.server "$PORT" --bind 127.0.0.1
+exec python3 tools/server.py "$PORT"

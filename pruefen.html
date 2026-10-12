@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  pruefen.html – Prüfseite für die Kursinhalte (Wartungswerkzeug)
+
+  Lädt alle Dateien aus content/ und listet in Klartext auf, was nicht stimmt: mit Datei,
+  Zeilennummer, Schweregrad und Lösungsvorschlag. Vor jeder Veröffentlichung öffnen!
+  Erklärung der Meldungen: docs/PFLEGE.md, Abschnitt „Prüfseite benutzen".
+
+  Die Logik steht in js/check-page.js und js/content/validate.js.
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inhalte prüfen – Rookie-Onboarding</title>
+    <meta name="description" content="Prüft die Inhaltsdateien des Rookie-Onboardings auf Fehler, fehlende Angaben und offene Platzhalter.">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="js/theme-init.js"></script>
+    <script type="module" src="js/check-page.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="masthead__brand" href="index.html">
+          <img class="masthead__logo" src="assets/logo/logo.svg" alt="Einstein Motorsport" width="284" height="269">
+          <span>Prüfseite</span>
+        </a>
+        <nav class="masthead__nav" aria-label="Werkzeuge">
+          <ul class="masthead__links">
+            <li><a href="index.html">Zum Kurs</a></li>
+            <li><a href="editor.html">Editor</a></li>
+            <li><a href="tests.html">Selbsttests</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page page--wide stack" id="main" tabindex="-1">
+      <h1>Inhalte prüfen</h1>
+      <p class="lead">Diese Seite liest alle Dateien aus <code>content/</code> und zeigt, was nicht stimmt. Fehler zuerst beheben, Warnungen prüfen, Platzhalter vor der Veröffentlichung füllen.</p>
+      <div class="check-actions">
+        <button class="button button--primary" type="button" data-action="recheck">Neu prüfen</button>
+      </div>
+      <section class="check-summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Zusammenfassung</h2>
+        <p data-summary aria-live="polite">Prüfung läuft …</p>
+      </section>
+      <div data-results></div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>Die Prüfung läuft nur in deinem Browser. Es werden keine Daten verschickt.</p>
+      </div>
+    </footer>
+  </body>
+</html>

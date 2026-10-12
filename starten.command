@@ -40,4 +40,4 @@ echo "Prüfseite:  ${URL}pruefen.html"
 echo
 echo "Dieses Fenster offen lassen. Beenden mit Ctrl+C oder Fenster schließen."
 (sleep 1 && open "$URL") &
-exec python3 -m http.server "$PORT" --bind 127.0.0.1
+exec python3 tools/server.py "$PORT"

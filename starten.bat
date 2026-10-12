@@ -31,13 +31,13 @@ start "" /min cmd /c "timeout /t 2 /nobreak >nul & start "" %URL%"
 
 py -3 -c "import sys" >nul 2>nul
 if %errorlevel%==0 (
-  py -3 -m http.server %PORT% --bind 127.0.0.1
+  py -3 tools\server.py %PORT%
   goto :ende
 )
 
 python -c "import sys" >nul 2>nul
 if %errorlevel%==0 (
-  python -m http.server %PORT% --bind 127.0.0.1
+  python tools\server.py %PORT%
   goto :ende
 )
 

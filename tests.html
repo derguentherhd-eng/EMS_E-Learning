@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+  tests.html – Selbsttests für Parser, Bausteine und Kurslogik
+
+  Öffnen über das Startskript: http://localhost:8765/tests.html
+  Alle Tests müssen grün sein, bevor eine neue Fassung veröffentlicht wird.
+  Die Tests selbst stehen in js/tests.js (ohne Test-Framework, mit kleinem assert-Helfer).
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selbsttests – Rookie-Onboarding</title>
+    <meta name="description" content="Automatische Selbsttests für Parser, Bausteine, Quiz- und Fortschrittslogik des Rookie-Onboardings.">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/blocks.css">
+    <script src="js/theme-init.js"></script>
+    <script type="module" src="js/tests.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="masthead__brand" href="index.html">
+          <img class="masthead__logo" src="assets/logo/logo.svg" alt="Einstein Motorsport" width="284" height="269">
+          <span>Selbsttests</span>
+        </a>
+        <nav class="masthead__nav" aria-label="Werkzeuge">
+          <ul class="masthead__links">
+            <li><a href="index.html">Zum Kurs</a></li>
+            <li><a href="pruefen.html">Prüfseite</a></li>
+            <li><a href="editor.html">Editor</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page page--wide stack" id="main" tabindex="-1">
+      <h1>Selbsttests</h1>
+      <p class="lead" data-test-summary aria-live="polite">Tests laufen …</p>
+      <div data-test-results></div>
+      <!-- Spielfläche für Tests, die DOM-Elemente bauen; für Nutzende unsichtbar. -->
+      <div class="visually-hidden" data-test-sandbox></div>
+    </main>
+  </body>
+</html>
