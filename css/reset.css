@@ -1,0 +1,93 @@
+/*
+ * reset.css – Kaskadenebenen und schlanker Browser-Reset
+ *
+ * Zweck:
+ *   1. Legt die Reihenfolge aller Kaskadenebenen (@layer) fest. Diese Zeile MUSS als erstes
+ *      CSS geladen werden, deshalb steht reset.css in jeder HTML-Datei an erster Stelle.
+ *      Spätere Ebenen gewinnen gegen frühere – unabhängig von der Spezifität der Selektoren.
+ *   2. Gleicht Browser-Unterschiede aus (Abstände, Box-Modell, Medien).
+ *
+ * Zusammenspiel: tokens.css → base.css → layout.css → components.css/blocks.css nutzen diese
+ * Ebenen. print.css und editor.css hängen sich ebenfalls in die Ebenen ein.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neue Ebene nötig? Nur in der @layer-Zeile ergänzen, nirgends sonst.
+ *   – Gestaltung (Farben, Schriften) gehört NICHT hierher, sondern nach tokens.css/base.css.
+ */
+
+@layer reset, tokens, base, layout, components, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Browser-Standardabstände entfernen; Abstände setzt base.css bewusst neu. */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd,
+  ul,
+  ol {
+    margin: 0;
+  }
+
+  html {
+    /* Verhindert, dass iOS die Schrift im Querformat eigenmächtig vergrößert. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-block-size: 100vh;
+    min-block-size: 100dvh;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  /* Formularelemente erben die Schrift, statt die Systemschrift des Browsers zu nehmen. */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* Lange Wörter (z. B. Dateinamen, URLs) dürfen umbrechen, statt das Layout zu sprengen. */
+  p,
+  li,
+  dd,
+  dt,
+  h1,
+  h2,
+  h3,
+  figcaption,
+  td,
+  th {
+    overflow-wrap: break-word;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+}

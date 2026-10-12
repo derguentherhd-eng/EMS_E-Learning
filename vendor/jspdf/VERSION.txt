@@ -1,0 +1,5 @@
+jsPDF 4.2.1
+Quelle: https://registry.npmjs.org/jspdf/-/jspdf-4.2.1.tgz (dist/jspdf.umd.min.js)
+Veröffentlicht: 2026-03-17
+Lizenz: MIT (siehe LICENSE)
+Nicht automatisch aktualisieren. Neue Version: Datei ersetzen, diese Datei anpassen, Zertifikat testen.

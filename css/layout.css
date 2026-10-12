@@ -1,0 +1,159 @@
+/*
+ * layout.css – Seitengerüst: Kopfleiste, Hauptspalte, Fußzeile, Seitennavigation
+ *
+ * Zweck: Legt fest, WO Dinge stehen – nicht, wie einzelne Bedienelemente aussehen
+ * (das macht components.css).
+ *
+ * Aufbau jeder Kursansicht (siehe index.html):
+ *   <header class="masthead">  schwarzer Streifen mit Logo, Navigation und Sektoranzeige
+ *   <main class="page">        die aktuelle Ansicht (Startseite, Kapitelseite, Quiz …)
+ *   <footer class="site-footer">
+ *
+ * Mobile first: Die Grundregeln gelten fürs Smartphone (ab 320 px). Größere Bildschirme
+ * bekommen Ergänzungen per @media (min-width: …). Breakpoints in rem, damit sie auch bei
+ * 200 % Zoom und vergrößerter Schrift richtig greifen.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Breite der Textspalte: --content-max in tokens.css.
+ *   – Höhe der fixierten Weiter-Leiste: --pager-height in tokens.css.
+ */
+
+@layer layout {
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* ── Kopfleiste ── */
+  .masthead {
+    background-color: var(--color-masthead-bg);
+    color: var(--color-masthead-text);
+  }
+
+  .masthead__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+    max-inline-size: 72rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    min-block-size: var(--masthead-height);
+  }
+
+  .masthead__nav {
+    /* Mobil: eigene Zeile unter Logo und Menü-Knopf, aufklappbar. */
+    flex-basis: 100%;
+    padding-block-end: var(--space-xs);
+  }
+
+  @media (min-width: 48rem) {
+    .masthead__nav {
+      flex-basis: auto;
+      margin-inline-start: auto;
+      padding-block-end: 0;
+    }
+  }
+
+  /* ── Hauptspalte ── */
+  .page {
+    inline-size: 100%;
+    max-inline-size: calc(var(--content-max) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding: var(--space-l) var(--gutter) var(--space-2xl);
+  }
+
+  /* Breitere Ansichten (Glossar, Prüfseite) dürfen mehr Platz nutzen. */
+  .page--wide {
+    max-inline-size: calc(64rem + 2 * var(--gutter));
+  }
+
+  /* Gibt es eine fixierte Weiter-Leiste, braucht der Inhalt unten Platz, damit nichts
+   * verdeckt wird. :has() prüft das ohne zusätzliches JavaScript. */
+  .page:has(.pager) {
+    padding-block-end: calc(var(--pager-height) + var(--space-xl));
+  }
+
+  /* Abstände zwischen allen direkten Bausteinen einer Ansicht („Stapel"-Muster). */
+  .stack > * + * {
+    margin-block-start: var(--space-m);
+  }
+
+  .stack--tight > * + * {
+    margin-block-start: var(--space-xs);
+  }
+
+  .stack--loose > * + * {
+    margin-block-start: var(--space-xl);
+  }
+
+  /* ── Seitennavigation (Zurück / Weiter) ──
+   * Mobil: am unteren Bildschirmrand fixiert, mit Daumen gut erreichbar.
+   * Desktop: normale Leiste am Ende des Inhalts. */
+  .pager {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 10;
+    display: flex;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--gutter);
+    padding-block-end: max(var(--space-2xs), env(safe-area-inset-bottom));
+    background-color: var(--color-bg);
+    border-block-start: var(--border-thin) solid var(--color-line-strong);
+  }
+
+  .pager > * {
+    flex: 1 1 0;
+  }
+
+  .pager__spacer {
+    flex: 1 1 0;
+  }
+
+  @media (min-width: 48rem) {
+    .pager {
+      position: static;
+      margin-block-start: var(--space-xl);
+      padding-inline: 0;
+      padding-block: var(--space-m) 0;
+      background-color: transparent;
+    }
+
+    .pager > * {
+      flex: 0 0 auto;
+    }
+
+    .pager__spacer {
+      flex: 1 1 auto;
+    }
+
+    .page:has(.pager) {
+      padding-block-end: var(--space-2xl);
+    }
+  }
+
+  /* ── Fußzeile ── */
+  .site-footer {
+    padding: var(--space-m) var(--gutter);
+    border-block-start: var(--border-thin) solid var(--color-line);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .site-footer__inner {
+    max-inline-size: 72rem;
+    margin-inline: auto;
+  }
+
+  /* Auf Seiten mit fixierter Weiter-Leiste darf die Fußzeile nicht dahinter verschwinden. */
+  body:has(.pager) .site-footer {
+    padding-block-end: calc(var(--pager-height) + var(--space-m));
+  }
+
+  @media (min-width: 48rem) {
+    body:has(.pager) .site-footer {
+      padding-block-end: var(--space-m);
+    }
+  }
+}

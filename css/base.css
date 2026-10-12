@@ -1,0 +1,203 @@
+/*
+ * base.css – Grundgestaltung der HTML-Elemente (ohne Klassen)
+ *
+ * Zweck: Wie sehen Text, Überschriften, Links, Listen, Tabellen und Formularfelder aus, wenn
+ * keine Komponente etwas anderes sagt? Inhalte aus den Markdown-Dateien werden fast nur mit
+ * diesen Regeln gestaltet.
+ *
+ * Zusammenspiel: Nutzt ausschließlich Variablen aus tokens.css. Komponenten (components.css,
+ * blocks.css) liegen in einer späteren Ebene und dürfen alles hier überschreiben.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Schriftgrößen/Abstände: lieber die Skala in tokens.css anpassen.
+ *   – Fokusring: steht ganz unten; nie entfernen, nur gestalten (Barrierefreiheit!).
+ */
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 100%; /* respektiert die Schriftgröße, die im Browser eingestellt ist */
+    line-height: var(--line-height-body);
+    /* Lato hat standardmäßig gleich breite Ziffern – ideal für Zeiten und Zähler. */
+    font-variant-numeric: tabular-nums;
+    scroll-padding-block-start: calc(var(--masthead-height) + var(--space-m));
+  }
+
+  body {
+    background-color: var(--color-bg);
+    font-size: var(--step-0);
+  }
+
+  /* ── Überschriften ──
+   * h1 = Titel der Ansicht (in Kapiteln: „## Seitentitel" aus Markdown).
+   * h2 = Zwischenüberschrift („### …" aus Markdown) und Abschnitte in Ansichten. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: var(--line-height-tight);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--step-4);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-size: var(--step-2);
+    font-weight: var(--font-weight-bold);
+  }
+
+  h3 {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  h4 {
+    font-size: var(--step-0);
+    font-weight: var(--font-weight-bold);
+  }
+
+  p,
+  li {
+    max-inline-size: var(--measure);
+    text-wrap: pretty;
+  }
+
+  strong,
+  b {
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ── Links: immer unterstrichen, damit sie nicht nur über Farbe erkennbar sind. ── */
+  a {
+    color: var(--color-link);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 0.16em;
+  }
+
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    padding-inline: 0.25em;
+    background-color: var(--color-surface-strong);
+    border-radius: var(--radius-s);
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 1.4em;
+  }
+
+  li + li {
+    margin-block-start: var(--space-3xs);
+  }
+
+  li::marker {
+    color: var(--color-text-muted);
+  }
+
+  blockquote {
+    padding-inline-start: var(--space-s);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    color: var(--color-text);
+    font-style: italic;
+  }
+
+  hr {
+    border: 0;
+    border-block-start: var(--border-thin) solid var(--color-line);
+  }
+
+  /* ── Tabellen: schlicht, gut lesbar, auf schmalen Bildschirmen scrollt nur die Tabelle. ── */
+  table {
+    inline-size: 100%;
+    font-size: var(--step-0);
+  }
+
+  th,
+  td {
+    padding: var(--space-2xs) var(--space-xs);
+    text-align: start;
+    vertical-align: top;
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  th {
+    font-weight: var(--font-weight-bold);
+    border-block-end-color: var(--color-line-strong);
+  }
+
+  figure img {
+    background-color: var(--color-surface);
+  }
+
+  figcaption {
+    margin-block-start: var(--space-2xs);
+    font-size: var(--step--1);
+    color: var(--color-text-muted);
+  }
+
+  /* ── Formulare ── */
+  label {
+    font-weight: var(--font-weight-bold);
+  }
+
+  input:not([type='checkbox'], [type='radio']),
+  select,
+  textarea {
+    min-block-size: var(--touch-target);
+    padding: var(--space-2xs) var(--space-xs);
+    background-color: var(--color-surface);
+    border: var(--border-thin) solid var(--color-line-strong);
+    border-radius: var(--radius-s);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    accent-color: var(--color-yellow);
+  }
+
+  /* Im hellen Theme wäre ein gelbes Häkchen kaum sichtbar → Lila (7,99 zu Weiß). */
+  :root[data-theme='light'] :is(input[type='checkbox'], input[type='radio']) {
+    accent-color: var(--color-purple);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']) :is(input[type='checkbox'], input[type='radio']) {
+      accent-color: var(--color-purple);
+    }
+  }
+
+  ::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+
+  /* ── Fokus: sichtbar für Tastaturbedienung, unsichtbar beim Klicken mit der Maus. ── */
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  /* Elemente, die nur per Skript Fokus bekommen (z. B. die h1 nach Seitenwechsel), sollen
+   * keinen Ring zeigen – der Ring würde wie ein Bedienelement wirken. */
+  [tabindex='-1']:focus {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+  }
+}

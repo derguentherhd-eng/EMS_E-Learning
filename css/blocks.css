@@ -1,0 +1,21 @@
+/*
+ * blocks.css – Aussehen der interaktiven Inhalts-Bausteine (info, karten, zuordnen …)
+ *
+ * Zweck: Jeder Baustein aus js/blocks/ hat hier einen eigenen, mit Überschrift markierten
+ * Abschnitt. Die Klassennamen beginnen immer mit dem englischen Modulnamen, z. B. .flashcards
+ * für den Baustein „karten" (Zuordnung siehe js/blocks/registry.js).
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neuer Baustein: Abschnitt am Ende ergänzen, Klassen nach BEM (.modulname__teil--zustand).
+ *   – Farben nur über Variablen aus tokens.css; Kontrastregeln dort beachten.
+ *   – Bewegung immer mit var(--duration-…), damit „Bewegung reduzieren" greift.
+ */
+
+@layer components {
+  /* Gemeinsamer Rahmen aller Bausteine: kantige Fläche ohne Schatten. */
+  .block {
+    padding: var(--space-s);
+    background-color: var(--color-surface);
+    border-block-start: var(--border-thick) solid var(--color-line-strong);
+  }
+}

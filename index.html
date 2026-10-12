@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  index.html – die Kurs-Anwendung (Rookie-Onboarding Einstein Motorsport)
+
+  Aufbau: Kopfleiste mit Logo, Navigation und Sektoranzeige · Hauptbereich · Fußzeile.
+  Der Hauptbereich (<main>) wird von js/main.js je nach Adresse (#/…) befüllt.
+  Inhalte stehen NICHT hier, sondern in content/*.md.
+
+  Wichtig: Diese Datei funktioniert nicht per Doppelklick (file://), weil Browser dann das
+  Laden der Inhaltsdateien verbieten. Immer über das Startskript (starten.command / .bat / .sh)
+  oder einen Webserver öffnen.
+
+  Wenn du hier etwas ändern willst …
+    – Navigation in der Kopfleiste: Links in <ul class="masthead__links"> ergänzen.
+    – Neue CSS-Datei: als <link> in die Reihe unten, reset.css bleibt immer zuerst.
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rookie-Onboarding – Einstein Motorsport</title>
+    <meta name="description" content="Onboarding-Kurs für neue Mitglieder von Einstein Motorsport, dem Formula-Student-Team der Technischen Hochschule Ulm.">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/blocks.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <script src="js/theme-init.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="masthead__brand" href="#/">
+          <img class="masthead__logo" src="assets/logo/logo.svg" alt="Einstein Motorsport" width="284" height="269">
+          <span class="masthead__title" data-course-title>Rookie-Onboarding</span>
+        </a>
+        <button class="button button--small masthead__menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menü</button>
+        <nav class="masthead__nav" id="site-nav" aria-label="Hauptnavigation">
+          <ul class="masthead__links">
+            <li><a href="#/" data-nav="start">Start</a></li>
+            <li><a href="#/glossar" data-nav="glossary">Glossar</a></li>
+            <li><a href="#/einstellungen" data-nav="settings">Einstellungen</a></li>
+            <li><button class="theme-toggle" type="button" aria-pressed="false">Helles Design</button></li>
+          </ul>
+        </nav>
+      </div>
+      <nav class="sector-bar" aria-label="Sektoren" hidden></nav>
+    </header>
+
+    <main class="page" id="main" tabindex="-1">
+      <p class="lead">Kurs wird geladen …</p>
+      <noscript>
+        <p>Dieser Kurs braucht JavaScript. Bitte aktiviere JavaScript in deinem Browser.</p>
+      </noscript>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>Dein Fortschritt bleibt nur in diesem Browser auf diesem Gerät. Es gibt kein Konto und kein Tracking.</p>
+        <p class="site-footer__storage" data-storage-warning hidden>Speichern ist in diesem Browser gerade nicht möglich (z. B. privates Fenster). Du kannst den Kurs trotzdem machen, dein Fortschritt geht beim Schließen aber verloren.</p>
+      </div>
+    </footer>
+  </body>
+</html>

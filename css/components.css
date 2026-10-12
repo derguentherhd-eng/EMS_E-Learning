@@ -1,0 +1,257 @@
+/*
+ * components.css – Bedienelemente und wiederkehrende Bausteine der Oberfläche
+ *
+ * Zweck: Aussehen von Buttons, Kopfleiste, Sektoranzeige, Quiz, Glossar-Popover, Dialogen.
+ * Die interaktiven Inhalts-Bausteine (Lernkarten, Zuordnen …) stehen in blocks.css.
+ *
+ * Namensregel (BEM): .block__element--variante
+ *   z. B. .sector-bar__segment--done = Segment der Sektoranzeige im Zustand „bestanden".
+ *
+ * Gestaltungsregeln dieses Projekts (siehe Phase-0-Plan, Abschnitt 5):
+ *   – Kantig: Radius höchstens 2 px, keine Standard-Schatten, keine Verläufe als Deko.
+ *   – Gelb-Budget: Gelb nur für primäre Aktion, bestandene Sektoren, Fokus (dunkel),
+ *     Achtung-Schraffur und Links (dunkel). Lila nur für „Bestzeit".
+ *   – Keine Pfeile in Buttontexten; die Richtung ergibt sich aus der Position.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neue Button-Variante: unter „Buttons" als .button--name ergänzen.
+ *   – Farben nie direkt eintragen, immer Variablen aus tokens.css verwenden.
+ */
+
+@layer components {
+  /* ── Skip-Link: erstes Element der Seite, sichtbar sobald er Fokus hat ── */
+  .skip-link {
+    position: absolute;
+    inset-inline-start: var(--space-s);
+    inset-block-start: var(--space-s);
+    z-index: 100;
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+    font-weight: var(--font-weight-bold);
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+    outline: 3px solid var(--color-black);
+  }
+
+  /* ── Buttons ──
+   * <button class="button">            sekundär (Kontur)
+   * <button class="button button--primary">  primär (Gelb, schwarze Schrift, 17,37:1)
+   * <a class="button …">                Link, der wie ein Button aussieht (Navigation) */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    min-block-size: var(--touch-target);
+    min-inline-size: var(--touch-target);
+    padding: var(--space-2xs) var(--space-m);
+    background-color: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-line-strong);
+    border-radius: var(--radius-s);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .button:hover {
+    background-color: var(--color-surface-strong);
+  }
+
+  .button--primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary-border);
+  }
+
+  .button--primary:hover {
+    /* Etwas dunkleres Gelb; Schwarz darauf bleibt deutlich über 4,5:1. */
+    background-color: #f2e100;
+  }
+
+  .button--quiet {
+    border-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .button--small {
+    min-block-size: 2.25rem;
+    padding: var(--space-3xs) var(--space-xs);
+    font-size: var(--step--1);
+  }
+
+  .button:disabled,
+  .button[aria-disabled='true'] {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .button__icon {
+    inline-size: 1.25em;
+    block-size: 1.25em;
+    flex: none;
+  }
+
+  /* ── Kopfleiste (immer schwarz) ── */
+  .masthead :focus-visible {
+    outline-color: var(--color-masthead-focus);
+  }
+
+  .masthead__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    color: var(--color-masthead-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-black);
+    font-size: var(--step-1);
+    line-height: 1;
+  }
+
+  .masthead__logo {
+    inline-size: 2.6rem;
+    block-size: auto;
+  }
+
+  .masthead__menu-toggle {
+    margin-inline-start: auto;
+    color: var(--color-masthead-text);
+    border-color: var(--color-masthead-muted);
+  }
+
+  .masthead__menu-toggle:hover {
+    background-color: #222222;
+  }
+
+  @media (min-width: 48rem) {
+    .masthead__menu-toggle {
+      display: none;
+    }
+  }
+
+  .masthead__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .masthead__links li + li {
+    margin-block-start: 0;
+  }
+
+  .masthead__links a,
+  .masthead__links button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    min-block-size: var(--touch-target);
+    padding-inline: var(--space-2xs);
+    background: none;
+    border: 0;
+    color: var(--color-masthead-text);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+  }
+
+  .masthead__links a:hover,
+  .masthead__links button:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .masthead__links a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--color-yellow);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.35em;
+  }
+
+  @media (min-width: 48rem) {
+    .masthead__links {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+  }
+
+  /* Mobil ist die Navigation eingeklappt, bis der Menü-Knopf gedrückt wird.
+   * Ohne JavaScript bleibt sie sichtbar (die Klasse setzt erst main.js). */
+  @media (max-width: 47.99rem) {
+    .masthead--collapsible .masthead__nav:not(.masthead__nav--open) {
+      display: none;
+    }
+  }
+
+  /* ── Kopfbereich einer Ansicht: „Sektor 3 · Unsere Subteams    Seite 2 von 7" ── */
+  .view-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3xs) var(--space-s);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .view-meta p {
+    margin: 0;
+  }
+
+  .view-title {
+    margin-block-start: var(--space-xs);
+  }
+
+  .lead {
+    font-size: var(--step-1);
+    line-height: 1.45;
+  }
+
+  /* ── Hinweise der Oberfläche (z. B. „Speichern nicht möglich") ── */
+  .notice {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    background-color: var(--color-surface);
+  }
+
+  .notice--error {
+    border-inline-start-color: var(--color-error);
+    background-color: var(--color-error-bg);
+  }
+
+  .notice--success {
+    border-inline-start-color: var(--color-success);
+    background-color: var(--color-success-bg);
+  }
+}
+
+/* ── Hilfsklassen: dürfen als einzige Ebene !important nutzen ── */
+@layer utilities {
+  /* Für Screenreader lesbar, aber unsichtbar (z. B. Zustand eines Sektors). */
+  .visually-hidden {
+    position: absolute !important; /* Begründung: muss jede Komponentenregel schlagen */
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Das hidden-Attribut muss immer gewinnen, auch wenn eine Komponente display setzt. */
+  [hidden] {
+    display: none !important;
+  }
+}
