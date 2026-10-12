@@ -18,6 +18,8 @@ import { serializeChapter, serializeCourse, serializeElement, serializeGlossary 
 import { createFetchReader, loadCourse } from './content/loader.js';
 import { validateChapter } from './content/validate.js';
 import { getBlock, listBlocks } from './blocks/registry.js';
+import { renderInline, renderMarkdown } from './render.js';
+import { parseRoute } from './router.js';
 
 /* ───────────────────────────── Mini-Testrahmen ───────────────────────────── */
 
@@ -187,6 +189,45 @@ test('Blöcke: Überschrift, Listen (verschachtelt), Zitat, Tabelle, Bild, Platz
   assertEqual(blocks[2].ordered, true);
   assertEqual(blocks[4].rows[0][1], [{ type: 'text', value: '2 | 3' }]);
   assertEqual(blocks[5], { type: 'figure', alt: 'Alt', src: 'assets/x.svg', caption: 'Unterschrift', line: 25 });
+});
+
+/* ───────────────────────────── Darstellung ───────────────────────────── */
+
+group('Darstellung (Renderer) und Router');
+
+test('HTML aus Inhalten erscheint als Text, nie als Element', () => {
+  const box = el('div', {}, renderMarkdown('<b>fett</b> <img src=x onerror=alert(1)>\n\n<script>alert(1)</script>'));
+  assertEqual(box.querySelectorAll('b, img, script').length, 0, 'eingeschleuste Elemente');
+  assert(box.textContent.includes('<script>alert(1)</script>'), 'Text fehlt');
+});
+
+test('javascript:-Links werden nicht zu Links', () => {
+  const box = el('div', {}, renderInline('[klick](javascript:alert%281%29)'));
+  assertEqual(box.querySelectorAll('a').length, 0);
+  assertEqual(box.textContent, 'klick');
+});
+
+test('Externe Links öffnen im neuen Tab und sagen das', () => {
+  const link = el('div', {}, renderInline('[FS](https://example.org)')).querySelector('a');
+  assertEqual(link?.getAttribute('target'), '_blank');
+  assert(link.getAttribute('rel').includes('noopener'), 'rel=noopener fehlt');
+  assert(link.textContent.includes('neuem Tab'), 'Hinweis fehlt');
+});
+
+test('Überschriften: ### im Kapitel wird zu <h2>', () => {
+  const box = el('div', {}, renderMarkdown('### Zwischen', { headingShift: -1 }));
+  assertEqual(box.firstElementChild.tagName, 'H2');
+});
+
+test('Router: alle Routen', () => {
+  assertEqual(parseRoute('').name, 'start');
+  assertEqual(parseRoute('#/kapitel/01-a/3').params, { id: '01-a', page: 3 });
+  assertEqual(parseRoute('#/kapitel/01-a').params.page, 1);
+  assertEqual(parseRoute('#/kapitel/01-a/quiz').name, 'quiz');
+  assertEqual(parseRoute('#/glossar/Endurance').params, { term: 'Endurance' });
+  assertEqual(parseRoute('#/zertifikat').name, 'certificate');
+  assertEqual(parseRoute('#/kapitel/01-a/0').name, 'notfound');
+  assertEqual(parseRoute('#main'), null);
 });
 
 /* ───────────────────────────── Kapitelstruktur ───────────────────────────── */

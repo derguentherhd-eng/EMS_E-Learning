@@ -15,3 +15,9 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Baustein-Registry; erste Bausteine info/tipp/achtung, aufklappen, quiz (Lesen/Schreiben/Prüfen).
 - Prüflogik (`validate.js`), Prüfseite `pruefen.html`, Selbsttests `tests.html`.
 - Eigener kleiner Python-Server (`tools/server.py`) mit `Cache-Control: no-cache`.
+
+### Phase 3 – Kursoberfläche (2026-10-12)
+- Startseite mit Zeitenmonitor-Liste und „Weiter, wo du aufgehört hast".
+- Kapitelseiten mit Lernzielen, „Direkt zum Quiz", Freigabe-Hinweis für Sicherheitskapitel und Zurück/Weiter-Leiste.
+- Sektoranzeige (dynamisch aus kurs.md), Glossar-Popover und Glossarseite, Einstellungen mit Zurücksetzen-Dialog.
+- Fokus- und Titelmanagement bei jedem Seitenwechsel.

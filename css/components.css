@@ -339,6 +339,522 @@
   }
 }
 
+@layer components {
+  /* ── Weitere Button-Varianten ── */
+  .button--large {
+    min-block-size: 3.25rem;
+    padding-inline: var(--space-l);
+    font-size: var(--step-1);
+  }
+
+  .button--danger {
+    background-color: var(--color-error-bg);
+    border-color: var(--color-error);
+    color: var(--color-text);
+  }
+
+  /* ── Fließtext aus den Inhaltsdateien ── */
+  .prose > * + * {
+    margin-block-start: var(--space-s);
+  }
+
+  .prose > :is(h2, h3, h4) {
+    margin-block-start: var(--space-l);
+  }
+
+  .prose > :is(h2, h3, h4) + * {
+    margin-block-start: var(--space-xs);
+  }
+
+  .link__icon {
+    display: inline-block;
+    inline-size: 0.85em;
+    block-size: 0.85em;
+    margin-inline-start: 0.15em;
+    vertical-align: -0.05em;
+  }
+
+  .figure img {
+    border: var(--border-thin) solid var(--color-line);
+  }
+
+  .inline-image {
+    display: inline-block;
+    block-size: 1.4em;
+    inline-size: auto;
+    vertical-align: middle;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  /* ── Platzhalter „Inhalt folgt" ({{TODO: …}}): deutlich, aber nicht alarmierend ── */
+  .todo {
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-todo-bg);
+    border: 2px dashed var(--color-line-strong);
+  }
+
+  .todo__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .todo__icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  .todo__text {
+    margin-block-start: var(--space-3xs);
+  }
+
+  .todo--inline {
+    display: inline;
+    padding: 0.05em 0.3em;
+    border-width: 1px;
+  }
+
+  .todo--inline .todo__label {
+    display: inline;
+  }
+
+  /* ── Sektoranzeige: schwarzer Streifen wie ein Zeitenmonitor ──
+   * Kontraste auf Schwarz: offen #5a5a5a 3,04 · Gelb 17,37 · Lila 2,63 (deshalb zusätzlich
+   * weiße Markierung oben, 7,99 auf Lila, plus Stern-Symbol und Text). */
+  .sector-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    max-inline-size: 72rem;
+    margin-inline: auto;
+    padding: var(--space-2xs) var(--gutter) var(--space-s);
+    color: var(--color-masthead-text);
+  }
+
+  .sector-bar__list {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sector-bar__item {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+
+  .sector-bar__item + .sector-bar__item {
+    margin-block-start: 0;
+  }
+
+  .sector-bar__item--finish {
+    flex: 0 0 var(--touch-target);
+  }
+
+  .sector-bar__segment {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xs);
+    min-block-size: var(--touch-target);
+    padding-inline: var(--space-2xs);
+    color: var(--color-masthead-text);
+    font-weight: var(--font-weight-black);
+    font-size: var(--step--1);
+    line-height: 1.1;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Die schräge Fläche liegt auf einem Pseudo-Element. So wird weder der Text noch der
+   * Fokusring des Links mit verzerrt oder abgeschnitten. */
+  .sector-bar__segment::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-sector-open);
+    transform: skewX(-14deg);
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+
+  .sector-bar__segment--bestanden {
+    color: var(--color-black);
+  }
+
+  .sector-bar__segment--bestanden::before {
+    background-color: var(--color-sector-done);
+  }
+
+  .sector-bar__segment--bestzeit::before {
+    /* Harte Kante, kein Deko-Verlauf: 4 px weiße Markierung oben, darunter Lila. */
+    background: linear-gradient(to bottom, var(--color-white) 0 4px, var(--color-sector-best) 4px);
+  }
+
+  .sector-bar__segment[aria-current]::after {
+    content: '';
+    position: absolute;
+    inset-inline: 2px;
+    inset-block-end: -7px;
+    block-size: 3px;
+    background-color: var(--color-white);
+    transform: skewX(-14deg);
+  }
+
+  .sector-bar__segment:hover::before {
+    filter: brightness(1.15);
+  }
+
+  .sector-bar__label {
+    display: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sector-bar__icon {
+    flex: none;
+    inline-size: 1em;
+    block-size: 1em;
+  }
+
+  .sector-bar__finish::before {
+    background-color: transparent;
+    border: 2px solid var(--color-sector-open);
+  }
+
+  .sector-bar__finish--ready::before {
+    border-color: var(--color-yellow);
+  }
+
+  .sector-bar__finish--done {
+    color: var(--color-black);
+  }
+
+  .sector-bar__finish--done::before {
+    background-color: var(--color-yellow);
+    border-color: var(--color-yellow);
+  }
+
+  .sector-bar__caption {
+    flex: none;
+    margin: 0;
+    color: var(--color-masthead-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  @media (min-width: 48rem) {
+    .sector-bar__label {
+      display: inline;
+    }
+
+    .sector-bar__number {
+      color: inherit;
+      opacity: 0.85;
+    }
+
+    .sector-bar__caption {
+      display: none;
+    }
+  }
+
+  @media (max-width: 23rem) {
+    .sector-bar__caption {
+      display: none;
+    }
+  }
+
+  /* ── Startseite ── */
+  .start-continue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+  }
+
+  .start-continue__where {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ── Zeitenmonitor-Liste (Sektoren auf der Startseite) ── */
+  .timing-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: var(--border-thick) solid var(--color-text);
+  }
+
+  .timing-list__item {
+    max-inline-size: none;
+  }
+
+  .timing-list__item + .timing-list__item {
+    margin-block-start: 0;
+  }
+
+  .timing-list__item--finish:first-of-type,
+  .timing-list__item:not(.timing-list__item--finish) + .timing-list__item--finish {
+    border-block-start: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  .timing-list__row {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr auto;
+    grid-template-areas:
+      'pos title title'
+      'pos status time';
+    align-items: center;
+    gap: var(--space-3xs) var(--space-xs);
+    min-block-size: 3.5rem;
+    padding: var(--space-xs) var(--space-2xs);
+    color: var(--color-text);
+    text-decoration: none;
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  a.timing-list__row:hover {
+    background-color: var(--color-surface);
+  }
+
+  a.timing-list__row:hover .timing-list__title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .timing-list__row--locked {
+    color: var(--color-text-muted);
+  }
+
+  .timing-list__pos {
+    grid-area: pos;
+    font-weight: var(--font-weight-black);
+    font-size: var(--step-1);
+  }
+
+  .timing-list__title {
+    grid-area: title;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .timing-list__time {
+    grid-area: time;
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    text-align: end;
+  }
+
+  .timing-list__status {
+    grid-area: status;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Status-Chips in den Sektorfarben – gleiche Sprache wie die Sektoranzeige. */
+  .timing-list__status--bestanden,
+  .timing-list__status--bestzeit,
+  .timing-list__status--ready {
+    padding: 0.15em 0.5em;
+  }
+
+  .timing-list__status--bestanden {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+  }
+
+  .timing-list__status--bestzeit {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+  }
+
+  .timing-list__status--ready {
+    border: 2px solid var(--color-text);
+  }
+
+  .timing-list__icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  @media (min-width: 40rem) {
+    .timing-list__row {
+      grid-template-columns: 3.5rem 1fr 4.5rem 15rem;
+      grid-template-areas: 'pos title time status';
+    }
+  }
+
+  /* ── Kapitelseite ── */
+  .chapter__header {
+    padding-block-end: var(--space-2xs);
+  }
+
+  .goals {
+    padding: var(--space-s);
+    background-color: var(--color-surface);
+    border-inline-start: var(--border-thick) solid var(--color-text);
+  }
+
+  .goals__title {
+    font-size: var(--step-0);
+  }
+
+  .goals__list {
+    margin-block-start: var(--space-2xs);
+  }
+
+  .chapter__skip {
+    color: var(--color-text-muted);
+  }
+
+  /* ── Glossar im Text: gepunktete Unterstreichung, öffnet ein Erklärfenster ── */
+  .glossary-term {
+    display: inline;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline dotted 2px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: var(--color-link);
+    cursor: help;
+  }
+
+  .glossary-term:hover {
+    text-decoration-style: solid;
+  }
+
+  .glossary-popover {
+    position: fixed;
+    inset: auto;
+    inset-inline-start: var(--popover-left, var(--space-s));
+    inset-block-start: var(--popover-top, var(--space-s));
+    margin: 0;
+    inline-size: max-content;
+    max-inline-size: min(22rem, calc(100vw - 1rem));
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-surface-strong);
+    color: var(--color-text);
+    border: 2px solid var(--color-line-strong);
+    border-block-start: 4px solid var(--color-text);
+    font-size: var(--step-0);
+    line-height: 1.45;
+  }
+
+  /* Ohne Popover-API liegt das Fenster im Textfluss (siehe js/ui/glossary.js). */
+  .glossary-popover:not([popover]) {
+    position: static;
+    display: block;
+    margin-block: var(--space-2xs);
+  }
+
+  .glossary-popover > span,
+  .glossary-popover > a {
+    display: block;
+  }
+
+  .glossary-popover__term {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .glossary-popover__link {
+    margin-block-start: var(--space-2xs);
+    font-size: var(--step--1);
+  }
+
+  /* ── Glossarseite ── */
+  .glossary-search {
+    display: grid;
+    gap: var(--space-3xs);
+    max-inline-size: 28rem;
+  }
+
+  .glossary-search__count {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .glossary-list__term {
+    margin-block-start: var(--space-m);
+    padding-block-start: var(--space-xs);
+    border-block-start: var(--border-thin) solid var(--color-line);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step-1);
+    scroll-margin-block-start: var(--space-xl);
+  }
+
+  .glossary-list__term--target {
+    border-block-start: var(--border-thick) solid var(--color-link);
+  }
+
+  .glossary-list__text {
+    max-inline-size: var(--measure);
+    margin-block-start: var(--space-3xs);
+  }
+
+  /* ── Formulargruppen (Einstellungen) ── */
+  .choice-group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .choice-group legend {
+    margin-block-end: var(--space-2xs);
+    font-size: var(--step-2);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .choice__hint {
+    color: var(--color-text-muted);
+  }
+
+  .settings__status:empty {
+    display: none;
+  }
+
+  /* ── Dialoge (<dialog>) ── */
+  .dialog {
+    max-inline-size: min(32rem, calc(100vw - 2rem));
+    padding: var(--space-m);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-line-strong);
+    border-block-start: 4px solid var(--color-text);
+  }
+
+  .dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.65);
+  }
+
+  .dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-2xs);
+  }
+}
+
 /* ── Hilfsklassen: dürfen als einzige Ebene !important nutzen ── */
 @layer utilities {
   /* Für Screenreader lesbar, aber unsichtbar (z. B. Zustand eines Sektors). */

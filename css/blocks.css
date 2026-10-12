@@ -18,4 +18,112 @@
     background-color: var(--color-surface);
     border-block-start: var(--border-thick) solid var(--color-line-strong);
   }
+
+  /* ── info, tipp, achtung (callouts.js) ──
+   * info/tipp bewusst leise. achtung ist laut: gelb-schwarze Boxengassen-Schraffur oben.
+   * Die Schraffur ist ein Muster aus zwei Volltonfarben, kein Deko-Verlauf. */
+  .callout {
+    padding-block: var(--space-xs);
+    border-block-start: var(--border-thin) solid var(--color-line-strong);
+  }
+
+  .callout__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-black);
+  }
+
+  .callout__icon {
+    inline-size: 1.15em;
+    block-size: 1.15em;
+  }
+
+  .callout__title {
+    margin-block-start: var(--space-3xs);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step-1);
+  }
+
+  .callout__body {
+    margin-block-start: var(--space-2xs);
+  }
+
+  .callout--achtung {
+    padding: 0 var(--space-s) var(--space-s);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-yellow);
+    border-block-start: 0;
+  }
+
+  .callout--achtung::before {
+    content: '';
+    display: block;
+    block-size: 0.75rem;
+    margin-inline: calc(-1 * var(--space-s));
+    margin-block-end: var(--space-xs);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-yellow) 0 12px,
+      var(--color-black) 12px 24px
+    );
+  }
+
+  .callout--achtung .callout__label {
+    color: var(--color-text);
+  }
+
+  /* Im hellen Theme ist ein gelber Rahmen auf Weiß unsichtbar (1,21:1) → Schwarz. */
+  :root[data-theme='light'] .callout--achtung {
+    border-color: var(--color-black);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']) .callout--achtung {
+      border-color: var(--color-black);
+    }
+  }
+
+  /* ── aufklappen (details.js) ── */
+  .details {
+    border-block: var(--border-thin) solid var(--color-line-strong);
+  }
+
+  .details__summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    padding-block: var(--space-2xs);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .details__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Eigenes Plus/Minus-Zeichen statt des Standarddreiecks. */
+  .details__summary::before {
+    content: '+';
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border: 2px solid currentColor;
+    font-weight: var(--font-weight-black);
+    line-height: 1;
+  }
+
+  .details[open] > .details__summary::before {
+    content: '−';
+  }
+
+  .details__body {
+    padding-block-end: var(--space-s);
+  }
 }
