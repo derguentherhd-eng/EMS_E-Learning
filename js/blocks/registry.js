@@ -24,11 +24,22 @@
 
 import { createCallout } from './callouts.js';
 import details from './details.js';
+import flashcards from './flashcards.js';
+import matching from './matching.js';
+import ordering from './ordering.js';
+import scenario from './scenario.js';
+import hotspot from './hotspot.js';
+import fileTree from './file-tree.js';
+import teams from './teams.js';
+import timeline from './timeline.js';
+import checklist from './checklist.js';
 import quiz from './quiz-block.js';
 
 /**
  * @typedef {Object} FieldSchema
- * @property {string} key           Schlüssel im Datenobjekt
+ * @property {string} key           Schlüssel im Datenobjekt. Mit Punkt für verschachtelte Werte
+ *                                  (z. B. 'fields.kurz'). In Listen aus reinen Texten heißt das
+ *                                  einzige Feld 'value'.
  * @property {'text'|'markdown'|'number'|'select'|'boolean'|'image'|'list'} type
  * @property {string} label         Beschriftung im Formular
  * @property {string} [help]        Hilfetext unter dem Feld
@@ -59,6 +70,7 @@ import quiz from './quiz-block.js';
  * @property {(data: any, raw: import('./block-utils.js').RawBlock) => Object[]} [validate]
  *           Inhaltliche Prüfung (Daten sind lesbar, aber z. B. unvollständig).
  * @property {(data: any, context: import('./block-utils.js').BlockContext) => HTMLElement} render
+ * @property {(data: any) => string[]} [images]  Bildpfade (für die Prüfung, ob Dateien existieren)
  * @property {(data: any) => string} serialize
  *           Daten → Kursdown. parse(serialize(data)) muss wieder dieselben Daten ergeben.
  * @property {EditorSchema} editor
@@ -70,6 +82,15 @@ const BLOCKS = [
   createCallout('tipp'),
   createCallout('achtung'),
   details,
+  flashcards,
+  matching,
+  ordering,
+  scenario,
+  hotspot,
+  fileTree,
+  teams,
+  timeline,
+  checklist,
   quiz,
 ];
 

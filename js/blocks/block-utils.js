@@ -29,7 +29,8 @@
  * @property {string} chapterId     ID des Kapitels (Dateiname ohne .md)
  * @property {import('../store.js').Store} store  Fortschrittsspeicher (in der Vorschau ohne Speichern)
  * @property {(markdown: string) => DocumentFragment} renderMarkdown  Mehrzeiligen Text darstellen
- * @property {(text: string) => DocumentFragment} renderInline       Eine Textzeile darstellen
+ * @property {(text: string, options?: {plainGlossary?: boolean}) => DocumentFragment} renderInline
+ *           Eine Textzeile darstellen. plainGlossary: Begriffe ohne Popover-Knopf (z. B. in <label>)
  * @property {(prefix: string) => string} uid  Eindeutige ID für aria-Verknüpfungen
  * @property {() => number} random  Zufallszahl 0–1 (in Tests vorhersagbar)
  */
@@ -186,4 +187,53 @@ export function shuffle(items, random = Math.random) {
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
+}
+
+/**
+ * Kurzer, stabiler Schlüssel aus einem Text (FNV-1a, 32 Bit, Basis 36).
+ * Wird z. B. für Checklisten genutzt: Der Haken hängt am Text des Eintrags, nicht an seiner
+ * Position – Umsortieren behält die Haken, Umformulieren setzt nur diesen Eintrag zurück.
+ * @param {string} text
+ * @returns {string}
+ */
+export function hashText(text) {
+  let hash = 0x811c9dc5;
+  for (const char of text) {
+    hash ^= char.codePointAt(0);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(36);
+}
+
+/**
+ * Prüft, ob Bewegung reduziert werden soll (Systemeinstellung „Bewegung reduzieren").
+ * @returns {boolean}
+ */
+export function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Baut die gemeinsame Hülle eines Bausteins: <section> mit Überschrift.
+ * @param {string} className   z. B. 'flashcards'
+ * @param {string} title       Überschrift ('' = keine)
+ * @param {import('./block-utils.js').BlockContext} context
+ * @param {string} [fallbackLabel]  Name für Screenreader, wenn es keine Überschrift gibt
+ * @returns {{section: HTMLElement, headingId: string}}
+ */
+export function blockSection(className, title, context, fallbackLabel = '') {
+  const headingId = context.uid(className);
+  const section = document.createElement('section');
+  section.className = `block ${className}`;
+  if (title) {
+    const heading = document.createElement('h2');
+    heading.className = 'block__title';
+    heading.id = headingId;
+    heading.append(context.renderInline(title));
+    section.append(heading);
+    section.setAttribute('aria-labelledby', headingId);
+  } else if (fallbackLabel) {
+    section.setAttribute('aria-label', fallbackLabel);
+  }
+  return { section, headingId };
 }

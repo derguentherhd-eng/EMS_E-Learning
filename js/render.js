@@ -212,7 +212,7 @@ export function createBlockContext({ chapterId, store, glossary, random = Math.r
     random,
     uid: (prefix) => uniqueId(prefix),
     renderMarkdown: (markdown) => renderMarkdown(markdown, { glossary, headingShift: -1 }),
-    renderInline: (text) => renderInline(text, { glossary }),
+    renderInline: (text, extra = {}) => renderInline(text, { glossary, ...extra }),
   };
 }
 

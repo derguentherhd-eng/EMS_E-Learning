@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Platzhalter: schematische Seitenansicht eines Rennwagens">
+  <rect width="800" height="400" fill="#2a2a2a"/>
+  <path d="M90 270 L170 230 L330 215 L400 160 L470 160 L520 215 L690 225 L730 260 L720 280 L80 285 Z" fill="none" stroke="#ffed00" stroke-width="6" stroke-linejoin="miter"/>
+  <circle cx="210" cy="290" r="48" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="6"/>
+  <circle cx="610" cy="290" r="48" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="6"/>
+  <text x="400" y="370" fill="#f2f2f2" font-family="Lato, Arial, sans-serif" font-size="24" text-anchor="middle">Platzhalter – durch echtes Foto ersetzen</text>
+</svg>

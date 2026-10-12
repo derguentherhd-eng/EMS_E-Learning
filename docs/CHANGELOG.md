@@ -21,3 +21,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Kapitelseiten mit Lernzielen, „Direkt zum Quiz", Freigabe-Hinweis für Sicherheitskapitel und Zurück/Weiter-Leiste.
 - Sektoranzeige (dynamisch aus kurs.md), Glossar-Popover und Glossarseite, Einstellungen mit Zurücksetzen-Dialog.
 - Fokus- und Titelmanagement bei jedem Seitenwechsel.
+
+### Phase 4 – Interaktive Bausteine (2026-10-13)
+- Neue Bausteine: karten, zuordnen, reihenfolge, szenario, hotspot, ordner (ARIA-Tree mit Suchaufgaben), teams, zeitstrahl, checkliste.
+- Kommentierte Vorlage `js/blocks/_vorlage-baustein.js`.
+- Parser- und Round-Trip-Tests für jeden Baustein (gültige und ungültige Beispiele).

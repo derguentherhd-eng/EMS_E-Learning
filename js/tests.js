@@ -364,6 +364,33 @@ const BLOCK_SAMPLES = {
   tipp: { valid: ':::tipp\nEin Tipp.\n:::', invalid: null },
   achtung: { valid: ':::achtung Hochvolt\nNie ohne Freigabe.\n:::', invalid: null },
   aufklappen: { valid: ':::aufklappen Mehr dazu\nVertiefung.\n:::', invalid: null },
+  karten: {
+    valid: ':::karten Titel\nVorne || Hinten mit **fett**\nA \\| B || C\n:::',
+    invalid: ':::karten\nohne Trenner\n:::',
+  },
+  zuordnen: {
+    valid: ':::zuordnen Statisch oder dynamisch?\nSkidpad => Dynamisch | Das Auto fährt.\nCost => Statisch\n:::',
+    invalid: ':::zuordnen\nSkidpad ohne Pfeil\n:::',
+  },
+  reihenfolge: { valid: ':::reihenfolge Frage\nEins\nZwei\nDrei\n> Weil.\n:::', invalid: null },
+  szenario: {
+    valid: ':::szenario Öl am Boden\nDu siehst Öl.\n\nWas nun?\n- [ ] Ignorieren > Gefährlich.\n- [x] Absichern > Richtig, weil > sicher.\n:::',
+    invalid: ':::szenario X\nSituation\n- [x] A > a\nText nach den Optionen\n:::',
+  },
+  hotspot: {
+    valid: ':::hotspot Auto bild="assets/bilder/auto.svg" alt="Ein Auto"\n18% 62% | Vorderachse | Lenkung vorn.\n72.5% 40% | Akku\n:::',
+    invalid: ':::hotspot bild="a.svg" alt="x"\nlinks oben | Titel\n:::',
+  },
+  ordner: {
+    valid: ':::ordner Drive\n- 📁 01 Organisation | Protokolle\n  - 📁 Protokolle\n    - 📄 2026-10-01 Teamsitzung\n- 02 Technik\n  - Chassis\n? Wo liegen Protokolle? => 01 Organisation/Protokolle\n:::',
+    invalid: ':::ordner\nkein Listeneintrag\n:::',
+  },
+  teams: {
+    valid: ':::teams Unsere Teams\n# Chassis\nbereich: Technik\nkurz: Rahmen.\nunbekannt: bleibt\n\n# Marketing\nbereich: Organisation\nkurz: Sichtbarkeit.\n:::',
+    invalid: ':::teams\nkurz: ohne Teamname\n:::',
+  },
+  zeitstrahl: { valid: ':::zeitstrahl Saison\nHerbst | Konzept | Ideen.\nWinter | Konstruktion\n:::', invalid: ':::zeitstrahl\nOhne Trenner\n:::' },
+  checkliste: { valid: ':::checkliste Start\n- [ ] Eins\n- [ ] Zwei\n:::', invalid: ':::checkliste\nEins\n:::' },
   quiz: {
     valid: ':::quiz anzahl=1\n? Frage | mit Pipe\n- [x] Ja\n- [ ] Nein\n> Erklärung\n> zweite Zeile\n~ Seite\n\n?! Kritisch\n- [ ] A\n- [x] B\n- [x] C\n> Weil\n:::',
     invalid: ':::quiz anzahl=1\n- [x] Antwort ohne Frage\n:::',
