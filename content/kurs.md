@@ -10,6 +10,10 @@ zertifikat-unterschrift-rolle: Teamleitung
 logo: assets/logo/logo.svg
 kapitel:
   - 01-formula-student.md
+  - 02-einstein-motorsport.md
+  - 03-unsere-subteams.md
+  - 04-drive-und-tools.md
+  - 05-arbeitssicherheit.md
 ---
 
 Willkommen im Team! In sechs kurzen Sektoren erfährst du, wie Formula Student funktioniert, wer bei uns was macht, wo du Dateien findest und worauf es in der Werkstatt ankommt.

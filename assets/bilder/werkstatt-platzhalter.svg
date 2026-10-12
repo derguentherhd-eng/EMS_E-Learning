@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Platzhalter: schematischer Grundriss einer Werkstatt">
+  <!-- Platzhalter – durch den echten Werkstattplan ersetzen und die Hotspot-Punkte in
+       Kapitel 5 an die tatsächlichen Standorte anpassen. -->
+  <rect width="800" height="500" fill="#2a2a2a"/>
+  <!-- Außenwände mit Tür (Notausgang oben links) -->
+  <path d="M30 30 H40 M110 30 H770 V470 H30 V30" fill="none" stroke="#f2f2f2" stroke-width="6"/>
+  <path d="M40 30 A70 70 0 0 1 110 100" fill="none" stroke="#f2f2f2" stroke-width="2" stroke-dasharray="6 6"/>
+  <g font-family="Lato, Arial, sans-serif" font-size="18" fill="#f2f2f2">
+    <!-- Werkbänke -->
+    <rect x="60" y="150" width="220" height="60" fill="none" stroke="#b8b8b8" stroke-width="3"/>
+    <text x="170" y="186" text-anchor="middle">Werkbank</text>
+    <rect x="60" y="260" width="220" height="60" fill="none" stroke="#b8b8b8" stroke-width="3"/>
+    <text x="170" y="296" text-anchor="middle">Werkbank</text>
+    <!-- Maschinenbereich -->
+    <rect x="340" y="140" width="230" height="170" fill="none" stroke="#ffed00" stroke-width="3" stroke-dasharray="12 8"/>
+    <text x="455" y="175" text-anchor="middle">Maschinen</text>
+    <rect x="370" y="200" width="60" height="60" fill="#5a5a5a"/>
+    <rect x="480" y="200" width="60" height="60" fill="#5a5a5a"/>
+    <!-- Laminierbereich -->
+    <rect x="60" y="370" width="300" height="70" fill="none" stroke="#b8b8b8" stroke-width="3"/>
+    <text x="210" y="411" text-anchor="middle">Laminierbereich (Absaugung)</text>
+    <!-- Akku-Bereich -->
+    <rect x="610" y="340" width="140" height="110" fill="none" stroke="#ffed00" stroke-width="4"/>
+    <text x="680" y="400" text-anchor="middle">Akku-Bereich</text>
+  </g>
+  <text x="400" y="488" fill="#b8b8b8" font-family="Lato, Arial, sans-serif" font-size="18" text-anchor="middle">Platzhalter – durch echten Werkstattplan ersetzen</text>
+</svg>
