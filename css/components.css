@@ -855,6 +855,246 @@
   }
 }
 
+@layer components {
+  /* ── Quiz (js/quiz/quiz.js) ── */
+  .quiz__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .quiz__legend {
+    padding: 0;
+  }
+
+  .quiz__question {
+    font-size: var(--step-3);
+  }
+
+  .quiz__hint {
+    margin-block: var(--space-xs) var(--space-s);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .quiz__options {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .quiz__option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-xs);
+    min-block-size: 3rem;
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-line);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+  }
+
+  .quiz__option:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .quiz__option:has(:checked) {
+    border-color: var(--color-text);
+    box-shadow: inset var(--border-thick) 0 0 var(--color-text);
+  }
+
+  .quiz__option:has(:disabled) {
+    cursor: default;
+  }
+
+  .quiz__option.is-correct {
+    border-color: var(--color-success);
+    box-shadow: inset 6px 0 0 var(--color-success);
+  }
+
+  .quiz__option.is-wrong {
+    border-color: var(--color-error);
+    box-shadow: inset 6px 0 0 var(--color-error);
+  }
+
+  .quiz__mark:empty {
+    display: none;
+  }
+
+  .quiz__mark {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .is-correct .quiz__mark {
+    color: var(--color-success);
+  }
+
+  .is-wrong .quiz__mark {
+    color: var(--color-error);
+  }
+
+  .quiz__mark-icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  /* Sicherheitsfrage: dieselbe Boxengassen-Schraffur wie der Achtung-Kasten. */
+  .quiz__critical {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-s);
+    border-inline-start: 0.75rem solid transparent;
+    border-image: repeating-linear-gradient(-45deg, var(--color-yellow) 0 8px, var(--color-black) 8px 16px) 1;
+    background-color: var(--color-surface);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .quiz__critical-icon {
+    flex: none;
+    inline-size: 1.2em;
+    block-size: 1.2em;
+  }
+
+  .quiz__feedback:empty {
+    display: none;
+  }
+
+  .feedback--hint {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  /* ── Ergebnis ── */
+  .quiz-result__title--best {
+    /* Bestzeit: lila Fläche mit weißer Schrift (7,99:1) – Lila nie als Textfarbe auf Dunkel. */
+    justify-self: start;
+    display: inline-block;
+    padding: 0.1em 0.35em;
+    background-color: var(--color-purple);
+    color: var(--color-white);
+  }
+
+  .quiz-result__score {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .quiz-result__percent {
+    font-size: var(--step-4);
+    font-weight: var(--font-weight-black);
+  }
+
+  .result-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0;
+    padding: var(--space-2xs);
+    list-style: none;
+    background-color: var(--color-black);
+  }
+
+  .result-strip__cell {
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2rem;
+    margin: 0;
+    transform: skewX(-14deg);
+  }
+
+  .result-strip__cell--correct {
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+  }
+
+  .result-strip__cell--wrong {
+    background-color: #5a5a5a;
+    color: var(--color-white);
+  }
+
+  .result-strip__icon {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+    transform: skewX(14deg);
+  }
+
+  .review__title {
+    font-size: var(--step-1);
+  }
+
+  .review__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .review__item {
+    display: flex;
+    gap: var(--space-2xs);
+    padding-block: var(--space-2xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .review__icon {
+    flex: none;
+    inline-size: 1.1em;
+    block-size: 1.1em;
+    margin-block-start: 0.25em;
+    color: var(--color-error);
+  }
+
+  .review__question {
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ── Startampel (js/ui/start-lights.js) ──
+   * Rot ist bewusst die einzige Farbe außerhalb des Team-CD: Eine Startampel ist rot. */
+  .start-lights {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-s);
+  }
+
+  .start-lights__panel {
+    display: flex;
+    gap: var(--space-2xs);
+    padding: var(--space-xs);
+    background-color: var(--color-black);
+  }
+
+  .start-lights__column {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs);
+    background-color: #111111;
+  }
+
+  .start-lights__lamp {
+    inline-size: clamp(1.75rem, 8vw, 2.75rem);
+    aspect-ratio: 1;
+    border-radius: 50%; /* Lampen sind rund – Ausnahme vom kantigen Stil */
+    background-color: #2b2b2b;
+    transition: background-color var(--duration-fast) linear;
+  }
+
+  .start-lights__column.is-on .start-lights__lamp {
+    background-color: #ff2a1f;
+  }
+
+  .start-lights__status {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-black);
+  }
+}
+
 /* ── Hilfsklassen: dürfen als einzige Ebene !important nutzen ── */
 @layer utilities {
   /* Für Screenreader lesbar, aber unsichtbar (z. B. Zustand eines Sektors). */

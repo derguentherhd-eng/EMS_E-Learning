@@ -112,7 +112,8 @@ function sectorRow(chapter, index, state) {
 function finishRows(course, state) {
   const qualifyingOpen = isQualifyingUnlocked(state, course.chapters);
   const certificateOpen = isCertificateUnlocked(state, course.meta.kursversion);
-  const questions = course.meta['qualifying-fragen'] ?? 8;
+  const pool = course.chapters.reduce((sum, chapter) => sum + (chapter.quiz?.data.questions.length ?? 0), 0);
+  const questions = Math.min(Number(course.meta['qualifying-fragen'] ?? 8), pool);
 
   const row = (pos, title, open, href, openText, lockedText) =>
     el(

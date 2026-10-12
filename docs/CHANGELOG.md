@@ -26,3 +26,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Neue Bausteine: karten, zuordnen, reihenfolge, szenario, hotspot, ordner (ARIA-Tree mit Suchaufgaben), teams, zeitstrahl, checkliste.
 - Kommentierte Vorlage `js/blocks/_vorlage-baustein.js`.
 - Parser- und Round-Trip-Tests für jeden Baustein (gültige und ungültige Beispiele).
+
+### Phase 5 – Quiz, Fortschritt, Qualifying (2026-10-13)
+- Kapitelquiz: Pool mit Zufallsauswahl, Sicherheitsfragen immer, sofortiges Feedback mit Erklärung, Ergebnis mit Links zum Nachlesen.
+- Bestes Ergebnis bleibt; Sektor gelb (bestanden) bzw. lila (100 %); Versionserhöhung markiert „aktualisiert".
+- Qualifying mit Startampel (überspringbar, ohne Animation bei „Bewegung reduzieren").
