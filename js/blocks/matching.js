@@ -31,6 +31,7 @@
     shuffle,
     splitPipes,
     trimLines,
+    trackExercise,
   } = EM.require("js/blocks/block-utils.js");
 
   /**
@@ -173,6 +174,11 @@
         "Nochmal versuchen",
       );
 
+      const markSolved = trackExercise(
+        section,
+        context,
+        `zuordnen:${JSON.stringify(data.items)}`,
+      );
       checkButton.addEventListener("click", () => {
         let correct = 0;
         for (const { item, row, select, feedback } of rows) {
@@ -203,6 +209,9 @@
         }
         status.textContent = `${correct} von ${rows.length} richtig zugeordnet.`;
         resetButton.hidden = correct === rows.length;
+        if (correct === rows.length) {
+          markSolved();
+        }
       });
 
       resetButton.addEventListener("click", () => {

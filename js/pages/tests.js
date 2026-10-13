@@ -57,11 +57,12 @@
     recordQualifying,
     recordQuizResult,
   } = EM.require("js/core/store.js");
-  const { escapePipes, hashText, splitPipes } = EM.require(
+  const { escapePipes, hashText, splitPipes, trackExercise } = EM.require(
     "js/blocks/block-utils.js",
   );
   const { certificateFileName, createVerificationCode, formatGermanDate } =
     EM.require("js/course/certificate.js");
+  const { safetyRecordFileName } = EM.require("js/course/safety-record.js");
   const { backupPath, chapterFileName, imageFileName, slugify } =
     EM.require("js/editor/names.js");
   const { createHistory, record, redo, undo } = EM.require(
@@ -911,6 +912,50 @@ Hinweis
     assertEqual(isCertificateUnlocked(state, "1.1"), false);
   });
 
+  test("Anläufe bis zum ersten Bestehen werden gezählt (Nachweis Sicherheitsunterweisung)", () => {
+    const state = createEmptyState();
+    recordQuizResult(state, "a", 1, 50, false, "2026-10-01");
+    recordQuizResult(state, "a", 1, 70, false, "2026-10-02");
+    recordQuizResult(state, "a", 1, 85, true, "2026-10-03");
+    recordQuizResult(state, "a", 1, 100, true, "2026-10-04");
+    assertEqual(state.results.a.attempts, 4);
+    assertEqual(state.results.a.passedAfter, 3, "erstes Bestehen bleibt");
+    assertEqual(state.results.a.passedDate, "2026-10-03");
+    assertEqual(state.results.a.best, 100);
+    recordQuizResult(state, "a", 2, 90, true, "2026-11-01");
+    assertEqual(
+      [state.results.a.attempts, state.results.a.passedAfter],
+      [1, 1],
+      "neue Kapitelversion zählt neu",
+    );
+  });
+
+  test("Gelöste Übungen werden gemerkt und reichen „Weiter“ frei", () => {
+    const store = createStore({ storage: null });
+    const context = { store, chapterId: "k" };
+    const section = document.createElement("section");
+    const markSolved = trackExercise(section, context, "zuordnen:test");
+    assertEqual(section.dataset.exercise, "offen");
+    let events = 0;
+    section.addEventListener("exercise-change", () => {
+      events += 1;
+    });
+    markSolved();
+    assertEqual(section.dataset.exercise, "geloest");
+    assertEqual(events, 1, "Ereignis für die Kapitelseite");
+    const again = document.createElement("section");
+    trackExercise(again, context, "zuordnen:test");
+    assertEqual(
+      again.dataset.exercise,
+      "geloest",
+      "beim nächsten Besuch schon gelöst",
+    );
+    assertEqual(
+      normalizeState({ exercises: { k: ["abc"] } }).exercises.k[0],
+      "abc",
+    );
+  });
+
   test("Beschädigte gespeicherte Daten werden repariert", () => {
     assertEqual(normalizeState("kaputt"), createEmptyState());
     assertEqual(normalizeState({ theme: "lila", results: [] }).theme, "system");
@@ -995,6 +1040,12 @@ Hinweis
       "Onboarding-Zertifikat-Teilnehmende.pdf",
     );
   });
+
+  test("Dateiname des Nachweises Sicherheitsunterweisung", () =>
+    assertEqual(
+      safetyRecordFileName("Jürgen Weiß", "2026-10-13"),
+      "Nachweis-Sicherheitsunterweisung-Juergen-Weiss-2026-10-13.pdf",
+    ));
 
   test("Datum auf Deutsch", () =>
     assertEqual(formatGermanDate("2026-03-01"), "1. März 2026"));

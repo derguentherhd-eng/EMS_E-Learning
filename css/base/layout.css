@@ -137,6 +137,19 @@
     }
   }
 
+  /* Hinweis unter dem Seiteninhalt, solange „Weiter" gesperrt ist (js/views/chapter.js). */
+  .pager__hint:empty {
+    display: none;
+  }
+
+  .pager__hint {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: 4px solid var(--color-accent-line);
+    border-radius: var(--radius-m);
+    background-color: var(--color-surface);
+    font-weight: var(--font-weight-medium);
+  }
+
   /* ── Fußzeile ── */
   .site-footer {
     padding: var(--space-m) var(--gutter);

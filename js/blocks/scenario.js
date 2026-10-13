@@ -30,6 +30,7 @@
     formatHeader,
     joinLines,
     oneLine,
+    trackExercise,
   } = EM.require("js/blocks/block-utils.js");
 
   /**
@@ -167,6 +168,11 @@
         { type: "button", class: "button button--primary" },
         "Entscheidung prüfen",
       );
+      const markSolved = trackExercise(
+        section,
+        context,
+        `szenario:${data.situation}:${JSON.stringify(data.options)}`,
+      );
       checkButton.addEventListener("click", () => {
         const chosen = inputs.find((entry) => entry.input.checked);
         if (!chosen) {
@@ -180,6 +186,9 @@
           return;
         }
         const good = chosen.option.correct;
+        if (good) {
+          markSolved();
+        }
         const best = data.options.filter((option) => option.correct);
         result.replaceChildren(
           el(

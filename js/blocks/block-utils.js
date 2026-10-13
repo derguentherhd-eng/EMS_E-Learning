@@ -299,6 +299,48 @@
     return { section, headingId };
   }
 
+  /**
+   * Meldet den Zustand einer Übung mit richtig/falsch (zuordnen, reihenfolge, szenario, ordner).
+   * Die Kapitelseite gibt „Weiter" erst frei, wenn keine Übung mehr „offen" ist
+   * (data-exercise am Baustein, Ereignis „exercise-change", siehe js/views/chapter.js).
+   *
+   * Gelöste Übungen merkt sich der Fortschrittsspeicher (Feld exercises je Kapitel). Kommt man
+   * später zurück, muss man sie nicht noch einmal lösen.
+   *
+   * @param {HTMLElement} section  der Baustein aus blockSection()
+   * @param {BlockContext} context
+   * @param {string} key  eindeutiger Inhalt der Übung, z. B. Name + Daten als JSON
+   * @returns {() => void}  aufrufen, sobald die Übung richtig gelöst ist
+   */
+  function trackExercise(section, context, key) {
+    const id = hashText(key);
+    const solvedBefore = Boolean(
+      context.store?.get().exercises?.[context.chapterId]?.includes(id),
+    );
+    section.dataset.exercise = solvedBefore ? "geloest" : "offen";
+    if (solvedBefore) {
+      const note = document.createElement("p");
+      note.className = "block__hint block__hint--solved";
+      note.textContent = "Diese Übung hast du schon richtig gelöst.";
+      section.append(note);
+    }
+    return function markSolved() {
+      if (section.dataset.exercise === "geloest" && solvedBefore) {
+        return;
+      }
+      section.dataset.exercise = "geloest";
+      context.store?.update((state) => {
+        const list = (state.exercises[context.chapterId] ??= []);
+        if (!list.includes(id)) {
+          list.push(id);
+        }
+      });
+      section.dispatchEvent(
+        new CustomEvent("exercise-change", { bubbles: true }),
+      );
+    };
+  }
+
   EM.define("js/blocks/block-utils.js", {
     formatHeader,
     formatBlock,
@@ -313,5 +355,6 @@
     hashText,
     prefersReducedMotion,
     blockSection,
+    trackExercise,
   });
 })();

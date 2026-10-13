@@ -58,9 +58,11 @@
     kurs: [
       "js/course/quiz.js",
       "js/course/certificate.js",
+      "js/course/safety-record.js",
       "js/ui/sector-bar.js",
       "js/ui/start-lights.js",
       "js/views/not-found.js",
+      "js/views/safety-record-view.js",
       "js/views/chapter.js",
       "js/views/quiz-view.js",
       "js/views/start.js",

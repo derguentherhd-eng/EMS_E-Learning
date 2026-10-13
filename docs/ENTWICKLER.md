@@ -98,6 +98,8 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/blocks/*.js` | je ein Baustein (siehe Zuordnung unten) |
 | `js/blocks/_vorlage-baustein.js` | kommentierte Vorlage (nicht eingebunden) |
 | `js/course/quiz.js` | Ziehung, Bewertung, Fragenablauf, Ergebnis-Streifen |
+| `js/course/safety-record.js` | PDF-Nachweis Sicherheitsunterweisung (Name, Datum, Anläufe, Prüfcode) |
+| `js/views/safety-record-view.js` | Abschnitt „Dein Nachweis" mit Namensfeld (Quiz-Ergebnis und Seite 1) |
 | `js/course/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
 | `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole, Statusbar (`statusbar.js`) |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
@@ -156,8 +158,9 @@ setzen, Fokus auf die `<h1>` (bzw. `ViewResult.focus`).
   "schema": 1,
   "last": "#/kapitel/03-unsere-subteams/4",
   "visited": { "03-unsere-subteams": [1, 2, 3, 4] },
-  "results": { "01-formula-student": { "version": 1, "best": 100, "passed": true, "date": "2026-10-13" } },
+  "results": { "05-arbeitssicherheit": { "version": 3, "best": 93, "passed": true, "date": "2026-10-13", "attempts": 2, "passedAfter": 2, "passedDate": "2026-10-13" } },
   "checklists": { "06-dein-start": { "1frcozw": true } },
+  "exercises": { "05-arbeitssicherheit": ["k3x9a1"] },
   "theme": "system",
   "qualifying": { "passed": true, "best": 88, "courseVersion": "1.0", "date": "2026-10-13" },
   "name": ""
@@ -401,6 +404,8 @@ und JavaScript auf developer.mozilla.org). Die Werkzeug-Einstellungen liegen im 
 | Ordner nach Aufgabe (`js/pages`, `core`, `content`, `blocks`, `views`, `course`, `ui`, `editor`; `css/base`, `components`, `blocks`, `views`, `pages`, `editor`) | Dateien findet man über ihre Aufgabe; Baustein-Dateien heißen in `js/` und `css/` gleich |
 | Eine CSS-Einstiegsdatei je Seite mit `@import` | HTML bleibt kurz, CSS in kleinen Dateien; `@import` lädt auch per Doppelklick; der zusätzliche Ladeschritt ist vernachlässigbar |
 | Editor kann direkt auf GitHub speichern (Token, ein Commit pro Speichern) | Safari/Firefox und online ohne Ordnerzugriff; Versionsgeschichte ersetzt Sicherungskopien; Kurs selbst bleibt ohne externe Requests |
+| „Weiter" erst nach richtig gelösten Übungen (`trackExercise()` in `block-utils.js`, `data-exercise`, Ereignis `exercise-change`) | Wunsch des Teams: kein Durchklicken; gelöste Übungen werden im Speicher (`exercises`) gemerkt |
+| Sicherheitskapitel: Quiz erst nach allen Seiten, kein „Direkt zum Quiz", PDF-Nachweis mit Anläufen | Nachweis für die Projektleitung; Anläufe zählen je Kapitelversion (`attempts`, `passedAfter`, `passedDate` in `results`) |
 | Code-Stil nach MDN; Prettier-, ESLint- und Stylelint-Einstellungen im Projekt | einheitlich und in VS Code automatisch; die Werkzeuge sind optional und zur Laufzeit nicht nötig |
 | Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |
 | `content/inhalte.js` als erzeugte Kopie | einzige Möglichkeit, ohne Server Text nachzuladen; `.md` bleibt Quelle, Editor hält die Kopie aktuell, auf dem Webspace unbenutzt |

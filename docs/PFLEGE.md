@@ -18,6 +18,7 @@ kannst du im Texteditor lesen, und was du von Hand schreibst, öffnet der Editor
 9. [Prüfseite benutzen und Meldungen verstehen](#9-prüfseite-benutzen-und-meldungen-verstehen)
 10. [Wann erhöhe ich `version` und `kursversion`?](#10-wann-erhöhe-ich-version-und-kursversion)
 11. [Sicherheitskapitel: Freigabeprozess](#11-sicherheitskapitel-freigabeprozess)
+    – [Sicherheitsunterweisung: Ablauf und Nachweis](#11a-sicherheitsunterweisung-ablauf-und-nachweis)
 12. [Veröffentlichen](#12-veröffentlichen)
 13. [Saisonwechsel-Checkliste](#13-saisonwechsel-checkliste)
 14. [Häufige Fehler und ihre Lösung](#14-häufige-fehler-und-ihre-lösung)
@@ -297,6 +298,25 @@ vor. Trotzdem müssen seine Inhalte stimmen. Deshalb gilt:
 
 Ein Kapitel gilt als Sicherheitskapitel, wenn es im Kopfbereich die Zeile `freigegeben:` hat
 (im Editor: Häkchen „Enthält Sicherheitsinhalte").
+
+## 11a. Sicherheitsunterweisung: Ablauf und Nachweis
+
+So läuft das Kapitel Arbeitssicherheit (jedes Kapitel mit dem Feld `freigegeben`) für Teilnehmende:
+
+1. **Alle Seiten durcharbeiten.** „Weiter" geht erst, wenn die Übungen der Seite (zuordnen,
+   reihenfolge, szenario, ordner) richtig gelöst sind. Gelöste Übungen merkt sich der Browser.
+2. **Quiz:** öffnet erst, wenn alle Seiten bearbeitet wurden. „Direkt zum Quiz" gibt es hier nicht.
+3. **Nachweis:** Nach dem Bestehen erscheint „Dein Nachweis" – auf der Ergebnisseite und auf Seite 1
+   des Kapitels. Name eingeben → PDF mit Name, Datum, **Zahl der Anläufe bis zum Bestehen**,
+   bestem Ergebnis und Prüfcode. Das PDF wird bei der **Projektleitung** abgegeben und dort
+   unterschrieben.
+
+**Nur Sicherheitsunterweisung oder ganzes Onboarding?** In den Kurseinstellungen (bzw. `kurs.md`,
+Feld `kapitel`) nur `05-arbeitssicherheit.md` eintragen – oder alle Kapitel für das Onboarding. Der
+Willkommenstext passt für beides.
+
+> Wird das Kapitel inhaltlich geändert, `version` erhöhen: Dann zählen die Anläufe für den
+> Nachweis neu, und alle müssen das Quiz der neuen Fassung bestehen.
 
 ## 12. Veröffentlichen
 

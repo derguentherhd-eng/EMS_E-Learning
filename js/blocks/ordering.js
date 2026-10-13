@@ -32,6 +32,7 @@
     oneLine,
     shuffle,
     trimLines,
+    trackExercise,
   } = EM.require("js/blocks/block-utils.js");
 
   /** @typedef {{title: string, steps: string[], explanation: string}} OrderingData */
@@ -198,11 +199,19 @@
         { type: "button", class: "button button--primary" },
         "Reihenfolge prüfen",
       );
+      const markSolved = trackExercise(
+        section,
+        context,
+        `reihenfolge:${JSON.stringify(data.steps)}`,
+      );
       checkButton.addEventListener("click", () => {
         const correctCount = order.filter(
           (step, index) => step === data.steps[index],
         ).length;
         const allRight = correctCount === order.length;
+        if (allRight) {
+          markSolved();
+        }
         for (const [index, item] of [...list.children].entries()) {
           item.classList.toggle(
             "is-correct",

@@ -35,6 +35,9 @@
    * @property {number} best     Bestes Ergebnis in Prozent (0–100, gerundet)
    * @property {boolean} passed  Bestanden (Grenze erreicht und alle Sicherheitsfragen richtig)
    * @property {string} date     Datum im Format JJJJ-MM-TT
+   * @property {number} [attempts]       Anzahl der Quizdurchgänge mit dieser Kapitelversion
+   * @property {number|null} [passedAfter]  Im wievielten Durchgang zum ersten Mal bestanden
+   * @property {string|null} [passedDate]   Datum des ersten Bestehens (JJJJ-MM-TT)
    */
 
   /**
@@ -44,6 +47,8 @@
    * @property {Object<string, number[]>} visited Besuchte Seiten (Seitennummern ab 1) je Kapitel
    * @property {Object<string, ChapterResult>} results  Bestes Quizergebnis je Kapitel-ID
    * @property {Object<string, Object<string, boolean>>} checklists  Haken je Kapitel und Eintrag
+   * @property {Object<string, string[]>} exercises  Gelöste Übungen je Kapitel (Kennungen aus
+   *           trackExercise() in js/blocks/block-utils.js)
    * @property {'system'|'dark'|'light'} theme    Gewähltes Farbschema
    * @property {{passed:boolean, best:number, courseVersion:string, date:string}|null} qualifying
    * @property {string} name                      Name für das Zertifikat (erst dort eingegeben)
@@ -60,6 +65,7 @@
       visited: {},
       results: {},
       checklists: {},
+      exercises: {},
       theme: "system",
       qualifying: null,
       name: "",
@@ -88,6 +94,9 @@
     }
     if (isPlainObject(raw.checklists)) {
       state.checklists = raw.checklists;
+    }
+    if (isPlainObject(raw.exercises)) {
+      state.exercises = raw.exercises;
     }
     if (["system", "dark", "light"].includes(raw.theme)) {
       state.theme = raw.theme;
@@ -261,12 +270,22 @@
     passed,
     date = isoDate(),
   ) {
-    const candidate = { version, best: Math.round(percent), passed, date };
     const old = state.results[chapterId];
-    if (!old || old.version !== version || isBetterResult(candidate, old)) {
-      state.results[chapterId] = candidate;
+    const sameVersion = Boolean(old) && old.version === version;
+    // Anläufe zählen je Kapitelversion; das erste Bestehen bleibt für den Nachweis erhalten.
+    const attempts = (sameVersion ? (old.attempts ?? 0) : 0) + 1;
+    const firstPass = sameVersion && old.passedAfter ? old : null;
+    const history = {
+      attempts,
+      passedAfter: firstPass ? firstPass.passedAfter : passed ? attempts : null,
+      passedDate: firstPass ? firstPass.passedDate : passed ? date : null,
+    };
+    const candidate = { version, best: Math.round(percent), passed, date };
+    if (!sameVersion || isBetterResult(candidate, old)) {
+      state.results[chapterId] = { ...candidate, ...history };
       return true;
     }
+    state.results[chapterId] = { ...old, ...history };
     return false;
   }
 

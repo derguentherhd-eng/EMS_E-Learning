@@ -111,3 +111,11 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Neuer GitHub-Modus im Editor: Repository und Zugangsschlüssel eingeben, dann liest der Editor direkt aus GitHub und speichert jede Änderung als einen Commit – in jedem Browser und online. Kein Herunterladen, kein GitHub Desktop nötig.
 - Konfliktprüfung, wenn auf GitHub inzwischen dieselbe Datei geändert wurde; Archivieren und Umbenennen funktionieren als Teil des Commits.
 - Anleitung zum Zugangsschlüssel in `docs/PFLEGE.md`, Abschnitt 2.
+
+### Sicherheitsunterweisung überarbeitet (2026-10-13)
+- Inhalte nach Rückmeldung des Teams korrigiert: Atemschutz-Vollmaske bei Carbonstaub; TSAL dunkel = in der Regel sicher; nie vor, hinter oder neben dem Auto unter Spannung; Low Voltage 24 V; Ansprechpersonen (ESOs, Electrics Team Lead, Team Manufacturing, Projektleitung); Schraubstock festschrauben; Flex: Augen, feuerfeste Kleidung; Carbon nur draußen (Ausnahme Fräse); Harz kann beim Anmischen heiß werden; Drehstromstecker; Notfall mit Erste-Hilfe-Koffer, Rettungswagen einweisen, Stromunfall mit nicht leitendem Gegenstand. Werkstattplan entfernt. Kapitelversion 3.
+- Quiz: Fragen angepasst, drei neue Fragen (Schraubstock, Harz anmischen, Augen beim Flexen).
+- Sicherheitszeichen in vier Reihen, unter jeder Reihe ihre Erklärungen.
+- „Weiter" erst nach richtig gelösten Übungen; Sicherheitsquiz erst nach allen Seiten.
+- Neu: PDF-Nachweis Sicherheitsunterweisung mit Name, Datum und Zahl der Anläufe – zur Abgabe bei der Projektleitung.
+- Willkommenstext neutral für reine Sicherheitsunterweisung und ganzes Onboarding.

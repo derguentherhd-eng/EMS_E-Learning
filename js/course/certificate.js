@@ -76,7 +76,16 @@
    * @returns {string}  z. B. „Onboarding-Zertifikat-Juergen-Weiss-Oezdemir.pdf"
    */
   function certificateFileName(name) {
-    const safe = name
+    return `Onboarding-Zertifikat-${safeFileName(name) || "Teilnehmende"}.pdf`;
+  }
+
+  /**
+   * Macht aus einem Namen einen sicheren Dateinamen-Teil (Umlaute umschreiben, nur A–Z, 0–9, -).
+   * @param {string} name
+   * @returns {string}
+   */
+  function safeFileName(name) {
+    return name
       .trim()
       .replace(/Ä/g, "Ae")
       .replace(/Ö/g, "Oe")
@@ -89,7 +98,6 @@
       .replace(/[̀-ͯ]/g, "")
       .replace(/[^A-Za-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
-    return `Onboarding-Zertifikat-${safe || "Teilnehmende"}.pdf`;
   }
 
   /**
@@ -138,6 +146,31 @@
    */
 
   /**
+   * Bettet Lato in ein PDF ein und liefert eine Funktion zum Umschalten des Schriftschnitts.
+   * Schnitte wie im Designsystem: Überschrift Bold, Unterüberschrift/Hervorhebung Medium.
+   * Fehlen die Schriftdateien, nimmt das PDF Helvetica.
+   * @param {any} doc  jsPDF-Dokument
+   * @param {CertificateAssets["fonts"]} fonts
+   * @returns {(weight: "regular"|"medium"|"bold") => void}
+   */
+  function setupFonts(doc, fonts) {
+    const hasLato = fonts.length === FONTS.length;
+    for (const embedded of fonts) {
+      doc.addFileToVFS(embedded.file, embedded.base64);
+      doc.addFont(embedded.file, embedded.family, embedded.style);
+    }
+    return function font(weight) {
+      if (!hasLato) {
+        doc.setFont("helvetica", weight === "regular" ? "normal" : "bold");
+      } else if (weight === "medium") {
+        doc.setFont("LatoMedium", "normal");
+      } else {
+        doc.setFont("Lato", weight === "bold" ? "bold" : "normal");
+      }
+    };
+  }
+
+  /**
    * Zeichnet das Zertifikat.
    * @param {any} JsPDF  der jsPDF-Konstruktor (window.jspdf.jsPDF)
    * @param {CertificateData} data
@@ -151,21 +184,7 @@
       format: "a4",
       compress: true,
     });
-    const hasLato = assets.fonts.length === FONTS.length;
-    for (const embedded of assets.fonts) {
-      doc.addFileToVFS(embedded.file, embedded.base64);
-      doc.addFont(embedded.file, embedded.family, embedded.style);
-    }
-    // Schriftschnitte wie im Designsystem: Überschrift Bold, Unterüberschrift/Hervorhebung Medium.
-    function font(weight) {
-      if (!hasLato) {
-        doc.setFont("helvetica", weight === "regular" ? "normal" : "bold");
-      } else if (weight === "medium") {
-        doc.setFont("LatoMedium", "normal");
-      } else {
-        doc.setFont("Lato", weight === "bold" ? "bold" : "normal");
-      }
-    }
+    const font = setupFonts(doc, assets.fonts);
 
     const W = 297;
     const H = 210;
@@ -400,6 +419,10 @@
   EM.define("js/course/certificate.js", {
     createVerificationCode,
     certificateFileName,
+    safeFileName,
+    setupFonts,
+    loadFonts,
+    rasterizeLogo,
     formatGermanDate,
     buildCertificatePdf,
     loadJsPdf,

@@ -26,6 +26,7 @@
   const { statusBar } = EM.require("js/ui/statusbar.js");
   const { isReleased, isSafetyChapter } = EM.require("js/content/documents.js");
   const { renderNotFound } = EM.require("js/views/not-found.js");
+  const { renderSafetyRecord } = EM.require("js/views/safety-record-view.js");
 
   /**
    * @param {import("./view-types.js").ViewContext} context
@@ -89,14 +90,68 @@
         el("h1", { class: "view-title" }, page.title),
       ),
       pageNumber === 1 ? renderFirstPageIntro(chapter) : null,
+      pageNumber === 1 ? renderSafetyRecord({ course, chapter, store }) : null,
       elements.map((element) => renderElement(element, context)),
     );
+
+    const pager = renderPager(chapter, pageNumber, total);
+    lockUntilSolved(article, pager);
 
     return {
       title: `${page.title} · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
       chapterId: chapter.id,
-      node: el("div", {}, article, renderPager(chapter, pageNumber, total)),
+      node: el("div", {}, article, pager),
     };
+  }
+
+  /**
+   * Gibt „Weiter" erst frei, wenn alle Übungen mit richtig/falsch auf der Seite gelöst sind
+   * (Bausteine mit data-exercise, siehe trackExercise() in js/blocks/block-utils.js). Sonst
+   * könnte man sich ohne Mitdenken durch das Kapitel klicken.
+   * @param {HTMLElement} article  Inhalt der Seite
+   * @param {HTMLElement} pager    Zurück/Weiter-Leiste
+   */
+  function lockUntilSolved(article, pager) {
+    const next = pager.querySelector("[data-next]");
+    if (!next) {
+      return;
+    }
+    const hint = el("p", {
+      class: "pager__hint",
+      id: "pager-hint",
+      "aria-live": "polite",
+    });
+    article.append(hint);
+
+    function update() {
+      const open = article.querySelectorAll('[data-exercise="offen"]').length;
+      const locked = open > 0;
+      next.setAttribute("aria-disabled", String(locked));
+      next.classList.toggle("is-locked", locked);
+      if (locked) {
+        next.setAttribute("aria-describedby", "pager-hint");
+      } else {
+        next.removeAttribute("aria-describedby");
+      }
+      hint.textContent = locked
+        ? `Löse zuerst ${open === 1 ? "die Übung" : `die ${open} Übungen`} auf dieser Seite richtig – dann geht es weiter.`
+        : "";
+    }
+
+    next.addEventListener("click", (event) => {
+      if (next.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+        hint.textContent = "";
+        // Kurz leeren, damit Screenreader die Meldung erneut vorlesen.
+        setTimeout(update, 30);
+        article.querySelector('[data-exercise="offen"]')?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    });
+    article.addEventListener("exercise-change", update);
+    update();
   }
 
   /** Freigabe-Hinweis, Lernziele und „Direkt zum Quiz" auf Seite 1. */
@@ -122,7 +177,8 @@
             ),
           )
         : null,
-      chapter.quiz
+      // Sicherheitskapitel: kein Abkürzen direkt ins Quiz – erst alle Seiten durcharbeiten.
+      chapter.quiz && !isSafetyChapter(chapter)
         ? el(
             "p",
             { class: "chapter__skip" },
@@ -176,6 +232,7 @@
         {
           class: "button button--primary",
           href: chapterHash(chapter.id, pageNumber + 1),
+          "data-next": "",
         },
         "Weiter",
       );
@@ -185,6 +242,7 @@
         {
           class: "button button--primary",
           href: chapterHash(chapter.id, "quiz"),
+          "data-next": "",
         },
         "Zum Quiz",
       );

@@ -55,6 +55,7 @@
 @import url("views/glossary.css");
 @import url("views/quiz.css");
 @import url("views/certificate.css");
+@import url("views/safety-record.css");
 
 /* Hilfsklassen (immer zuletzt) */
 @import url("base/utilities.css");

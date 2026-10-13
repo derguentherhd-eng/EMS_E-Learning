@@ -1,0 +1,24 @@
+/*
+ * views/safety-record.css – Abschnitt „Dein Nachweis" (Sicherheitsunterweisung)
+ *
+ * Kasten mit Namensfeld und Download-Knopf auf der Quiz-Ergebnisseite und auf Seite 1 eines
+ * bestandenen Sicherheitskapitels (js/views/safety-record-view.js).
+ */
+
+@layer components {
+  .safety-record {
+    padding: var(--space-m);
+    background-color: var(--color-surface);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-l);
+  }
+
+  .safety-record h2 {
+    margin: 0;
+  }
+
+  /* Gelöste Übung bei erneutem Besuch (js/blocks/block-utils.js, trackExercise). */
+  .block__hint--solved::before {
+    content: "✓ ";
+  }
+}

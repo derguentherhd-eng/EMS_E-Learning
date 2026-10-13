@@ -7,6 +7,9 @@
  * Das beste Ergebnis wird gespeichert; die Sektoranzeige färbt sich automatisch
  * (gelb = bestanden, lila = 100 %).
  *
+ * Sicherheitskapitel (Feld „freigegeben"): Das Quiz öffnet erst, wenn alle Seiten bearbeitet
+ * wurden. Nach dem Bestehen gibt es den PDF-Nachweis (js/views/safety-record-view.js).
+ *
  * Wenn du hier etwas ändern willst …
  *   – Texte der Ergebnisseite: renderResult() unten.
  *   – Bewertungsregeln: js/course/quiz.js (scoreAttempt).
@@ -24,6 +27,8 @@
   const { drawQuestions, renderResultStrip, runQuiz, scoreAttempt } =
     EM.require("js/course/quiz.js");
   const { renderNotFound } = EM.require("js/views/not-found.js");
+  const { isSafetyChapter } = EM.require("js/content/documents.js");
+  const { renderSafetyRecord } = EM.require("js/views/safety-record-view.js");
 
   /**
    * @param {import("./view-types.js").ViewContext} context
@@ -54,6 +59,42 @@
           ),
         ),
       };
+    }
+
+    // Sicherheitskapitel: erst alle Seiten durcharbeiten, dann das Quiz.
+    if (isSafetyChapter(chapter)) {
+      const visited = store.get().visited[chapter.id] ?? [];
+      const missing = chapter.pages.findIndex(
+        (_page, pageIndex) => !visited.includes(pageIndex + 1),
+      );
+      if (missing !== -1) {
+        return {
+          title: `Quiz · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
+          chapterId: chapter.id,
+          node: el(
+            "div",
+            { class: "stack" },
+            el("h1", {}, "Erst alle Seiten durcharbeiten"),
+            el(
+              "p",
+              { class: "lead" },
+              "Das Quiz zur Sicherheitsunterweisung öffnet, wenn du alle Seiten des Kapitels bearbeitet hast.",
+            ),
+            el(
+              "p",
+              {},
+              el(
+                "a",
+                {
+                  class: "button button--primary",
+                  href: chapterHash(chapter.id, missing + 1),
+                },
+                `Weiter mit Seite ${missing + 1}`,
+              ),
+            ),
+          ),
+        };
+      }
     }
 
     store.update((state) => {
@@ -213,6 +254,7 @@
               : `Nötig sind ${threshold} %. Schau dir die Themen unten nochmal an – beim nächsten Versuch kommen andere Fragen.`,
           ),
       wrong.length > 0 ? renderReviewList(wrong) : null,
+      score.passed ? renderSafetyRecord({ course, chapter, store }) : null,
       el(
         "div",
         { class: "block__actions" },

@@ -40,6 +40,7 @@
     oneLine,
     splitPipes,
     trimLines,
+    trackExercise,
   } = EM.require("js/blocks/block-utils.js");
 
   /**
@@ -382,12 +383,18 @@
 
       // ── Suchaufgaben ──
       if (data.tasks.length > 0) {
+        const markSolved = trackExercise(
+          section,
+          context,
+          `ordner:${JSON.stringify(data.tasks)}`,
+        );
+        const found = new Set();
         section.append(
           el("h3", { class: "file-tree__tasks-title" }, "Finde es selbst"),
           el(
             "ol",
             { class: "file-tree__tasks" },
-            data.tasks.map((task) => {
+            data.tasks.map((task, taskIndex) => {
               const feedback = el("div", {
                 class: "file-tree__feedback",
                 "aria-live": "polite",
@@ -413,6 +420,12 @@
                   normalizePath(nodes[selected].path) ===
                   normalizePath(task.target);
                 attempts += 1;
+                if (ok) {
+                  found.add(taskIndex);
+                  if (found.size === data.tasks.length) {
+                    markSolved();
+                  }
+                }
                 const top = task.target.split("/")[0];
                 feedback.replaceChildren(
                   el(

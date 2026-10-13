@@ -80,7 +80,8 @@
   }
 
   .button:disabled,
-  .button[aria-disabled="true"] {
+  .button[aria-disabled="true"],
+  .button.is-locked {
     opacity: 0.55;
     cursor: not-allowed;
   }

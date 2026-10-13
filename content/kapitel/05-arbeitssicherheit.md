@@ -2,7 +2,7 @@
 titel: Arbeitssicherheit
 kurztitel: Sicherheit
 dauer: 50
-version: 2
+version: 3
 freigegeben: nein
 lernziele:
   - Du erkennst Sicherheitszeichen und weißt, welche Schutzausrüstung du wann brauchst.
@@ -19,7 +19,7 @@ In unserer Werkstatt stehen Maschinen, die in Sekunden schwer verletzen können.
 
 Die gute Nachricht: Fast alle Unfälle lassen sich mit ein paar klaren Regeln vermeiden. Dieses Kapitel erklärt sie dir Schritt für Schritt.
 
-**Du kannst dieses Kapitel jederzeit bearbeiten** – auch wenn du die anderen Kapitel noch nicht gemacht hast. Wenn du bald in die Werkstatt willst: Fang am besten hier an.
+**Du kannst dieses Kapitel jederzeit bearbeiten** – unabhängig von anderen Kapiteln. Auf jeder Seite kommst du erst weiter, wenn du die Übungen richtig gelöst hast. Am Ende steht ein Quiz; danach kannst du deinen Nachweis als PDF herunterladen.
 
 ### Die Grundregeln
 
@@ -48,23 +48,40 @@ In der Werkstatt hängen viele Schilder. Du musst nicht jedes einzelne auswendig
 
 Auf älteren Dosen findest du manchmal noch **orange Quadrate mit schwarzem Symbol**. Das ist die alte Kennzeichnung für Gefahrstoffe. Nimm sie genauso ernst.
 
-**So funktioniert die Übung:** Auf dem Bild unten siehst du die Zeichen aus unserer Sicherheitspräsentation. Unter jedem Zeichen ist ein nummerierter Punkt. Tippe ihn an, dann erscheint die Erklärung. Dieselben Erklärungen stehen auch als Liste unter dem Bild.
+**So funktioniert die Übung:** Die Zeichen kommen in vier Reihen. Unter jedem Zeichen steht eine Nummer – tippe sie an, dann erscheint die Erklärung. Dieselben Erklärungen stehen direkt unter jeder Reihe als Liste.
 
-:::hotspot Was bedeutet dieses Zeichen? bild="assets/bilder/sicherheit/sicherheitszeichen.webp" alt="Übersicht von 14 Sicherheitszeichen: blaue runde Gebotszeichen, rote durchgestrichene Verbotszeichen, gelbe dreieckige Warnzeichen und Gefahrstoff-Symbole"
-12.5% 21.4% | Schutzbrille tragen | Gebotszeichen. Hier musst du eine Schutzbrille tragen – zum Beispiel an Ständerbohrmaschine, Bandschleifer und Flex. Späne und Funken fliegen schneller, als du blinzeln kannst.
-37.5% 21.4% | Gehörschutz tragen | Gebotszeichen. Bei lauten Maschinen wie der Flex trägst du Kapseln oder Stöpsel. Lärm schädigt das Gehör dauerhaft – ohne dass es wehtut.
-62.5% 21.4% | Atemschutz tragen | Gebotszeichen. Hier brauchst du eine Atemschutzmaske – zum Beispiel immer, wenn Carbon- oder Aramidstaub entsteht.
-87.5% 21.4% | Gesichtsschutz tragen | Gebotszeichen. Ein Visier schützt das ganze Gesicht, etwa vor Funken und Bruchstücken beim Flexen.
-12.5% 46.4% | Schutzhandschuhe tragen | Gebotszeichen. Handschuhe tragen, zum Beispiel beim Umgang mit Harzen. Aber: niemals an rotierenden Werkzeugen!
-37.5% 46.4% | Handschuhe verboten | Verbotszeichen. An dieser Maschine keine Handschuhe. Ein Handschuh kann vom drehenden Werkzeug erfasst werden und zieht die Hand mit hinein.
-62.5% 46.4% | Berühren verboten | Verbotszeichen. Nicht anfassen! Bei uns gilt das zum Beispiel für alles am Hochvoltsystem.
-87.5% 46.4% | Offene lange Haare verboten | Verbotszeichen. Lange Haare zusammenbinden oder unter eine Mütze stecken. Offene Haare können von drehenden Teilen erfasst werden.
-12.5% 71.4% | Warnung vor elektrischer Spannung | Warnzeichen. Hier gibt es gefährliche Spannung – zum Beispiel am Hochvolt-Akku unseres Autos.
-37.5% 71.4% | Warnung vor giftigen Stoffen | Warnzeichen. Der Stoff kann schon in kleinen Mengen schwer schaden. Nur mit passender Schutzausrüstung und nach Sicherheitsdatenblatt arbeiten.
-62.5% 71.4% | Warnung vor feuergefährlichen Stoffen | Warnzeichen. Leicht entzündliche Stoffe, zum Beispiel Lösungsmittel oder Aceton. Keine Funken, kein offenes Feuer in der Nähe.
-87.5% 71.4% | Gefahrstoff: ätzend | GHS-Symbol. Der Stoff verätzt Haut, Augen oder sogar Metall. Schutzbrille und passende Handschuhe tragen.
-12.5% 96.4% | Gefahrstoff: umweltgefährlich | GHS-Symbol. Der Stoff schadet Gewässern und Tieren. Reste kommen nie in den Ausguss, sondern werden richtig entsorgt.
-37.5% 96.4% | Altes Symbol: gesundheitsschädlich | Die alte orange Kennzeichnung (Xn). Sie wurde durch die GHS-Symbole ersetzt, steht aber noch auf älteren Dosen. Bedeutet: gesundheitsschädlich – genauso ernst nehmen.
+**Reihe 1 – Gebotszeichen:** blau und rund. Sie sagen dir, welche Schutzausrüstung du tragen musst.
+
+:::hotspot Gebotszeichen bild="assets/bilder/sicherheit/zeichen-gebote.webp" alt="Vier blaue, runde Gebotszeichen: Schutzbrille, Gehörschutz, Atemschutzmaske, Gesichtsschutz"
+12.5% 84% | Schutzbrille tragen | Hier musst du eine Schutzbrille tragen – zum Beispiel an Ständerbohrmaschine, Bandschleifer und Flex. Späne und Funken fliegen schneller, als du blinzeln kannst.
+37.5% 84% | Gehörschutz tragen | Bei lauten Maschinen wie der Flex trägst du Kapseln oder Stöpsel. Lärm schädigt das Gehör dauerhaft – ohne dass es wehtut.
+62.5% 84% | Atemschutz tragen | Hier brauchst du eine Atemschutzmaske. Bei Carbon- und Aramidstaub eine Vollmaske, die auch das Gesicht abdeckt.
+87.5% 84% | Gesichtsschutz tragen | Ein Visier schützt das ganze Gesicht, etwa vor Funken und Bruchstücken beim Flexen.
+:::
+
+**Reihe 2 – Handschuhe und Verbotszeichen:** Verbotszeichen sind rot mit Schrägstrich. Achte auf den Unterschied zwischen den ersten beiden Zeichen.
+
+:::hotspot Handschuhe und Verbotszeichen bild="assets/bilder/sicherheit/zeichen-verbote.webp" alt="Ein blaues Gebotszeichen Schutzhandschuhe und drei rote Verbotszeichen: Handschuhe verboten, Berühren verboten, offene lange Haare verboten"
+12.5% 84% | Schutzhandschuhe tragen | Gebotszeichen. Handschuhe tragen, zum Beispiel beim Umgang mit Harzen. Aber: niemals an rotierenden Werkzeugen!
+37.5% 84% | Handschuhe verboten | Verbotszeichen. An dieser Maschine keine Handschuhe. Ein Handschuh kann vom drehenden Werkzeug erfasst werden und zieht die Hand mit hinein.
+62.5% 84% | Berühren verboten | Verbotszeichen. Nicht anfassen! Bei uns gilt das zum Beispiel für alles am Hochvoltsystem.
+87.5% 84% | Offene lange Haare verboten | Verbotszeichen. Lange Haare zusammenbinden oder unter eine Mütze stecken. Offene Haare können von drehenden Teilen erfasst werden.
+:::
+
+**Reihe 3 – Warnzeichen:** gelbe Dreiecke. Sie warnen vor einer Gefahr.
+
+:::hotspot Warnzeichen bild="assets/bilder/sicherheit/zeichen-warnungen.webp" alt="Drei gelbe, dreieckige Warnzeichen: elektrische Spannung, giftige Stoffe, feuergefährliche Stoffe"
+25% 84% | Warnung vor elektrischer Spannung | Hier gibt es gefährliche Spannung – zum Beispiel am Hochvolt-Akku unseres Autos.
+50% 84% | Warnung vor giftigen Stoffen | Der Stoff kann schon in kleinen Mengen schwer schaden. Nur mit passender Schutzausrüstung und nach Sicherheitsdatenblatt arbeiten.
+75% 84% | Warnung vor feuergefährlichen Stoffen | Leicht entzündliche Stoffe, zum Beispiel Lösungsmittel oder Aceton. Keine Funken, kein offenes Feuer in der Nähe.
+:::
+
+**Reihe 4 – Gefahrstoff-Symbole:** stehen auf Dosen, Flaschen und Kanistern.
+
+:::hotspot Gefahrstoff-Symbole bild="assets/bilder/sicherheit/zeichen-gefahrstoffe.webp" alt="Zwei Gefahrstoff-Rauten mit rotem Rand (ätzend, umweltgefährlich) und das alte orange Symbol für gesundheitsschädlich"
+25% 84% | Gefahrstoff: ätzend | GHS-Symbol. Der Stoff verätzt Haut, Augen oder sogar Metall. Schutzbrille und passende Handschuhe tragen.
+50% 84% | Gefahrstoff: umweltgefährlich | GHS-Symbol. Der Stoff schadet Gewässern und Tieren. Reste kommen nie in den Ausguss, sondern werden richtig entsorgt.
+75% 84% | Altes Symbol: gesundheitsschädlich | Die alte orange Kennzeichnung (Xn). Sie wurde durch die GHS-Symbole ersetzt, steht aber noch auf älteren Dosen. Bedeutet: gesundheitsschädlich – genauso ernst nehmen.
 :::
 
 Jetzt prüfst du, ob du die Arten sicher erkennst. **So funktioniert die Übung:** Ordne jede Beschreibung der richtigen Art zu. Danach bekommst du zu jeder Zuordnung eine Erklärung.
@@ -87,12 +104,12 @@ Deine [[PSA|Persönliche Schutzausrüstung]] ist das Letzte, was zwischen dir un
 | **Schutzbrille** | Bei allen Arbeiten, bei denen etwas fliegen oder spritzen kann: Bohren, Schleifen, Flexen, Harz anmischen. |
 | **Gehörschutz** | Bei lauten Maschinen, vor allem bei der Flex. |
 | **Gesichtsschutz (Visier)** | Zusätzlich zur Brille beim Flexen und bei starkem Funkenflug. |
-| **Atemschutzmaske** | Immer, wenn Carbon- oder Aramidstaub entsteht. |
+| **Atemschutz-Vollmaske** (mit Gesichtsschild) | Immer, wenn Carbon- oder Aramidstaub entsteht. Eine Schutzbrille allein reicht dann nicht – das Gesicht wäre dem Staub ausgesetzt. |
 | **Ganzkörperanzug** | Bei Arbeiten mit Carbonstaub, damit der Staub nicht an Haut und Kleidung bleibt. |
 | **Schutzhandschuhe** | Beim Umgang mit Harzen und Chemikalien – **aber nie an rotierenden Werkzeugen**. |
 | **Feste, geschlossene Schuhe** | Immer in der Werkstatt. Herunterfallende Teile und Späne am Boden gibt es überall. |
 
-{{TODO: Wo liegt die Schutzausrüstung in der Werkstatt, und welche Atemschutzmasken und Handschuhe verwendet das Team (Typ/Klasse)?}}
+**Wo finde ich die Schutzausrüstung?** In der Werkstatt steht eine Kiste mit Atemschutzmasken und Schutzbrillen. Handschuhe stellen die Teamleitungen bereit. Der Ort ändert sich während der Saison immer wieder – findest du nichts, meldest du dich **vor der Arbeit** bei der zuständigen Teamleitung.
 
 ### Die Handschuh-Regel
 
@@ -109,6 +126,7 @@ An drehenden Maschinen wird alles gefährlich, was locker ist:
 
 - **keine weite Kleidung**, keine offenen Jacken, Ärmel eng oder hochgekrempelt
 - **keine Schals, Kordeln, Ketten, Ringe oder Armbänder**
+- bei Funkenflug (Flex, Schleifen) **Kleidung aus Baumwolle oder feuerfestem Material** – Kunstfasern fangen Feuer oder schmelzen auf der Haut
 - **lange Haare zusammenbinden** oder unter eine Mütze stecken
 
 **So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Rückmeldung – auch zu den falschen.
@@ -135,13 +153,13 @@ Zum Hochvoltsystem gehören der [[Akku]], die Leistungselektronik, die Motoren u
 - **Den HV-Hänger betrittst du nicht.**
 - **Du steckst nichts an oder ab, ohne vorher zu fragen** – auch nicht „nur kurz".
 - **Wird das Auto in Betrieb genommen,** ist die Werkstatt mit **Absperrband** geschlossen. Dann betrittst du sie nicht.
-- **Steht das Auto unter Spannung,** hältst du **mindestens 10 Meter vor und hinter dem Auto** Abstand. Die Räder können sich plötzlich drehen.
+- **Steht das Auto unter Spannung, stellst du dich nie vor oder hinter das Auto** – und nie neben die Räder. Das Auto beschleunigt in weniger als 2,5 Sekunden von 0 auf 100 km/h. Wenn es plötzlich losfährt, kommst du nicht mehr weg. Drehende Räder können außerdem Teile wegschleudern oder sich lösen. Ausnahme sind nur die berechtigten Elektrikerinnen und Elektriker von Team HV.
 
 :::info Warum so streng?
 Das Formula-Student-Regelwerk verlangt, dass für die Arbeit am Hochvoltsystem ein [[ESO]] (Electrical System Officer) zuständig ist. Diese Person braucht eine Hochvolt-Qualifikation mit Theorie und Praxis. Nur ein ESO darf das Auto als „elektrisch sicher" erklären.
 :::
 
-{{TODO: Wer gehört zu Team HV, wer sind die ESOs (Rollen), und an wen wendest du dich bei Fragen zum Hochvoltsystem?}}
+**Wer ist zuständig?** Die ESOs werden im Team benannt und sind bekannt. Weißt du nicht, wen du fragen sollst, meldest du dich bei der **Projektleitung**.
 
 **So funktioniert die Übung:** Lies die Situation und entscheide dich. Du bekommst zu jeder Antwort eine Erklärung.
 
@@ -162,14 +180,16 @@ Das Regelwerk schreibt genau vor, wann welche Farbe leuchtet:
 |---|---|---|
 | **blinkt rot** | Das Hochvoltsystem ist **aktiv**: Es liegt mehr als 60 Volt an. | **Finger weg vom Rennwagen.** Abstand halten. |
 | **leuchtet dauerhaft grün** | Das Hochvoltsystem ist **aus** und vom Akku getrennt. | Arbeiten am Auto trotzdem nur, wenn Team HV es freigegeben hat. |
-| **leuchtet gar nicht** | Auch das Bordnetz ist aus – der Zustand ist **unbekannt**. | Wie aktiv behandeln: **Finger weg** und Team HV fragen. |
+| **leuchtet gar nicht** | Auch das Niedervolt-Bordnetz ist aus. Ohne Niedervolt kann der Akku bei uns nicht aktiv sein. | Das Auto ist **in der Regel sicher** – außer jemand aus Team HV sagt etwas anderes. |
 | **rot und grün gleichzeitig** | Ein **Fehler**. | Wie aktiv behandeln: **Finger weg** und sofort Team HV Bescheid geben. |
 
-Merke: **Blinkt das TSAL rot oder funktioniert es nicht richtig, gilt das Hochvoltsystem als aktiv.** So steht es im Regelwerk.
+Merke: **Blinkt das TSAL rot oder zeigt es rot und grün gleichzeitig, gilt das Hochvoltsystem als aktiv.** So steht es im Regelwerk.
+
+Ist das Hochvoltsystem aktiv, gilt außerdem: **niemals vor, hinter oder neben dem Auto stehen** – auch nicht für einen kurzen Moment. Das Auto kann ohne Vorwarnung losfahren, und drehende Räder können Teile wegschleudern.
 
 ### Weitere Signale am Auto
 
-- **Der Ready-to-drive-Ton:** Bevor die Motoren auf das Gaspedal reagieren, spielt das Auto einen lauten Signalton (1 bis 3 Sekunden). Ab dann ist das Auto [[Ready-to-drive|fahrbereit]] – und es kann **sofort losfahren**. Elektroautos sind dabei fast lautlos. Hörst du den Ton, gehst du aus dem Bereich vor und hinter dem Auto.
+- **Der Ready-to-drive-Ton:** Bevor die Motoren auf das Gaspedal reagieren, spielt das Auto einen lauten Signalton (1 bis 3 Sekunden). Ab dann ist das Auto [[Ready-to-drive|fahrbereit]] – und es kann **sofort losfahren**. Elektroautos sind dabei fast lautlos. Spätestens jetzt bist du weg vom Bereich vor, hinter und neben dem Auto.
 - **Die Abschaltknöpfe:** Das Auto hat drei Not-Aus-Knöpfe: je einen links und rechts hinter dem Kopf der fahrenden Person und einen im Cockpit. Ein Druck schaltet das Hochvoltsystem ab. Sie sind für Notfälle da.
 - **Absperrband und Schild:** Arbeitet Team HV am Hochvoltsystem, wird das Auto mit Absperrband abgesperrt. Ein Schild zeigt an, welcher ESO zuständig ist. **Nur dieser ESO** darf Band und Schild wieder entfernen.
 
@@ -177,15 +197,15 @@ Merke: **Blinkt das TSAL rot oder funktioniert es nicht richtig, gilt das Hochvo
 
 :::zuordnen Was tust du, wenn …
 das TSAL rot blinkt => Finger weg – gilt als aktiv | Rot blinkend heißt: Hochvolt ist aktiv. Nicht anfassen, Abstand halten.
-das TSAL gar nicht leuchtet => Finger weg – gilt als aktiv | Ohne Licht weißt du nicht, in welchem Zustand das Auto ist. Also: wie aktiv behandeln.
+das TSAL gar nicht leuchtet => In der Regel sicher – außer Team HV sagt etwas anderes | Ohne Licht ist auch das Niedervolt-Bordnetz aus. Ohne Niedervolt kann der Akku nicht aktiv sein.
 das TSAL rot und grün gleichzeitig leuchtet => Finger weg – gilt als aktiv | Beide Farben gleichzeitig sind ein Fehler. Ein Fehler wird immer wie „aktiv" behandelt.
 das TSAL dauerhaft grün leuchtet => Nur mit Freigabe von Team HV | Grün heißt: Hochvolt ist aus. Am Auto arbeitest du trotzdem erst, wenn Team HV es erlaubt.
-der Ready-to-drive-Ton erklingt => Sofort Abstand vor und hinter dem Auto | Ab dem Ton reagieren die Motoren aufs Gaspedal – das Auto kann sofort losfahren.
+der Ready-to-drive-Ton erklingt => Weg vom Bereich vor, hinter und neben dem Auto | Ab dem Ton reagieren die Motoren aufs Gaspedal – das Auto kann sofort losfahren.
 :::
 
 ## Low Voltage: nur mit Einweisung
 
-Neben dem Hochvoltsystem hat das Auto ein zweites Bordnetz: das [[Low Voltage|Niedervolt-System]], kurz **LV**. Es versorgt Steuergeräte, Sensoren, Lichter, Pumpen und Lüfter. Die Spannung ist viel niedriger (höchstens 60 Volt) und die Leitungen sind **nie orange**.
+Neben dem Hochvoltsystem hat das Auto ein zweites Bordnetz: das [[Low Voltage|Niedervolt-System]], kurz **LV**. Es versorgt Steuergeräte, Sensoren, Lichter, Pumpen und Lüfter. Bei uns arbeitet es mit **24 Volt**, und die Leitungen sind **nie orange**.
 
 „Niedrig" heißt aber nicht „harmlos":
 
@@ -202,7 +222,7 @@ Neben dem Hochvoltsystem hat das Auto ein zweites Bordnetz: das [[Low Voltage|Ni
 - **Nichts an- oder abstecken**, ohne vorher zu fragen.
 - **Beschädigungen meldest du sofort**, zum Beispiel ein Kabel, bei dem schon das Kupfer zu sehen ist.
 
-{{TODO: Wer im Electrics-Team gibt die Einweisung für das Niedervolt-System (Rolle), und wie meldest du dich dafür?}}
+**Wer weist ein?** Die Einweisung für das Niedervolt-System gibt der **Electrics Team Lead**.
 
 Ein besonderer Fall sind **beschädigte Lithium-Akkus**. Sie können in [[Thermisches Durchgehen]] geraten: Dann heizen sie sich immer weiter auf, brennen heftig und lassen sich kaum löschen. Ein Warnzeichen ist ein **aufgeblähter** Akku.
 
@@ -219,19 +239,19 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 
 Für alle Maschinen in der Werkstatt gelten ein paar Grundregeln – auch für erfahrene Mitglieder:
 
-1. **Du benutzt nur Maschinen, in die du eingewiesen wurdest.** Die Einweisung macht eine verantwortliche Person, und sie wird dokumentiert.
+1. **Du benutzt nur Maschinen, in die du eingewiesen wurdest.** Die Einweisung macht das Team Manufacturing oder eine Person, die die Projektleitung dafür bestimmt. Sie wird dokumentiert.
 2. **Fräsmaschine und Drehmaschine nur mit gesonderter Einweisung.** Die allgemeine Werkstatt-Unterweisung reicht dafür nicht. Diese Maschinen sind so gefährlich, dass du extra und ausführlich eingewiesen wirst.
 3. **Du arbeitest nie allein in der Werkstatt.** Wenn etwas passiert, muss jemand da sein, der hilft und den Notruf absetzt.
 4. **Vor jedem Einsatz eine Sichtprüfung:** Kabel, Stecker, Schutzabdeckungen, Werkzeug.
 5. **Ist ein Gerät beschädigt, wird es aus dem Verkehr gezogen** – damit es niemand anderes benutzt.
 
-{{TODO: Wer weist an welchen Maschinen ein (Rolle), wer gibt die gesonderte Einweisung für Fräs- und Drehmaschine, und wo ist dokumentiert, wer welche Maschine nutzen darf?}}
+**Wen fragst du?** Weißt du nicht, wer dich einweisen kann, wendest du dich an die **Projektleitung**.
 
 :::info
 Unsicher, ob du eine Maschine benutzen darfst? Dann darfst du es nicht – frag vorher. Niemand wird dir das übelnehmen.
 :::
 
-Was genau tust du mit einem beschädigten Gerät? Es sind vier Schritte. Der erste ist immer: Strom weg. Dann kommt das Gerät aus dem Weg, damit niemand darüber stolpert oder es aus Versehen benutzt. Danach sorgst du dafür, dass es nicht wieder eingeschaltet wird – zum Beispiel mit einem Zettel „Defekt – nicht benutzen" am Stecker. Zum Schluss sagst du Bescheid, damit es repariert oder ersetzt wird.
+Was genau tust du mit einem beschädigten Gerät? Es sind vier Schritte. Der erste ist immer: Strom weg. Dann kommt das Gerät aus dem Weg, damit niemand darüber stolpert oder es aus Versehen benutzt. Danach sorgst du dafür, dass es nicht wieder eingeschaltet wird – zum Beispiel mit einem Zettel „Defekt – nicht benutzen" am Stecker. Zum Schluss meldest du den Schaden – und sagst dazu, **wo das Gerät jetzt liegt**. Sonst sucht die nächste Person danach oder findet es nicht wieder.
 
 **So funktioniert die Übung:** Bring die vier Schritte in die richtige Reihenfolge. Verschiebe die Einträge und prüfe dann deine Lösung.
 
@@ -239,8 +259,8 @@ Was genau tust du mit einem beschädigten Gerät? Es sind vier Schritte. Der ers
 Ausschalten und den Stecker ziehen
 Das Gerät sicher verstauen
 Gegen Wiedereinschalten sichern, zum Beispiel mit einem Zettel „Defekt – nicht benutzen"
-Den Schaden melden
-> Erst Strom weg, dann aus dem Weg räumen, dann sichern, damit es niemand aus Versehen wieder benutzt – und zum Schluss melden, damit es repariert wird.
+Den Schaden melden und sagen, wo das Gerät liegt
+> Erst Strom weg, dann aus dem Weg räumen, dann sichern, damit es niemand aus Versehen wieder benutzt – und zum Schluss melden, wo es liegt, damit es repariert wird.
 :::
 
 ## Ständerbohrmaschine: Finger in Gefahr
@@ -251,12 +271,17 @@ Die Ständerbohrmaschine sieht harmlos aus. Sie gehört aber zu den Maschinen, a
 Keine Handschuhe – auch nicht bei scharfkantigen Teilen. Ein Handschuh kann sich am Bohrer oder an der Spindel verfangen. Dann wird die Hand in die Maschine gezogen, und du kannst nicht mehr loslassen. Die Folge sind schwerste Verletzungen bis zum Verlust von Fingern.
 :::
 
+:::achtung Werkstück und Schraubstock immer sichern
+Ein Werkstück, das sich losreißt, dreht mit voller Kraft mit und kann wie ein Geschoss durch den Arbeitsraum schlagen. Deshalb: Werkstück fest im Schraubstock einspannen **und** den Schraubstock mit einer Schraube am Tisch sichern. Ein loser Schraubstock ist lebensgefährlich.
+:::
+
 ![Ständerbohrmaschine](assets/bilder/sicherheit/staenderbohrmaschine.webp "Die Ständerbohrmaschine: harmlos im Aussehen, gefährlich bei Leichtsinn.")
 
 ### So arbeitest du sicher
 
 - **Schutzbrille** tragen, **keine Handschuhe**, Haare zusammen, Ärmel eng, kein Schmuck.
-- **Werkstück immer einspannen**, zum Beispiel im Maschinenschraubstock. Nie mit der Hand festhalten – verkantet sich der Bohrer, dreht sich das Werkstück mit.
+- **Werkstück immer einspannen**, zum Beispiel im Maschinenschraubstock. Nie mit der Hand festhalten – verkantet sich der Bohrer, reißt er das Werkstück mit.
+- **Der Schraubstock selbst muss mit einer Schraube am Maschinentisch gesichert sein.** Sonst kann er sich mitsamt Werkstück losreißen, im Arbeitsraum herumschleudern und dich treffen – **Lebensgefahr**.
 - **Bohrfutterschlüssel abziehen**, bevor du einschaltest. Ein vergessener Schlüssel wird beim Einschalten weggeschleudert.
 - Die **Drehzahl** passend zum Bohrer und Material einstellen. Frag, wenn du sie nicht kennst.
 - **Späne nie mit der Hand entfernen.** Sie sind scharf und heiß. Maschine ausschalten, Stillstand abwarten, dann mit Pinsel oder Spänehaken entfernen.
@@ -317,12 +342,16 @@ Arbeitsplatz von Schleifstaub reinigen
 
 Die Flex heißt eigentlich [[Winkelschleifer]]. Ihre Scheibe dreht sich bis zu **200-mal pro Sekunde**. Sie ist laut, macht viele Funken – und eine kaputte Scheibe kann **zerplatzen**. Die Bruchstücke fliegen dann wie Geschosse durch den Raum.
 
+:::achtung Dein Augenlicht steht auf dem Spiel
+Ein Funke, ein Splitter oder ein Stück Trennscheibe im Auge – und das Augenlicht kann für immer verloren sein. Bruchstücke einer zerplatzten Scheibe können außerdem tiefe Schnittwunden und lebensgefährliche Verletzungen verursachen. Deshalb gibt es an der Flex keine Ausnahme bei der Schutzausrüstung.
+:::
+
 ### Deine Schutzausrüstung beim Flexen
 
 - **Gehörschutz** – die Flex ist so laut, dass sie das Gehör schädigt.
 - **Schutzbrille**, besser zusätzlich ein **Gesichtsschutz** (Visier).
 - **Keine Handschuhe** – auch die Flex ist ein rotierendes Werkzeug.
-- Feste Kleidung, möglichst aus Baumwolle. Funken schmelzen Kunstfasern und brennen Löcher.
+- **Kleidung aus Baumwolle oder feuerfestem Material.** Funken entzünden Kunstfasern oder schmelzen sie auf der Haut – du könntest dich selbst in Brand setzen.
 
 ### Die Maschine prüfen
 
@@ -371,33 +400,30 @@ Unser Auto besteht zu großen Teilen aus [[Faserverbund]]: Carbon (Kohlefaser) u
 
 **Carbon- und Aramidstäube sind hochgiftig und können Krebs auslösen.** Die Fasern sind so fein, dass sie tief in die Lunge gelangen. Sie reizen außerdem Haut und Augen und jucken stark.
 
-:::achtung Keine zerspanende Bearbeitung von Carbon in der Werkstatt
-Schleifen, Bohren, Sägen oder Fräsen von Carbon und Aramid ist in der Werkstatt verboten. Und wo es erlaubt ist, gilt: **immer Atemschutz und Ganzkörperanzug.**
+:::achtung Carbon und Aramid nur draußen bearbeiten
+Schleifen, Bohren und Sägen von Carbon und Aramid passiert **draußen vor der Werkstatt – niemals in der Werkstatt.** Einzige Ausnahme ist die Fräse: Wird Carbon dort gefräst, dann nur mit Atemschutz und einem Industriestaubsauger, der für Carbonstaub geeignet ist. Und immer gilt: **Atemschutz-Vollmaske und Ganzkörperanzug.**
 :::
-
-{{TODO: Wo dürfen Carbon- und Aramidbauteile bearbeitet werden, welche Absaugung gibt es dort und wer ist dafür zuständig?}}
 
 ### Deine Schutzausrüstung bei Carbonstaub
 
-- **Atemschutzmaske** mit Partikelfilter (mindestens FFP3), die dicht am Gesicht anliegt.
+- **Atemschutz-Vollmaske** mit Partikelfilter, die das ganze Gesicht abdeckt. Eine Schutzbrille allein reicht nicht – sonst liegt das Gesicht im Staub.
 - **Ganzkörperanzug** mit Kapuze (Einweg-Schutzanzug). So bleibt der Staub nicht an Haut und Kleidung – und du trägst ihn nicht nach Hause.
-- **Schutzbrille**, die gut abschließt.
 - Wenn möglich: **Absaugung** direkt an der Stelle, wo der Staub entsteht.
 
 ### Nach der Arbeit
 
 - Staub mit einem **geeigneten Industriesauger** aufnehmen. **Nie mit Druckluft abblasen oder trocken fegen** – dann wirbelt der Staub erst richtig auf.
-- Den **Anzug vorsichtig ausziehen** (von innen nach außen rollen) und entsorgen. Die Maske nimmst du erst danach ab.
+- Den **Anzug vorsichtig ausziehen** (von innen nach außen rollen) und **wegwerfen** – er wird nicht wiederverwendet. Die Maske nimmst du erst danach ab.
 - **Hände und Gesicht waschen.** Nicht in der Nähe von Carbonstaub essen oder trinken.
 
 **So funktioniert die Übung:** Auf jeder Karte steht eine Frage. Überleg dir die Antwort und dreh die Karte dann um.
 
 :::karten Carbonstaub – weißt du es noch?
 Warum ist Carbonstaub so gefährlich? || Er ist hochgiftig und kann Krebs auslösen. Die feinen Fasern gelangen tief in die Lunge.
-Welche zwei Dinge trägst du immer bei Carbonstaub? || Atemschutz und Ganzkörperanzug – dazu eine Schutzbrille.
-Darfst du Carbon in der Werkstatt schleifen oder bohren? || Nein. Zerspanende Bearbeitung von Carbon ist in der Werkstatt verboten.
+Welche zwei Dinge trägst du immer bei Carbonstaub? || Eine Atemschutz-Vollmaske, die das ganze Gesicht abdeckt, und einen Ganzkörperanzug. Eine Schutzbrille allein reicht nicht.
+Wo wird Carbon geschliffen, gebohrt oder gesägt? || Draußen vor der Werkstatt – nie drinnen. Ausnahme: die Fräse, dann mit Atemschutz und geeignetem Industriestaubsauger.
 Wie entfernst du Carbonstaub? || Mit einem geeigneten Industriesauger – nie mit Druckluft oder Besen.
-Was machst du mit dem Anzug nach der Arbeit? || Vorsichtig von innen nach außen ausziehen und entsorgen. Erst danach die Maske abnehmen.
+Was machst du mit dem Anzug nach der Arbeit? || Vorsichtig von innen nach außen ausziehen und wegwerfen. Erst danach die Maske abnehmen.
 :::
 
 ## Harze und andere Gefahrstoffe
@@ -418,6 +444,15 @@ Für Harze nimmst du **Nitrilhandschuhe** – keine Latex- und keine Stoffhandsc
 - Zu jedem Gefahrstoff gibt es ein **Sicherheitsdatenblatt.** Lies es, bevor du mit dem Stoff arbeitest.
 
 {{TODO: Wo liegen die Sicherheitsdatenblätter für unsere Harze und Chemikalien, und wo werden Harzreste entsorgt?}}
+
+### Vorsicht, heiß: Harz richtig anmischen
+
+Harz und Härter reagieren miteinander – dabei entsteht **Wärme**. Mischst du zu viel auf einmal an, kann das Gemisch **sehr heiß werden, qualmen und sogar anfangen zu brennen.**
+
+- Nur so viel anmischen, wie du in der Verarbeitungszeit wirklich brauchst.
+- **Geeignete Mischgefäße** verwenden – keine kleinen, dünnen Plastikbecher. Die schmelzen bei größeren Mengen einfach weg.
+- Angemischtes Harz nicht in einem Klumpen stehen lassen; Reste flach ausgebreitet aushärten lassen.
+- Nichts Brennbares direkt neben dem Mischgefäß abstellen.
 
 ### Gefahrstoffe richtig aufbewahren
 
@@ -452,7 +487,7 @@ Jede Arbeit beginnt mit einer sauberen Vorbereitung und endet mit dem Aufräumen
 
 ### Nach der Arbeit: Nachbereitung
 
-- Maschinen **ausschalten** und **Stecker ziehen**.
+- Maschinen **ausschalten** und **Stecker ziehen**. Ausnahme: Drehstromstecker (Starkstrom) fest installierter Maschinen müssen nicht gezogen werden.
 - **Späne und Staub entfernen** – mit Pinsel, Besen oder Sauger, nie mit der bloßen Hand.
 - **Werkzeug zurück an seinen Platz.** So findet es die nächste Person – und es liegt nicht im Weg.
 - **Abfälle richtig entsorgen**, vor allem Harzreste, Lappen und Gefahrstoffe.
@@ -466,7 +501,7 @@ Jede Arbeit beginnt mit einer sauberen Vorbereitung und endet mit dem Aufräumen
 - [ ] Vorher: Schutzausrüstung bereitgelegt
 - [ ] Vorher: Werkzeug und Maschine geprüft
 - [ ] Vorher: Arbeitsplatz freigeräumt
-- [ ] Nachher: Maschine aus und Stecker gezogen
+- [ ] Nachher: Maschine aus und Stecker gezogen (außer Drehstrom)
 - [ ] Nachher: Späne und Staub entfernt
 - [ ] Nachher: Werkzeug zurückgelegt
 - [ ] Nachher: Abfälle richtig entsorgt
@@ -475,30 +510,22 @@ Jede Arbeit beginnt mit einer sauberen Vorbereitung und endet mit dem Aufräumen
 
 ## Wenn etwas passiert
 
-Bei einem Notfall zählt jede Sekunde. Präg dir deshalb schon jetzt ein, wo die wichtigsten Dinge in der Werkstatt sind.
+Bei einem Notfall zählt jede Sekunde. Deshalb gilt **vor jeder Arbeit:** Schau nach, wo der nächste **Feuerlöscher** und der nächste **Verbandskasten** sind – je nachdem, wo du gerade arbeitest.
 
-**So funktioniert die Übung:** Auf dem Werkstattplan sind nummerierte Punkte. Tippe einen an, dann erfährst du, was dort ist. Die gleichen Infos stehen als Liste unter dem Plan.
-
-:::hotspot Wo ist was in der Werkstatt? bild="assets/bilder/werkstatt-platzhalter.svg" alt="Schematischer Grundriss einer Werkstatt mit Werkbänken, Maschinen, Laminierbereich und Akku-Bereich"
-9% 12% | Notausgang | Fluchtweg nach draußen. Er muss immer frei sein – nichts davor abstellen.
-30% 12% | Feuerlöscher | Hier hängt ein Feuerlöscher. Benutze ihn nur, wenn du dich dabei nicht selbst gefährdest.
-55% 50% | Not-Aus | Mit dem Not-Aus-Schalter werden die Maschinen sofort abgeschaltet.
-78% 14% | Erste-Hilfe-Kasten | Verbandsmaterial für die Erste Hilfe. Benutztes Material melden, damit es ersetzt wird.
-85% 79% | Akku-Bereich | Hier werden Akkus gelagert und geladen. Zutritt nur mit Freigabe.
-:::
-
-{{TODO: Platzhalterbild durch den echten Werkstattplan ersetzen und die Punkte an die tatsächlichen Standorte von Notausgang, Feuerlöschern, Not-Aus, Erste-Hilfe-Kasten und Akku-Bereich anpassen.}}
+- Der **Erste-Hilfe-Kasten** der Werkstatt steht **am Eingang der Werkstatt im orangefarbenen Koffer**.
+- Der **Fluchtweg** zum Ausgang bleibt immer frei – nichts davor abstellen.
 
 **Im Notfall:**
 
 1. Ruhe bewahren, sich selbst nicht gefährden.
 2. Maschine über den [[Notaus]] abschalten. Am Rennwagen: einen Abschaltknopf drücken, wenn du gefahrlos drankommst, und laut nach Team HV rufen.
 3. Notruf **112** wählen – Wo ist es passiert? Was ist passiert? Wie viele Verletzte? Welche Verletzungen? Warten auf Rückfragen.
-4. [[Erste Hilfe]] leisten, Ersthelferin oder Ersthelfer holen.
-5. Den Unfall melden – auch kleine Verletzungen werden dokumentiert.
+4. **Den Rettungswagen einweisen lassen:** Wenn möglich, eine zweite Person holen, die am Eingang der Hochschule auf den Rettungswagen wartet und ihn zum richtigen Ort bringt. Tipp: Bei Google Maps findet man die Werkstatt unter **„Einstein Motorsport"** – das kannst du den Einsatzkräften sagen.
+5. [[Erste Hilfe]] leisten, Ersthelferin oder Ersthelfer holen.
+6. Den Unfall melden – auch kleine Verletzungen werden dokumentiert.
 
 :::achtung Bei einem Stromunfall
-Berühre niemanden, der noch mit einem Hochvolt-Bauteil in Kontakt sein könnte – sonst fließt der Strom auch durch dich. Ruf sofort Team HV und die 112. Nach jedem Stromunfall muss die betroffene Person ärztlich untersucht werden, auch wenn sie sich gut fühlt.
+Hängt jemand am Strom, **fass die Person niemals mit der Hand an** – sonst fließt der Strom auch durch dich. Zuerst den Strom abschalten (Not-Aus, Abschaltknopf). Geht das nicht, die Person mit einem **Besen oder einem anderen nicht leitenden Gegenstand** wegstoßen. Dann sofort Team HV und die 112 rufen. Nach jedem Stromunfall muss die betroffene Person ärztlich untersucht werden, auch wenn sie sich gut fühlt.
 :::
 
 {{TODO: Interne Notrufnummer der Hochschule, Namen bzw. Rollen der Ersthelferinnen und Ersthelfer im Team und wo Unfälle gemeldet werden (z. B. Verbandbuch).}}
@@ -517,14 +544,14 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 
 - Dieses Kapitel **bereitet vor** – die verpflichtende Unterweisung ersetzt es nicht.
 - **Sicherheitszeichen:** blau = Gebot, rot durchgestrichen = Verbot, gelb = Warnung, rote Raute = Gefahrstoff.
-- **Hochvolt (600 V):** Nur Team HV mit Schulung. Orange heißt Hochvolt – Finger weg. 10 Meter Abstand vor und hinter dem Auto, wenn es unter Spannung steht.
-- **TSAL:** Rot blinkend, dunkel oder Fehler = **Finger weg vom Rennwagen.** Grün = Hochvolt aus, Arbeiten trotzdem nur mit Freigabe.
-- **Low Voltage:** nur nach Einweisung durch das Electrics-Team. Keine Ahnung? Finger weg.
-- **Rotierende Werkzeuge:** keine Handschuhe, Haare zusammen, Schutzbrille. An der **Ständerbohrmaschine** das Werkstück immer einspannen.
-- **Fräs- und Drehmaschine** nur mit gesonderter Einweisung.
-- **Flex:** Gehörschutz, Schutzbrille, Schutzhaube montiert, Scheibe prüfen – und **nur vor der Werkstatt** flexen.
-- **Carbonstaub:** immer Atemschutz und Ganzkörperanzug. **Harz:** nur mit Nitrilhandschuhen.
-- **Vorbereitung und Aufräumen sind Pflicht.** Im Notfall: Not-Aus, **112**, Erste Hilfe, Unfall melden.
+- **Hochvolt (600 V):** Nur Team HV mit Schulung. Orange heißt Hochvolt – Finger weg. Steht das Auto unter Spannung: **nie vor, hinter oder neben dem Auto.**
+- **TSAL:** Rot blinkend oder rot und grün zugleich = **Finger weg vom Rennwagen.** Grün = Hochvolt aus, Arbeiten nur mit Freigabe. Dunkel = in der Regel sicher, außer Team HV sagt etwas anderes.
+- **Low Voltage (24 V):** nur nach Einweisung durch den Electrics Team Lead. Keine Ahnung? Finger weg.
+- **Rotierende Werkzeuge:** keine Handschuhe, Haare zusammen, Schutzbrille. An der **Ständerbohrmaschine** Werkstück einspannen und Schraubstock festschrauben.
+- **Fräs- und Drehmaschine** nur mit gesonderter Einweisung. Ansprechpartner unbekannt? Projektleitung.
+- **Flex:** Gehörschutz, Schutzbrille bzw. Visier, Schutzhaube, Kleidung aus Baumwolle oder feuerfest – und **nur vor der Werkstatt** flexen. Deine Augen sind nicht ersetzbar.
+- **Carbon:** nur draußen bearbeiten, immer **Atemschutz-Vollmaske** und Ganzkörperanzug. **Harz:** Nitrilhandschuhe, nur kleine Mengen in geeigneten Gefäßen anmischen.
+- **Vorbereitung und Aufräumen sind Pflicht.** Im Notfall: Strom abschalten, **112**, Rettungswagen einweisen lassen, Erste Hilfe (orangefarbener Koffer am Eingang), Unfall melden.
 
 :::quiz anzahl=7
 ?! Das TSAL am Überrollbügel blinkt rot. Was gilt?
@@ -556,10 +583,10 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 ~ Flex: Schutz, Scheibe und Brandschutz
 
 ?! Welche Schutzausrüstung brauchst du immer, wenn Carbonstaub entsteht?
-- [x] Atemschutzmaske
+- [x] Atemschutz-Vollmaske, die das ganze Gesicht abdeckt
 - [x] Ganzkörperanzug
-- [ ] Gehörschutz reicht aus
-> Carbonstaub ist hochgiftig und kann Krebs auslösen. Deshalb immer Atemschutz und Ganzkörperanzug – dazu eine Schutzbrille.
+- [ ] Eine Schutzbrille reicht für das Gesicht aus
+> Carbonstaub ist hochgiftig und kann Krebs auslösen. Deshalb immer eine Vollmaske mit Gesichtsschutz und einen Ganzkörperanzug. Mit einer Schutzbrille allein wäre das Gesicht dem Staub ausgesetzt.
 ~ Carbonstaub: Ganzkörperanzug und Atemschutz
 
 ?! Darfst du die Fräsmaschine benutzen, wenn du die allgemeine Werkstatt-Unterweisung hast?
@@ -575,11 +602,11 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 > Der Kurs bereitet nur vor. Die Unterweisung ist vorgeschrieben, maschinen- und tätigkeitsbezogen und wird dokumentiert.
 ~ Deine verpflichtende Unterweisung
 
-? Das TSAL leuchtet gar nicht. Was bedeutet das für dich?
-- [ ] Das Auto ist aus, du darfst daran arbeiten
-- [x] Der Zustand ist unbekannt – wie aktiv behandeln und Team HV fragen
-- [ ] Die Lampe ist kaputt, das ist egal
-> Ohne Licht weißt du nicht, ob Hochvolt anliegt. Was du nicht sicher weißt, behandelst du wie „aktiv".
+? Das TSAL leuchtet gar nicht – weder rot noch grün. Was bedeutet das?
+- [x] Das Auto ist in der Regel sicher, außer jemand aus Team HV sagt etwas anderes
+- [ ] Das Hochvoltsystem ist aktiv
+- [ ] Das Auto ist bereit zum Losfahren
+> Leuchtet das TSAL gar nicht, ist auch das Niedervolt-Bordnetz aus. Ohne Niedervolt kann der Akku bei uns nicht aktiv sein.
 ~ Das TSAL: Rot heißt Finger weg
 
 ? Woran erkennst du Hochvolt-Leitungen am Auto?
@@ -589,11 +616,11 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 > Alle Hochvolt-Leitungen sind orange. Orange Bauteile fasst du nicht an.
 ~ Hochvolt: 600 Volt – Finger weg
 
-? Das Auto steht unter Spannung. Wo hältst du dich nicht auf?
-- [x] Mindestens 10 Meter vor und hinter dem Auto
-- [ ] Nur direkt im Cockpit
-- [ ] Nirgends, solange das Auto steht
-> Steht das Auto unter Spannung, können sich die Räder jederzeit drehen. Vor und hinter dem Auto gilt deshalb ein Abstand von mindestens 10 Metern.
+? Das Auto steht unter Spannung, das TSAL blinkt rot. Wo stehst du?
+- [x] Nie vor, hinter oder neben dem Auto
+- [ ] 10 Meter vor dem Auto reichen
+- [ ] Direkt hinter dem Auto, da fährt es ja nicht hin
+> Das Auto beschleunigt in weniger als 2,5 Sekunden von 0 auf 100 km/h – wenn es losfährt, kommst du nicht weg. Drehende Räder können außerdem Teile wegschleudern.
 ~ Hochvolt: 600 Volt – Finger weg
 
 ? Was bedeutet der Ready-to-drive-Ton?
@@ -674,7 +701,7 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 ~ Carbonstaub: Ganzkörperanzug und Atemschutz
 
 ? Du bist mit deiner Arbeit fertig. Was gehört dazu?
-- [x] Maschine ausschalten und Stecker ziehen
+- [x] Maschine ausschalten und Stecker ziehen (außer Drehstromstecker)
 - [x] Arbeitsplatz aufräumen und Werkzeug zurücklegen
 - [ ] Liegen lassen – morgen geht es ja weiter
 > Aufräumen ist bei uns Pflicht. Ein unordentlicher Platz gefährdet die nächste Person.
@@ -684,7 +711,28 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 - [x] Ausschalten und den Stecker ziehen
 - [ ] Den Schaden melden und weiterarbeiten
 - [ ] Selbst reparieren
-> Erst Strom weg, dann sicher verstauen, gegen Wiedereinschalten sichern und melden.
+> Erst Strom weg, dann sicher verstauen, gegen Wiedereinschalten sichern und melden – mit dem Ort, an dem das Gerät jetzt liegt.
+
+? Der Maschinenschraubstock an der Ständerbohrmaschine ist nicht festgeschraubt. Was tust du?
+- [x] Erst den Schraubstock mit einer Schraube am Tisch sichern, dann bohren
+- [ ] Den Schraubstock beim Bohren mit der Hand festhalten
+- [ ] Einfach langsamer bohren
+> Ein loser Schraubstock kann sich mit dem Werkstück losreißen und durch den Arbeitsraum schlagen – Lebensgefahr.
+~ Ständerbohrmaschine: Finger in Gefahr
+
+? Du willst eine größere Menge Harz anmischen. Worauf achtest du?
+- [x] Nur so viel wie nötig, in einem geeigneten Mischgefäß
+- [ ] Im kleinen Plastikbecher, der ist gerade da
+- [ ] Gleich viel auf Vorrat anmischen
+> Harz und Härter werden beim Reagieren heiß. Große Mengen können qualmen oder brennen und dünne Plastikbecher schmelzen.
+~ Harze und andere Gefahrstoffe
+
+? Warum flext du nur mit Schutzbrille bzw. Visier?
+- [x] Ein Funke oder Splitter im Auge kann das Augenlicht für immer zerstören
+- [ ] Weil es so vorgeschrieben ist, passieren kann aber nichts
+- [ ] Nur damit kein Staub in die Augen kommt
+> Funken, Splitter und Bruchstücke einer zerplatzten Scheibe fliegen mit hoher Geschwindigkeit. Das Augenlicht ist nicht ersetzbar.
+~ Flex: Schutz, Scheibe und Brandschutz
 ~ Regeln in der Werkstatt
 
 ? Welche Nummer wählst du im Notfall?
