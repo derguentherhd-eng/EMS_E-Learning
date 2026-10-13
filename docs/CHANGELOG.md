@@ -75,3 +75,13 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - `.nojekyll` ergänzt: Ohne die Datei würde GitHub Pages die `.md`-Inhalte in HTML umwandeln.
 - Sicherungskopien (`content/_backup/`) werden nicht mehr ins Repository übernommen.
 - Anleitung zum Veröffentlichen mit GitHub Desktop und GitHub Pages in `docs/PFLEGE.md`.
+
+### Kapitel Arbeitssicherheit ausführlich (2026-10-13)
+- Kapitel 5 neu und ausführlich (16 Seiten, ca. 35 min, Version 2): Sicherheitszeichen, Schutzausrüstung, Hochvolt (600 V, nur Team HV), TSAL nach FS Rules 2026 (EV4.10, A6.9/A6.10), Low Voltage (nur nach Einweisung durch das Electrics-Team), Werkstattregeln, Ständerbohrmaschine, Bandschleifer, Flex mit Brandschutz, Carbonstaub, Harze, Ordnung, Notfall.
+- Vor jedem interaktiven Element steht eine Erklärung in einfachen Worten („So funktioniert die Übung").
+- Bilder aus der Teampräsentation (Arbeitssicherheit) in `assets/bilder/sicherheit/`, darunter eine anklickbare Übersicht der Sicherheitszeichen.
+- Quiz: 7 Sicherheitsfragen (immer gestellt) und 7 zufällige aus 18 weiteren.
+- Glossar: ESO, GHS, Low Voltage, Ready-to-drive, Tractive System, TSAL, Winkelschleifer; Hochvolt mit 600 V.
+- Willkommenstext: Sektoren in beliebiger Reihenfolge, Hinweis auf direkten Start mit der Arbeitssicherheit.
+- Behoben: Breite Tabellen verbreiterten auf dem Handy die ganze Seite statt nur seitlich zu scrollen.
+- Das Kapitel bleibt `freigegeben: nein`, bis die Sicherheitsverantwortlichen es geprüft haben.

@@ -19,4 +19,6 @@ kapitel:
 
 Willkommen im Team! In sechs kurzen Sektoren erfährst du, wie Formula Student funktioniert, wer bei uns was macht, wo du Dateien findest und worauf es in der Werkstatt ankommt.
 
-Jeder Sektor dauert sechs bis zwölf Minuten und endet mit einem kurzen Quiz. Du kannst jederzeit pausieren – dein Fortschritt bleibt in diesem Browser gespeichert.
+Jeder Sektor endet mit einem kurzen Quiz. Du kannst die Sektoren in beliebiger Reihenfolge bearbeiten und jederzeit pausieren – dein Fortschritt bleibt in diesem Browser gespeichert.
+
+**Bald in der Werkstatt?** Dann starte direkt mit Sektor 5, der Arbeitssicherheit. Dafür musst du die anderen Sektoren nicht abgeschlossen haben.

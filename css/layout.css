@@ -58,6 +58,9 @@
   /* ── Hauptspalte ── */
   .page {
     inline-size: 100%;
+    /* Rasterelement im <body>: ohne min-inline-size: 0 würde eine breite Tabelle die ganze Seite
+       verbreitern, statt nur in ihrem eigenen Rahmen (.table-wrap) zu scrollen. */
+    min-inline-size: 0;
     max-inline-size: calc(var(--content-max) + 2 * var(--gutter));
     margin-inline: auto;
     padding: var(--space-l) var(--gutter) var(--space-2xl);

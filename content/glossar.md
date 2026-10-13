@@ -11,16 +11,20 @@ Egress-Test: Teil der technischen Abnahme: Die fahrende Person muss in wenigen S
 Endurance: Die längste dynamische Disziplin: rund 22 Kilometer Dauerlauf mit Fahrerwechsel. Sie prüft Zuverlässigkeit und Effizienz.
 Engineering Design: Statische Disziplin: Das Team erklärt einer Jury aus Fachleuten seine Konstruktionsentscheidungen. Gefragt ist das Warum, nicht nur das Was.
 Erste Hilfe: Sofortmaßnahmen bei Unfällen, bis professionelle Hilfe da ist. In der Werkstatt gibt es Ersthelferinnen und Ersthelfer sowie einen Erste-Hilfe-Kasten.
+ESO: Electrical System Officer – laut Regelwerk die Person im Team, die für alle Arbeiten am Hochvoltsystem verantwortlich ist. Nur ein ESO darf das Auto als „elektrisch sicher" erklären; dafür braucht er oder sie eine Hochvolt-Qualifikation.
 Faserverbund: Werkstoff aus Fasern (z. B. Kohlefaser) und Harz. Leicht und steif, aber beim Schleifen entsteht gesundheitsschädlicher Staub.
-FSG: Formula Student Germany – eines der bekanntesten Formula-Student-Events, ausgetragen auf dem Hockenheimring.
 Formula Student: Internationaler Konstruktionswettbewerb, bei dem Studierendenteams einen einsitzigen Rennwagen entwerfen, bauen und gegeneinander antreten lassen.
 Freigabe: Ausdrückliche Erlaubnis einer verantwortlichen Person, eine bestimmte Arbeit durchzuführen – zum Beispiel am Hochvoltsystem.
+FSG: Formula Student Germany – eines der bekanntesten Formula-Student-Events, ausgetragen auf dem Hockenheimring.
 Gefahrstoff: Stoff, der Gesundheit oder Umwelt gefährden kann, etwa Harze, Lösungsmittel oder Kühlmittel. Zu jedem gibt es ein Sicherheitsdatenblatt.
-Hochvolt: Spannungen, die für Menschen lebensgefährlich sein können. Bei Formula-Student-Elektroautos sind es oft mehrere hundert Volt. Kurz: HV.
+GHS: Weltweit einheitliches System zur Kennzeichnung von Gefahrstoffen: schwarze Symbole in einer weißen Raute mit rotem Rand, zum Beispiel für ätzend, entzündbar oder umweltgefährlich.
+Hochvolt: Spannungen, die für Menschen lebensgefährlich sein können. Unser Rennwagen arbeitet mit 600 Volt. Kurz: HV. Hochvolt-Bauteile sind orange; an ihnen arbeitet nur Team HV mit Schulung.
 Lastenheft: Dokument, das festhält, was ein Bauteil oder System können muss. Es steht am Anfang der Konstruktion.
+Low Voltage: Das Niedervolt-Bordnetz des Autos mit höchstens 60 Volt: Steuergeräte, Sensoren, Lichter, Pumpen. Kurz: LV. Seine Leitungen sind nie orange. Arbeiten daran nur nach Einweisung durch das Electrics-Team.
 Monocoque: Selbsttragende Fahrzeugstruktur aus einem Stück, meist aus Faserverbund. Sie ersetzt den klassischen Rohrrahmen.
 Notaus: Schalter, der eine Maschine oder das Fahrzeug sofort abschaltet. Er ist rot auf gelbem Grund und muss immer frei erreichbar sein.
 PSA: Persönliche Schutzausrüstung – zum Beispiel Schutzbrille, Sicherheitsschuhe, Gehörschutz oder Atemschutzmaske.
+Ready-to-drive: Fahrbereiter Zustand des Elektroautos: Die Motoren reagieren auf das Gaspedal. Das Auto kündigt ihn mit einem lauten Signalton an. Kurz: R2D.
 Regelwerk: Die offiziellen Formula-Student-Regeln. Sie werden jedes Jahr überarbeitet und legen Fahrzeuganforderungen, Disziplinen und Punkte fest.
 Rollout: Der Moment, in dem das neue Auto zum ersten Mal vorgestellt wird und aus eigener Kraft fährt.
 Rookie: Neues Teammitglied in der ersten Saison. Niemand erwartet, dass du schon alles weißt.
@@ -29,5 +33,8 @@ Skidpad: Dynamische Disziplin: Das Auto fährt eine liegende Acht. Gemessen wird
 Subteam: Arbeitsgruppe im Team mit eigenem Fachgebiet, zum Beispiel Fahrwerk oder Marketing.
 Thermisches Durchgehen: Eine beschädigte oder überhitzte Lithium-Zelle heizt sich selbst immer weiter auf, bis sie brennt oder explodiert. Englisch: Thermal Runaway.
 Tilt-Test: Teil der technischen Abnahme: Das Auto wird stark zur Seite geneigt, um zu prüfen, dass nichts ausläuft und es nicht umkippt.
+Tractive System: Das Hochvolt-Antriebssystem des Elektroautos: Akku, Leistungselektronik, Motoren und alle Leitungen dazwischen. Kurz: TS. Erkennbar an der Signalfarbe Orange.
+TSAL: Tractive System Active Light – Warnleuchte oben am Überrollbügel. Blinkt sie rot, ist das Hochvoltsystem aktiv: Finger weg vom Rennwagen. Leuchtet sie dauerhaft grün, ist es aus.
 Unterweisung: Verpflichtende Einweisung in Gefahren und Schutzmaßnahmen durch eine verantwortliche Person – vor der ersten Tätigkeit und danach regelmäßig.
 Versionierung: Eine Datei bekommt neue Versionen, statt dass immer neue Kopien entstehen. So ist klar, welche Fassung aktuell ist.
+Winkelschleifer: Handmaschine mit einer schnell drehenden Trenn- oder Schleifscheibe, umgangssprachlich „Flex". Nur mit Gehörschutz, Schutzbrille und montierter Schutzhaube – und bei uns nur vor der Werkstatt.

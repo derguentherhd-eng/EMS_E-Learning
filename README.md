@@ -40,3 +40,8 @@ direkt. Details: [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 1.
   ([assets/fonts/OFL-Lato.txt](assets/fonts/OFL-Lato.txt)).
 - **jsPDF 4.2.1** – MIT-Lizenz ([vendor/jspdf/LICENSE](vendor/jspdf/LICENSE)).
 - **Logo** – Eigentum von Einstein Motorsport.
+- **Bilder in `assets/bilder/sicherheit/`** – aus der Teampräsentation „GNTM 15.04.2026", Teil
+  Arbeitssicherheit. Die Sicherheitszeichen sind genormte Symbole. Die Produktfotos (Werkzeuge,
+  Trennscheiben) und das Plakat „Gefährliche Stoffe niemals in Getränkeflaschen!" (Suva) stammen von
+  Dritten: **Nutzungsrechte vor einer öffentlichen Veröffentlichung klären** oder durch eigene Fotos
+  aus der Werkstatt ersetzen.
