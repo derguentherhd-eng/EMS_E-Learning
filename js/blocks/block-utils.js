@@ -93,21 +93,44 @@ export function joinLines(lines) {
 }
 
 /**
- * Teilt eine Zeile an | in Spalten (\| bleibt als Zeichen erhalten).
+ * Teilt eine Zeile an | in Spalten. Nicht getrennt wird an \| (maskiert), an || (Lernkarten)
+ * und innerhalb von [[Begriff|Anzeigetext]] – dort gehört der Strich zum Glossarbegriff.
  * @param {string} text
  * @returns {string[]}
  */
 export function splitPipes(text) {
-  return text.split(/(?<![\\|])\|(?!\|)/).map((part) => part.trim().replace(/\\\|/g, '|'));
+  const parts = [];
+  let current = '';
+  let inGlossary = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i];
+    if (text.startsWith('[[', i)) inGlossary = true;
+    if (text.startsWith(']]', i)) inGlossary = false;
+    if (char === '\\' && text[i + 1] === '|') {
+      current += '|';
+      i += 1;
+    } else if (char === '|' && !inGlossary && text[i + 1] !== '|' && text[i - 1] !== '|') {
+      parts.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  parts.push(current.trim());
+  return parts;
 }
 
 /**
- * Schützt | in Text, der in eine |-getrennte Zeile geschrieben wird.
+ * Schützt | in Text, der in eine |-getrennte Zeile geschrieben wird. Striche innerhalb von
+ * [[Begriff|Anzeigetext]] bleiben unverändert.
  * @param {string} text
  * @returns {string}
  */
 export function escapePipes(text) {
-  return oneLine(text).replace(/\|/g, '\\|');
+  return oneLine(text)
+    .split(/(\[\[[^\]]*\]\])/)
+    .map((part, index) => (index % 2 === 1 ? part : part.replace(/\|/g, '\\|')))
+    .join('');
 }
 
 /**

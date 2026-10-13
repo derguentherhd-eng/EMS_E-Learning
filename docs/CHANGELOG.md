@@ -45,3 +45,9 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Rückgängig/Wiederholen (50 Schritte), Sicherungskopien in `content/_backup/`, Konfliktprüfung, Warnung beim Verlassen.
 - Kapitel anlegen, umbenennen, duplizieren, umsortieren, deaktivieren, archivieren, wiederherstellen.
 - Freigabe von Sicherheitskapiteln wird bei jeder Änderung zurückgesetzt; Vorschlag „Version erhöhen" bei Quizänderungen.
+
+### Phase 8 – Inhalte (2026-10-13)
+- Sechs Kapitel, Glossar mit 33 Begriffen, SVG-Platzhalter für Fahrzeug und Werkstattplan.
+- Kapitel 6 „Dein Start" vollständig im Editor angelegt (Praxistest).
+- Behoben: `[[Begriff|Text]]` in Bausteinen mit `|`-Trennern (Zeitstrahl, Lernkarten …) wurde getrennt bzw. beim Speichern maskiert.
+- Behoben: Der Editor meldete unveränderte, aber anders formatierte Dateien als „ungespeichert" und hätte sie umformatiert.

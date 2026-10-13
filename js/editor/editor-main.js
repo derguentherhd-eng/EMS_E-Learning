@@ -349,8 +349,12 @@ async function loadProject(workspace) {
   const courseText = await read(COURSE_PATH);
   if (courseText === null) throw new Error('content/kurs.md wurde nicht gefunden.');
   const course = parseCourse(courseText);
+  // canonical = Inhalt so, wie der Editor ihn schreiben würde. Eine Datei gilt nur dann als
+  // geändert, wenn sich ihr INHALT ändert – nicht schon, weil sie anders formatiert ist.
+  state.files[COURSE_PATH].canonical = serializeCourse({ meta: course.meta, welcome: course.welcome });
   const glossaryText = (await read(GLOSSARY_PATH)) ?? '';
   if (!state.files[GLOSSARY_PATH]) state.files[GLOSSARY_PATH] = { text: '', lastModified: null, backedUp: false };
+  state.files[GLOSSARY_PATH].canonical = glossaryText ? serializeGlossary(parseGlossary(glossaryText).entries) : '';
   state.template = (await workspace.readFile(TEMPLATE_PATH))?.text ?? null;
 
   const chapterFiles = workspace.canList ? (await workspace.list(DIRS.kapitel)).filter((name) => name.endsWith('.md')) : [...course.meta.kapitel];
@@ -362,6 +366,7 @@ async function loadProject(workspace) {
     const text = await read(`${DIRS[location]}/${file}`);
     if (text === null) return;
     const model = parseChapter(text, file, DIRS[location]);
+    state.files[`${DIRS[location]}/${file}`].canonical = model.fatal ? text : serializeChapter(model);
     chapters.push({ file, location, origin: { file, location }, model: model.fatal ? null : model, brokenText: model.fatal ? text : undefined });
     state.baseline[file] = { quiz: model.quiz ? serializeElement(model.quiz) : '', version: model.meta.version };
   };
@@ -384,6 +389,11 @@ async function loadProject(workspace) {
 
 /* ───────────────────────────── Speichern ───────────────────────────── */
 
+/** Vergleichsstand einer Datei: kanonische Fassung beim Laden bzw. zuletzt gespeicherter Text. */
+function baselineText(path) {
+  return state.files[path]?.canonical ?? state.files[path]?.text;
+}
+
 /**
  * Ermittelt alle nötigen Dateioperationen.
  * @returns {{path: string, label: string, text?: string, blob?: Blob, from?: string, entry?: ChapterEntry}[]}
@@ -392,16 +402,16 @@ function collectChanges() {
   if (!state.doc) return [];
   const changes = [];
   const courseText = serializeCourse(state.doc.course);
-  if (courseText !== state.files[COURSE_PATH]?.text) changes.push({ path: COURSE_PATH, label: 'Kurseinstellungen', text: courseText });
+  if (courseText !== baselineText(COURSE_PATH)) changes.push({ path: COURSE_PATH, label: 'Kurseinstellungen', text: courseText });
   const glossaryText = serializeGlossary(state.doc.glossary);
-  if (glossaryText !== (state.files[GLOSSARY_PATH]?.text ?? '') && !(glossaryText === '\n' && !state.files[GLOSSARY_PATH]?.text)) {
+  if (glossaryText !== (baselineText(GLOSSARY_PATH) ?? '') && !(glossaryText === '\n' && !baselineText(GLOSSARY_PATH))) {
     changes.push({ path: GLOSSARY_PATH, label: 'Glossar', text: glossaryText });
   }
   for (const entry of state.doc.chapters) {
     const path = chapterPath(entry);
     const from = entry.origin ? chapterPath(entry.origin) : null;
     const text = entry.model ? serializeChapter(entry.model) : entry.brokenText;
-    const original = from ? state.files[from]?.text : null;
+    const original = from ? baselineText(from) : null;
     if (from === null || from !== path || text !== original) {
       changes.push({ path, from, text, entry, label: entry.model?.meta.titel ?? entry.file });
     }

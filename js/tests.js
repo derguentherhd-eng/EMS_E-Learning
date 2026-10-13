@@ -25,7 +25,7 @@ import {
   createEmptyState, createStore, getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked,
   normalizeState, recordQualifying, recordQuizResult,
 } from './store.js';
-import { hashText } from './blocks/block-utils.js';
+import { escapePipes, hashText, splitPipes } from './blocks/block-utils.js';
 import { certificateFileName, createVerificationCode, formatGermanDate } from './certificate.js';
 import { backupPath, chapterFileName, imageFileName, slugify } from './editor/names.js';
 import { createHistory, record, redo, undo } from './editor/history.js';
@@ -367,6 +367,26 @@ test('Meldungen haben Klartext und richtige Zeilennummern', () => {
 });
 
 /* ───────────────────────────── Bausteine ───────────────────────────── */
+
+group('Bausteine: Trenner und Glossar');
+
+test('| innerhalb von [[Begriff|Text]] trennt keine Spalten', () => {
+  assertEqual(splitPipes('Herbst | Konzept | Ziele, [[Lastenheft|Lastenhefte]] schreiben'), ['Herbst', 'Konzept', 'Ziele, [[Lastenheft|Lastenhefte]] schreiben']);
+  assertEqual(splitPipes('a \\| b | c'), ['a | b', 'c']);
+});
+
+test('Maskieren lässt Glossarbegriffe unverändert', () => {
+  assertEqual(escapePipes('A|B [[Hochvolt|HV-Technik]]'), 'A\\|B [[Hochvolt|HV-Technik]]');
+});
+
+test('Zeitstrahl und Lernkarten: Glossar mit Anzeigetext bleibt beim Speichern gleich', () => {
+  for (const text of [
+    ':::zeitstrahl\nHerbst | Konzept | [[Lastenheft|Lastenhefte]] schreiben.\n:::',
+    ':::karten\nElektro || Mit [[Hochvolt|Hochvolt-Technik]].\n:::',
+  ]) {
+    assertEqual(serializeElement(parseSingleElement(text)), text);
+  }
+});
 
 group('Bausteine: Parser und Round-Trip');
 
