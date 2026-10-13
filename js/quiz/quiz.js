@@ -19,10 +19,13 @@
  *   – Bewertungsregeln: scoreAttempt(); danach Tests in tests.html anpassen.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { renderInline } from '../render.js';
-import { shuffle } from '../blocks/block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { renderInline } = EM.require('js/render.js');
+const { shuffle } = EM.require('js/blocks/block-utils.js');
 
 /**
  * Eine gezogene Frage mit Herkunft (für Ergebnisliste und Links zum Nachlesen).
@@ -46,7 +49,7 @@ import { shuffle } from '../blocks/block-utils.js';
  * @param {Set<string>} [avoid]  Fragetexte des letzten Versuchs (werden möglichst vermieden)
  * @returns {import('../blocks/quiz-block.js').QuizQuestion[]}
  */
-export function drawQuestions(quiz, random = Math.random, avoid = new Set()) {
+function drawQuestions(quiz, random = Math.random, avoid = new Set()) {
   const critical = quiz.questions.filter((question) => question.critical);
   const normal = quiz.questions.filter((question) => !question.critical);
   const count = Math.min(quiz.count ?? normal.length, normal.length);
@@ -63,7 +66,7 @@ export function drawQuestions(quiz, random = Math.random, avoid = new Set()) {
  * @param {() => number} [random]
  * @returns {DrawnQuestion[]}
  */
-export function drawQualifying(chapters, count, random = Math.random) {
+function drawQualifying(chapters, count, random = Math.random) {
   const pools = chapters
     .map((chapter, chapterIndex) => ({ chapter, chapterIndex, questions: shuffle(chapter.quiz?.data.questions ?? [], random) }))
     .filter((pool) => pool.questions.length > 0);
@@ -86,7 +89,7 @@ export function drawQualifying(chapters, count, random = Math.random) {
  * @param {string[]} selected  Texte der gewählten Antworten
  * @returns {boolean}
  */
-export function isAnswerCorrect(question, selected) {
+function isAnswerCorrect(question, selected) {
   const correct = question.answers.filter((answer) => answer.correct).map((answer) => answer.text);
   return correct.length === selected.length && correct.every((text) => selected.includes(text));
 }
@@ -97,7 +100,7 @@ export function isAnswerCorrect(question, selected) {
  * @param {number} threshold  Bestehensgrenze in Prozent
  * @returns {{correct: number, total: number, percent: number, passed: boolean, criticalFailed: number}}
  */
-export function scoreAttempt(answered, threshold) {
+function scoreAttempt(answered, threshold) {
   const total = answered.length;
   const correct = answered.filter((entry) => entry.correct).length;
   const criticalFailed = answered.filter((entry) => entry.question.critical && !entry.correct).length;
@@ -124,7 +127,7 @@ export function scoreAttempt(answered, threshold) {
  * @param {() => number} [options.random]
  * @param {(answered: AnsweredQuestion[]) => void} options.onFinish
  */
-export function runQuiz(container, { questions, label, glossary, random = Math.random, onFinish }) {
+function runQuiz(container, { questions, label, glossary, random = Math.random, onFinish }) {
   const answered = [];
 
   const showQuestion = (index) => {
@@ -220,7 +223,7 @@ export function runQuiz(container, { questions, label, glossary, random = Math.r
  * @param {AnsweredQuestion[]} answered
  * @returns {HTMLElement}
  */
-export function renderResultStrip(answered) {
+function renderResultStrip(answered) {
   return el(
     'ol',
     { class: 'result-strip', 'aria-label': 'Deine Antworten' },
@@ -234,3 +237,6 @@ export function renderResultStrip(answered) {
     ),
   );
 }
+
+EM.define('js/quiz/quiz.js', { drawQuestions, drawQualifying, isAnswerCorrect, scoreAttempt, runQuiz, renderResultStrip });
+})();

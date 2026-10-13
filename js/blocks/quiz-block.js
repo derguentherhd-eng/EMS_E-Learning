@@ -28,8 +28,11 @@
  *     (js/editor/quiz-editor.js) ein Feld ergänzen, Round-Trip-Test in tests.html ergänzen.
  */
 
-import { el } from '../dom.js';
-import { blockError, formatBlock, formatHeader, oneLine } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, formatBlock, formatHeader, oneLine } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {Object} QuizAnswer
@@ -56,7 +59,7 @@ import { blockError, formatBlock, formatHeader, oneLine } from './block-utils.js
  */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'quiz',
   interactive: false, // zählt didaktisch nicht als Interaktion der Inhaltsseiten
 
@@ -202,3 +205,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/quiz-block.js', { default: definition });
+})();

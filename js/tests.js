@@ -10,25 +10,26 @@
  *   – Neue Logik: einen test(...)-Block in der passenden Gruppe ergänzen.
  */
 
-import { el } from './dom.js';
-import { parseFrontmatter, serializeFrontmatter } from './content/frontmatter.js';
-import { parseInline, parseMarkdown } from './content/markdown.js';
-import { normalizeText, parseBlockHeader, parseBody, parseChapter, parseCourse, parseGlossary } from './content/documents.js';
-import { serializeChapter, serializeCourse, serializeElement, serializeGlossary } from './content/serialize.js';
-import { createFetchReader, loadCourse } from './content/loader.js';
-import { validateChapter } from './content/validate.js';
-import { getBlock, listBlocks } from './blocks/registry.js';
-import { renderInline, renderMarkdown } from './render.js';
-import { parseRoute } from './router.js';
-import { drawQualifying, drawQuestions, isAnswerCorrect, scoreAttempt } from './quiz/quiz.js';
-import {
-  createEmptyState, createStore, getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked,
-  normalizeState, recordQualifying, recordQuizResult,
-} from './store.js';
-import { escapePipes, hashText, splitPipes } from './blocks/block-utils.js';
-import { certificateFileName, createVerificationCode, formatGermanDate } from './certificate.js';
-import { backupPath, chapterFileName, imageFileName, slugify } from './editor/names.js';
-import { createHistory, record, redo, undo } from './editor/history.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { parseFrontmatter, serializeFrontmatter } = EM.require('js/content/frontmatter.js');
+const { parseInline, parseMarkdown } = EM.require('js/content/markdown.js');
+const { normalizeText, parseBlockHeader, parseBody, parseChapter, parseCourse, parseGlossary } = EM.require('js/content/documents.js');
+const { serializeChapter, serializeCourse, serializeElement, serializeGlossary } = EM.require('js/content/serialize.js');
+const { createDefaultReader, createFileListReader, loadCourse } = EM.require('js/content/loader.js');
+const { buildMirrorScript, collectMirrorPaths, createMirrorReader, parseMirrorScript } = EM.require('js/content/mirror.js');
+const { validateChapter } = EM.require('js/content/validate.js');
+const { getBlock, listBlocks } = EM.require('js/blocks/registry.js');
+const { renderInline, renderMarkdown } = EM.require('js/render.js');
+const { parseRoute } = EM.require('js/router.js');
+const { drawQualifying, drawQuestions, isAnswerCorrect, scoreAttempt } = EM.require('js/quiz/quiz.js');
+const { createEmptyState, createStore, getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked, normalizeState, recordQualifying, recordQuizResult } = EM.require('js/store.js');
+const { escapePipes, hashText, splitPipes } = EM.require('js/blocks/block-utils.js');
+const { certificateFileName, createVerificationCode, formatGermanDate } = EM.require('js/certificate.js');
+const { backupPath, chapterFileName, imageFileName, slugify } = EM.require('js/editor/names.js');
+const { createHistory, record, redo, undo } = EM.require('js/editor/history.js');
 
 /* ───────────────────────────── Mini-Testrahmen ───────────────────────────── */
 
@@ -74,7 +75,7 @@ function stableJson(value) {
  * Entfernt Angaben, die sich beim Zurückschreiben ändern dürfen (Zeilennummern, Meldungen).
  * „Inhaltsgleich" heißt: nach dieser Bereinigung identisch.
  */
-export function stripVolatile(value) {
+function stripVolatile(value) {
   if (Array.isArray(value)) return value.map(stripVolatile);
   if (value && typeof value === 'object') {
     return Object.fromEntries(
@@ -702,12 +703,53 @@ test('Glossar: Einträge, ungültige Zeilen bleiben erhalten', () => {
   assertEqual(serializeGlossary(entries), 'A: Erklärung: mit Doppelpunkt\nkaputt\nB: Zwei\n');
 });
 
+/* ───────────────────────────── Offline-Datei ───────────────────────────── */
+
+group('Betrieb ohne Server (content/inhalte.js)');
+
+test('Offline-Datei: Inhalte kommen unverändert zurück, auch mit Sonderzeichen', async () => {
+  const files = { 'content/kurs.md': 'Umlaute äöüß, Backtick `x`, ${nicht}, </script>, \u2028, "Zitat"\n' };
+  const data = parseMirrorScript(buildMirrorScript(files, ['01-a.md'], new Date(2026, 0, 1)));
+  assertEqual(data.dateien, files);
+  assertEqual(data.kapitelOrdner, ['01-a.md']);
+  assertEqual(await createMirrorReader(data)('content/kurs.md'), files['content/kurs.md']);
+  assertEqual(await createMirrorReader(data)('gibt/es/nicht.md'), null);
+});
+
+test('Offline-Datei: welche Dateien hineingehören', () => {
+  assertEqual(collectMirrorPaths(['01-a.md'], 'assets/logo/logo.svg'), ['content/kurs.md', 'content/glossar.md', 'content/_vorlage-kapitel.md', 'content/kapitel/01-a.md', 'assets/logo/logo.svg']);
+  assertEqual(collectMirrorPaths([], 'assets/logo/logo.png').length, 3, 'Nur SVG-Logos werden als Text übernommen');
+});
+
+test('Offline-Datei ist aktuell (gleicher Inhalt wie die .md-Dateien)', async () => {
+  if (window.location.protocol === 'file:') return; // ohne Server gibt es nichts zum Vergleichen
+  const response = await fetch('content/inhalte.js', { cache: 'no-cache' });
+  const data = parseMirrorScript(await response.text());
+  assert(data, 'content/inhalte.js fehlt oder ist unlesbar – im Editor den Projektordner öffnen');
+  for (const [path, text] of Object.entries(data.dateien)) {
+    const current = (await (await fetch(path, { cache: 'no-cache' })).text()).replace(/\r\n?/g, '\n');
+    assertEqual(text, current, `${path} ist veraltet – im Editor den Projektordner öffnen`);
+  }
+});
+
+test('Eingelesener Ordner: Pfade ohne Ordnernamen, Auflisten eines Unterordners', async () => {
+  const file = (path, text) => Object.assign(new File([text], path.split('/').pop()), {});
+  const files = [file('a', 'x'), file('b', 'y')];
+  Object.defineProperty(files[0], 'webkitRelativePath', { value: 'onboarding/content/kurs.md' });
+  Object.defineProperty(files[1], 'webkitRelativePath', { value: 'onboarding/content/kapitel/01-a.md' });
+  const reader = createFileListReader(files);
+  assertEqual(await reader.readText('content/kurs.md'), 'x');
+  assertEqual(reader.list('content/kapitel'), ['01-a.md']);
+  assertEqual(reader.list('content'), ['kurs.md']);
+});
+
 /* ───────────────────────── Alle echten Inhaltsdateien ───────────────────────── */
 
 group('Round-Trip aller Dateien in content/');
 
 const contentTests = (async () => {
-  const read = createFetchReader();
+  // Mit Server die .md-Dateien, ohne Server (file://) die Offline-Datei content/inhalte.js.
+  const read = createDefaultReader();
   const course = await loadCourse(read);
   test('content/kurs.md', () => {
     const first = parseCourse(course.sources['content/kurs.md']);
@@ -784,3 +826,6 @@ function render(outcomes) {
 }
 
 runAll();
+
+EM.define('js/tests.js', { stripVolatile });
+})();

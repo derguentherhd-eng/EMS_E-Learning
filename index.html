@@ -6,13 +6,13 @@
   Der Hauptbereich (<main>) wird von js/main.js je nach Adresse (#/…) befüllt.
   Inhalte stehen NICHT hier, sondern in content/*.md.
 
-  Wichtig: Diese Datei funktioniert nicht per Doppelklick (file://), weil Browser dann das
-  Laden der Inhaltsdateien verbieten. Immer über das Startskript (starten.command / .bat / .sh)
-  oder einen Webserver öffnen.
+  Funktioniert per Doppelklick (ohne Server) und auf jedem Webspace. Ohne Server liest der Kurs
+  die Inhalte aus content/inhalte.js – diese Datei erzeugt der Editor beim Speichern.
 
   Wenn du hier etwas ändern willst …
     – Navigation in der Kopfleiste: Links in <ul class="masthead__links"> ergänzen.
     – Neue CSS-Datei: als <link> in die Reihe unten, reset.css bleibt immer zuerst.
+    – Neue Skriptdatei: in js/scripts.js eintragen, nicht hier.
 -->
 <html lang="de">
   <head>
@@ -30,7 +30,8 @@
     <link rel="stylesheet" href="css/blocks.css">
     <link rel="stylesheet" href="css/print.css" media="print">
     <script src="js/theme-init.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script src="js/em.js"></script>
+    <script src="js/scripts.js" defer data-pakete="kern kurs" data-start="js/main.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>

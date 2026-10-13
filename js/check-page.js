@@ -4,18 +4,23 @@
  * Ablauf:
  *   1. Kurs laden (js/content/loader.js) – mit Originaltexten für exakte Zeilennummern.
  *   2. Inhalte prüfen (js/content/validate.js).
- *   3. Zusätzlich über das Netzwerk prüfen: Gibt es alle Bilder? Liegen in content/kapitel/
- *      Dateien, die nicht in kurs.md eingetragen sind?
+ *   3. Zusätzlich prüfen: Gibt es alle Bilder? Liegen in content/kapitel/ Dateien, die nicht
+ *      in kurs.md eingetragen sind?
+ *   Funktioniert mit Server (.md-Dateien), ohne Server (Offline-Datei content/inhalte.js) und
+ *   mit einem über „Projektordner einlesen" gewählten Ordner (aktueller Stand, alle Browser).
  *   4. Meldungen nach Datei gruppiert anzeigen, oben eine Zusammenfassung.
  *
  * Wenn du hier etwas ändern willst …
  *   – Neue Prüfregel gehört nach validate.js (dann gilt sie auch im Editor), nicht hierher.
  */
 
-import { el } from './dom.js';
-import { icon } from './ui/icons.js';
-import { CHAPTER_DIR, loadCourse } from './content/loader.js';
-import { collectImages, summarize, validateCourse } from './content/validate.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { CHAPTER_DIR, createFileListReader, loadCourse } = EM.require('js/content/loader.js');
+const { collectImages, summarize, validateCourse } = EM.require('js/content/validate.js');
 
 const summaryOutput = /** @type {HTMLElement} */ (document.querySelector('[data-summary]'));
 const results = /** @type {HTMLElement} */ (document.querySelector('[data-results]'));
@@ -27,18 +32,26 @@ const SEVERITY = {
   todo: { label: 'Platzhalter', icon: 'flag', order: 3 },
 };
 
+/**
+ * Woher die Inhalte kommen:
+ *   'server'  – über einen Webserver direkt die .md-Dateien
+ *   'offline' – ohne Server die Offline-Datei content/inhalte.js (Stand der letzten Erzeugung)
+ *   'ordner'  – ein über „Projektordner einlesen" gewählter Ordner (aktueller Stand der .md-Dateien)
+ * @type {{kind: 'server'|'offline'|'ordner', reader?: ReturnType<typeof createFileListReader>}}
+ */
+let source = { kind: window.location.protocol === 'file:' ? 'offline' : 'server' };
+
 /** Führt die komplette Prüfung aus und zeigt das Ergebnis. */
 async function run() {
   summaryOutput.textContent = 'Prüfung läuft …';
   results.replaceChildren();
+  showSource();
   let course;
   try {
-    course = await loadCourse();
+    course = await loadCourse(source.kind === 'ordner' ? source.reader.readText : undefined);
   } catch (error) {
     summaryOutput.textContent = '';
-    results.replaceChildren(
-      el('p', { class: 'notice notice--error' }, `Der Kurs konnte nicht geladen werden: ${error.message} Läuft die Seite über das Startskript?`),
-    );
+    results.replaceChildren(el('p', { class: 'notice notice--error' }, `Der Kurs konnte nicht geladen werden: ${error.message}`));
     return;
   }
   const errors = validateCourse(course, { sources: course.sources });
@@ -48,65 +61,77 @@ async function run() {
   showResults(errors, course);
 }
 
+/** Zeigt an, welcher Stand geprüft wird. */
+function showSource() {
+  const output = document.querySelector('[data-source]');
+  if (!output) return;
+  const text = {
+    server: 'Geprüft werden die .md-Dateien auf dem Webserver.',
+    offline: `Geprüft wird die Offline-Datei content/inhalte.js${window.EM.inhalte ? ` (erzeugt am ${new Date(window.EM.inhalte.erzeugt).toLocaleString('de-DE')})` : ''}. Hast du .md-Dateien von Hand geändert, wähle „Projektordner einlesen", um den aktuellen Stand zu prüfen.`,
+    ordner: 'Geprüft werden die .md-Dateien aus dem eingelesenen Projektordner (aktueller Stand).',
+  }[source.kind];
+  output.textContent = text;
+}
+
 /**
- * Prüft per HTTP-Anfrage, ob alle Bilddateien existieren.
+ * Prüft, ob alle Bilddateien existieren. Ein Bild wird testweise geladen – das funktioniert
+ * mit und ohne Server. Bei einem eingelesenen Ordner wird direkt in der Dateiliste geschaut.
  * @returns {Promise<Object[]>}
  */
 async function checkImages(course) {
-  const checks = collectImages(course).map(async (image) => {
-    try {
-      const response = await fetch(image.src, { method: 'HEAD', cache: 'no-cache' });
-      if (response.ok) return null;
-    } catch {
-      // Netzwerkfehler wie „nicht gefunden" behandeln.
-    }
-    return {
-      file: image.file,
-      line: image.line,
-      severity: image.file === 'content/kurs.md' ? 'warnung' : 'fehler',
-      message: `Die Bilddatei „${image.src}" wurde nicht gefunden.`,
-      fix: 'Prüfe den Pfad (ab Projektordner, z. B. assets/bilder/auto.svg) und die Schreibweise. Groß-/Kleinschreibung zählt auf vielen Webservern!',
-    };
-  });
+  const exists = (src) => {
+    if (source.kind === 'ordner') return Promise.resolve(source.reader.files.has(src));
+    return new Promise((resolve) => {
+      const image = new Image();
+      image.addEventListener('load', () => resolve(true));
+      image.addEventListener('error', () => resolve(false));
+      image.src = src;
+    });
+  };
+  const checks = collectImages(course).map(async (image) =>
+    (await exists(image.src))
+      ? null
+      : {
+        file: image.file,
+        line: image.line,
+        severity: image.file === 'content/kurs.md' ? 'warnung' : 'fehler',
+        message: `Die Bilddatei „${image.src}" wurde nicht gefunden.`,
+        fix: 'Prüfe den Pfad (ab Projektordner, z. B. assets/bilder/auto.svg) und die Schreibweise. Groß-/Kleinschreibung zählt auf vielen Webservern!',
+      },
+  );
   return (await Promise.all(checks)).filter(Boolean);
 }
 
 /**
- * Sucht Kapiteldateien, die nicht in kurs.md stehen. Ein statischer Webserver kann Ordner
- * normalerweise nicht auflisten – der Server aus dem Startskript aber schon. Klappt es
- * nicht, gibt es einen Hinweis statt einer Prüfung.
+ * Sucht Kapiteldateien, die nicht in kurs.md stehen. Die Dateiliste kommt aus dem eingelesenen
+ * Ordner bzw. der Offline-Datei. Ein Webserver kann Ordner meist nicht auflisten – dann gibt es
+ * einen Hinweis statt einer Prüfung.
  * @returns {Promise<Object[]>}
  */
 async function checkUnlistedChapters(course) {
-  try {
-    const response = await fetch(`${CHAPTER_DIR}/`, { cache: 'no-cache' });
-    const type = response.headers.get('content-type') ?? '';
-    if (!response.ok || !type.includes('html')) throw new Error('keine Ordnerliste');
-    // DOMParser liest das HTML nur als Daten – Skripte darin werden nicht ausgeführt.
-    const listing = new DOMParser().parseFromString(await response.text(), 'text/html');
-    const files = [...listing.querySelectorAll('a[href]')]
-      .map((link) => decodeURIComponent(link.getAttribute('href') ?? '').split('/').pop())
-      .filter((name) => name.endsWith('.md'));
-    return files
-      .filter((name) => !course.meta.kapitel.includes(name))
-      .map((name) => ({
-        file: `${CHAPTER_DIR}/${name}`,
-        line: 0,
-        severity: 'warnung',
-        message: `Die Datei „${name}" liegt in content/kapitel/, steht aber nicht in der Kapitelliste von kurs.md. Das Kapitel ist deaktiviert.`,
-        fix: 'Gewollt? Dann alles gut. Sonst die Datei unter „kapitel:" in kurs.md eintragen – oder sie nach content/_archiv/ verschieben.',
-      }));
-  } catch {
+  let files = null;
+  if (source.kind === 'ordner') files = source.reader.list(CHAPTER_DIR).filter((name) => name.endsWith('.md'));
+  else if (source.kind === 'offline') files = window.EM.inhalte?.kapitelOrdner ?? null;
+  if (files === null) {
     return [
       {
         file: 'content/kurs.md',
         line: 0,
         severity: 'hinweis',
         message: 'Nicht eingetragene Kapiteldateien konnten nicht gesucht werden (der Webserver listet keine Ordner).',
-        fix: 'Öffne die Prüfseite über das Startskript, dann klappt diese Prüfung.',
+        fix: 'Wähle „Projektordner einlesen", dann klappt diese Prüfung.',
       },
     ];
   }
+  return files
+    .filter((name) => !course.meta.kapitel.includes(name))
+    .map((name) => ({
+      file: `${CHAPTER_DIR}/${name}`,
+      line: 0,
+      severity: 'warnung',
+      message: `Die Datei „${name}" liegt in content/kapitel/, steht aber nicht in der Kapitelliste von kurs.md. Das Kapitel ist deaktiviert.`,
+      fix: 'Gewollt? Dann alles gut. Sonst die Datei unter „kapitel:" in kurs.md eintragen – oder sie nach content/_archiv/ verschieben.',
+    }));
 }
 
 /** Zeigt die Zahlen oben, z. B. „3 Fehler · 5 Warnungen · 12 offene Platzhalter". */
@@ -190,4 +215,16 @@ function severityOrder(error) {
 }
 
 document.querySelector('[data-action="recheck"]')?.addEventListener('click', run);
+
+// „Projektordner einlesen": prüft den aktuellen Stand der .md-Dateien – auch ohne Server.
+const folderInput = /** @type {HTMLInputElement} */ (document.querySelector('[data-folder-input]'));
+// Ordnerauswahl statt Dateiauswahl. Per Skript gesetzt, weil das Attribut nicht im HTML-Standard
+// steht (der Validator würde es bemängeln); alle aktuellen Browser unterstützen es.
+if (folderInput) folderInput.webkitdirectory = true;
+folderInput?.addEventListener('change', () => {
+  if (!folderInput.files?.length) return;
+  source = { kind: 'ordner', reader: createFileListReader(folderInput.files) };
+  run();
+});
 run();
+})();

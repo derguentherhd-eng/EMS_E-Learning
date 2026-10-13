@@ -4,7 +4,7 @@
  * Ablauf beim Klick auf „Zertifikat herunterladen":
  *   1. jsPDF nachladen (vendor/jspdf/jspdf.umd.min.js). Die Bibliothek wird NUR hier geladen,
  *      nicht beim Kursstart – sie ist groß und wird nur einmal gebraucht.
- *   2. Schrift Lato als TTF laden (assets/fonts/pdf/) und ins PDF einbetten. Die OFL-Lizenz
+ *   2. Schrift Lato laden (assets/fonts/pdf/lato-pdf.js, Base64 der TTF-Dateien) und einbetten. Die OFL-Lizenz
  *      erlaubt das. Dadurch erscheinen Umlaute und ß korrekt (Test: „Jürgen Weiß-Özdemir").
  *      Klappt das nicht, nimmt jsPDF Helvetica (Umlaute gehen dort auch, sehen aber anders aus).
  *   3. Logo (SVG) in ein Bild umwandeln, PDF zeichnen (A4 quer), herunterladen.
@@ -23,11 +23,14 @@
  *   – Pflichthinweis zur Sicherheitsunterweisung: SAFETY_NOTE – nicht entfernen!
  */
 
+(function () {
+  'use strict';
+
 /** Pflichttext auf jedem Zertifikat (Arbeitsschutz). */
-export const SAFETY_NOTE = 'Diese Bestätigung ersetzt nicht die verpflichtende Sicherheitsunterweisung in der Werkstatt.';
+const SAFETY_NOTE = 'Diese Bestätigung ersetzt nicht die verpflichtende Sicherheitsunterweisung in der Werkstatt.';
 
 const JSPDF_PATH = 'vendor/jspdf/jspdf.umd.min.js';
-const FONT_DIR = 'assets/fonts/pdf';
+const FONT_SCRIPT = 'assets/fonts/pdf/lato-pdf.js';
 const FONTS = [
   { file: 'Lato-Regular.ttf', family: 'Lato', style: 'normal' },
   { file: 'Lato-Bold.ttf', family: 'Lato', style: 'bold' },
@@ -46,7 +49,7 @@ const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // ohne I, L, O, U – nic
  * @param {string|number} version Kursversion
  * @returns {string}
  */
-export function createVerificationCode(name, date, version) {
+function createVerificationCode(name, date, version) {
   const input = `${name.trim().replace(/\s+/g, ' ').toLocaleLowerCase('de')}|${date}|${version}`;
   // Zwei FNV-1a-Durchläufe mit verschiedenen Startwerten → 64 Bit, davon 40 Bit = 8 Zeichen.
   const fnv = (seed) => {
@@ -71,7 +74,7 @@ export function createVerificationCode(name, date, version) {
  * @param {string} name
  * @returns {string}  z. B. „Onboarding-Zertifikat-Juergen-Weiss-Oezdemir.pdf"
  */
-export function certificateFileName(name) {
+function certificateFileName(name) {
   const safe = name
     .trim()
     .replace(/Ä/g, 'Ae').replace(/Ö/g, 'Oe').replace(/Ü/g, 'Ue')
@@ -87,7 +90,7 @@ export function certificateFileName(name) {
  * @param {string} isoDate  JJJJ-MM-TT
  * @returns {string}
  */
-export function formatGermanDate(isoDate) {
+function formatGermanDate(isoDate) {
   const [year, month, day] = isoDate.split('-').map(Number);
   const months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
   return `${day}. ${months[month - 1]} ${year}`;
@@ -121,7 +124,7 @@ export function formatGermanDate(isoDate) {
  * @param {CertificateAssets} assets
  * @returns {any} das jsPDF-Dokument
  */
-export function buildCertificatePdf(JsPDF, data, assets) {
+function buildCertificatePdf(JsPDF, data, assets) {
   const doc = new JsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4', compress: true });
   const hasLato = assets.fonts.length === FONTS.length;
   for (const font of assets.fonts) {
@@ -241,47 +244,53 @@ export function buildCertificatePdf(JsPDF, data, assets) {
 /* ───────────────────────────── Laden im Browser ───────────────────────────── */
 
 /**
- * Lädt jsPDF einmalig als klassisches Skript nach.
- * @returns {Promise<any>} der jsPDF-Konstruktor
+ * Lädt ein klassisches Skript nach (funktioniert auch ohne Server, anders als fetch).
+ * @param {string} src
+ * @returns {Promise<void>}
  */
-export function loadJsPdf() {
-  if (window.jspdf?.jsPDF) return Promise.resolve(window.jspdf.jsPDF);
+function loadScript(src) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = JSPDF_PATH;
-    script.addEventListener('load', () => (window.jspdf?.jsPDF ? resolve(window.jspdf.jsPDF) : reject(new Error('jsPDF nicht gefunden'))));
-    script.addEventListener('error', () => reject(new Error(`${JSPDF_PATH} konnte nicht geladen werden`)));
+    script.src = src;
+    script.addEventListener('load', () => resolve());
+    script.addEventListener('error', () => reject(new Error(`${src} konnte nicht geladen werden`)));
     document.head.append(script);
   });
 }
 
 /**
- * Lädt die Schriften als Base64 (für jsPDF). Fehlt eine, wird keine eingebettet.
+ * Lädt jsPDF einmalig nach.
+ * @returns {Promise<any>} der jsPDF-Konstruktor
+ */
+async function loadJsPdf() {
+  if (!window.jspdf?.jsPDF) await loadScript(JSPDF_PATH);
+  if (!window.jspdf?.jsPDF) throw new Error('jsPDF nicht gefunden');
+  return window.jspdf.jsPDF;
+}
+
+/**
+ * Lädt die Schrift Lato (Base64 aus assets/fonts/pdf/lato-pdf.js). Fehlt die Datei, nimmt das
+ * PDF Helvetica.
  * @returns {Promise<CertificateAssets['fonts']>}
  */
 async function loadFonts() {
   try {
-    return await Promise.all(
-      FONTS.map(async (font) => {
-        const response = await fetch(`${FONT_DIR}/${font.file}`);
-        if (!response.ok) throw new Error(font.file);
-        return { ...font, base64: toBase64(new Uint8Array(await response.arrayBuffer())) };
-      }),
-    );
+    if (!window.EM.pdfSchriften) await loadScript(FONT_SCRIPT);
+    return FONTS.map((font) => {
+      const base64 = window.EM.pdfSchriften?.[font.file];
+      if (!base64) throw new Error(font.file);
+      return { ...font, base64 };
+    });
   } catch {
     return [];
   }
 }
 
-function toBase64(bytes) {
-  let binary = '';
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
-  return btoa(binary);
-}
-
 /**
  * Wandelt das SVG-Logo in ein PNG um (jsPDF kann kein SVG).
+ *
+ * Ohne Server würde ein Bild von der Festplatte die Zeichenfläche „sperren" (Browser-Sicherheit).
+ * Deshalb wird das Logo dann aus der Offline-Datei (content/inhalte.js) als Daten-URL benutzt.
  * @param {string} path
  * @returns {Promise<string|null>}
  */
@@ -291,16 +300,21 @@ function rasterizeLogo(path) {
       resolve(null);
       return;
     }
+    const svgText = window.EM.inhalte?.dateien?.[path];
     const image = new Image();
     image.addEventListener('load', () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 720;
-      canvas.height = Math.round((720 * (image.naturalHeight || 1)) / (image.naturalWidth || 1));
-      canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-      resolve(canvas.toDataURL('image/png'));
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 720;
+        canvas.height = Math.round((720 * (image.naturalHeight || 1)) / (image.naturalWidth || 1));
+        canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/png'));
+      } catch {
+        resolve(null); // Zertifikat dann ohne Logo
+      }
     });
     image.addEventListener('error', () => resolve(null));
-    image.src = path;
+    image.src = svgText ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgText)}` : path;
   });
 }
 
@@ -311,9 +325,12 @@ function rasterizeLogo(path) {
  * @returns {Promise<void>}
  * @throws {Error} wenn jsPDF nicht geladen werden kann (→ Druckansicht anbieten)
  */
-export async function downloadCertificate(data, logoPath) {
+async function downloadCertificate(data, logoPath) {
   const JsPDF = await loadJsPdf();
   const [fonts, logo] = await Promise.all([loadFonts(), rasterizeLogo(logoPath)]);
   const doc = buildCertificatePdf(JsPDF, data, { fonts, logo });
   doc.save(certificateFileName(data.name));
 }
+
+EM.define('js/certificate.js', { createVerificationCode, certificateFileName, formatGermanDate, buildCertificatePdf, loadJsPdf, downloadCertificate, SAFETY_NOTE });
+})();

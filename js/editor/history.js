@@ -15,7 +15,10 @@
  *   – Anzahl Schritte: LIMIT. Mehr Schritte = mehr Arbeitsspeicher.
  */
 
-export const LIMIT = 50;
+(function () {
+  'use strict';
+
+const LIMIT = 50;
 const COALESCE_MS = 1500;
 
 /**
@@ -27,7 +30,7 @@ const COALESCE_MS = 1500;
  */
 
 /** @returns {History} */
-export function createHistory() {
+function createHistory() {
   return { past: [], future: [], lastKey: null, lastTime: 0 };
 }
 
@@ -38,7 +41,7 @@ export function createHistory() {
  * @param {string|null} [coalesceKey]  gleicher Schlüssel kurz hintereinander = ein Schritt
  * @param {number} [now]
  */
-export function record(history, snapshot, coalesceKey = null, now = Date.now()) {
+function record(history, snapshot, coalesceKey = null, now = Date.now()) {
   const sameBurst = coalesceKey !== null && coalesceKey === history.lastKey && now - history.lastTime < COALESCE_MS;
   if (!sameBurst) {
     history.past.push(snapshot);
@@ -55,7 +58,7 @@ export function record(history, snapshot, coalesceKey = null, now = Date.now()) 
  * @param {Object} current  aktueller Zustand (wandert nach future)
  * @returns {Object|null}   der wiederhergestellte Zustand oder null
  */
-export function undo(history, current) {
+function undo(history, current) {
   if (history.past.length === 0) return null;
   history.future.push(current);
   history.lastKey = null;
@@ -68,9 +71,12 @@ export function undo(history, current) {
  * @param {Object} current
  * @returns {Object|null}
  */
-export function redo(history, current) {
+function redo(history, current) {
   if (history.future.length === 0) return null;
   history.past.push(current);
   history.lastKey = null;
   return history.future.pop();
 }
+
+EM.define('js/editor/history.js', { createHistory, record, undo, redo, LIMIT });
+})();

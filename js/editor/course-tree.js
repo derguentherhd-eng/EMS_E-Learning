@@ -11,14 +11,17 @@
  *   – Neue Aktion an einem Kapitel: Knopf hier, Logik in editor-main.js (operations).
  */
 
-import { el } from '../dom.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
 
 /**
  * Baut die Kursstruktur.
  * @param {Object} editor  Schnittstelle aus editor-main.js
  * @returns {HTMLElement}
  */
-export function renderTree(editor) {
+function renderTree(editor) {
   const { state } = editor;
   const selection = state.selection;
   const changedPaths = new Set(editor.collectChanges().map((change) => change.path));
@@ -155,3 +158,6 @@ function addDragAndDrop(item, file, index, editor) {
     if (dragged && dragged !== file) editor.operations.moveChapterTo(dragged, index);
   });
 }
+
+EM.define('js/editor/course-tree.js', { renderTree });
+})();

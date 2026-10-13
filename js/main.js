@@ -14,21 +14,24 @@
  *     eintragen.
  */
 
-import { startRouter } from './router.js';
-import { createStore } from './store.js';
-import { setupThemeToggle } from './ui/theme.js';
-import { icon } from './ui/icons.js';
-import { createSectorBar } from './ui/sector-bar.js';
-import { el } from './dom.js';
-import { loadCourse } from './content/loader.js';
-import { renderStart } from './views/start.js';
-import { renderChapter } from './views/chapter.js';
-import { renderGlossaryPage } from './views/glossary-page.js';
-import { renderSettings } from './views/settings.js';
-import { renderQuiz } from './views/quiz-view.js';
-import { renderQualifying } from './views/qualifying.js';
-import { renderCertificate } from './views/certificate-view.js';
-import { renderNotFound } from './views/not-found.js';
+(function () {
+  'use strict';
+
+const { startRouter } = EM.require('js/router.js');
+const { createStore } = EM.require('js/store.js');
+const { setupThemeToggle } = EM.require('js/ui/theme.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { createSectorBar } = EM.require('js/ui/sector-bar.js');
+const { el } = EM.require('js/dom.js');
+const { loadCourse } = EM.require('js/content/loader.js');
+const { renderStart } = EM.require('js/views/start.js');
+const { renderChapter } = EM.require('js/views/chapter.js');
+const { renderGlossaryPage } = EM.require('js/views/glossary-page.js');
+const { renderSettings } = EM.require('js/views/settings.js');
+const { renderQuiz } = EM.require('js/views/quiz-view.js');
+const { renderQualifying } = EM.require('js/views/qualifying.js');
+const { renderCertificate } = EM.require('js/views/certificate-view.js');
+const { renderNotFound } = EM.require('js/views/not-found.js');
 
 /** Zuordnung Routenname → Ansicht. */
 const VIEWS = {
@@ -120,10 +123,10 @@ function showLoadError(error) {
       'div',
       { class: 'stack' },
       el('h1', {}, 'Der Kurs konnte nicht geladen werden'),
+      el('p', { class: 'lead' }, `Grund: ${error.message}`),
       viaFile
-        ? el('p', { class: 'lead' }, 'Du hast die Datei direkt geöffnet (Doppelklick auf index.html). Browser erlauben dann kein Nachladen der Inhalte. Starte den Kurs bitte über das Startskript im Ordner: starten.command (Mac), starten.bat (Windows) oder starten.sh (Linux).')
-        : el('p', { class: 'lead' }, `Grund: ${error.message}`),
-      viaFile ? null : el('p', {}, 'Prüfe, ob der Ordner content/ vollständig hochgeladen wurde. Für das Media-Team: ', el('a', { href: 'pruefen.html' }, 'Prüfseite öffnen'), '.'),
+        ? el('p', {}, 'Ohne Server liest der Kurs seine Inhalte aus content/inhalte.js. Für das Media-Team: ', el('a', { href: 'editor.html' }, 'Editor öffnen'), ' und den Projektordner wählen – dann wird die Datei neu erzeugt.')
+        : el('p', {}, 'Prüfe, ob der Ordner content/ vollständig hochgeladen wurde. Für das Media-Team: ', el('a', { href: 'pruefen.html' }, 'Prüfseite öffnen'), '.'),
     ),
   );
   document.title = 'Fehler beim Laden – Rookie-Onboarding';
@@ -158,3 +161,4 @@ async function init() {
 }
 
 init();
+})();

@@ -16,13 +16,16 @@
  *   – Aussehen: Abschnitt „checkliste" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, blockSection, formatBlock, formatHeader, hashText, oneLine, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, blockSection, formatBlock, formatHeader, hashText, oneLine, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /** @typedef {{title: string, items: string[]}} ChecklistData */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'checkliste',
   interactive: true,
 
@@ -99,3 +102,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/checklist.js', { default: definition });
+})();

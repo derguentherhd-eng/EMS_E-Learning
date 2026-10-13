@@ -16,18 +16,21 @@
  *   – Was auf Seite 1 zusätzlich erscheint: renderFirstPageIntro().
  */
 
-import { el } from '../dom.js';
-import { createBlockContext, renderElement } from '../render.js';
-import { chapterHash } from '../router.js';
-import { markVisited } from '../store.js';
-import { isReleased, isSafetyChapter } from '../content/documents.js';
-import { renderNotFound } from './not-found.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { createBlockContext, renderElement } = EM.require('js/render.js');
+const { chapterHash } = EM.require('js/router.js');
+const { markVisited } = EM.require('js/store.js');
+const { isReleased, isSafetyChapter } = EM.require('js/content/documents.js');
+const { renderNotFound } = EM.require('js/views/not-found.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderChapter({ route, course, store }) {
+function renderChapter({ route, course, store }) {
   const index = course.chapters.findIndex((chapter) => chapter.id === route.params.id);
   const chapter = course.chapters[index];
   if (!chapter) {
@@ -132,3 +135,6 @@ function renderPager(chapter, pageNumber, total) {
   }
   return el('nav', { class: 'pager', 'aria-label': 'Seitennavigation' }, previous, el('span', { class: 'pager__spacer' }), next);
 }
+
+EM.define('js/views/chapter.js', { renderChapter });
+})();

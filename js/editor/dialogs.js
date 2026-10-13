@@ -8,7 +8,10 @@
  *   – Aussehen: .dialog in css/components.css (gleich wie im Kurs).
  */
 
-import { el } from '../dom.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
 
 /**
  * Öffnet einen Dialog und wartet auf das Ergebnis.
@@ -16,7 +19,7 @@ import { el } from '../dom.js';
  * @param {string} labelId  ID der Überschrift (für aria-labelledby)
  * @returns {Promise<any>}  Wert aus close(), bei Escape null
  */
-export function openDialog(build, labelId) {
+function openDialog(build, labelId) {
   const opener = document.activeElement;
   return new Promise((resolve) => {
     let result = null;
@@ -46,7 +49,7 @@ export function openDialog(build, labelId) {
  * @param {boolean} [options.danger]
  * @returns {Promise<boolean>}
  */
-export async function confirmDialog({ title, text, confirmLabel = 'OK', cancelLabel = 'Abbrechen', danger = false }) {
+async function confirmDialog({ title, text, confirmLabel = 'OK', cancelLabel = 'Abbrechen', danger = false }) {
   const id = `dialog-${Date.now()}`;
   const value = await openDialog(
     (close) => [
@@ -74,7 +77,7 @@ export async function confirmDialog({ title, text, confirmLabel = 'OK', cancelLa
  * @param {string} [options.confirmLabel]
  * @returns {Promise<string|null>}  null bei Abbruch
  */
-export function promptDialog({ title, label, value = '', hint = '', confirmLabel = 'OK' }) {
+function promptDialog({ title, label, value = '', hint = '', confirmLabel = 'OK' }) {
   const id = `dialog-${Date.now()}`;
   return openDialog((close) => {
     const input = el('input', { type: 'text', id: `${id}-input`, value, class: 'field__input', autofocus: true, required: true });
@@ -98,3 +101,6 @@ export function promptDialog({ title, label, value = '', hint = '', confirmLabel
     return [el('h2', { id }, title), form];
   }, id);
 }
+
+EM.define('js/editor/dialogs.js', { openDialog, confirmDialog, promptDialog });
+})();

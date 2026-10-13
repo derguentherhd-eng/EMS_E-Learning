@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <script src="js/theme-init.js"></script>
-    <script type="module" src="js/check-page.js"></script>
+    <script src="js/em.js"></script>
+    <script src="js/scripts.js" defer data-pakete="kern" data-start="js/check-page.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -47,7 +48,9 @@
       <p class="lead">Diese Seite liest alle Dateien aus <code>content/</code> und zeigt, was nicht stimmt. Fehler zuerst beheben, Warnungen prüfen, Platzhalter vor der Veröffentlichung füllen.</p>
       <div class="check-actions">
         <button class="button button--primary" type="button" data-action="recheck">Neu prüfen</button>
+        <label class="button check-actions__folder">Projektordner einlesen<input class="visually-hidden" type="file" multiple data-folder-input></label>
       </div>
+      <p class="check-source" data-source></p>
       <section class="check-summary" aria-labelledby="summary-title">
         <h2 id="summary-title">Zusammenfassung</h2>
         <p data-summary aria-live="polite">Prüfung läuft …</p>

@@ -15,8 +15,11 @@
  *   – Aussehen: Abschnitt „Glossar" in css/components.css.
  */
 
-import { el, uniqueId } from '../dom.js';
-import { glossaryHash } from '../router.js';
+(function () {
+  'use strict';
+
+const { el, uniqueId } = EM.require('js/dom.js');
+const { glossaryHash } = EM.require('js/router.js');
 
 const supportsPopover = typeof HTMLElement !== 'undefined' && 'popover' in HTMLElement.prototype;
 
@@ -26,7 +29,7 @@ const supportsPopover = typeof HTMLElement !== 'undefined' && 'popover' in HTMLE
  * @param {string} label  angezeigter Text im Fließtext
  * @returns {DocumentFragment}
  */
-export function createGlossaryTerm(entry, label) {
+function createGlossaryTerm(entry, label) {
   const id = uniqueId('glossar');
   const button = el('button', { type: 'button', class: 'glossary-term' }, label);
   const panel = el(
@@ -88,3 +91,6 @@ function positionPanel(button, panel) {
   panel.style.setProperty('--popover-left', `${left}px`);
   panel.style.setProperty('--popover-top', `${top}px`);
 }
+
+EM.define('js/ui/glossary.js', { createGlossaryTerm });
+})();

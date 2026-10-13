@@ -16,12 +16,15 @@
  *     bzw. renderInlineNodes() darstellen.
  */
 
-import { append, el, uniqueId } from './dom.js';
-import { icon } from './ui/icons.js';
-import { createGlossaryTerm } from './ui/glossary.js';
-import { parseInline, parseMarkdown } from './content/markdown.js';
-import { findGlossaryEntry } from './content/documents.js';
-import { getBlock } from './blocks/registry.js';
+(function () {
+  'use strict';
+
+const { append, el, uniqueId } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { createGlossaryTerm } = EM.require('js/ui/glossary.js');
+const { parseInline, parseMarkdown } = EM.require('js/content/markdown.js');
+const { findGlossaryEntry } = EM.require('js/content/documents.js');
+const { getBlock } = EM.require('js/blocks/registry.js');
 
 /**
  * @typedef {Object} RenderOptions
@@ -40,7 +43,7 @@ const SAFE_HREF = /^(https?:|mailto:|#|\.{0,2}\/|[^:]*$)/i;
  * @returns {DocumentFragment}
  * @example container.append(renderMarkdown('Hallo **Welt**'));
  */
-export function renderMarkdown(markdown, options = {}) {
+function renderMarkdown(markdown, options = {}) {
   const fragment = document.createDocumentFragment();
   for (const block of parseMarkdown(markdown)) fragment.append(renderBlockNode(block, options));
   return fragment;
@@ -52,7 +55,7 @@ export function renderMarkdown(markdown, options = {}) {
  * @param {RenderOptions} [options]
  * @returns {DocumentFragment}
  */
-export function renderInline(text, options = {}) {
+function renderInline(text, options = {}) {
   const fragment = document.createDocumentFragment();
   append(fragment, renderInlineNodes(parseInline(text), options));
   return fragment;
@@ -116,7 +119,7 @@ function renderTable(table, options) {
  * @param {string} [caption]
  * @returns {HTMLElement}
  */
-export function renderFigure(src, alt, caption = '') {
+function renderFigure(src, alt, caption = '') {
   if (!src) return el('p', { class: 'notice', role: 'note' }, 'Hier fehlt noch ein Bild.');
   return el(
     'figure',
@@ -131,7 +134,7 @@ export function renderFigure(src, alt, caption = '') {
  * @param {string} text
  * @returns {HTMLElement}
  */
-export function renderTodo(text) {
+function renderTodo(text) {
   return el(
     'div',
     { class: 'todo', role: 'note' },
@@ -205,7 +208,7 @@ function safeSrc(src) {
  * @param {() => number} [params.random]
  * @returns {import('./blocks/block-utils.js').BlockContext}
  */
-export function createBlockContext({ chapterId, store, glossary, random = Math.random }) {
+function createBlockContext({ chapterId, store, glossary, random = Math.random }) {
   return {
     chapterId,
     store,
@@ -226,7 +229,7 @@ export function createBlockContext({ chapterId, store, glossary, random = Math.r
  * @param {import('./blocks/block-utils.js').BlockContext} context
  * @returns {Node}
  */
-export function renderElement(element, context) {
+function renderElement(element, context) {
   switch (element.type) {
     case 'text':
       return el('div', { class: 'prose' }, renderMarkdown(element.markdown, { glossary: context.glossary, headingShift: -1 }));
@@ -254,3 +257,6 @@ function renderUnreadable() {
     el('p', {}, 'Dieser Abschnitt kann gerade nicht angezeigt werden. Wenn das so bleibt, gib bitte dem Media-Team Bescheid.'),
   );
 }
+
+EM.define('js/render.js', { renderMarkdown, renderInline, renderFigure, renderTodo, createBlockContext, renderElement });
+})();

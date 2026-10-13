@@ -12,19 +12,22 @@
  *   – Bewertungsregeln: js/quiz/quiz.js (scoreAttempt).
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { chapterHash } from '../router.js';
-import { isQualifyingUnlocked, recordQuizResult } from '../store.js';
-import { passThreshold } from '../content/loader.js';
-import { drawQuestions, renderResultStrip, runQuiz, scoreAttempt } from '../quiz/quiz.js';
-import { renderNotFound } from './not-found.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { chapterHash } = EM.require('js/router.js');
+const { isQualifyingUnlocked, recordQuizResult } = EM.require('js/store.js');
+const { passThreshold } = EM.require('js/content/loader.js');
+const { drawQuestions, renderResultStrip, runQuiz, scoreAttempt } = EM.require('js/quiz/quiz.js');
+const { renderNotFound } = EM.require('js/views/not-found.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderQuiz({ route, course, store }) {
+function renderQuiz({ route, course, store }) {
   const index = course.chapters.findIndex((chapter) => chapter.id === route.params.id);
   const chapter = course.chapters[index];
   if (!chapter) return renderNotFound('Dieses Kapitel gibt es nicht (mehr).');
@@ -128,7 +131,7 @@ function renderResult({ course, chapter, index, answered, score, threshold, stor
  * @param {import('../quiz/quiz.js').AnsweredQuestion[]} wrong
  * @returns {HTMLElement}
  */
-export function renderReviewList(wrong) {
+function renderReviewList(wrong) {
   return el(
     'section',
     { class: 'review stack--tight', 'aria-labelledby': 'review-title' },
@@ -151,3 +154,6 @@ export function renderReviewList(wrong) {
     ),
   );
 }
+
+EM.define('js/views/quiz-view.js', { renderQuiz, renderReviewList });
+})();

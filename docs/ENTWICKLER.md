@@ -3,8 +3,9 @@
 Für alle, die am Code arbeiten. Inhalte pflegen? Dann `PFLEGE.md`. Schreibweisen der Bausteine:
 `BAUSTEINE.md`.
 
-**Grundsätze:** Nur HTML, CSS und JavaScript (native ES-Module). Kein Framework, kein Build, kein
-`npm`. Einzige Bibliothek: jsPDF (lokal in `vendor/jspdf/`). Keine externen Requests zur Laufzeit.
+**Grundsätze:** Nur HTML, CSS und JavaScript – läuft per Doppelklick auf `index.html` (`file://`)
+und auf jedem statischen Webspace. Kein Server, kein Framework, kein Build, kein `npm`. Einzige
+Bibliothek: jsPDF (lokal in `vendor/jspdf/`). Keine externen Requests zur Laufzeit.
 Inhalte stehen ausschließlich in `content/*.md`. Inhalte werden nie als HTML interpretiert.
 
 ---
@@ -12,7 +13,7 @@ Inhalte stehen ausschließlich in `content/*.md`. Inhalte werden nie als HTML in
 ## 1. Architektur und Datenfluss
 
 ```
-content/*.md ──fetch bzw. Ordnerzugriff──▶ loader.js / editor-main.js
+content/*.md ──fetch (Webspace) / content/inhalte.js (file://) / Ordner──▶ loader.js / editor-main.js
                                               │ Text
                                               ▼
                        frontmatter.js + documents.js (Seiten, Elemente, Bausteine)
@@ -29,9 +30,10 @@ content/*.md ──fetch bzw. Ordnerzugriff──▶ loader.js / editor-main.js
                                                                             │
                                                                             ▼
                                                      content/*.md (Direkt) bzw. Download
+                                                     + content/inhalte.js (mirror.js)
 ```
 
-Ein Modell, drei Verbraucher: Kurs, Prüfseite und Editor importieren dieselben Module. Der Kurs
+Ein Modell, drei Verbraucher: Kurs, Prüfseite und Editor benutzen dieselben Module. Der Kurs
 (`index.html`) lädt nie Code aus `js/editor/`.
 
 ### Datenmodell eines Kapitels (`documents.js`)
@@ -47,10 +49,35 @@ Elementarten: `text` (Markdown-**Rohtext**, kein AST), `image` (Absatz nur aus `
 `block` (lesbarer Baustein mit `data`), `raw` (nicht lesbarer Abschnitt mit Originaltext und
 Fehlermeldungen – wird Zeichen für Zeichen zurückgeschrieben).
 
+### Skripte laden ohne Server
+
+Chrome blockiert ES-Module (`import`/`export`) auf `file://`. Deshalb sind alle Dateien
+**klassische Skripte** in einer Hülle `(function () { 'use strict'; … })();`:
+
+```js
+const { el } = EM.require('js/dom.js');            // statt import
+EM.define('js/blocks/key-sentence.js', { default: definition });  // statt export
+```
+
+`js/em.js` stellt `EM.define`/`EM.require` bereit (meldet doppeltes oder zu frühes Laden mit
+Klartext). `js/scripts.js` lädt die Dateien **in fester Reihenfolge** (Pakete `kern`, `kurs`,
+`editor`); jede Datei muss nach allen stehen, die sie per `EM.require` benutzt. Die HTML-Seiten
+binden nur `theme-init.js`, `em.js` und `scripts.js` ein (`data-pakete`, `data-start`).
+
+**Inhalte ohne Server:** `fetch` ist auf `file://` ebenfalls gesperrt. `content/inhalte.js`
+(`EM.inhalte = { erzeugt, kapitelOrdner, dateien }`) enthält eine Kopie aller `.md`-Dateien und
+des Logo-SVGs; `scripts.js` lädt sie nur auf `file://`. `createDefaultReader()` in `loader.js`
+wählt: `fetch` auf http(s), sonst die Kopie. Die Datei wird **nur vom Editor** erzeugt
+(`js/content/mirror.js`), die `.md`-Dateien bleiben die einzige Quelle. Die PDF-Schriften liegen
+aus demselben Grund als Skript vor (`assets/fonts/pdf/lato-pdf.js`, Base64), das Logo kommt im PDF
+als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunreinigen").
+
 ## 2. Module
 
 | Datei | Aufgabe |
 |---|---|
+| `js/em.js` | `EM.define`/`EM.require` – Modulsystem ohne ES-Module |
+| `js/scripts.js` | Lade-Reihenfolge aller Skripte (Pakete), lädt auf `file://` `content/inhalte.js` |
 | `js/main.js` | Einstieg Kurs: Speicher, Theme, Menü, Kurs laden, Sektoranzeige, Router |
 | `js/router.js` | Hash-Routen (`parseRoute`), `navigate`, Hash-Bauer |
 | `js/store.js` | Fortschritt in localStorage (Fallback Arbeitsspeicher) + reine Auswertungsfunktionen |
@@ -61,17 +88,18 @@ Fehlermeldungen – wird Zeichen für Zeichen zurückgeschrieben).
 | `js/content/markdown.js` | Markdown → AST (Blöcke, Inline), `walkMarkdown`, `countWords` |
 | `js/content/documents.js` | Kapitel, Kurs, Glossar zerlegen; Bausteinkopf; Sicherheitskapitel-Erkennung |
 | `js/content/serialize.js` | Modell → kanonisches Kursdown |
-| `js/content/loader.js` | Alle Inhaltsdateien laden (`createFetchReader`), Bestehensgrenze |
+| `js/content/loader.js` | Alle Inhaltsdateien laden (`createDefaultReader`, `createFetchReader`, `createFileListReader`), Bestehensgrenze |
+| `js/content/mirror.js` | `content/inhalte.js` erzeugen (`buildMirrorScript`) und lesen |
 | `js/content/validate.js` | Alle Prüfregeln, Bildsammlung, Zusammenfassung |
 | `js/blocks/registry.js` | Liste aller Bausteine (Palette in dieser Reihenfolge) |
 | `js/blocks/block-utils.js` | Helfer: Kopfzeile, Trenner, Einträge, Hash, Abschnittshülle |
 | `js/blocks/*.js` | je ein Baustein (siehe Zuordnung unten) |
 | `js/blocks/_vorlage-baustein.js` | kommentierte Vorlage (nicht eingebunden) |
 | `js/quiz/quiz.js` | Ziehung, Bewertung, Fragenablauf, Ergebnis-Streifen |
-| `js/certificate.js` | jsPDF laden, PDF zeichnen, Prüfcode, Dateiname |
+| `js/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
 | `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
-| `js/check-page.js` | Logik von `pruefen.html` (Bilder per HEAD, Ordnerliste) |
+| `js/check-page.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
 | `js/tests.js` | Selbsttests für `tests.html` |
 | `js/editor/*` | Editor (siehe Abschnitt 6) |
 
@@ -84,8 +112,9 @@ zeitstrahl → `timeline.js` · checkliste → `checklist.js` · quiz → `quiz-
 `tokens.css`, `base.css`, `layout.css`, `components.css` (inkl. `utilities`-Ebene), `blocks.css`,
 `print.css` (nur Druck), `editor.css` (nur Editor). Eingebunden per `<link>`, kein `@import`.
 
-**Werkzeuge:** `tools/server.py` (Python-Server mit `Cache-Control: no-cache`, von den
-Startskripten benutzt), `tools/server.ps1` (Ersatzserver für Windows ohne Python).
+**Generierte Dateien:** `content/inhalte.js` (vom Editor), `assets/fonts/pdf/lato-pdf.js` (einmalig
+aus den TTF-Dateien erzeugt; bei Schriftwechsel neu erzeugen: Dateiname → Base64 in
+`window.EM.pdfSchriften`).
 
 ## 3. Routen
 
@@ -147,8 +176,10 @@ Beispiel: ein Baustein `merksatz` (ein hervorgehobener Satz mit Quelle).
      `list` (`itemFields`, `itemLabel`, `min`). Verschachtelte Werte per Punkt (`fields.kurz`),
      Listen aus Texten mit genau einem Feld `value`. Spezialeditoren: `customEditor: 'quiz' | 'hotspot'`.
    - `images(data)` (optional): Bildpfade, damit die Prüfseite ihre Existenz prüft.
-3. **Eintragen:** in `js/blocks/registry.js` `import keySentence from './key-sentence.js';` und
-   `keySentence` in `BLOCKS` ergänzen. → Der Baustein wird im Kurs dargestellt, geprüft und erscheint
+3. **Eintragen:** den Pfad bei `EM.define` ganz unten anpassen; in `js/scripts.js` im Paket `kern`
+   `'js/blocks/key-sentence.js'` **vor** `'js/blocks/registry.js'` ergänzen; in
+   `js/blocks/registry.js` `const { default: keySentence } = EM.require('js/blocks/key-sentence.js');`
+   und `keySentence` in `BLOCKS` ergänzen. → Der Baustein wird im Kurs dargestellt, geprüft und erscheint
    **automatisch** in der Editor-Palette mit Formular.
 4. **CSS:** Abschnitt in `css/blocks.css`, Klassen nach BEM (`.key-sentence__text`).
 5. **Symbol:** `assets/icons/merksatz.svg` (24×24, Linien in `#8a8a8a`).
@@ -179,9 +210,15 @@ wird (bleibt stehen, damit der Fokus nicht verloren geht). `coalesce` bündelt T
 Unveränderte Dateien werden also nie umformatiert.
 
 **Direktmodus:** `showDirectoryPicker()`, Ordner-Handle in IndexedDB (`em-onboarding-editor`),
-beim nächsten Start `queryPermission`/`requestPermission`. Nur in sicherem Kontext (localhost)
-und Chrome/Edge. **Download-Modus:** lesen per `fetch`, speichern per Download mit Zielordner.
-Erkennung per Feature-Detection (`supportsDirectAccess()`), nie per Browsername.
+beim nächsten Start `queryPermission`/`requestPermission`. Chrome/Edge, auch auf `file://`.
+**Download-Modus:** lesen per `<input type="file" webkitdirectory>` („Projektordner einlesen",
+`createFolderWorkspace`) oder – nur auf http(s) – per `fetch`; speichern per Download mit
+Zielordner. Erkennung per Feature-Detection (`supportsDirectAccess()`), nie per Browsername.
+
+**Offline-Datei:** Beim Laden liest der Editor `content/inhalte.js` mit. `collectChanges()` hängt
+eine Änderung „Offline-Datei" an, wenn die aus den (neuen) `.md`-Texten erzeugte Kopie vom
+gelesenen Stand abweicht – also auch nach Änderungen von Hand. Im Direktmodus schreibt
+`writeMirrorFromDisk()` sie nach allen anderen Dateien aus dem tatsächlichen Plattenstand.
 
 **Sicherungskopien:** Beim ersten Speichern einer bestehenden Datei pro Sitzung wird die Fassung
 auf der Platte nach `content/_backup/<name>-<JJJJ-MM-TT-HHMM>.md` geschrieben.
@@ -248,7 +285,7 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 
 - 2 Leerzeichen Einrückung, Semikolons, einfache Anführungszeichen, ca. 100 Zeichen pro Zeile
   (lange Meldungstexte dürfen länger sein).
-- `const` vor `let`, nie `var`; strikte Gleichheit; keine Globals (außer `window.jspdf`).
+- `const` vor `let`, nie `var`; strikte Gleichheit; keine Globals außer `window.EM` (Modulsystem, Offline-Inhalte, PDF-Schriften) und `window.jspdf`.
 - Bezeichner Englisch, Kommentare/Doku/Bausteinnamen Deutsch.
 - Jede Datei hat einen Kopfkommentar mit „Wenn du hier etwas ändern willst …". Exportierte und
   nicht-triviale Funktionen haben JSDoc. Kommentare erklären das Warum.
@@ -275,12 +312,13 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 | Projekt im Unterordner `onboarding/`, Git-Repo darin | wie in der Spezifikation (B3), Ordner ist in sich vollständig |
 | Schrift ausschließlich **Lato** (lokal, subsettet), PDF bettet Lato-TTF ein | Vorgabe des Teams; Umlaute im PDF korrekt |
 | Kopfleiste und Sektoranzeige in beiden Themes **schwarz** | Logo ist einfarbig gelb (auf Weiß unsichtbar); wirkt wie ein Zeitenmonitor |
-| `js/theme-init.js` als klassisches Skript | Module laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
+| `js/theme-init.js` synchron im `<head>` | alle anderen Skripte laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
+| Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |
+| `content/inhalte.js` als erzeugte Kopie | einzige Möglichkeit, ohne Server Text nachzuladen; `.md` bleibt Quelle, Editor hält die Kopie aktuell, auf dem Webspace unbenutzt |
+| Kein Server, keine Startskripte (früher `tools/server.py`, `starten.*`) | Vorgabe: nur HTML, CSS, JavaScript |
 | `##` → `<h1>` der Ansicht, `###` → `<h2>` | genau eine `<h1>` pro Bildschirm |
-| Ergänzungen zu B3: `js/render.js`, `js/views/`, `js/dom.js`, `js/content/documents.js`, `js/check-page.js`, `js/tests.js`, `js/editor/names.js`, `js/editor/dialogs.js`, `assets/icons/`, `tools/`, `favicon.ico` | kleinste saubere Aufteilung; Inhalte und Code bleiben getrennt |
-| Eigener Python-Server `tools/server.py` statt `python -m http.server` | ohne `Cache-Control` zeigten Browser nach Änderungen alte Fassungen; feste MIME-Typen |
-| PowerShell-Ersatzserver für Windows | Start ohne Python-Installation |
-| Prüfseite liest Ordnerlisten des Startskript-Servers | statische Server listen keine Ordner; Hinweis, wenn nicht möglich |
+| Ergänzungen zu B3: `js/render.js`, `js/views/`, `js/dom.js`, `js/content/documents.js`, `js/check-page.js`, `js/tests.js`, `js/editor/names.js`, `js/editor/dialogs.js`, `assets/icons/`, `js/em.js`, `js/scripts.js`, `js/content/mirror.js`, `content/inhalte.js`, `favicon.ico` | kleinste saubere Aufteilung; Inhalte und Code bleiben getrennt |
+| Prüfseite: „Projektordner einlesen" bzw. `kapitelOrdner` aus `inhalte.js` | statische Server und `file://` listen keine Ordner; Hinweis, wenn nicht möglich |
 | Freigabe-Hinweis als Systemhinweis für jedes Kapitel mit `freigegeben: nein` | kein Kursinhalt im Code; verschwindet bei `ja` ohne weitere Pflege |
 | Sicherheitskapitel = Kapitel mit Feld `freigegeben` | keine Kapitelnamen im Code |
 | Prozent = richtige / gestellte Fragen, abgerundet; Mehrfachauswahl nur exakt richtig | einfach und erklärbar; 79,9 % wird nie als 80 % angezeigt |
@@ -305,10 +343,13 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 - **Fortschritt im localStorage:** gilt nur für diesen Browser auf diesem Gerät. Browserdaten löschen,
   privates Fenster oder Gerätewechsel = Neustart. Kein Konto, kein Abgleich.
 - **Zertifikat** ist keine Sicherheitsunterweisung (steht auf jedem PDF).
-- **Editor-Direktmodus** nur in Chromium-Browsern (Chrome, Edge) und nur über `localhost`/HTTPS.
-  Firefox und Safari: Download-Modus; dort kann der Editor Ordner weder auflisten noch Dateien
-  verschieben (inaktive und archivierte Kapitel sind dann nicht sichtbar).
-- **Ordnerliste auf der Prüfseite** nur mit dem Startskript-Server.
+- **Editor-Direktmodus** nur in Chromium-Browsern (Chrome, Edge). Firefox und Safari:
+  Download-Modus; dort kann der Editor keine Dateien verschieben (Archivieren/Umbenennen erledigt
+  man nach Anleitung im Dateimanager).
+- **Veraltete Offline-Datei:** Nach Änderungen von Hand an `.md`-Dateien zeigt der Doppelklick-Kurs
+  den alten Stand, bis der Editor einmal geöffnet (Ordner gewählt) und gespeichert wurde. Die
+  Prüfseite meldet dann den alten Stand, außer man liest den Ordner ein.
+- **Ordnerliste auf der Prüfseite** auf dem Webspace nicht verfügbar (dort kein Ordnerlisting).
 - **Mehrbenutzerbetrieb** im Editor gibt es nicht; die Konfliktprüfung erkennt nur, dass eine Datei
   zwischenzeitlich geändert wurde.
 - **Popover-Positionierung** per JavaScript (CSS Anchor Positioning ist noch nicht überall verfügbar);

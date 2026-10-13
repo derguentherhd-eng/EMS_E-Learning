@@ -1,11 +1,11 @@
 /*
  * theme-init.js – setzt das gespeicherte Farbschema, BEVOR die Seite gezeichnet wird
  *
- * Warum eine eigene, klassische Skriptdatei (kein ES-Modul)?
- *   ES-Module werden immer erst nach dem Aufbau der Seite ausgeführt. Hätte jemand „Hell"
+ * Warum eine eigene Datei, die vor allen anderen läuft?
+ *   Alle übrigen Skripte werden erst nach dem Aufbau der Seite ausgeführt. Hätte jemand „Hell"
  *   gewählt, sähe man beim Laden kurz das dunkle Theme aufblitzen. Dieses winzige Skript wird
  *   im <head> synchron geladen und verhindert das. Inline-Skripte sind im Projekt verboten,
- *   deshalb eine eigene Datei. Es ist die einzige Ausnahme von „nur ES-Module".
+ *   deshalb eine eigene Datei. Sie wird als einzige nicht über js/scripts.js geladen.
  *
  * Zusammenspiel: Liest denselben Speicher wie js/store.js (Schlüssel em-onboarding:v1, Feld
  * theme). Das Umschalten im Betrieb übernimmt js/ui/theme.js.

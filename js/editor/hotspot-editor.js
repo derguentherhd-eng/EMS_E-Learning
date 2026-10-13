@@ -11,8 +11,11 @@
  *   – Darstellung im Kurs: js/blocks/hotspot.js. Hier geht es nur ums Bearbeiten.
  */
 
-import { el } from '../dom.js';
-import { renderFields } from './field-renderers.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { renderFields } = EM.require('js/editor/field-renderers.js');
 
 /** Prozentwert auf eine Nachkommastelle begrenzen (so wird er auch gespeichert). */
 const clampPercent = (value) => Math.round(Math.min(100, Math.max(0, value)) * 10) / 10;
@@ -23,7 +26,7 @@ const clampPercent = (value) => Math.round(Math.min(100, Math.max(0, value)) * 1
  * @param {import('../blocks/registry.js').FieldSchema[]} fields  Schema des Bausteins
  * @returns {HTMLElement}
  */
-export function renderHotspotEditor(data, context, fields) {
+function renderHotspotEditor(data, context, fields) {
   const baseFields = fields.filter((field) => field.key !== 'points');
   const pointField = fields.find((field) => field.key === 'points');
 
@@ -104,3 +107,6 @@ export function renderHotspotEditor(data, context, fields) {
     pointField ? renderFields([pointField], data, context) : null,
   );
 }
+
+EM.define('js/editor/hotspot-editor.js', { renderHotspotEditor });
+})();

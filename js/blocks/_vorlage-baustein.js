@@ -8,7 +8,9 @@
  *  1. Diese Datei kopieren und umbenennen, z. B. js/blocks/key-sentence.js
  *     (Dateiname englisch, Baustein-Name im Inhalt deutsch – siehe registry.js).
  *  2. Unten alle Stellen mit „ANPASSEN" ausfüllen.
- *  3. In js/blocks/registry.js eine import-Zeile und einen Eintrag in BLOCKS ergänzen.
+ *  3. Die neue Datei in js/scripts.js eintragen (Paket „kern", vor js/blocks/registry.js).
+ *     In js/blocks/registry.js eine EM.require-Zeile und einen Eintrag in BLOCKS ergänzen.
+ *     Ganz unten in der neuen Datei den Pfad bei EM.define anpassen.
  *     → Der Baustein funktioniert jetzt im Kurs, wird geprüft und erscheint im Editor.
  *  4. Aussehen: in css/blocks.css einen Abschnitt „merksatz" mit Klassen .key-sentence…
  *  5. Symbol für die Editor-Palette: assets/icons/merksatz.svg (24×24, eine Farbe).
@@ -30,8 +32,11 @@
  *   :::
  */
 
-import { el } from '../dom.js';
-import { blockError, formatBlock, formatHeader, joinLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, formatBlock, formatHeader, joinLines } = EM.require('js/blocks/block-utils.js');
 
 /**
  * Form der Daten dieses Bausteins. ANPASSEN.
@@ -39,7 +44,7 @@ import { blockError, formatBlock, formatHeader, joinLines } from './block-utils.
  */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   // ANPASSEN: Name, wie er nach ::: in den Inhaltsdateien steht. Kleinbuchstaben, deutsch.
   name: 'merksatz',
 
@@ -115,3 +120,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/_vorlage-baustein.js', { default: definition });
+})();

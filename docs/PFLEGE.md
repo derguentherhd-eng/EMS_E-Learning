@@ -28,28 +28,28 @@ kannst du im Texteditor lesen, und was du von Hand schreibst, öffnet der Editor
 ## 1. In 2 Minuten startklar
 
 1. Öffne den Ordner `onboarding/`.
-2. Doppelklicke das Startskript für dein System:
-   - **Mac:** `starten.command` – beim allerersten Mal blockiert macOS das evtl. Dann:
-     Rechtsklick auf die Datei → „Öffnen" → „Öffnen" bestätigen.
-   - **Windows:** `starten.bat`
-   - **Linux:** `starten.sh` (im Dateimanager „Als Programm ausführen" oder im Terminal `sh starten.sh`)
-3. Ein Fenster mit Text öffnet sich (der kleine Webserver) und der Browser zeigt den Kurs.
-   **Lass dieses Fenster offen**, solange du arbeitest.
+2. **Doppelklicke `index.html`** – der Kurs öffnet sich im Browser. Fertig.
 
-| Was | Adresse |
+Es braucht kein Programm, keinen Server und keine Installation. Die anderen Seiten öffnest du
+genauso per Doppelklick:
+
+| Was | Datei |
 |---|---|
-| Kurs | `http://localhost:8765/` |
-| Editor | `http://localhost:8765/editor.html` |
-| Prüfseite | `http://localhost:8765/pruefen.html` |
-| Selbsttests | `http://localhost:8765/tests.html` |
+| Kurs | `index.html` |
+| Editor | `editor.html` (am besten in Chrome oder Edge) |
+| Prüfseite | `pruefen.html` |
+| Selbsttests | `tests.html` |
 
-**Warum funktioniert ein Doppelklick auf `index.html` nicht?** Browser verbieten Seiten, die direkt
-von der Festplatte geöffnet werden, das Nachladen anderer Dateien. Der Kurs lädt seine Inhalte aber
-aus `content/`. Das Startskript startet deshalb einen kleinen Webserver nur für deinen Rechner.
+**Die Datei `content/inhalte.js`.** Browser erlauben einer Seite, die direkt von der Festplatte
+geöffnet wird, nicht, andere Textdateien nachzuladen. Deshalb liegt in `content/inhalte.js` eine
+**Kopie** aller Inhaltsdateien. Diese Kopie erzeugt der **Editor** automatisch – bei jedem
+Speichern und beim Öffnen des Projektordners, falls sie veraltet ist. Du bearbeitest sie **nie**
+von Hand. Die eigentlichen Inhalte bleiben die `.md`-Dateien.
 
-**Voraussetzung:** Python 3. Auf dem Mac ist es meist vorhanden (sonst fragt macOS beim ersten
-Start, ob es die Entwicklerwerkzeuge installieren soll – mit „Installieren" bestätigen). Unter
-Windows springt ohne Python ein eingebauter Ersatzserver ein.
+> Hast du eine `.md`-Datei **von Hand** geändert, zeigt der Doppelklick-Kurs die Änderung erst,
+> nachdem du einmal `editor.html` geöffnet, den Projektordner gewählt und gespeichert hast
+> (Abschnitt 2). Auf dem Webspace (Abschnitt 12) gilt das nicht: Dort liest der Kurs die
+> `.md`-Dateien direkt.
 
 **Warum der Editor am besten in Chrome oder Edge läuft:** Nur diese Browser erlauben einer
 Webseite, mit deiner Erlaubnis direkt in einen Ordner zu speichern. In Firefox und Safari
@@ -58,10 +58,11 @@ selbst in den richtigen Ordner (Download-Modus).
 
 ## 2. Der Editor in 5 Minuten
 
-**Ordner freigeben.** Öffne `http://localhost:8765/editor.html` und klicke **„Projektordner öffnen"**.
+**Ordner freigeben.** Doppelklicke `editor.html` und klicke **„Projektordner öffnen"**.
 Wähle den Ordner `onboarding` (den Ordner, in dem `index.html` liegt – nicht `content`). Der Browser
 fragt, ob der Editor dort speichern darf: erlauben. Beim nächsten Mal merkt sich der Editor den Ordner
-und fragt nur kurz nach.
+und fragt nur kurz nach. Ist `content/inhalte.js` veraltet (weil jemand von Hand geändert hat),
+meldet der Editor das unten in der Statuszeile – einmal **Speichern** erneuert sie.
 
 **Die drei Spalten:**
 
@@ -82,11 +83,13 @@ Bis zu 50 Schritte, solange der Editor offen ist.
 speichern aber nichts. „Im Kurs testen" öffnet den echten Kurs in einem neuen Tab – er zeigt
 den **gespeicherten** Stand, also vorher speichern.
 
-**Download-Modus** (Firefox, Safari oder Knopf „Ohne Ordnerzugriff arbeiten"): Beim Speichern
-erscheint eine Liste der geänderten Dateien mit „Herunterladen" und dem Zielordner. Lade jede Datei
-herunter, ersetze damit die Datei im angegebenen Ordner und klicke „Erledigt". Kapitel verschieben
-(archivieren, umbenennen) musst du in diesem Modus selbst im Dateimanager erledigen – der Editor
-sagt dir genau, welche Datei wohin gehört.
+**Download-Modus** (Firefox, Safari oder Knopf „Projektordner einlesen (Download-Modus)"): Du
+wählst den Ordner `onboarding` aus, der Editor liest ihn nur. Beim Speichern erscheint eine Liste
+der geänderten Dateien mit „Herunterladen" und dem Zielordner – dazu gehört fast immer auch
+`content/inhalte.js` („Offline-Datei"). Lade jede Datei herunter, ersetze damit die Datei im
+angegebenen Ordner und klicke „Erledigt". Kapitel verschieben (archivieren, umbenennen) musst du
+in diesem Modus selbst im Dateimanager erledigen – der Editor sagt dir genau, welche Datei wohin
+gehört.
 
 ## 3. Ich will einen Text ändern
 
@@ -198,7 +201,7 @@ und klicke „Erneut einlesen".
 
 ## 9. Prüfseite benutzen und Meldungen verstehen
 
-Öffne `http://localhost:8765/pruefen.html` – **vor jeder Veröffentlichung**. Oben steht eine
+Öffne `pruefen.html` (Doppelklick) – **vor jeder Veröffentlichung**. Oben steht eine
 Zusammenfassung, darunter die Meldungen nach Datei, jeweils mit Zeilennummer und Lösungsvorschlag.
 „Kapitel in der Vorschau öffnen" springt direkt in den Kurs.
 
@@ -217,7 +220,11 @@ Häufige Meldungen:
 - *„Die Datei … liegt in content/kapitel/, steht aber nicht in kurs.md"* → gewollt (deaktiviert)
   oder eintragen.
 
-Die Prüfseite kann nicht eingetragene Dateien nur finden, wenn sie über das Startskript läuft.
+**Welcher Stand wird geprüft?** Unter den Knöpfen steht es. Per Doppelklick geöffnet, prüft die Seite
+zunächst `content/inhalte.js`, also den Stand der letzten Speicherung im Editor. Hast du `.md`-Dateien
+von Hand geändert, klicke **„Projektordner einlesen"** und wähle den Ordner `onboarding` – dann prüft
+sie genau die Dateien, die jetzt auf der Festplatte liegen (der Browser fragt evtl., ob du die Dateien
+„hochladen" willst: Sie bleiben trotzdem auf deinem Rechner, es wird nichts verschickt).
 
 ## 10. Wann erhöhe ich `version` und `kursversion`?
 
@@ -258,10 +265,11 @@ auch in einem Unterordner (z. B. `https://example.org/onboarding/`).
 
 - `editor.html` und den Ordner `js/editor/` (Pflegewerkzeug, gehört nicht ins Netz)
 - `content/_backup/` und `content/_archiv/`
-- `starten.command`, `starten.bat`, `starten.sh`, `tools/`
 - `.git/` (falls vorhanden)
 
 `pruefen.html` und `tests.html` schaden nicht, können aber auch weggelassen werden.
+`content/inhalte.js` darf mit hoch, wird auf dem Webspace aber nicht benutzt: Dort liest der Kurs
+die `.md`-Dateien direkt. Änderungen von Hand wirken auf dem Webspace also sofort.
 
 **Alternativ GitHub Pages:** Repository auf GitHub anlegen, Ordnerinhalt hochladen, unter
 „Settings → Pages" die Veröffentlichung einschalten. Auch hier die Pflegedateien vorher entfernen
@@ -291,14 +299,12 @@ Einmal pro Jahr, am besten direkt nach der Übergabe an die neue Teamleitung:
 
 | Problem | Ursache | Lösung |
 |---|---|---|
-| Kurs zeigt „Der Kurs konnte nicht geladen werden" | `index.html` per Doppelklick geöffnet | Startskript benutzen (Abschnitt 1). |
-| Startskript: „Python 3 wurde nicht gefunden" | Python fehlt | Python von python.org installieren; unter Windows springt der Ersatzserver ein. |
-| Port belegt / Server startet nicht | Der Kurs läuft schon in einem anderen Fenster | Einfach `http://localhost:8765/` öffnen. |
-| Änderungen erscheinen nicht im Kurs | Nicht gespeichert oder Seite nicht neu geladen | Im Editor speichern, Kurs neu laden. |
+| Kurs zeigt „Der Kurs konnte nicht geladen werden" | `content/inhalte.js` fehlt (per Doppelklick geöffnet) | `editor.html` öffnen, Projektordner wählen, speichern (Abschnitt 2). |
+| Änderungen erscheinen nicht im Kurs | Nicht gespeichert, Seite nicht neu geladen oder `.md` von Hand geändert | Im Editor speichern, Kurs neu laden. Nach Änderungen von Hand: Editor öffnen, Projektordner wählen, speichern – das erneuert `content/inhalte.js`. |
 | Kapitel fehlt im Kurs | Nicht in `kurs.md` eingetragen oder Tippfehler im Dateinamen | Prüfseite öffnen, Eintrag korrigieren (Groß-/Kleinschreibung, `.md`). |
 | Umlaute kaputt (z. B. „Ã¼") | Datei nicht als UTF-8 gespeichert | Im Texteditor „Speichern unter → Kodierung UTF-8". |
 | Baustein erscheint als „kann nicht angezeigt werden" | Syntaxfehler | Prüfseite zeigt die Zeile; Vorlage in `docs/BAUSTEINE.md`. |
-| Editor: „Projektordner öffnen" fehlt | Firefox/Safari oder nicht über `localhost` geöffnet | Chrome/Edge über das Startskript nutzen oder Download-Modus. |
+| Editor: „Projektordner öffnen" fehlt | Firefox oder Safari | `editor.html` in Chrome oder Edge öffnen – oder „Projektordner einlesen (Download-Modus)" nutzen. |
 | Editor fragt „Datei wurde außerhalb geändert" | Jemand hat die Datei inzwischen anders bearbeitet | „Diese Datei auslassen", Editor neu laden, Änderung wiederholen. Oder überschreiben – die andere Fassung landet in `_backup/`. |
 | Bild wird nicht angezeigt | Pfad oder Groß-/Kleinschreibung falsch | Pfad ab Projektordner: `assets/bilder/name.webp`. |
 

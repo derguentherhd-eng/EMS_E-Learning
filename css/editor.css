@@ -150,6 +150,11 @@
     gap: var(--space-s);
   }
 
+  .editor-start__folder:focus-within {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
   .editor-start__small {
     color: var(--color-text-muted);
     font-size: var(--step--1);

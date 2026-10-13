@@ -11,15 +11,18 @@
  *   – Layout des PDFs: js/certificate.js. Druckansicht: css/print.css + renderPrintable().
  */
 
-import { el } from '../dom.js';
-import { isoDate, getChapterStatus, isCertificateUnlocked } from '../store.js';
-import { SAFETY_NOTE, certificateFileName, createVerificationCode, downloadCertificate, formatGermanDate } from '../certificate.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { isoDate, getChapterStatus, isCertificateUnlocked } = EM.require('js/store.js');
+const { SAFETY_NOTE, certificateFileName, createVerificationCode, downloadCertificate, formatGermanDate } = EM.require('js/certificate.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderCertificate({ course, store }) {
+function renderCertificate({ course, store }) {
   const state = store.get();
   if (!isCertificateUnlocked(state, course.meta.kursversion)) {
     return {
@@ -175,3 +178,6 @@ function renderPrintable(data, logo) {
     ),
   );
 }
+
+EM.define('js/views/certificate-view.js', { renderCertificate });
+})();

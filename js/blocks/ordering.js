@@ -19,14 +19,17 @@
  *   – Aussehen: Abschnitt „reihenfolge" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { blockError, blockSection, formatBlock, formatHeader, oneLine, shuffle, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { blockError, blockSection, formatBlock, formatHeader, oneLine, shuffle, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /** @typedef {{title: string, steps: string[], explanation: string}} OrderingData */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'reihenfolge',
   interactive: true,
 
@@ -169,3 +172,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/ordering.js', { default: definition });
+})();

@@ -14,8 +14,11 @@
  *   – Aussehen: Abschnitt „zeitstrahl" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, blockSection, escapePipes, formatBlock, formatHeader, splitPipes, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, blockSection, escapePipes, formatBlock, formatHeader, splitPipes, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {{when: string, title: string, text: string}} TimelineEntry
@@ -23,7 +26,7 @@ import { blockError, blockSection, escapePipes, formatBlock, formatHeader, split
  */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'zeitstrahl',
   interactive: false,
 
@@ -107,3 +110,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/timeline.js', { default: definition });
+})();

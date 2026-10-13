@@ -27,6 +27,9 @@
  *     die Prüfseite und docs/PFLEGE.md kennen.
  */
 
+(function () {
+  'use strict';
+
 /**
  * @typedef {Object} ValidationError
  * @property {string} file       Dateipfad relativ zum Projektordner, z. B. 'content/kurs.md'
@@ -60,7 +63,7 @@ const LIST_LINE = /^\s*-\s+(.*?)\s*$|^\s*-\s*$/;
  *   parseFrontmatter('---\ntitel: Hallo\ndauer: 8\n---\nText').meta
  *   // → { titel: 'Hallo', dauer: 8 }
  */
-export function parseFrontmatter(text, file = '') {
+function parseFrontmatter(text, file = '') {
   const lines = text.split('\n');
   const errors = [];
   const meta = {};
@@ -153,7 +156,7 @@ export function parseFrontmatter(text, file = '') {
  *   serializeFrontmatter({ dauer: 8, titel: 'X' }, ['titel', 'dauer'])
  *   // → '---\ntitel: X\ndauer: 8\n---'
  */
-export function serializeFrontmatter(meta, order = []) {
+function serializeFrontmatter(meta, order = []) {
   const keys = [
     ...order.filter((key) => key in meta),
     ...Object.keys(meta).filter((key) => !order.includes(key)),
@@ -191,3 +194,6 @@ function toValue(value) {
 function oneLine(value) {
   return String(value).replace(/\s*\n\s*/g, ' ').trim();
 }
+
+EM.define('js/content/frontmatter.js', { parseFrontmatter, serializeFrontmatter });
+})();

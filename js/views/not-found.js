@@ -7,13 +7,16 @@
  *   – Nur Texte; die Ansicht ist absichtlich schlicht.
  */
 
-import { el } from '../dom.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
 
 /**
  * @param {string} [reason]  Erklärung, warum die Seite fehlt
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderNotFound(reason = 'Diese Adresse gibt es im Kurs nicht.') {
+function renderNotFound(reason = 'Diese Adresse gibt es im Kurs nicht.') {
   return {
     title: 'Seite nicht gefunden',
     node: el(
@@ -25,3 +28,6 @@ export function renderNotFound(reason = 'Diese Adresse gibt es im Kurs nicht.') 
     ),
   };
 }
+
+EM.define('js/views/not-found.js', { renderNotFound });
+})();

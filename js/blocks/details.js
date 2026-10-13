@@ -16,13 +16,16 @@
  *   – Aussehen: Abschnitt „aufklappen" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, formatBlock, formatHeader, joinLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, formatBlock, formatHeader, joinLines } = EM.require('js/blocks/block-utils.js');
 
 /** @typedef {{title: string, markdown: string}} DetailsData */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'aufklappen',
   interactive: false,
 
@@ -67,3 +70,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/details.js', { default: definition });
+})();

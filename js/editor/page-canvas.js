@@ -21,16 +21,19 @@
  *   – Felder der Kurseinstellungen: COURSE_FIELDS. Felder des Kapitelkopfs: CHAPTER_FIELDS.
  */
 
-import { el } from '../dom.js';
-import { getBlock, listBlocks } from '../blocks/registry.js';
-import { parseBody, isSafetyChapter } from '../content/documents.js';
-import { serializeElement } from '../content/serialize.js';
-import { countWords } from '../content/markdown.js';
-import { openDialog } from './dialogs.js';
-import { renderFields, renderMarkdownField } from './field-renderers.js';
-import { renderQuizEditor, quizChanged, versionNotice } from './quiz-editor.js';
-import { renderGlossaryEditor } from './glossary-editor.js';
-import { renderHotspotEditor } from './hotspot-editor.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { getBlock, listBlocks } = EM.require('js/blocks/registry.js');
+const { parseBody, isSafetyChapter } = EM.require('js/content/documents.js');
+const { serializeElement } = EM.require('js/content/serialize.js');
+const { countWords } = EM.require('js/content/markdown.js');
+const { openDialog } = EM.require('js/editor/dialogs.js');
+const { renderFields, renderMarkdownField } = EM.require('js/editor/field-renderers.js');
+const { renderQuizEditor, quizChanged, versionNotice } = EM.require('js/editor/quiz-editor.js');
+const { renderGlossaryEditor } = EM.require('js/editor/glossary-editor.js');
+const { renderHotspotEditor } = EM.require('js/editor/hotspot-editor.js');
 
 const COURSE_FIELDS = [
   { key: 'titel', type: 'text', label: 'Kurstitel', required: true },
@@ -69,7 +72,7 @@ const MINUTES_PER_INTERACTION = 0.75;
  * @param {Object} editor
  * @returns {HTMLElement}
  */
-export function renderMiddle(editor) {
+function renderMiddle(editor) {
   const { state } = editor;
   const selection = state.selection;
   if (selection.kind === 'course') return renderCourseSettings(editor);
@@ -512,7 +515,7 @@ function addDrag(item, type, index, onDrop) {
  * @param {Object} editor
  * @returns {HTMLElement}
  */
-export function renderProperties(editor) {
+function renderProperties(editor) {
   const { state } = editor;
   const selection = state.selection;
   const empty = (text) => el('div', { class: 'stack' }, el('h2', { class: 'editor-column__title' }, 'Eigenschaften'), el('p', { class: 'canvas__info' }, text));
@@ -583,3 +586,6 @@ function renderRawEditor(editor, entry, selection, element, heading) {
     reparse,
   );
 }
+
+EM.define('js/editor/page-canvas.js', { renderMiddle, renderProperties });
+})();

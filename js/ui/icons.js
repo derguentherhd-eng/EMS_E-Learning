@@ -12,6 +12,9 @@
  *     Symbole für die Baustein-Palette des Editors liegen dagegen als Dateien in assets/icons/.
  */
 
+(function () {
+  'use strict';
+
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /** Pfaddaten im 24×24-Raster, gezeichnet als Linie (stroke), nicht als Fläche. */
@@ -36,7 +39,7 @@ const PATHS = {
  * @param {string} [className]
  * @returns {SVGSVGElement}
  */
-export function icon(name, className = 'icon') {
+function icon(name, className = 'icon') {
   const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('viewBox', '0 0 24 24');
   svg.setAttribute('width', '20');
@@ -54,3 +57,6 @@ export function icon(name, className = 'icon') {
   svg.append(path);
   return svg;
 }
+
+EM.define('js/ui/icons.js', { icon });
+})();

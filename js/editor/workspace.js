@@ -3,7 +3,7 @@
  *
  * Eine Webseite darf normalerweise keine Dateien speichern. Deshalb zwei Wege:
  *
- * Direktmodus (Chrome, Edge – über das Startskript, also http://localhost):
+ * Direktmodus (Chrome, Edge – per Doppelklick auf editor.html oder über einen Webserver):
  *   „Projektordner öffnen" → showDirectoryPicker() → Ordner onboarding/ wählen. Danach liest
  *   und schreibt der Editor direkt in content/ und assets/bilder/. Der Ordner-Zugriff wird in
  *   IndexedDB gemerkt; beim nächsten Start fragt der Browser nur kurz nach Erlaubnis.
@@ -23,6 +23,11 @@
  *   – Neue Dateioperation: in BEIDEN Arbeitsbereichen ergänzen.
  */
 
+(function () {
+  'use strict';
+
+const { createFileListReader } = EM.require('js/content/loader.js');
+
 const DB_NAME = 'em-onboarding-editor';
 const STORE = 'handles';
 
@@ -30,7 +35,7 @@ const STORE = 'handles';
  * Ist der Direktmodus in diesem Browser möglich?
  * @returns {boolean}
  */
-export function supportsDirectAccess() {
+function supportsDirectAccess() {
   return typeof window.showDirectoryPicker === 'function' && window.isSecureContext;
 }
 
@@ -55,7 +60,7 @@ export function supportsDirectAccess() {
  * @returns {Promise<Workspace>}
  * @throws {Error} mit verständlicher Meldung (z. B. falscher Ordner)
  */
-export async function openDirectory() {
+async function openDirectory() {
   const root = await window.showDirectoryPicker({ id: 'em-onboarding', mode: 'readwrite' });
   await assertProjectFolder(root);
   await saveHandle(root);
@@ -67,7 +72,7 @@ export async function openDirectory() {
  * @param {boolean} ask  true = Browser darf nach Erlaubnis fragen (nur nach einem Klick erlaubt)
  * @returns {Promise<{workspace: Workspace|null, needsPermission: boolean, name: string}>}
  */
-export async function restoreDirectory(ask) {
+async function restoreDirectory(ask) {
   const root = await loadHandle().catch(() => null);
   if (!root) return { workspace: null, needsPermission: false, name: '' };
   const options = { mode: 'readwrite' };
@@ -165,7 +170,7 @@ function createDirectWorkspace(root) {
  * (das übernimmt der Speichern-Dialog im Editor).
  * @returns {Workspace}
  */
-export function createDownloadWorkspace() {
+function createDownloadWorkspace() {
   const readFile = async (path) => {
     const response = await fetch(path, { cache: 'no-cache' });
     if (response.status === 404) return null;
@@ -190,11 +195,46 @@ export function createDownloadWorkspace() {
 }
 
 /**
+ * Arbeitsbereich aus einem eingelesenen Ordner (<input type="file" webkitdirectory>).
+ * Funktioniert in allen Browsern und auch ohne Server: Lesen aus den gewählten Dateien,
+ * „Schreiben" = Herunterladen anbieten. Ordner auflisten geht, Dateien verschieben nicht.
+ *
+ * @param {FileList} fileList
+ * @returns {Workspace}
+ * @throws {Error} wenn im gewählten Ordner keine content/kurs.md liegt
+ */
+function createFolderWorkspace(fileList) {
+  const reader = createFileListReader(fileList);
+  if (!reader.files.has('content/kurs.md')) {
+    throw new Error('Im gewählten Ordner gibt es keine Datei content/kurs.md. Bitte den Projektordner (onboarding) wählen – nicht einen Unterordner.');
+  }
+  const unsupported = async () => {
+    throw new Error('Mit eingelesenem Ordner nicht möglich – Dateien werden zum Herunterladen angeboten.');
+  };
+  const name = (fileList[0]?.webkitRelativePath ?? '').split('/')[0] || 'Projektordner';
+  return {
+    mode: 'download',
+    label: `Ordner „${name}" eingelesen`,
+    canList: true,
+    canMove: false,
+    async readFile(path) {
+      const file = reader.files.get(path);
+      return file ? { text: await file.text(), lastModified: file.lastModified } : null;
+    },
+    writeText: unsupported,
+    writeBlob: unsupported,
+    list: async (dir) => reader.list(dir),
+    move: unsupported,
+    lastModified: async () => null,
+  };
+}
+
+/**
  * Startet den Download einer Datei.
  * @param {string} fileName
  * @param {Blob} blob
  */
-export function downloadBlob(fileName, blob) {
+function downloadBlob(fileName, blob) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -239,7 +279,7 @@ async function loadHandle() {
  * Vergisst den gemerkten Ordner (z. B. „Anderen Ordner wählen").
  * @returns {Promise<void>}
  */
-export async function forgetDirectory() {
+async function forgetDirectory() {
   const db = await openDb();
   await new Promise((resolve) => {
     const transaction = db.transaction(STORE, 'readwrite');
@@ -247,3 +287,6 @@ export async function forgetDirectory() {
     transaction.addEventListener('complete', resolve);
   });
 }
+
+EM.define('js/editor/workspace.js', { supportsDirectAccess, openDirectory, restoreDirectory, createDownloadWorkspace, createFolderWorkspace, downloadBlob, forgetDirectory });
+})();

@@ -18,13 +18,16 @@
  *   – Zustandslogik: getChapterStatus() in js/store.js.
  */
 
-import { el } from '../dom.js';
-import { icon } from './icons.js';
-import { chapterHash } from '../router.js';
-import { getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked } from '../store.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { chapterHash } = EM.require('js/router.js');
+const { getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked } = EM.require('js/store.js');
 
 /** Sichtbarer bzw. vorgelesener Text je Zustand. */
-export const STATUS_TEXT = {
+const STATUS_TEXT = {
   offen: 'offen',
   bestanden: 'bestanden',
   bestzeit: 'Bestzeit',
@@ -41,7 +44,7 @@ const STATUS_ICON = { bestanden: 'check', bestzeit: 'star', aktualisiert: 'refre
  * @param {import('../store.js').Store} store
  * @returns {{setCurrent: (chapterId: string|null) => void}}
  */
-export function createSectorBar(container, course, store) {
+function createSectorBar(container, course, store) {
   let currentId = null;
 
   const render = () => {
@@ -113,3 +116,6 @@ function finishItem(state, course) {
     ),
   );
 }
+
+EM.define('js/ui/sector-bar.js', { createSectorBar, STATUS_TEXT });
+})();

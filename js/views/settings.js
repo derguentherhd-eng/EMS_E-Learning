@@ -9,14 +9,17 @@
  *   – Neue Einstellung: Feld in js/store.js (createEmptyState) ergänzen, hier ein Formularfeld.
  */
 
-import { el } from '../dom.js';
-import { applyTheme } from '../ui/theme.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { applyTheme } = EM.require('js/ui/theme.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderSettings({ store }) {
+function renderSettings({ store }) {
   const state = store.get();
   const status = el('p', { class: 'settings__status', role: 'status' });
 
@@ -102,3 +105,6 @@ export function renderSettings({ store }) {
     ),
   };
 }
+
+EM.define('js/views/settings.js', { renderSettings });
+})();

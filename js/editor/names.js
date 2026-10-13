@@ -15,8 +15,11 @@
  *   – Erlaubte Bildformate: IMAGE_TYPES.
  */
 
+(function () {
+  'use strict';
+
 /** Erlaubte Bildformate (Dateiendung → MIME-Typ). */
-export const IMAGE_TYPES = {
+const IMAGE_TYPES = {
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg',
   png: 'image/png',
@@ -32,7 +35,7 @@ export const IMAGE_TYPES = {
  * @returns {string}
  * @example slugify('Boxengasse: Regeln & Tipps!') // → 'boxengasse-regeln-tipps'
  */
-export function slugify(text, maxLength = 50) {
+function slugify(text, maxLength = 50) {
   const slug = String(text)
     .trim()
     .toLocaleLowerCase('de')
@@ -54,7 +57,7 @@ export function slugify(text, maxLength = 50) {
  * @param {string[]} existing vorhandene Dateinamen (mit Endung)
  * @returns {string}
  */
-export function uniqueName(base, extension, existing) {
+function uniqueName(base, extension, existing) {
   const taken = new Set(existing.map((name) => name.toLowerCase()));
   let candidate = `${base}.${extension}`;
   for (let counter = 2; taken.has(candidate.toLowerCase()); counter += 1) {
@@ -70,7 +73,7 @@ export function uniqueName(base, extension, existing) {
  * @returns {string}
  * @example chapterFileName('Boxengasse-Regeln', ['01-a.md', '06-b.md']) // → '07-boxengasse-regeln.md'
  */
-export function chapterFileName(title, existing) {
+function chapterFileName(title, existing) {
   const highest = existing.reduce((max, name) => {
     const match = name.match(/^(\d+)-/);
     return match ? Math.max(max, Number(match[1])) : max;
@@ -85,7 +88,7 @@ export function chapterFileName(title, existing) {
  * @param {string[]} existing  Dateien in assets/bilder/
  * @returns {string|null}  null, wenn das Format nicht erlaubt ist
  */
-export function imageFileName(original, existing) {
+function imageFileName(original, existing) {
   const match = original.match(/^(.*)\.([^.]+)$/);
   if (!match) return null;
   const extension = match[2].toLowerCase();
@@ -99,9 +102,12 @@ export function imageFileName(original, existing) {
  * @param {Date} [date]
  * @returns {string}
  */
-export function backupPath(path, date = new Date()) {
+function backupPath(path, date = new Date()) {
   const pad = (n) => String(n).padStart(2, '0');
   const stamp = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
   const name = path.split('/').pop().replace(/\.md$/i, '');
   return `content/_backup/${name}-${stamp}.md`;
 }
+
+EM.define('js/editor/names.js', { slugify, uniqueName, chapterFileName, imageFileName, backupPath, IMAGE_TYPES });
+})();

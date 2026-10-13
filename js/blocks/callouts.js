@@ -18,9 +18,12 @@
  *     CSS-Klasse .callout--merke in blocks.css anlegen, docs/BAUSTEINE.md ergänzen.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { formatBlock, formatHeader, joinLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { formatBlock, formatHeader, joinLines } = EM.require('js/blocks/block-utils.js');
 
 const VARIANTS = {
   info: {
@@ -52,7 +55,7 @@ const VARIANTS = {
  * @param {'info'|'tipp'|'achtung'} name
  * @returns {import('./registry.js').BlockDefinition}
  */
-export function createCallout(name) {
+function createCallout(name) {
   const variant = VARIANTS[name];
   return {
     name,
@@ -110,3 +113,6 @@ export function createCallout(name) {
     },
   };
 }
+
+EM.define('js/blocks/callouts.js', { createCallout });
+})();

@@ -10,17 +10,20 @@
  *   – Aussehen der Liste: Abschnitt „Zeitenmonitor" in css/components.css.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { renderMarkdown } from '../render.js';
-import { chapterHash, parseRoute } from '../router.js';
-import { getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked } from '../store.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { renderMarkdown } = EM.require('js/render.js');
+const { chapterHash, parseRoute } = EM.require('js/router.js');
+const { getChapterStatus, isCertificateUnlocked, isQualifyingUnlocked } = EM.require('js/store.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderStart({ course, store }) {
+function renderStart({ course, store }) {
   const state = store.get();
   const chapters = course.chapters;
   const severeErrors = course.errors.filter((error) => error.severity === 'fehler').length;
@@ -143,3 +146,6 @@ function finishRows(course, state) {
     row('Ziel', 'Zertifikat', certificateOpen, '#/zertifikat', 'Bereit zum Herunterladen', 'Gesperrt bis zum bestandenen Qualifying'),
   ];
 }
+
+EM.define('js/views/start.js', { renderStart });
+})();

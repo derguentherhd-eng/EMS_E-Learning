@@ -17,8 +17,11 @@
  *   – Tempo: STEP_MS (Abstand zwischen den Lichtern).
  */
 
-import { el } from '../dom.js';
-import { prefersReducedMotion } from '../blocks/block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { prefersReducedMotion } = EM.require('js/blocks/block-utils.js');
 
 const STEP_MS = 550;
 const LIGHTS = 5;
@@ -28,7 +31,7 @@ const LIGHTS = 5;
  * @param {() => void} onGo  wird aufgerufen, wenn es losgeht (oder übersprungen wird)
  * @returns {{node: HTMLElement, destroy: () => void}}
  */
-export function createStartLights(onGo) {
+function createStartLights(onGo) {
   const timers = [];
   let done = false;
   const reduced = prefersReducedMotion();
@@ -81,3 +84,6 @@ export function createStartLights(onGo) {
     },
   };
 }
+
+EM.define('js/ui/start-lights.js', { createStartLights });
+})();

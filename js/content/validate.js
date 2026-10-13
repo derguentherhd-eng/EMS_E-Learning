@@ -20,9 +20,12 @@
  *     einen Testfall anlegen, in docs/PFLEGE.md („Prüfseite benutzen") die Meldung erklären.
  */
 
-import { getBlock } from '../blocks/registry.js';
-import { findGlossaryEntry, isReleased, isSafetyChapter } from './documents.js';
-import { countWords, parseMarkdown, walkMarkdown } from './markdown.js';
+(function () {
+  'use strict';
+
+const { getBlock } = EM.require('js/blocks/registry.js');
+const { findGlossaryEntry, isReleased, isSafetyChapter } = EM.require('js/content/documents.js');
+const { countWords, parseMarkdown, walkMarkdown } = EM.require('js/content/markdown.js');
 
 const TODO_PATTERN = /\{\{\s*TODO:?\s*([\s\S]*?)\s*\}\}/gi;
 const GLOSSARY_PATTERN = /\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g;
@@ -41,7 +44,7 @@ const SAFE_LINK = /^(https?:|mailto:|#|\.{0,2}\/|[^:]*$)/i;
  * @param {ValidateOptions} [options]
  * @returns {import('./frontmatter.js').ValidationError[]}
  */
-export function validateCourse(course, options = {}) {
+function validateCourse(course, options = {}) {
   const errors = [...course.errors];
   const coursePath = 'content/kurs.md';
   const meta = course.meta;
@@ -107,7 +110,7 @@ export function validateCourse(course, options = {}) {
  * @param {ValidateOptions} [options]
  * @returns {import('./frontmatter.js').ValidationError[]}
  */
-export function validateChapter(chapter, course, options = {}) {
+function validateChapter(chapter, course, options = {}) {
   const errors = [...chapter.errors];
   const file = chapter.path;
   const meta = chapter.meta;
@@ -241,7 +244,7 @@ export function validateChapter(chapter, course, options = {}) {
  * @param {import('./loader.js').CourseModel} course
  * @returns {{src:string, file:string, line:number, ref:Object|null}[]}
  */
-export function collectImages(course) {
+function collectImages(course) {
   const images = [];
   if (course.meta.logo) images.push({ src: String(course.meta.logo), file: 'content/kurs.md', line: 0, ref: null });
   for (const chapter of course.chapters) {
@@ -271,7 +274,7 @@ export function collectImages(course) {
  * @param {import('./frontmatter.js').ValidationError[]} errors
  * @returns {{fehler:number, warnung:number, hinweis:number, todo:number}}
  */
-export function summarize(errors) {
+function summarize(errors) {
   const summary = { fehler: 0, warnung: 0, hinweis: 0, todo: 0 };
   for (const error of errors) {
     if (error.kind === 'todo') summary.todo += 1;
@@ -363,3 +366,6 @@ function checkNumber(errors, file, meta, key, min, max, required, ref = null, in
     errors.push({ file, line: 1, severity: 'fehler', message: `„${key}: ${value}" ist ungültig.`, fix: `Erlaubt ist eine ${integer ? 'ganze ' : ''}Zahl von ${min} bis ${max}.`, ref });
   }
 }
+
+EM.define('js/content/validate.js', { validateCourse, validateChapter, collectImages, summarize });
+})();

@@ -61,3 +61,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 ### Phase 10 – Dokumentation und Abschluss (2026-10-13)
 - `docs/PFLEGE.md` (Pflege ohne Programmierkenntnisse), `docs/BAUSTEINE.md` (alle Bausteine mit Kopiervorlagen), `docs/ENTWICKLER.md` (Architektur, neue Bausteine, Kontraste, Entscheidungen, Grenzen).
 - Abschlussprüfung gegen die Definition of Done; Betrieb aus einem Unterordner eines Standard-Webservers geprüft.
+
+### Betrieb ohne Server (2026-10-13)
+- Der Kurs, der Editor, die Prüfseite und die Selbsttests laufen jetzt per **Doppelklick** (`file://`) – nur HTML, CSS und JavaScript.
+- Entfernt: Startskripte (`starten.command`, `.bat`, `.sh`) und die Server in `tools/` (Python, PowerShell).
+- Code von ES-Modulen auf klassische Skripte umgestellt (`js/em.js`: `EM.define`/`EM.require`; Lade-Reihenfolge in `js/scripts.js`), weil Browser Module auf `file://` sperren.
+- Neu: `content/inhalte.js` – vom Editor erzeugte Kopie der `.md`-Dateien für den Betrieb ohne Server. Der Editor erneuert sie beim Speichern und meldet, wenn sie veraltet ist. Auf dem Webspace werden weiter die `.md`-Dateien gelesen.
+- Neu: „Projektordner einlesen" in Editor (Download-Modus, alle Browser) und Prüfseite.
+- PDF-Schriften als Skript (`assets/fonts/pdf/lato-pdf.js`), Logo im PDF aus der Offline-Datei.
+- Selbsttests für die Offline-Datei; 145 Tests grün per Doppelklick und über einen Webserver.

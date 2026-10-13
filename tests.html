@@ -2,7 +2,7 @@
 <!--
   tests.html – Selbsttests für Parser, Bausteine und Kurslogik
 
-  Öffnen über das Startskript: http://localhost:8765/tests.html
+  Öffnen per Doppelklick (oder über einen Webserver).
   Alle Tests müssen grün sein, bevor eine neue Fassung veröffentlicht wird.
   Die Tests selbst stehen in js/tests.js (ohne Test-Framework, mit kleinem assert-Helfer).
 -->
@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/blocks.css">
     <script src="js/theme-init.js"></script>
-    <script type="module" src="js/tests.js"></script>
+    <script src="js/em.js"></script>
+    <script src="js/scripts.js" defer data-pakete="kern kurs editor" data-start="js/tests.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>

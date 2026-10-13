@@ -18,7 +18,10 @@
  *     docs/ENTWICKLER.md dokumentieren.
  */
 
-import { el } from '../dom.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
 
 /**
  * @typedef {Object} FieldContext
@@ -36,7 +39,7 @@ import { el } from '../dom.js';
  * @param {string} key  z. B. 'fields.kurz'
  * @returns {any}
  */
-export function getPath(data, key) {
+function getPath(data, key) {
   return key.split('.').reduce((value, part) => (value == null ? undefined : value[part]), data);
 }
 
@@ -48,7 +51,7 @@ export function getPath(data, key) {
  * @param {string} key
  * @param {any} value
  */
-export function setPath(data, key, value) {
+function setPath(data, key, value) {
   const parts = key.split('.');
   const last = parts.pop();
   let target = data;
@@ -67,7 +70,7 @@ export function setPath(data, key, value) {
  * @param {FieldContext} context
  * @returns {DocumentFragment}
  */
-export function renderFields(fields, data, context) {
+function renderFields(fields, data, context) {
   const fragment = document.createDocumentFragment();
   for (const field of fields) fragment.append(renderField(field, data, context));
   return fragment;
@@ -80,7 +83,7 @@ export function renderFields(fields, data, context) {
  * @param {FieldContext} context
  * @returns {HTMLElement}
  */
-export function renderField(field, data, context) {
+function renderField(field, data, context) {
   const id = `${context.idPrefix}-${field.key.replace(/[^a-z0-9]/gi, '-')}`;
   const hintId = field.help ? `${id}-hint` : null;
   const value = getPath(data, field.key);
@@ -122,7 +125,7 @@ export function renderField(field, data, context) {
  * Textfeld mit schlanker Werkzeugleiste. Die Knöpfe fügen Kursdown-Syntax an der
  * Cursorposition ein bzw. um die Markierung herum.
  */
-export function renderMarkdownField({ id, label, hint, hintId, value, set, context, required = false, warnPageSyntax = false }) {
+function renderMarkdownField({ id, label, hint, hintId, value, set, context, required = false, warnPageSyntax = false }) {
   const textarea = el('textarea', { id, rows: Math.min(18, Math.max(5, value.split('\n').length + 1)), class: 'field__input field__textarea', 'aria-describedby': hintId, required, spellcheck: 'true' }, value);
   const warning = el('p', { class: 'field__warning', role: 'status' });
   const checkSyntax = () => {
@@ -286,3 +289,6 @@ function createEmptyItem(itemFields) {
   }
   return item;
 }
+
+EM.define('js/editor/field-renderers.js', { getPath, setPath, renderFields, renderField, renderMarkdownField });
+})();

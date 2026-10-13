@@ -13,6 +13,9 @@
  *   – Bitte keine Möglichkeit einbauen, HTML-Text direkt einzufügen. Das ist Absicht.
  */
 
+(function () {
+  'use strict';
+
 /**
  * @typedef {string|number|Node|null|undefined|false} Child
  *   Kindelemente: Text (wird immer als Text eingefügt, nie als HTML), Knoten, oder
@@ -33,7 +36,7 @@
  * @example
  *   el('button', { class: 'button', type: 'button', onclick: () => alert('Hi') }, 'Klick');
  */
-export function el(tag, attrs = {}, ...children) {
+function el(tag, attrs = {}, ...children) {
   const element = document.createElement(tag);
   for (const [key, value] of Object.entries(attrs ?? {})) {
     if (value === false || value === null || value === undefined) continue;
@@ -55,7 +58,7 @@ export function el(tag, attrs = {}, ...children) {
  * @param {...(Child|Child[])} children
  * @returns {Node} parent
  */
-export function append(parent, ...children) {
+function append(parent, ...children) {
   for (const child of children.flat(Infinity)) {
     if (child === null || child === undefined || child === false) continue;
     parent.append(child instanceof Node ? child : document.createTextNode(String(child)));
@@ -71,7 +74,10 @@ let idCounter = 0;
  * @param {string} [prefix]
  * @returns {string}
  */
-export function uniqueId(prefix = 'id') {
+function uniqueId(prefix = 'id') {
   idCounter += 1;
   return `${prefix}-${idCounter}`;
 }
+
+EM.define('js/dom.js', { el, append, uniqueId });
+})();

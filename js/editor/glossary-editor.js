@@ -9,14 +9,17 @@
  *   – Format der Datei content/glossar.md: documents.js (parseGlossary) / serialize.js.
  */
 
-import { el } from '../dom.js';
-import { serializeChapter } from '../content/serialize.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { serializeChapter } = EM.require('js/content/serialize.js');
 
 /**
  * @param {Object} editor
  * @returns {HTMLElement}
  */
-export function renderGlossaryEditor(editor) {
+function renderGlossaryEditor(editor) {
   const { doc } = editor.state;
   const change = (mutate, key = null, structural = false) => editor.commit(mutate, { source: 'middle', coalesce: key, structural });
 
@@ -71,3 +74,6 @@ export function renderGlossaryEditor(editor) {
     ),
   );
 }
+
+EM.define('js/editor/glossary-editor.js', { renderGlossaryEditor });
+})();

@@ -14,6 +14,9 @@
  *   – Beschriftung des Knopfes: in updateToggle().
  */
 
+(function () {
+  'use strict';
+
 const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 /**
@@ -21,7 +24,7 @@ const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
  * @param {'system'|'dark'|'light'} choice
  * @param {Document} [doc]  anderes Dokument, z. B. die Vorschau im Editor
  */
-export function applyTheme(choice, doc = document) {
+function applyTheme(choice, doc = document) {
   if (choice === 'dark' || choice === 'light') {
     doc.documentElement.dataset.theme = choice;
   } else {
@@ -33,7 +36,7 @@ export function applyTheme(choice, doc = document) {
  * Welches Schema ist gerade tatsächlich sichtbar?
  * @returns {'dark'|'light'}
  */
-export function effectiveTheme() {
+function effectiveTheme() {
   const forced = document.documentElement.dataset.theme;
   if (forced === 'dark' || forced === 'light') return forced;
   // Ohne ausdrückliche Wahl ist Dunkel Standard – außer das System ist ausdrücklich hell.
@@ -47,7 +50,7 @@ export function effectiveTheme() {
  * @param {HTMLButtonElement} button
  * @param {import('../store.js').Store} store
  */
-export function setupThemeToggle(button, store) {
+function setupThemeToggle(button, store) {
   const updateToggle = () => {
     button.setAttribute('aria-pressed', String(effectiveTheme() === 'light'));
   };
@@ -67,3 +70,6 @@ export function setupThemeToggle(button, store) {
   });
   updateToggle();
 }
+
+EM.define('js/ui/theme.js', { applyTheme, effectiveTheme, setupThemeToggle });
+})();

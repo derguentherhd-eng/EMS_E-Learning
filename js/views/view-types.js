@@ -9,6 +9,9 @@
  *   – Neue gemeinsame Eigenschaft: hier beschreiben und in main.js (showRoute) auswerten.
  */
 
+(function () {
+  'use strict';
+
 /**
  * @typedef {Object} ViewContext
  * @property {import('../router.js').Route} route     aktuelle Adresse
@@ -25,5 +28,4 @@
  * @property {HTMLElement} [focus]     Fokusziel statt der <h1> (z. B. Glossarbegriff)
  * @property {() => void} [destroy]    Aufräumen beim Verlassen (Timer, Listener)
  */
-
-export {};
+})();

@@ -12,8 +12,11 @@
  *   – Neue Eigenschaft einer Frage: hier ein Feld, in js/blocks/quiz-block.js lesen/schreiben.
  */
 
-import { el } from '../dom.js';
-import { serializeElement } from '../content/serialize.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { serializeElement } = EM.require('js/content/serialize.js');
 
 /**
  * Wurde das Quiz seit dem Laden geändert, ohne dass die Version erhöht wurde?
@@ -21,7 +24,7 @@ import { serializeElement } from '../content/serialize.js';
  * @param {Object} entry
  * @returns {boolean}
  */
-export function quizChanged(editor, entry) {
+function quizChanged(editor, entry) {
   const baseline = editor.state.baseline[entry.file];
   const model = entry.model;
   if (!baseline || !model?.quiz || entry.origin === null) return false;
@@ -32,7 +35,7 @@ export function quizChanged(editor, entry) {
  * Hinweis „Version erhöhen", wenn das Quiz geändert wurde.
  * @returns {HTMLElement}
  */
-export function versionNotice(editor, entry) {
+function versionNotice(editor, entry) {
   const model = entry.model;
   const next = Number(model.meta.version || 1) + 1;
   return el(
@@ -48,7 +51,7 @@ export function versionNotice(editor, entry) {
  * @param {Object} entry
  * @returns {HTMLElement}
  */
-export function renderQuizEditor(editor, entry) {
+function renderQuizEditor(editor, entry) {
   const model = entry.model;
   const quiz = model.quiz;
   const data = quiz.data;
@@ -157,3 +160,6 @@ export function renderQuizEditor(editor, entry) {
     addQuestion,
   );
 }
+
+EM.define('js/editor/quiz-editor.js', { quizChanged, versionNotice, renderQuizEditor });
+})();

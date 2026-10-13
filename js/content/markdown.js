@@ -22,6 +22,9 @@
  *     in tests.html testen, in docs/BAUSTEINE.md dokumentieren.
  */
 
+(function () {
+  'use strict';
+
 /**
  * @typedef {Object} InlineNode
  * @property {'text'|'strong'|'em'|'code'|'link'|'image'|'glossary'|'todo'} type
@@ -62,7 +65,7 @@ const TODO_ONLY = /^\{\{\s*TODO:?\s*(.*?)\s*\}\}$/i;
  *   parseMarkdown('Hallo **Welt**')
  *   // → [{ type: 'paragraph', line: 1, children: [text 'Hallo ', strong […]] }]
  */
-export function parseMarkdown(text, startLine = 1) {
+function parseMarkdown(text, startLine = 1) {
   const lines = text.split('\n');
   const blocks = [];
   let index = 0;
@@ -262,7 +265,7 @@ function splitTableRow(row) {
  *   parseInline('Das ist [[Scrutineering|die Abnahme]].')
  *   // → [text 'Das ist ', glossary {term: 'Scrutineering', label: 'die Abnahme'}, text '.']
  */
-export function parseInline(text) {
+function parseInline(text) {
   const nodes = [];
   let buffer = '';
   let index = 0;
@@ -382,7 +385,7 @@ function findClosingStar(text, from) {
  * @param {InlineNode[]} nodes
  * @returns {string}
  */
-export function inlineToText(nodes) {
+function inlineToText(nodes) {
   return nodes
     .map((node) => {
       switch (node.type) {
@@ -408,7 +411,7 @@ export function inlineToText(nodes) {
  * @param {BlockNode[]} blocks
  * @param {(node: BlockNode|InlineNode, line: number) => void} visit
  */
-export function walkMarkdown(blocks, visit) {
+function walkMarkdown(blocks, visit) {
   const walkInline = (nodes, line) => {
     for (const node of nodes) {
       visit(node, line);
@@ -440,10 +443,13 @@ export function walkMarkdown(blocks, visit) {
  * @param {string} text
  * @returns {number}
  */
-export function countWords(text) {
+function countWords(text) {
   const plain = text
     .replace(/\{\{[^}]*\}\}/g, ' ')
     .replace(/[#>*`|[\]()!_~-]/g, ' ')
     .trim();
   return plain === '' ? 0 : plain.split(/\s+/).length;
 }
+
+EM.define('js/content/markdown.js', { parseMarkdown, parseInline, inlineToText, walkMarkdown, countWords });
+})();

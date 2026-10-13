@@ -6,7 +6,7 @@
   content/ bleiben die einzige Quelle: Der Editor liest und schreibt genau diese Dateien.
   Anleitung: docs/PFLEGE.md, Abschnitt „Der Editor in 5 Minuten".
 
-  Am besten in Chrome oder Edge über das Startskript öffnen (http://localhost:8765/editor.html).
+  Am besten in Chrome oder Edge öffnen (Doppelklick auf editor.html genügt).
   Diese Datei und den Ordner js/editor/ NICHT auf den öffentlichen Webspace hochladen.
 
   Die Logik steht in js/editor/ (Einstieg: editor-main.js).
@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/editor.css">
     <script src="js/theme-init.js"></script>
-    <script type="module" src="js/editor/editor-main.js"></script>
+    <script src="js/em.js"></script>
+    <script src="js/scripts.js" defer data-pakete="kern kurs editor" data-start="js/editor/editor-main.js"></script>
   </head>
   <body class="editor">
     <a class="skip-link" href="#editor-main">Zum Arbeitsbereich springen</a>

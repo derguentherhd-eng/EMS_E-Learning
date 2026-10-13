@@ -18,13 +18,16 @@
  *   – Aussehen: Abschnitt „karten" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, blockSection, escapePipes, formatBlock, formatHeader, prefersReducedMotion, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, blockSection, escapePipes, formatBlock, formatHeader, prefersReducedMotion, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /** @typedef {{title: string, cards: {front: string, back: string}[]}} FlashcardsData */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'karten',
   interactive: true,
 
@@ -142,3 +145,6 @@ function escapeCard(text) {
 function unescape(text) {
   return text.trim().replace(/\\\|/g, '|');
 }
+
+EM.define('js/blocks/flashcards.js', { default: definition });
+})();

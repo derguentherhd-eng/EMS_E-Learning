@@ -23,8 +23,11 @@
  *   – Aussehen: Abschnitt „teams" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, blockSection, formatBlock, formatHeader, oneLine, parseEntries } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, blockSection, formatBlock, formatHeader, oneLine, parseEntries } = EM.require('js/blocks/block-utils.js');
 
 /** Bekannte Felder: Schlüssel in der Datei → Beschriftung auf der Karte (null = nicht als Text zeigen). */
 const FIELDS = [
@@ -46,7 +49,7 @@ const KNOWN = FIELDS.map(([key]) => key);
  */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'teams',
   interactive: true,
 
@@ -186,3 +189,6 @@ export default {
 function teamCount(count) {
   return count === 1 ? '1 Team' : `${count} Teams`;
 }
+
+EM.define('js/blocks/teams.js', { default: definition });
+})();

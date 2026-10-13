@@ -12,18 +12,15 @@ Abschlussrunde („Qualifying") und am Ende ein PDF-Zertifikat „Onboarding abg
 ## Schnellstart
 
 1. Ordner `onboarding/` öffnen.
-2. Startskript doppelklicken:
-   - **Mac:** `starten.command` (beim ersten Mal: Rechtsklick → „Öffnen")
-   - **Windows:** `starten.bat`
-   - **Linux:** `starten.sh`
-3. Der Browser öffnet den Kurs unter `http://localhost:8765/`.
-   - Editor: `http://localhost:8765/editor.html` (am besten in Chrome oder Edge)
-   - Prüfseite: `http://localhost:8765/pruefen.html`
-   - Selbsttests: `http://localhost:8765/tests.html`
+2. **`index.html` doppelklicken** – der Kurs öffnet sich im Browser.
 
-Ein Doppelklick auf `index.html` funktioniert **nicht**: Browser verbieten Seiten, die direkt
-von der Festplatte geöffnet werden, das Nachladen der Inhaltsdateien. Deshalb gibt es die
-Startskripte. Sie brauchen Python 3 (Windows kommt notfalls ohne aus).
+Genauso per Doppelklick: `editor.html` (Editor, am besten in Chrome oder Edge), `pruefen.html`
+(Prüfseite) und `tests.html` (Selbsttests). Es braucht keinen Server und keine Installation –
+nur HTML, CSS und JavaScript.
+
+Ohne Server liest der Kurs seine Inhalte aus `content/inhalte.js`, einer Kopie der `.md`-Dateien,
+die der Editor beim Speichern automatisch erneuert. Auf einem Webspace liest er die `.md`-Dateien
+direkt. Details: [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 1.
 
 ## Dokumentation
 

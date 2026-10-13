@@ -25,6 +25,9 @@
  *     um einen Testfall erweitern, Liste oben und docs/ENTWICKLER.md aktualisieren.
  */
 
+(function () {
+  'use strict';
+
 /**
  * @typedef {Object} Route
  * @property {'start'|'chapter'|'quiz'|'glossary'|'qualifying'|'certificate'|'settings'|'notfound'} name
@@ -43,7 +46,7 @@
  *   parseRoute('#/kapitel/01-formula-student/3')
  *   // → { name: 'chapter', params: { id: '01-formula-student', page: 3 }, path: … }
  */
-export function parseRoute(hash) {
+function parseRoute(hash) {
   if (hash === '' || hash === '#' || hash === '#/') {
     return { name: 'start', params: {}, path: '#/' };
   }
@@ -81,7 +84,7 @@ export function parseRoute(hash) {
  * @param {number|'quiz'} page
  * @returns {string}
  */
-export function chapterHash(chapterId, page = 1) {
+function chapterHash(chapterId, page = 1) {
   return `#/kapitel/${encodeURIComponent(chapterId)}/${page}`;
 }
 
@@ -90,7 +93,7 @@ export function chapterHash(chapterId, page = 1) {
  * @param {string} term
  * @returns {string}
  */
-export function glossaryHash(term) {
+function glossaryHash(term) {
   return `#/glossar/${encodeURIComponent(term)}`;
 }
 
@@ -99,7 +102,7 @@ export function glossaryHash(term) {
  * jeder Änderung (Links, Zurück-Button, navigate()).
  * @param {(route: Route) => void} onRoute
  */
-export function startRouter(onRoute) {
+function startRouter(onRoute) {
   const handle = () => {
     const route = parseRoute(window.location.hash);
     if (route) onRoute(route);
@@ -113,7 +116,7 @@ export function startRouter(onRoute) {
  * Wechselt zu einer Adresse (erzeugt einen Eintrag im Browserverlauf).
  * @param {string} hash  z. B. '#/glossar'
  */
-export function navigate(hash) {
+function navigate(hash) {
   if (window.location.hash === hash) {
     // Gleiche Adresse: hashchange feuert nicht, also selbst auslösen (z. B. „Nochmal").
     window.dispatchEvent(new HashChangeEvent('hashchange'));
@@ -129,3 +132,6 @@ function safeDecode(part) {
     return part;
   }
 }
+
+EM.define('js/router.js', { parseRoute, chapterHash, glossaryHash, startRouter, navigate });
+})();

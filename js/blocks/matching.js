@@ -17,9 +17,12 @@
  *   – Aussehen: Abschnitt „zuordnen" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { blockError, blockSection, escapePipes, formatBlock, formatHeader, shuffle, splitPipes, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { blockError, blockSection, escapePipes, formatBlock, formatHeader, shuffle, splitPipes, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {{term: string, category: string, explanation: string}} MatchingItem
@@ -27,7 +30,7 @@ import { blockError, blockSection, escapePipes, formatBlock, formatHeader, shuff
  */
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'zuordnen',
   interactive: true,
 
@@ -175,3 +178,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/matching.js', { default: definition });
+})();

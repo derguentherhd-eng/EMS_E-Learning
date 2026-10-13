@@ -16,24 +16,27 @@
  *   checkliste          → checklist.js    quiz        → quiz-block.js
  *
  * Wenn du hier etwas ändern willst …
- *   – Neuen Baustein anlegen: js/blocks/_vorlage-baustein.js kopieren, ausfüllen, dann HIER
- *     eine import-Zeile und einen Eintrag in BLOCKS ergänzen. Schritt-für-Schritt-Anleitung:
- *     docs/ENTWICKLER.md, Abschnitt „Neuen Baustein anlegen".
+ *   – Neuen Baustein anlegen: js/blocks/_vorlage-baustein.js kopieren, ausfüllen, in
+ *     js/scripts.js eintragen, dann HIER eine EM.require-Zeile und einen Eintrag in BLOCKS
+ *     ergänzen. Schritt-für-Schritt-Anleitung: docs/ENTWICKLER.md, „Neuen Baustein anlegen".
  *   – Die Reihenfolge in BLOCKS ist die Reihenfolge in der Editor-Palette.
  */
 
-import { createCallout } from './callouts.js';
-import details from './details.js';
-import flashcards from './flashcards.js';
-import matching from './matching.js';
-import ordering from './ordering.js';
-import scenario from './scenario.js';
-import hotspot from './hotspot.js';
-import fileTree from './file-tree.js';
-import teams from './teams.js';
-import timeline from './timeline.js';
-import checklist from './checklist.js';
-import quiz from './quiz-block.js';
+(function () {
+  'use strict';
+
+const { createCallout } = EM.require('js/blocks/callouts.js');
+const details = EM.require('js/blocks/details.js').default;
+const flashcards = EM.require('js/blocks/flashcards.js').default;
+const matching = EM.require('js/blocks/matching.js').default;
+const ordering = EM.require('js/blocks/ordering.js').default;
+const scenario = EM.require('js/blocks/scenario.js').default;
+const hotspot = EM.require('js/blocks/hotspot.js').default;
+const fileTree = EM.require('js/blocks/file-tree.js').default;
+const teams = EM.require('js/blocks/teams.js').default;
+const timeline = EM.require('js/blocks/timeline.js').default;
+const checklist = EM.require('js/blocks/checklist.js').default;
+const quiz = EM.require('js/blocks/quiz-block.js').default;
 
 /**
  * @typedef {Object} FieldSchema
@@ -101,7 +104,7 @@ const byName = new Map(BLOCKS.map((block) => [block.name, block]));
  * @param {string} name
  * @returns {BlockDefinition|undefined}
  */
-export function getBlock(name) {
+function getBlock(name) {
   return byName.get(name);
 }
 
@@ -109,6 +112,9 @@ export function getBlock(name) {
  * Alle Bausteine (z. B. für die Editor-Palette).
  * @returns {BlockDefinition[]}
  */
-export function listBlocks() {
+function listBlocks() {
   return [...BLOCKS];
 }
+
+EM.define('js/blocks/registry.js', { getBlock, listBlocks });
+})();

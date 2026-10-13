@@ -235,6 +235,23 @@
   }
 
   /* ── Prüfseite (pruefen.html) und Selbsttests (tests.html) ── */
+  .check-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  /* Der „Projektordner einlesen"-Knopf ist ein <label> um ein verstecktes Dateifeld. Den
+   * Tastaturfokus bekommt das Feld – der Rahmen wird deshalb am Label gezeigt. */
+  .check-actions__folder:focus-within {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+  }
+
+  .check-source {
+    color: var(--color-text-muted);
+  }
+
   .check-summary [data-summary] {
     font-size: var(--step-1);
     font-weight: var(--font-weight-bold);

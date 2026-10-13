@@ -19,16 +19,19 @@
  *   – Reihenfolge der Kopfbereichsfelder: CHAPTER_KEYS / COURSE_KEYS in documents.js.
  */
 
-import { serializeFrontmatter } from './frontmatter.js';
-import { CHAPTER_KEYS, COURSE_KEYS } from './documents.js';
-import { getBlock } from '../blocks/registry.js';
+(function () {
+  'use strict';
+
+const { serializeFrontmatter } = EM.require('js/content/frontmatter.js');
+const { CHAPTER_KEYS, COURSE_KEYS } = EM.require('js/content/documents.js');
+const { getBlock } = EM.require('js/blocks/registry.js');
 
 /**
  * Schreibt ein einzelnes Element.
  * @param {import('./documents.js').Element} element
  * @returns {string}
  */
-export function serializeElement(element) {
+function serializeElement(element) {
   switch (element.type) {
     case 'text':
       return element.markdown.replace(/\s+$/, '');
@@ -53,7 +56,7 @@ export function serializeElement(element) {
  * @param {import('./documents.js').ChapterModel} chapter
  * @returns {string}
  */
-export function serializeChapter(chapter) {
+function serializeChapter(chapter) {
   const meta = { ...chapter.meta };
   const parts = [serializeFrontmatter(meta, CHAPTER_KEYS)];
   for (const element of chapter.preamble) parts.push(serializeElement(element));
@@ -70,7 +73,7 @@ export function serializeChapter(chapter) {
  * @param {{meta: Object, welcome: string}} course
  * @returns {string}
  */
-export function serializeCourse(course) {
+function serializeCourse(course) {
   const head = serializeFrontmatter(course.meta, COURSE_KEYS);
   const welcome = course.welcome.trim();
   return welcome ? `${head}\n\n${welcome}\n` : `${head}\n`;
@@ -81,7 +84,7 @@ export function serializeCourse(course) {
  * @param {import('./documents.js').GlossaryEntry[]} entries
  * @returns {string}
  */
-export function serializeGlossary(entries) {
+function serializeGlossary(entries) {
   const lines = entries.map((entry) =>
     'raw' in entry ? entry.raw : `${oneLine(entry.term)}: ${oneLine(entry.text)}`,
   );
@@ -91,3 +94,6 @@ export function serializeGlossary(entries) {
 function oneLine(text) {
   return String(text).replace(/\s*\n\s*/g, ' ').trim();
 }
+
+EM.define('js/content/serialize.js', { serializeElement, serializeChapter, serializeCourse, serializeGlossary });
+})();

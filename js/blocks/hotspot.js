@@ -17,8 +17,11 @@
  *   – Aussehen: Abschnitt „hotspot" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { blockError, blockSection, escapePipes, formatBlock, formatHeader, splitPipes, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { blockError, blockSection, escapePipes, formatBlock, formatHeader, splitPipes, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {{x: number, y: number, title: string, text: string}} HotspotPoint
@@ -28,7 +31,7 @@ import { blockError, blockSection, escapePipes, formatBlock, formatHeader, split
 const POINT = /^(\d+(?:\.\d+)?)\s*%\s+(\d+(?:\.\d+)?)\s*%\s*\|(.*)$/;
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'hotspot',
   interactive: true,
 
@@ -157,3 +160,6 @@ export default {
 function round(value) {
   return String(Math.round(Number(value) * 10) / 10);
 }
+
+EM.define('js/blocks/hotspot.js', { default: definition });
+})();

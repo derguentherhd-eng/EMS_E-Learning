@@ -15,8 +15,11 @@
  *   – Größengrenze für die Warnung: SIZE_WARNING.
  */
 
-import { el } from '../dom.js';
-import { IMAGE_TYPES, imageFileName } from './names.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { IMAGE_TYPES, imageFileName } = EM.require('js/editor/names.js');
 
 const SIZE_WARNING = 500 * 1024;
 
@@ -25,7 +28,7 @@ const SIZE_WARNING = 500 * 1024;
  * @param {Object} editor
  * @returns {Promise<{path: string, blob?: Blob}|null>}
  */
-export async function importImage(editor) {
+async function importImage(editor) {
   const file = await chooseFile();
   if (!file) return null;
   const { state } = editor;
@@ -75,3 +78,6 @@ function chooseFile() {
     input.click();
   });
 }
+
+EM.define('js/editor/image-import.js', { importImage });
+})();

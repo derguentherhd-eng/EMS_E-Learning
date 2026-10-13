@@ -12,6 +12,9 @@
  *   – Änderungen wirken auf ALLE Bausteine. Danach unbedingt tests.html laufen lassen.
  */
 
+(function () {
+  'use strict';
+
 /**
  * Rohdaten eines Bausteins, so wie documents.js sie aus der Datei liest.
  * @typedef {Object} RawBlock
@@ -46,7 +49,7 @@
  * @returns {string}
  * @example formatHeader('quiz', '', [['anzahl', 5]]) // → ':::quiz anzahl=5'
  */
-export function formatHeader(name, title = '', attrs = []) {
+function formatHeader(name, title = '', attrs = []) {
   const parts = [`:::${name}`];
   if (title.trim() !== '') parts.push(oneLine(title));
   for (const [key, value] of attrs) {
@@ -63,7 +66,7 @@ export function formatHeader(name, title = '', attrs = []) {
  * @param {string[]} bodyLines
  * @returns {string}
  */
-export function formatBlock(header, bodyLines) {
+function formatBlock(header, bodyLines) {
   return [header, ...bodyLines, ':::'].join('\n');
 }
 
@@ -72,7 +75,7 @@ export function formatBlock(header, bodyLines) {
  * @param {{text:string, line:number}[]} lines
  * @returns {{text:string, line:number}[]}
  */
-export function trimLines(lines) {
+function trimLines(lines) {
   let start = 0;
   let end = lines.length;
   while (start < end && lines[start].text.trim() === '') start += 1;
@@ -85,7 +88,7 @@ export function trimLines(lines) {
  * @param {{text:string, line:number}[]} lines
  * @returns {string}
  */
-export function joinLines(lines) {
+function joinLines(lines) {
   return trimLines(lines)
     .map((entry) => entry.text.replace(/\s+$/, ''))
     .join('\n')
@@ -98,7 +101,7 @@ export function joinLines(lines) {
  * @param {string} text
  * @returns {string[]}
  */
-export function splitPipes(text) {
+function splitPipes(text) {
   const parts = [];
   let current = '';
   let inGlossary = false;
@@ -126,7 +129,7 @@ export function splitPipes(text) {
  * @param {string} text
  * @returns {string}
  */
-export function escapePipes(text) {
+function escapePipes(text) {
   return oneLine(text)
     .split(/(\[\[[^\]]*\]\])/)
     .map((part, index) => (index % 2 === 1 ? part : part.replace(/\|/g, '\\|')))
@@ -144,7 +147,7 @@ export function escapePipes(text) {
  * @param {RawBlock} raw  für Fehlermeldungen
  * @returns {{entries: {name:string, fields:Object<string,string>, line:number}[], errors: Object[]}}
  */
-export function parseEntries(lines, raw) {
+function parseEntries(lines, raw) {
   const entries = [];
   const errors = [];
   let current = null;
@@ -183,7 +186,7 @@ export function parseEntries(lines, raw) {
  * @param {'fehler'|'warnung'|'hinweis'} [severity]
  * @returns {import('../content/frontmatter.js').ValidationError}
  */
-export function blockError(raw, line, message, fix = '', severity = 'fehler') {
+function blockError(raw, line, message, fix = '', severity = 'fehler') {
   return { file: raw.file, line, severity, message: `Baustein „${raw.name}": ${message}`, fix };
 }
 
@@ -192,7 +195,7 @@ export function blockError(raw, line, message, fix = '', severity = 'fehler') {
  * @param {string} text
  * @returns {string}
  */
-export function oneLine(text) {
+function oneLine(text) {
   return String(text ?? '').replace(/\s*\n\s*/g, ' ').trim();
 }
 
@@ -203,7 +206,7 @@ export function oneLine(text) {
  * @param {() => number} [random]
  * @returns {T[]}
  */
-export function shuffle(items, random = Math.random) {
+function shuffle(items, random = Math.random) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i -= 1) {
     const j = Math.floor(random() * (i + 1));
@@ -219,7 +222,7 @@ export function shuffle(items, random = Math.random) {
  * @param {string} text
  * @returns {string}
  */
-export function hashText(text) {
+function hashText(text) {
   let hash = 0x811c9dc5;
   for (const char of text) {
     hash ^= char.codePointAt(0);
@@ -232,7 +235,7 @@ export function hashText(text) {
  * Prüft, ob Bewegung reduziert werden soll (Systemeinstellung „Bewegung reduzieren").
  * @returns {boolean}
  */
-export function prefersReducedMotion() {
+function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
@@ -244,7 +247,7 @@ export function prefersReducedMotion() {
  * @param {string} [fallbackLabel]  Name für Screenreader, wenn es keine Überschrift gibt
  * @returns {{section: HTMLElement, headingId: string}}
  */
-export function blockSection(className, title, context, fallbackLabel = '') {
+function blockSection(className, title, context, fallbackLabel = '') {
   const headingId = context.uid(className);
   const section = document.createElement('section');
   section.className = `block ${className}`;
@@ -260,3 +263,6 @@ export function blockSection(className, title, context, fallbackLabel = '') {
   }
   return { section, headingId };
 }
+
+EM.define('js/blocks/block-utils.js', { formatHeader, formatBlock, trimLines, joinLines, splitPipes, escapePipes, parseEntries, blockError, oneLine, shuffle, hashText, prefersReducedMotion, blockSection });
+})();

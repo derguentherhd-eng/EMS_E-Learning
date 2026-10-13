@@ -18,9 +18,12 @@
  *   – Aussehen: Abschnitt „szenario" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { blockError, blockSection, formatBlock, formatHeader, joinLines, oneLine } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { blockError, blockSection, formatBlock, formatHeader, joinLines, oneLine } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {{text: string, correct: boolean, feedback: string}} ScenarioOption
@@ -30,7 +33,7 @@ import { blockError, blockSection, formatBlock, formatHeader, joinLines, oneLine
 const OPTION = /^-\s*\[([ xX])\]\s*(.*)$/;
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'szenario',
   interactive: true,
 
@@ -153,3 +156,6 @@ export default {
     ],
   },
 };
+
+EM.define('js/blocks/scenario.js', { default: definition });
+})();

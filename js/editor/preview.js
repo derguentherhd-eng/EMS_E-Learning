@@ -12,13 +12,16 @@
  *   – Breiten: WIDTHS. CSS-Dateien der Vorschau: COURSE_CSS (wie in index.html).
  */
 
-import { el } from '../dom.js';
-import { createStore } from '../store.js';
-import { parseRoute } from '../router.js';
-import { renderChapter } from '../views/chapter.js';
-import { renderQuiz } from '../views/quiz-view.js';
-import { renderStart } from '../views/start.js';
-import { renderGlossaryPage } from '../views/glossary-page.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { createStore } = EM.require('js/store.js');
+const { parseRoute } = EM.require('js/router.js');
+const { renderChapter } = EM.require('js/views/chapter.js');
+const { renderQuiz } = EM.require('js/views/quiz-view.js');
+const { renderStart } = EM.require('js/views/start.js');
+const { renderGlossaryPage } = EM.require('js/views/glossary-page.js');
 
 const COURSE_CSS = ['reset', 'tokens', 'base', 'layout', 'components', 'blocks'];
 const WIDTHS = { mobile: 375, desktop: 1024 };
@@ -30,7 +33,7 @@ const HEIGHT = 720;
  * @param {Object} editor
  * @returns {{update: (state: Object, courseModel: Function, entryByFile: Function) => void}}
  */
-export function createPreview(container, editor) {
+function createPreview(container, editor) {
   const store = createStore({ storage: null });
   const frame = el('iframe', { class: 'preview__frame', title: 'Vorschau der Kursseite', srcdoc: frameDocument() });
   const stage = el('div', { class: 'preview__stage' }, frame);
@@ -140,3 +143,6 @@ function frameDocument() {
   const links = COURSE_CSS.map((name) => `<link rel="stylesheet" href="css/${name}.css">`).join('');
   return `<!DOCTYPE html><html lang="de" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vorschau</title>${links}</head><body><main class="page" id="main"></main></body></html>`;
 }
+
+EM.define('js/editor/preview.js', { createPreview });
+})();

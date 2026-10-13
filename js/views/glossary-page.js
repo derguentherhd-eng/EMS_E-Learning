@@ -8,15 +8,18 @@
  *   – Begriffe selbst: content/glossar.md.
  */
 
-import { el } from '../dom.js';
-import { renderInline } from '../render.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { renderInline } = EM.require('js/render.js');
 
 /**
  * Macht aus einem Begriff eine gültige HTML-ID (für Sprungziele).
  * @param {string} term
  * @returns {string}
  */
-export function termId(term) {
+function termId(term) {
   return `begriff-${term.toLocaleLowerCase('de').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-')}`;
 }
 
@@ -24,7 +27,7 @@ export function termId(term) {
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderGlossaryPage({ route, course }) {
+function renderGlossaryPage({ route, course }) {
   const entries = course.glossary
     .filter((entry) => 'term' in entry)
     .sort((a, b) => a.term.localeCompare(b.term, 'de', { sensitivity: 'base' }));
@@ -71,3 +74,6 @@ export function renderGlossaryPage({ route, course }) {
     ),
   };
 }
+
+EM.define('js/views/glossary-page.js', { termId, renderGlossaryPage });
+})();

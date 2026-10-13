@@ -24,24 +24,29 @@
  *     page-canvas.js. Immer über commit(), sonst funktioniert „Rückgängig" nicht.
  */
 
-import { el } from '../dom.js';
-import { normalizeText, parseChapter, parseCourse, parseGlossary, findGlossaryEntry, isReleased, isSafetyChapter } from '../content/documents.js';
-import { serializeChapter, serializeCourse, serializeElement, serializeGlossary } from '../content/serialize.js';
-import { validateCourse } from '../content/validate.js';
-import { createHistory, record, redo as historyRedo, undo as historyUndo } from './history.js';
-import { createDownloadWorkspace, downloadBlob, forgetDirectory, openDirectory, restoreDirectory, supportsDirectAccess } from './workspace.js';
-import { backupPath, chapterFileName, slugify, uniqueName } from './names.js';
-import { confirmDialog, openDialog, promptDialog } from './dialogs.js';
-import { renderTree } from './course-tree.js';
-import { renderMiddle, renderProperties } from './page-canvas.js';
-import { createPreview } from './preview.js';
-import { importImage } from './image-import.js';
-import { applyTheme } from '../ui/theme.js';
-import { getBlock } from '../blocks/registry.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { normalizeText, parseChapter, parseCourse, parseGlossary, findGlossaryEntry, isReleased, isSafetyChapter } = EM.require('js/content/documents.js');
+const { serializeChapter, serializeCourse, serializeElement, serializeGlossary } = EM.require('js/content/serialize.js');
+const { validateCourse } = EM.require('js/content/validate.js');
+const { createHistory, record, redo: historyRedo, undo: historyUndo } = EM.require('js/editor/history.js');
+const { createDownloadWorkspace, createFolderWorkspace, downloadBlob, forgetDirectory, openDirectory, restoreDirectory, supportsDirectAccess } = EM.require('js/editor/workspace.js');
+const { buildMirrorScript, collectMirrorPaths, parseMirrorScript } = EM.require('js/content/mirror.js');
+const { backupPath, chapterFileName, slugify, uniqueName } = EM.require('js/editor/names.js');
+const { confirmDialog, openDialog, promptDialog } = EM.require('js/editor/dialogs.js');
+const { renderTree } = EM.require('js/editor/course-tree.js');
+const { renderMiddle, renderProperties } = EM.require('js/editor/page-canvas.js');
+const { createPreview } = EM.require('js/editor/preview.js');
+const { importImage } = EM.require('js/editor/image-import.js');
+const { applyTheme } = EM.require('js/ui/theme.js');
+const { getBlock } = EM.require('js/blocks/registry.js');
 
 const COURSE_PATH = 'content/kurs.md';
 const GLOSSARY_PATH = 'content/glossar.md';
 const TEMPLATE_PATH = 'content/_vorlage-kapitel.md';
+const MIRROR_PATH = 'content/inhalte.js';
 const DIRS = { kapitel: 'content/kapitel', archiv: 'content/_archiv' };
 
 /* ───────────────────────────── Zustand ───────────────────────────── */
@@ -65,6 +70,9 @@ const state = {
   /** Quiz und Version beim Laden (für den Vorschlag „Version erhöhen") */
   baseline: {},
   template: null,
+  /** Logo als SVG-Text (für die Offline-Datei) und die Offline-Datei, wie sie beim Laden war */
+  logoText: null,
+  mirror: null,
   selection: { kind: 'course' },
   ui: { rightTab: 'preview', previewWidth: 'mobile', previewTheme: 'dark', sourceView: false, expanded: new Set(), hintsAll: false },
   history: createHistory(),
@@ -355,7 +363,13 @@ async function loadProject(workspace) {
   const glossaryText = (await read(GLOSSARY_PATH)) ?? '';
   if (!state.files[GLOSSARY_PATH]) state.files[GLOSSARY_PATH] = { text: '', lastModified: null, backedUp: false };
   state.files[GLOSSARY_PATH].canonical = glossaryText ? serializeGlossary(parseGlossary(glossaryText).entries) : '';
-  state.template = (await workspace.readFile(TEMPLATE_PATH))?.text ?? null;
+  const template = (await workspace.readFile(TEMPLATE_PATH))?.text;
+  state.template = template === undefined ? null : normalizeText(template);
+  const logoPath = String(course.meta.logo ?? '');
+  const logo = /\.svg$/i.test(logoPath) ? await workspace.readFile(logoPath).catch(() => null) : null;
+  state.logoText = logo ? normalizeText(logo.text) : null;
+  const mirror = await workspace.readFile(MIRROR_PATH).catch(() => null);
+  state.mirror = mirror ? parseMirrorScript(mirror.text) : null;
 
   const chapterFiles = workspace.canList ? (await workspace.list(DIRS.kapitel)).filter((name) => name.endsWith('.md')) : [...course.meta.kapitel];
   const archiveFiles = workspace.canList ? (await workspace.list(DIRS.archiv)).filter((name) => name.endsWith('.md')) : [];
@@ -380,11 +394,18 @@ async function loadProject(workspace) {
   const missing = course.meta.kapitel.filter((file) => !chapters.some((entry) => entry.file === file && entry.location === 'kapitel'));
   regions.start.hidden = true;
   regions.layout.hidden = false;
-  regions.mode.textContent = workspace.mode === 'direkt' ? `Modus: Direkt (Ordner „${workspace.label}")` : 'Modus: Download (ohne Ordnerzugriff)';
+  regions.mode.textContent = workspace.mode === 'direkt' ? `Modus: Direkt (Ordner „${workspace.label}")` : `Modus: Download (${workspace.label})`;
   regions.mode.dataset.mode = workspace.mode;
   preview ??= createPreview(regions.previewPanel, api);
   renderAll();
-  setStatus(missing.length > 0 ? `Geladen. Achtung: In kurs.md stehen Kapitel, deren Datei fehlt: ${missing.join(', ')}` : 'Inhalte geladen.');
+  const mirrorStale = collectChanges().some((change) => change.path === MIRROR_PATH);
+  setStatus(
+    missing.length > 0
+      ? `Geladen. Achtung: In kurs.md stehen Kapitel, deren Datei fehlt: ${missing.join(', ')}`
+      : mirrorStale
+        ? 'Inhalte geladen. Die Offline-Datei content/inhalte.js passt nicht zu den .md-Dateien (z. B. nach Änderungen von Hand) – einmal speichern, dann ist sie aktuell.'
+        : 'Inhalte geladen.',
+  );
 }
 
 /* ───────────────────────────── Speichern ───────────────────────────── */
@@ -417,7 +438,36 @@ function collectChanges() {
     }
   }
   for (const [path, asset] of state.pendingAssets) changes.push({ path, label: 'Bild', blob: asset.blob });
+
+  // Offline-Datei: gilt als geändert, sobald sie nicht mehr zum Stand nach dem Speichern passt.
+  const mirror = expectedMirror(changes);
+  const same = state.mirror
+    && JSON.stringify(state.mirror.dateien) === JSON.stringify(mirror.files)
+    && JSON.stringify(state.mirror.kapitelOrdner) === JSON.stringify(mirror.chapterFiles);
+  if (!same) {
+    changes.push({ path: MIRROR_PATH, label: 'Offline-Datei', text: buildMirrorScript(mirror.files, mirror.chapterFiles), mirror: true });
+  }
   return changes;
+}
+
+/**
+ * Inhalt der Offline-Datei content/inhalte.js, wie sie NACH dem Speichern sein muss:
+ * unveränderte Dateien mit ihrem Text auf der Platte, geänderte mit dem neuen Text.
+ * @param {Object[]} changes  übrige Änderungen aus collectChanges()
+ * @returns {{files: Object<string, string>, chapterFiles: string[]}}
+ */
+function expectedMirror(changes) {
+  const changed = new Map(changes.filter((change) => typeof change.text === 'string').map((change) => [change.path, change.text]));
+  const chapterFiles = state.doc.chapters.filter((entry) => entry.location === 'kapitel').map((entry) => entry.file).sort();
+  const files = {};
+  for (const path of collectMirrorPaths(chapterFiles, String(state.doc.course.meta.logo ?? ''))) {
+    let text = changed.get(path);
+    if (text === undefined && path === TEMPLATE_PATH) text = state.template;
+    else if (text === undefined && path === String(state.doc.course.meta.logo)) text = state.logoText;
+    else if (text === undefined) text = state.files[path]?.text;
+    if (typeof text === 'string') files[path] = text;
+  }
+  return { files, chapterFiles };
 }
 
 async function save() {
@@ -442,7 +492,8 @@ async function save() {
 async function saveDirect(changes) {
   const workspace = state.workspace;
   const saved = [];
-  for (const change of changes) {
+  // Die Offline-Datei wird zum Schluss aus dem tatsächlichen Stand auf der Platte erzeugt.
+  for (const change of changes.filter((entry) => !entry.mirror)) {
     try {
       const source = change.from === undefined ? change.path : change.from;
       if (source && state.files[source]) {
@@ -479,7 +530,37 @@ async function saveDirect(changes) {
       return;
     }
   }
+  try {
+    if (await writeMirrorFromDisk()) saved.push('inhalte.js (Offline-Datei)');
+  } catch (error) {
+    setStatus(`Die Offline-Datei content/inhalte.js konnte nicht geschrieben werden: ${error.message}`);
+    return;
+  }
   setStatus(saved.length > 0 ? `Gespeichert: ${saved.join(', ')}. Sicherungskopien liegen in content/_backup/.` : 'Nichts gespeichert.');
+}
+
+/**
+ * Erzeugt content/inhalte.js aus den Dateien, wie sie gerade auf der Platte liegen, und schreibt
+ * sie, falls sie sich geändert hat (nur Direktmodus).
+ * @returns {Promise<boolean>} true, wenn die Datei neu geschrieben wurde
+ */
+async function writeMirrorFromDisk() {
+  const workspace = state.workspace;
+  const chapterFiles = (await workspace.list(DIRS.kapitel)).filter((name) => name.endsWith('.md')).sort();
+  const logoPath = String(state.doc.course.meta.logo ?? '');
+  const files = {};
+  for (const path of collectMirrorPaths(chapterFiles, logoPath)) {
+    const file = await workspace.readFile(path);
+    if (file) files[path] = normalizeText(file.text);
+  }
+  state.logoText = files[logoPath] ?? state.logoText;
+  if (state.mirror && JSON.stringify(state.mirror.dateien) === JSON.stringify(files) && JSON.stringify(state.mirror.kapitelOrdner) === JSON.stringify(chapterFiles)) {
+    return false;
+  }
+  const text = buildMirrorScript(files, chapterFiles);
+  await workspace.writeText(MIRROR_PATH, text);
+  state.mirror = parseMirrorScript(text);
+  return true;
 }
 
 /** Download-Modus: Dateien zum Herunterladen anbieten, mit Zielordner. */
@@ -512,6 +593,10 @@ async function saveDownload(changes) {
   );
   if (!done) return setStatus('Nicht gespeichert. Deine Änderungen sind noch da.');
   for (const change of changes) {
+    if (change.mirror) {
+      state.mirror = parseMirrorScript(change.text);
+      continue;
+    }
     state.files[change.path] = { text: change.text ?? '', lastModified: null, backedUp: true };
     if (change.from && change.from !== change.path) delete state.files[change.from];
     if (change.entry) change.entry.origin = { file: change.entry.file, location: change.entry.location };
@@ -792,7 +877,12 @@ async function showStart() {
 
   const buttons = [];
   if (directPossible) {
-    const remembered = await restoreDirectory(false).catch(() => ({ workspace: null, needsPermission: false, name: '' }));
+    // Zeitgrenze: Hängt die Browser-Datenbank (IndexedDB), erscheinen die Knöpfe trotzdem.
+    const none = { workspace: null, needsPermission: false, name: '' };
+    const remembered = await Promise.race([
+      restoreDirectory(false).catch(() => none),
+      new Promise((resolve) => setTimeout(() => resolve(none), 2000)),
+    ]);
     if (remembered.workspace) {
       await run(() => loadProject(remembered.workspace));
       return;
@@ -808,13 +898,23 @@ async function showStart() {
       await forgetDirectory().catch(() => {});
       await loadProject(await openDirectory());
     }) }, 'Projektordner öffnen'));
-    info.textContent = 'Empfohlen: Öffne den Ordner „onboarding". Dann speichert der Editor direkt in die Dateien und legt Sicherungskopien an.';
+    info.textContent = 'Empfohlen: Öffne den Ordner „onboarding". Dann speichert der Editor direkt in die Dateien, legt Sicherungskopien an und hält die Offline-Datei für den Doppelklick-Start aktuell.';
   } else {
-    info.textContent = window.isSecureContext
-      ? 'Dieser Browser kann nicht direkt in Ordner speichern (z. B. Firefox oder Safari). Du kannst trotzdem arbeiten: Beim Speichern lädst du die geänderten Dateien herunter. Am bequemsten ist der Editor in Chrome oder Edge.'
-      : 'Der Editor ist nicht über das Startskript (localhost) geöffnet. Direktes Speichern ist deshalb nicht möglich – nur der Download-Modus. Tipp: editor.html gehört nicht auf den öffentlichen Webspace.';
+    info.textContent = 'Dieser Browser kann nicht direkt in Ordner speichern (z. B. Firefox oder Safari). Du kannst trotzdem arbeiten: Lies den Ordner „onboarding" ein – beim Speichern lädst du die geänderten Dateien herunter und legst sie in den Ordner. Am bequemsten ist der Editor in Chrome oder Edge.';
   }
-  buttons.push(el('button', { type: 'button', class: `button button--large${directPossible ? '' : ' button--primary'}`, onclick: () => run(() => loadProject(createDownloadWorkspace())) }, 'Ohne Ordnerzugriff arbeiten (Download-Modus)'));
+
+  // „Projektordner einlesen": geht in allen Browsern und ohne Server (nur lesen, Speichern per Download).
+  const folderInput = el('input', { type: 'file', multiple: true, class: 'visually-hidden', id: 'folder-input' });
+  folderInput.webkitdirectory = true; // per Skript: Attribut steht nicht im HTML-Standard
+  folderInput.addEventListener('change', () => {
+    if (folderInput.files?.length) run(() => loadProject(createFolderWorkspace(folderInput.files)));
+  });
+  buttons.push(el('label', { class: `button button--large editor-start__folder${directPossible ? '' : ' button--primary'}`, for: 'folder-input' }, 'Projektordner einlesen (Download-Modus)', folderInput));
+
+  // Mit Webserver geht es auch ganz ohne Ordnerwahl (Inhalte werden vom Server gelesen).
+  if (window.location.protocol !== 'file:') {
+    buttons.push(el('button', { type: 'button', class: 'button button--large', onclick: () => run(() => loadProject(createDownloadWorkspace())) }, 'Vom Webserver lesen (Download-Modus)'));
+  }
   area.replaceChildren(...buttons);
 }
 
@@ -876,3 +976,4 @@ function setupChrome() {
 
 setupChrome();
 showStart();
+})();

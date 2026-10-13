@@ -9,18 +9,25 @@
  * course.errors, das Kapitel fehlt, der Rest läuft. Nur ohne kurs.md geht gar nichts.
  *
  * Woher die Dateien kommen, entscheidet eine „Lesefunktion":
- *   – createFetchReader(): per HTTP vom Webserver (Kurs, Prüfseite, Editor im Download-Modus)
- *   – der Editor im Direktmodus liefert eine eigene, die über den Ordnerzugriff liest
+ *   – createDefaultReader(): automatisch die passende der beiden folgenden
+ *   – createFetchReader(): per HTTP vom Webserver (die .md-Dateien direkt)
+ *   – Offline-Datei content/inhalte.js (mirror.js), wenn die Seite per Doppelklick (file://)
+ *     geöffnet wurde – dann darf der Browser keine .md-Dateien nachladen
+ *   – der Editor liefert eigene Lesefunktionen (Ordnerzugriff bzw. eingelesener Ordner)
  *
  * Wenn du hier etwas ändern willst …
  *   – Neue Inhaltsdatei (z. B. content/faq.md): hier laden, in documents.js zerlegen.
  */
 
-import { normalizeText, parseChapter, parseCourse, parseGlossary } from './documents.js';
+(function () {
+  'use strict';
+
+const { normalizeText, parseChapter, parseCourse, parseGlossary } = EM.require('js/content/documents.js');
+const { createMirrorReader } = EM.require('js/content/mirror.js');
 
 /** Ordner der Inhalte, relativ zur HTML-Seite. */
-export const CONTENT_DIR = 'content';
-export const CHAPTER_DIR = `${CONTENT_DIR}/kapitel`;
+const CONTENT_DIR = 'content';
+const CHAPTER_DIR = `${CONTENT_DIR}/kapitel`;
 
 /**
  * @callback ReadText
@@ -34,12 +41,53 @@ export const CHAPTER_DIR = `${CONTENT_DIR}/kapitel`;
  * @param {string} [base]  Präfix, z. B. '' (gleicher Ordner wie die HTML-Seite)
  * @returns {ReadText}
  */
-export function createFetchReader(base = '') {
+function createFetchReader(base = '') {
   return async (path) => {
     const response = await fetch(`${base}${path}`, { cache: 'no-cache' });
     if (response.status === 404) return null;
     if (!response.ok) throw new Error(`${path}: Server antwortet mit ${response.status}`);
     return response.text();
+  };
+}
+
+/**
+ * Wählt die passende Lesefunktion: über einen Webserver die .md-Dateien, ohne Server (file://)
+ * die Offline-Datei content/inhalte.js.
+ * @returns {ReadText}
+ * @throws {Error} ohne Server, wenn content/inhalte.js fehlt
+ */
+function createDefaultReader() {
+  if (window.location.protocol !== 'file:') return createFetchReader();
+  if (!window.EM.inhalte) {
+    throw new Error('Die Datei content/inhalte.js fehlt. Sie wird vom Editor erzeugt: editor.html öffnen und den Projektordner wählen.');
+  }
+  return createMirrorReader(window.EM.inhalte);
+}
+
+/**
+ * Lesefunktion für einen über <input type="file" webkitdirectory> eingelesenen Ordner.
+ * Funktioniert in allen Browsern und ohne Server – aber nur lesend.
+ *
+ * Die Pfade im FileList beginnen mit dem gewählten Ordnernamen (z. B. „onboarding/content/…");
+ * dieser erste Teil wird abgeschnitten.
+ *
+ * @param {FileList|File[]} fileList
+ * @returns {{readText: ReadText, files: Map<string, File>, list: (dir: string) => string[]}}
+ */
+function createFileListReader(fileList) {
+  const files = new Map();
+  for (const file of fileList) {
+    const path = (file.webkitRelativePath || file.name).split('/').slice(1).join('/');
+    files.set(path, file);
+  }
+  return {
+    files,
+    readText: async (path) => (files.has(path) ? normalizeText(await files.get(path).text()) : null),
+    list: (dir) =>
+      [...files.keys()]
+        .filter((path) => path.startsWith(`${dir}/`) && !path.slice(dir.length + 1).includes('/'))
+        .map((path) => path.slice(dir.length + 1))
+        .sort(),
   };
 }
 
@@ -60,7 +108,7 @@ export function createFetchReader(base = '') {
  * @returns {Promise<CourseModel>}
  * @throws {Error} nur wenn kurs.md fehlt oder nicht geladen werden kann
  */
-export async function loadCourse(readText = createFetchReader()) {
+async function loadCourse(readText = createDefaultReader()) {
   const sources = {};
   const coursePath = `${CONTENT_DIR}/kurs.md`;
   const courseText = await readText(coursePath);
@@ -107,7 +155,7 @@ export async function loadCourse(readText = createFetchReader()) {
         errors.push(...chapter.errors);
         return chapter;
       } catch (error) {
-        errors.push({ file: path, line: 0, severity: 'fehler', message: `Die Datei konnte nicht geladen werden (${error.message}).`, fix: 'Läuft der Kurs über das Startskript bzw. einen Webserver?' });
+        errors.push({ file: path, line: 0, severity: 'fehler', message: `Die Datei konnte nicht geladen werden (${error.message}).`, fix: 'Ohne Server: Ist content/inhalte.js aktuell? (editor.html öffnen, Projektordner wählen, speichern.) Auf dem Webspace: Wurde der Ordner content/ vollständig hochgeladen?' });
         return null;
       }
     }),
@@ -129,7 +177,10 @@ export async function loadCourse(readText = createFetchReader()) {
  * @param {import('./documents.js').ChapterModel} chapter
  * @returns {number}
  */
-export function passThreshold(course, chapter) {
+function passThreshold(course, chapter) {
   const value = Number(chapter?.meta.bestehensgrenze ?? course.meta.bestehensgrenze ?? 80);
   return Number.isFinite(value) && value > 0 && value <= 100 ? value : 80;
 }
+
+EM.define('js/content/loader.js', { createDefaultReader, createFileListReader, createFetchReader, loadCourse, passThreshold, CONTENT_DIR, CHAPTER_DIR });
+})();

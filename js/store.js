@@ -23,8 +23,11 @@
  *     verloren – im CHANGELOG vermerken).
  */
 
+(function () {
+  'use strict';
+
 /** Name des Eintrags im localStorage. Auch in js/theme-init.js verwendet. */
-export const STORAGE_KEY = 'em-onboarding:v1';
+const STORAGE_KEY = 'em-onboarding:v1';
 
 /**
  * @typedef {Object} ChapterResult
@@ -50,7 +53,7 @@ export const STORAGE_KEY = 'em-onboarding:v1';
  * Liefert einen leeren Fortschritt.
  * @returns {ProgressState}
  */
-export function createEmptyState() {
+function createEmptyState() {
   return {
     schema: 1,
     last: null,
@@ -69,7 +72,7 @@ export function createEmptyState() {
  * @param {unknown} raw  Ergebnis von JSON.parse
  * @returns {ProgressState}
  */
-export function normalizeState(raw) {
+function normalizeState(raw) {
   const state = createEmptyState();
   if (!isPlainObject(raw)) {
     return state;
@@ -106,7 +109,7 @@ export function normalizeState(raw) {
  *   const store = createStore();
  *   store.update((s) => { s.last = '#/glossar'; });
  */
-export function createStore(options = {}) {
+function createStore(options = {}) {
   let storage = 'storage' in options ? options.storage : detectLocalStorage();
   let state = load(storage);
   const listeners = new Set();
@@ -190,7 +193,7 @@ function isPlainObject(value) {
  * @param {Date} [date]
  * @returns {string}
  */
-export function isoDate(date = new Date()) {
+function isoDate(date = new Date()) {
   const pad = (n) => String(n).padStart(2, '0');
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
@@ -203,7 +206,7 @@ export function isoDate(date = new Date()) {
  * @param {{passed:boolean, best:number}} b
  * @returns {boolean}
  */
-export function isBetterResult(a, b) {
+function isBetterResult(a, b) {
   if (a.passed !== b.passed) return a.passed;
   return a.best > b.best;
 }
@@ -221,7 +224,7 @@ export function isBetterResult(a, b) {
  * @param {string} [date]
  * @returns {boolean} true, wenn das neue Ergebnis gespeichert wurde
  */
-export function recordQuizResult(state, chapterId, version, percent, passed, date = isoDate()) {
+function recordQuizResult(state, chapterId, version, percent, passed, date = isoDate()) {
   const candidate = { version, best: Math.round(percent), passed, date };
   const old = state.results[chapterId];
   if (!old || old.version !== version || isBetterResult(candidate, old)) {
@@ -242,7 +245,7 @@ export function recordQuizResult(state, chapterId, version, percent, passed, dat
  * @param {{id:string, meta:{version:number}}} chapter
  * @returns {'offen'|'bestanden'|'bestzeit'|'aktualisiert'}
  */
-export function getChapterStatus(state, chapter) {
+function getChapterStatus(state, chapter) {
   const result = state.results[chapter.id];
   if (!result) return 'offen';
   if (result.version !== chapter.meta.version) return result.passed ? 'aktualisiert' : 'offen';
@@ -257,7 +260,7 @@ export function getChapterStatus(state, chapter) {
  * @param {Array<{id:string, meta:{version:number}}>} chapters  aktive Kapitel
  * @returns {boolean}
  */
-export function isQualifyingUnlocked(state, chapters) {
+function isQualifyingUnlocked(state, chapters) {
   return (
     chapters.length > 0 &&
     chapters.every((chapter) => ['bestanden', 'bestzeit'].includes(getChapterStatus(state, chapter)))
@@ -273,7 +276,7 @@ export function isQualifyingUnlocked(state, chapters) {
  * @param {boolean} passed
  * @param {string} [date]
  */
-export function recordQualifying(state, courseVersion, percent, passed, date = isoDate()) {
+function recordQualifying(state, courseVersion, percent, passed, date = isoDate()) {
   const candidate = { courseVersion: String(courseVersion), best: Math.round(percent), passed, date };
   const old = state.qualifying;
   if (!old || old.courseVersion !== candidate.courseVersion || isBetterResult(candidate, old)) {
@@ -287,7 +290,7 @@ export function recordQualifying(state, courseVersion, percent, passed, date = i
  * @param {string|number} courseVersion
  * @returns {boolean}
  */
-export function isCertificateUnlocked(state, courseVersion) {
+function isCertificateUnlocked(state, courseVersion) {
   return Boolean(
     state.qualifying?.passed && state.qualifying.courseVersion === String(courseVersion),
   );
@@ -299,7 +302,7 @@ export function isCertificateUnlocked(state, courseVersion) {
  * @param {string} chapterId
  * @param {number} pageNumber  ab 1
  */
-export function markVisited(state, chapterId, pageNumber) {
+function markVisited(state, chapterId, pageNumber) {
   const pages = state.visited[chapterId] ?? [];
   if (!pages.includes(pageNumber)) {
     pages.push(pageNumber);
@@ -307,3 +310,6 @@ export function markVisited(state, chapterId, pageNumber) {
   }
   state.visited[chapterId] = pages;
 }
+
+EM.define('js/store.js', { createEmptyState, normalizeState, createStore, isoDate, isBetterResult, recordQuizResult, getChapterStatus, isQualifyingUnlocked, recordQualifying, isCertificateUnlocked, markVisited, STORAGE_KEY });
+})();

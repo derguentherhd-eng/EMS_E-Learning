@@ -26,9 +26,12 @@
  *   – Aussehen: Abschnitt „ordner" in css/blocks.css.
  */
 
-import { el } from '../dom.js';
-import { icon } from '../ui/icons.js';
-import { blockError, blockSection, escapePipes, formatBlock, formatHeader, oneLine, splitPipes, trimLines } from './block-utils.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { icon } = EM.require('js/ui/icons.js');
+const { blockError, blockSection, escapePipes, formatBlock, formatHeader, oneLine, splitPipes, trimLines } = EM.require('js/blocks/block-utils.js');
 
 /**
  * @typedef {{depth: number, type: 'ordner'|'datei', name: string, description: string}} TreeItem
@@ -40,7 +43,7 @@ const FOLDER = '📁';
 const FILE = '📄';
 
 /** @type {import('./registry.js').BlockDefinition} */
-export default {
+const definition = {
   name: 'ordner',
   interactive: true,
 
@@ -327,3 +330,6 @@ function findParent(items, index) {
 function normalizePath(path) {
   return path.split('/').map((part) => part.trim().toLocaleLowerCase('de')).filter(Boolean).join('/');
 }
+
+EM.define('js/blocks/file-tree.js', { default: definition });
+})();

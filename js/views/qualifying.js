@@ -10,20 +10,23 @@
  *   – Anzahl der Fragen: „qualifying-fragen" in content/kurs.md (nicht hier).
  */
 
-import { el } from '../dom.js';
-import { chapterHash } from '../router.js';
-import { getChapterStatus, isQualifyingUnlocked, recordQualifying } from '../store.js';
-import { passThreshold } from '../content/loader.js';
-import { drawQualifying, renderResultStrip, runQuiz, scoreAttempt } from '../quiz/quiz.js';
-import { createStartLights } from '../ui/start-lights.js';
-import { STATUS_TEXT } from '../ui/sector-bar.js';
-import { renderReviewList } from './quiz-view.js';
+(function () {
+  'use strict';
+
+const { el } = EM.require('js/dom.js');
+const { chapterHash } = EM.require('js/router.js');
+const { getChapterStatus, isQualifyingUnlocked, recordQualifying } = EM.require('js/store.js');
+const { passThreshold } = EM.require('js/content/loader.js');
+const { drawQualifying, renderResultStrip, runQuiz, scoreAttempt } = EM.require('js/quiz/quiz.js');
+const { createStartLights } = EM.require('js/ui/start-lights.js');
+const { STATUS_TEXT } = EM.require('js/ui/sector-bar.js');
+const { renderReviewList } = EM.require('js/views/quiz-view.js');
 
 /**
  * @param {import('./view-types.js').ViewContext} context
  * @returns {import('./view-types.js').ViewResult}
  */
-export function renderQualifying({ course, store }) {
+function renderQualifying({ course, store }) {
   const state = store.get();
   if (!isQualifyingUnlocked(state, course.chapters)) {
     return { title: 'Qualifying', node: renderLocked(course, state) };
@@ -115,3 +118,6 @@ function renderResult(answered, score, threshold, restart) {
     ),
   );
 }
+
+EM.define('js/views/qualifying.js', { renderQualifying });
+})();

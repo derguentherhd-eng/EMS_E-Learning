@@ -24,8 +24,11 @@
  *     im Editor (js/editor/page-canvas.js) anbieten, Round-Trip-Test ergänzen.
  */
 
-import { parseFrontmatter } from './frontmatter.js';
-import { getBlock } from '../blocks/registry.js';
+(function () {
+  'use strict';
+
+const { parseFrontmatter } = EM.require('js/content/frontmatter.js');
+const { getBlock } = EM.require('js/blocks/registry.js');
 
 /**
  * @typedef {{type:'text', markdown:string, line:number}} TextElement
@@ -57,10 +60,10 @@ import { getBlock } from '../blocks/registry.js';
  */
 
 /** Bekannte Felder eines Kapitel-Kopfbereichs in kanonischer Reihenfolge. */
-export const CHAPTER_KEYS = ['titel', 'kurztitel', 'dauer', 'version', 'bestehensgrenze', 'freigegeben', 'lernziele'];
+const CHAPTER_KEYS = ['titel', 'kurztitel', 'dauer', 'version', 'bestehensgrenze', 'freigegeben', 'lernziele'];
 
 /** Bekannte Felder von kurs.md in kanonischer Reihenfolge. */
-export const COURSE_KEYS = [
+const COURSE_KEYS = [
   'titel',
   'team',
   'kursversion',
@@ -83,7 +86,7 @@ const IMAGE_ONLY = /^!\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+"([^"]*)")?\s*\)$/;
  * @param {string} text
  * @returns {string}
  */
-export function normalizeText(text) {
+function normalizeText(text) {
   return text.replace(/^﻿/, '').replace(/\r\n?/g, '\n');
 }
 
@@ -95,7 +98,7 @@ export function normalizeText(text) {
  * @param {string} [dir]  Ordner ab Projektordner (Standard: content/kapitel)
  * @returns {ChapterModel}
  */
-export function parseChapter(text, file, dir = 'content/kapitel') {
+function parseChapter(text, file, dir = 'content/kapitel') {
   const path = `${dir}/${file}`;
   const source = normalizeText(text);
   const front = parseFrontmatter(source, path);
@@ -145,7 +148,7 @@ export function parseChapter(text, file, dir = 'content/kapitel') {
  * @param {Object} meta
  * @returns {Object}
  */
-export function normalizeChapterMeta(meta) {
+function normalizeChapterMeta(meta) {
   const result = { ...meta };
   if (!Array.isArray(result.lernziele)) {
     result.lernziele = result.lernziele ? [String(result.lernziele)] : [];
@@ -162,7 +165,7 @@ export function normalizeChapterMeta(meta) {
  * @param {string} path
  * @returns {Array<Element|{type:'page', title:string, line:number}>}
  */
-export function parseBody(body, startLine, path) {
+function parseBody(body, startLine, path) {
   const lines = body.split('\n');
   const result = [];
   let textBuffer = [];
@@ -230,7 +233,7 @@ export function parseBody(body, startLine, path) {
  * @example parseBlockHeader(' Unser Drive bild="a b.svg" x=1')
  *   // → { title: 'Unser Drive', attrs: { bild: 'a b.svg', x: '1' } }
  */
-export function parseBlockHeader(rest) {
+function parseBlockHeader(rest) {
   const attrs = {};
   const titleParts = [];
   const token = /([a-zäöüß][a-zäöüß0-9-]*)=(?:"([^"]*)"|(\S+))|("[^"]*"|\S+)/gi;
@@ -344,7 +347,7 @@ function textToElements(buffer) {
  * @param {string} [path]
  * @returns {CourseFile}
  */
-export function parseCourse(text, path = 'content/kurs.md') {
+function parseCourse(text, path = 'content/kurs.md') {
   const front = parseFrontmatter(normalizeText(text), path);
   const meta = { ...front.meta };
   if (!Array.isArray(meta.kapitel)) meta.kapitel = meta.kapitel ? [String(meta.kapitel)] : [];
@@ -366,7 +369,7 @@ export function parseCourse(text, path = 'content/kurs.md') {
  * @param {string} [path]
  * @returns {{entries: GlossaryEntry[], errors: Object[]}}
  */
-export function parseGlossary(text, path = 'content/glossar.md') {
+function parseGlossary(text, path = 'content/glossar.md') {
   const entries = [];
   const errors = [];
   normalizeText(text)
@@ -397,7 +400,7 @@ export function parseGlossary(text, path = 'content/glossar.md') {
  * @param {string} term
  * @returns {{term:string, text:string}|undefined}
  */
-export function findGlossaryEntry(entries, term) {
+function findGlossaryEntry(entries, term) {
   const wanted = term.trim().toLocaleLowerCase('de');
   return entries.find((entry) => 'term' in entry && entry.term.toLocaleLowerCase('de') === wanted);
 }
@@ -407,7 +410,7 @@ export function findGlossaryEntry(entries, term) {
  * @param {ChapterModel} chapter
  * @returns {boolean}
  */
-export function isSafetyChapter(chapter) {
+function isSafetyChapter(chapter) {
   return 'freigegeben' in chapter.meta;
 }
 
@@ -416,6 +419,9 @@ export function isSafetyChapter(chapter) {
  * @param {ChapterModel} chapter
  * @returns {boolean}
  */
-export function isReleased(chapter) {
+function isReleased(chapter) {
   return ['ja', 'true', '1'].includes(String(chapter.meta.freigegeben).trim().toLowerCase());
 }
+
+EM.define('js/content/documents.js', { normalizeText, parseChapter, normalizeChapterMeta, parseBody, parseBlockHeader, parseCourse, parseGlossary, findGlossaryEntry, isSafetyChapter, isReleased, CHAPTER_KEYS, COURSE_KEYS });
+})();
