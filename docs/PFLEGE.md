@@ -279,7 +279,14 @@ speichern. Dann in GitHub Desktop eine kurze Beschreibung eintragen → „Commi
 origin". Nach ca. einer Minute ist die neue Fassung online (im Browser ggf. neu laden).
 
 **Wichtig:** Die leere Datei `.nojekyll` im Projektordner **nie löschen**. Ohne sie wandelt GitHub
-die `.md`-Dateien in HTML-Seiten um, und der Kurs findet seine Inhalte nicht mehr.
+die `.md`-Dateien in HTML-Seiten um. Der Kurs weicht dann zwar auf die Kopie `content/inhalte.js`
+aus, zeigt aber nach Änderungen von Hand evtl. einen alten Stand.
+
+> **Achtung beim Hochladen über die GitHub-Webseite** („Add file → Upload files"): Dabei werden
+> Dateien, deren Name mit einem Punkt beginnt, **nicht** mit hochgeladen – also auch `.nojekyll`
+> nicht. Abhilfe: auf github.com im Repository „Add file → Create new file", als Namen `.nojekyll`
+> eintragen, Inhalt leer lassen, „Commit changes". Besser gleich GitHub Desktop benutzen (siehe
+> oben) – das überträgt alle Dateien.
 
 Gut zu wissen:
 - Sicherungskopien aus `content/_backup/` werden nicht hochgeladen (steht in `.gitignore`).

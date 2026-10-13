@@ -9,8 +9,11 @@
  * course.errors, das Kapitel fehlt, der Rest läuft. Nur ohne kurs.md geht gar nichts.
  *
  * Woher die Dateien kommen, entscheidet eine „Lesefunktion":
- *   – createDefaultReader(): automatisch die passende der beiden folgenden
- *   – createFetchReader(): per HTTP vom Webserver (die .md-Dateien direkt)
+ *   – createDefaultReader(): automatisch die passende der folgenden
+ *   – createWebReader(): per HTTP vom Webserver (die .md-Dateien direkt). Fehlt dort eine
+ *     .md-Datei, liest sie aus content/inhalte.js – so läuft der Kurs auch, wenn GitHub Pages
+ *     die .md-Dateien umgewandelt hat (fehlende Datei .nojekyll, siehe docs/PFLEGE.md)
+ *   – createFetchReader(): nur HTTP, ohne Ausweichen (für Editor und Selbsttests)
  *   – Offline-Datei content/inhalte.js (mirror.js), wenn die Seite per Doppelklick (file://)
  *     geöffnet wurde – dann darf der Browser keine .md-Dateien nachladen
  *   – der Editor liefert eigene Lesefunktionen (Ordnerzugriff bzw. eingelesener Ordner)
@@ -56,14 +59,60 @@
   }
 
   /**
-   * Wählt die passende Lesefunktion: über einen Webserver die .md-Dateien, ohne Server (file://)
-   * die Offline-Datei content/inhalte.js.
+   * Lädt content/inhalte.js nach (nur einmal) und liefert die Daten oder null.
+   * Ein <script> funktioniert auch dort, wo .md-Dateien fehlen.
+   * @returns {Promise<import("./mirror.js").MirrorData|null>}
+   */
+  function loadMirror() {
+    if (window.EM.inhalte) {
+      return Promise.resolve(window.EM.inhalte);
+    }
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = `${CONTENT_DIR}/inhalte.js`;
+      script.addEventListener("load", () => resolve(window.EM.inhalte ?? null));
+      script.addEventListener("error", () => resolve(null));
+      document.head.append(script);
+    });
+  }
+
+  /**
+   * Lesefunktion für den Webspace: zuerst die .md-Datei, fehlt sie, die Kopie in
+   * content/inhalte.js. Grund: GitHub Pages wandelt .md-Dateien in HTML um, wenn die Datei
+   * .nojekyll fehlt (z. B. nach dem Hochladen über die GitHub-Webseite, die Dateien mit Punkt
+   * am Anfang weglässt). Der Kurs läuft dann trotzdem; die Konsole nennt die Ursache.
+   * @returns {ReadText}
+   */
+  function createWebReader() {
+    const fromServer = createFetchReader();
+    let mirror = null;
+    let warned = false;
+    return async (path) => {
+      const text = await fromServer(path);
+      if (text !== null || !path.endsWith(".md")) {
+        return text;
+      }
+      mirror ??= loadMirror();
+      const data = await mirror;
+      if (data && !warned) {
+        warned = true;
+        console.warn(
+          `${path} fehlt auf dem Server – der Kurs liest die Kopie in content/inhalte.js. Auf GitHub Pages fehlt vermutlich die Datei .nojekyll (siehe docs/PFLEGE.md, Abschnitt 12).`,
+        );
+      }
+      return data ? createMirrorReader(data)(path) : null;
+    };
+  }
+
+  /**
+   * Wählt die passende Lesefunktion: über einen Webserver die .md-Dateien (mit Ausweichen auf
+   * content/inhalte.js), ohne Server (file://) direkt die Offline-Datei.
    * @returns {ReadText}
    * @throws {Error} ohne Server, wenn content/inhalte.js fehlt
    */
   function createDefaultReader() {
     if (window.location.protocol !== "file:") {
-      return createFetchReader();
+      return createWebReader();
     }
     if (!window.EM.inhalte) {
       throw new Error(

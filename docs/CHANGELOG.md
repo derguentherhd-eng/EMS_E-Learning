@@ -102,3 +102,7 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - VS-Code-Einstellungen (`.vscode/`, `.editorconfig`, `jsconfig.json`) und Übersicht „Wo finde ich was?" in der README.
 - Aussehen und Verhalten unverändert (Bildschirmfotos vorher/nachher verglichen, 145 Selbsttests grün).
 - Kapitel Arbeitssicherheit: Dauer auf 50 Minuten korrigiert (Schätzung des Editors).
+
+### Robuster auf GitHub Pages (2026-10-13)
+- Fehlt online eine `.md`-Datei (z. B. weil `.nojekyll` beim Hochladen über die Webseite verloren ging), liest der Kurs die Kopie in `content/inhalte.js` statt abzubrechen. Hinweis dazu in der Browser-Konsole.
+- `docs/PFLEGE.md`: Hinweis, dass der Upload über die GitHub-Webseite Dateien mit Punkt am Anfang weglässt.
