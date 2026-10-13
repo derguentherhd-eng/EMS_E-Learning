@@ -381,7 +381,7 @@ Einmal pro Jahr, am besten direkt nach der Übergabe an die neue Teamleitung:
 - [ ] **Regelwerksänderungen** einarbeiten: Disziplinen, Punkte, Fahrzeugklassen, Event-Liste (Kapitel 1).
 - [ ] **Aktuelles Auto und Saisonablauf** in Kapitel 2 aktualisieren (Name, Bilder, Zeiträume).
 - [ ] **Sicherheitsinhalte** prüfen und **neu freigeben** lassen (Abschnitt 11).
-- [ ] **Unterschrift auf dem Zertifikat** anpassen: `zertifikat-unterschrift-name` und `-rolle` in `kurs.md`.
+- [ ] **Unterschrift auf dem Zertifikat** prüfen: `zertifikat-unterschrift-rolle` in `kurs.md` (derzeit Projektleitung). `zertifikat-unterschrift-name` leer lassen = Unterschrift von Hand.
 - [ ] **`kursversion`** erhöhen, wenn sich viel geändert hat.
 - [ ] **Prüfseite**: 0 Fehler, Platzhalter geprüft. **Selbsttests**: alle grün.
 - [ ] Zuständigkeiten (Abschnitt 15) aktualisieren.

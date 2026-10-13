@@ -71,11 +71,8 @@
       "warnung",
       'Ergänze z. B. „zertifikat-titel: Onboarding abgeschlossen".',
     );
-    requireText(
-      "zertifikat-unterschrift-name",
-      "warnung",
-      'Name der Person, die das Zertifikat „unterschreibt".',
-    );
+    // zertifikat-unterschrift-name darf leer bleiben: Dann steht auf dem Zertifikat nur eine
+    // Unterschriftszeile mit der Rolle, unterschrieben wird von Hand.
     requireText(
       "zertifikat-unterschrift-rolle",
       "warnung",

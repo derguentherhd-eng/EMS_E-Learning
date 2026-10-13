@@ -120,3 +120,4 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Neu: PDF-Nachweis Sicherheitsunterweisung mit Name, Datum und Zahl der Anläufe – zur Abgabe bei der Projektleitung.
 - Willkommenstext neutral für reine Sicherheitsunterweisung und ganzes Onboarding.
 - Klarstellung: Die Online-Unterweisung ist Teil der Sicherheitsunterweisung; maschinenbezogene Einweisungen erfolgen zusätzlich vor Ort. Ansprechpersonen (Teamleitung, Projektleitung) eingetragen; Hinweis, dass es im Verein keine festen Ersthelfer gibt. Kapitelversion 4.
+- Feuerlöscher (Werkstatt, Push Pull Bar) eingetragen; Zertifikat wird wie der Nachweis von der Projektleitung von Hand unterschrieben (Name leer, Rolle Projektleitung). Keine offenen Platzhalter mehr.

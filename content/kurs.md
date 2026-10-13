@@ -5,8 +5,8 @@ kursversion: 1.0
 bestehensgrenze: 80
 qualifying-fragen: 8
 zertifikat-titel: Onboarding abgeschlossen
-zertifikat-unterschrift-name: {{TODO: Name Teamleitung}}
-zertifikat-unterschrift-rolle: Teamleitung
+zertifikat-unterschrift-name:
+zertifikat-unterschrift-rolle: Projektleitung
 logo: assets/logo/logo.svg
 kapitel:
   - 05-arbeitssicherheit.md

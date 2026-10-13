@@ -380,10 +380,8 @@ Die Funken einer Flex fliegen mehrere Meter weit und sind heiß genug, um Lappen
 :::
 
 - Vor dem Flexen: **Brennbares wegräumen** und den Funkenflug so lenken, dass er niemanden trifft.
-- Einen **Feuerlöscher** in Reichweite haben.
+- Einen **Feuerlöscher** in Reichweite haben. Feuerlöscher stehen **in der Werkstatt** und **an der Push Pull Bar** – vor dem Flexen nachsehen, welcher näher ist.
 - Nach dem Flexen: Den Platz noch einige Minuten **auf Glutnester kontrollieren.**
-
-{{TODO: Wo genau vor der Werkstatt darf geflext werden, und wo steht der nächste Feuerlöscher?}}
 
 **So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Erklärung.
 
@@ -513,6 +511,7 @@ Jede Arbeit beginnt mit einer sauberen Vorbereitung und endet mit dem Aufräumen
 Bei einem Notfall zählt jede Sekunde. Deshalb gilt **vor jeder Arbeit:** Schau nach, wo der nächste **Feuerlöscher** und der nächste **Verbandskasten** sind – je nachdem, wo du gerade arbeitest.
 
 - Der **Erste-Hilfe-Kasten** der Werkstatt steht **am Eingang der Werkstatt im orangefarbenen Koffer**.
+- **Feuerlöscher** stehen **in der Werkstatt** und **an der Push Pull Bar**.
 - Der **Fluchtweg** zum Ausgang bleibt immer frei – nichts davor abstellen.
 
 **Im Notfall:**
