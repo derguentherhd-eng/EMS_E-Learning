@@ -51,3 +51,9 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Kapitel 6 „Dein Start" vollständig im Editor angelegt (Praxistest).
 - Behoben: `[[Begriff|Text]]` in Bausteinen mit `|`-Trennern (Zeitstrahl, Lernkarten …) wurde getrennt bzw. beim Speichern maskiert.
 - Behoben: Der Editor meldete unveränderte, aber anders formatierte Dateien als „ungespeichert" und hätte sie umformatiert.
+
+### Phase 9 – Feinschliff und Barrierefreiheit (2026-10-13)
+- Alle 56 Kursansichten ohne horizontales Scrollen bei 320 px, 640 px (200 % Zoom) und doppelter Schriftgröße.
+- Automatische Prüfung aller Ansichten: genau eine h1, keine Sprünge in der Überschriftenhierarchie, benannte Bedienelemente, Alternativtexte, beschriftete Felder.
+- Vollständige Kontrasttabelle (beide Themes) geprüft und in docs/ENTWICKLER.md dokumentiert.
+- Sektorbeschriftung auf schmalen Handys ausgeblendet (lief am Rand aus dem Bild), favicon.ico ergänzt.

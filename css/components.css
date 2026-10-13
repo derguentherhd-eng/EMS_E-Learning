@@ -566,7 +566,9 @@
     }
   }
 
-  @media (max-width: 23rem) {
+  /* Auf schmalen Handys reicht der Platz neben sechs Segmenten nicht für die Beschriftung.
+   * Den aktuellen Sektor zeigt dort die weiße Unterkante. */
+  @media (max-width: 30rem) {
     .sector-bar__caption {
       display: none;
     }
