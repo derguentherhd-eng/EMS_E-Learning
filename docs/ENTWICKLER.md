@@ -316,6 +316,7 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 | Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |
 | `content/inhalte.js` als erzeugte Kopie | einzige Möglichkeit, ohne Server Text nachzuladen; `.md` bleibt Quelle, Editor hält die Kopie aktuell, auf dem Webspace unbenutzt |
 | Kein Server, keine Startskripte (früher `tools/server.py`, `starten.*`) | Vorgabe: nur HTML, CSS, JavaScript |
+| `.nojekyll` im Projektordner | GitHub Pages würde sonst `.md`-Dateien mit Kopfbereich in HTML umwandeln und Dateien/Ordner mit `_` (z. B. `_vorlage-kapitel.md`) weglassen |
 | `##` → `<h1>` der Ansicht, `###` → `<h2>` | genau eine `<h1>` pro Bildschirm |
 | Ergänzungen zu B3: `js/render.js`, `js/views/`, `js/dom.js`, `js/content/documents.js`, `js/check-page.js`, `js/tests.js`, `js/editor/names.js`, `js/editor/dialogs.js`, `assets/icons/`, `js/em.js`, `js/scripts.js`, `js/content/mirror.js`, `content/inhalte.js`, `favicon.ico` | kleinste saubere Aufteilung; Inhalte und Code bleiben getrennt |
 | Prüfseite: „Projektordner einlesen" bzw. `kapitelOrdner` aus `inhalte.js` | statische Server und `file://` listen keine Ordner; Hinweis, wenn nicht möglich |

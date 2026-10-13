@@ -258,26 +258,47 @@ Ein Kapitel gilt als Sicherheitskapitel, wenn es im Kopfbereich die Zeile `freig
 ## 12. Veröffentlichen
 
 Der Kurs braucht nur einen **statischen Webspace** – keine Datenbank, kein PHP. Er funktioniert
-auch in einem Unterordner (z. B. `https://example.org/onboarding/`).
+auch in einem Unterordner (z. B. `https://example.org/onboarding/`). Empfohlen: **GitHub Pages**.
 
-**Hochladen (z. B. per FTP-Programm wie FileZilla):** den Inhalt von `onboarding/` hochladen –
-**außer**:
+### GitHub Pages (empfohlen)
 
-- `editor.html` und den Ordner `js/editor/` (Pflegewerkzeug, gehört nicht ins Netz)
-- `content/_backup/` und `content/_archiv/`
-- `.git/` (falls vorhanden)
+Der Ordner `onboarding/` ist bereits ein Git-Repository. Mit **GitHub Desktop**:
 
-`pruefen.html` und `tests.html` schaden nicht, können aber auch weggelassen werden.
-`content/inhalte.js` darf mit hoch, wird auf dem Webspace aber nicht benutzt: Dort liest der Kurs
-die `.md`-Dateien direkt. Änderungen von Hand wirken auf dem Webspace also sofort.
+1. **Einmalig einrichten:** GitHub Desktop → „File → Add Local Repository…" → den Ordner
+   `onboarding` wählen → „Publish repository". Name z. B. `rookie-onboarding`. Den Haken
+   „Keep this code private" **entfernen** (GitHub Pages ist im kostenlosen Konto nur für
+   öffentliche Repositories verfügbar – siehe „Öffentlich oder geschützt?" unten).
+2. **Pages einschalten:** auf github.com im Repository → „Settings" → „Pages" → unter „Build and
+   deployment" bei „Source" **„Deploy from a branch"**, Branch **`main`**, Ordner **`/ (root)`** →
+   „Save".
+3. Nach ca. einer Minute ist der Kurs erreichbar unter
+   `https://<github-name>.github.io/<repository-name>/` (die Adresse steht oben auf der Pages-Seite).
 
-**Alternativ GitHub Pages:** Repository auf GitHub anlegen, Ordnerinhalt hochladen, unter
-„Settings → Pages" die Veröffentlichung einschalten. Auch hier die Pflegedateien vorher entfernen
-(oder ein eigenes Veröffentlichungs-Repository nutzen).
+**Änderungen veröffentlichen:** Wie gewohnt im Editor auf dem eigenen Rechner bearbeiten und
+speichern. Dann in GitHub Desktop eine kurze Beschreibung eintragen → „Commit to main" → „Push
+origin". Nach ca. einer Minute ist die neue Fassung online (im Browser ggf. neu laden).
+
+**Wichtig:** Die leere Datei `.nojekyll` im Projektordner **nie löschen**. Ohne sie wandelt GitHub
+die `.md`-Dateien in HTML-Seiten um, und der Kurs findet seine Inhalte nicht mehr.
+
+Gut zu wissen:
+- Sicherungskopien aus `content/_backup/` werden nicht hochgeladen (steht in `.gitignore`).
+- `editor.html`, `pruefen.html` und `tests.html` sind online mit erreichbar. Das ist unbedenklich:
+  Der Editor kann online nichts verändern, er arbeitet immer nur mit einem Ordner auf dem eigenen
+  Rechner.
+- `content/inhalte.js` wird online nicht benutzt, dort liest der Kurs die `.md`-Dateien direkt.
+
+### Anderer Webspace (z. B. per FTP-Programm wie FileZilla)
+
+Den Inhalt von `onboarding/` hochladen – **außer** `content/_backup/` und `.git/`.
+`editor.html`, `js/editor/`, `pruefen.html`, `tests.html` und `content/inhalte.js` schaden nicht,
+können aber weggelassen werden.
 
 **Öffentlich oder geschützt?** Enthalten die Inhalte interne Dinge – echte Drive-Struktur,
 Sponsorennamen, Namen von Personen, Werkstattplan –, dann **nicht öffentlich** hochladen, sondern
 mit Passwortschutz (die meisten Webspaces bieten „Verzeichnisschutz") oder nur im Hochschulnetz.
+GitHub Pages hat keinen Passwortschutz: Alles im Repository ist für alle sichtbar – auch frühere
+Fassungen in der Versionsgeschichte.
 
 Nach dem Hochladen: Kurs im Browser öffnen, einmal durchklicken, Zertifikat testen.
 

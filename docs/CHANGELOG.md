@@ -70,3 +70,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Neu: „Projektordner einlesen" in Editor (Download-Modus, alle Browser) und Prüfseite.
 - PDF-Schriften als Skript (`assets/fonts/pdf/lato-pdf.js`), Logo im PDF aus der Offline-Datei.
 - Selbsttests für die Offline-Datei; 145 Tests grün per Doppelklick und über einen Webserver.
+
+### GitHub Pages (2026-10-13)
+- `.nojekyll` ergänzt: Ohne die Datei würde GitHub Pages die `.md`-Inhalte in HTML umwandeln.
+- Sicherungskopien (`content/_backup/`) werden nicht mehr ins Repository übernommen.
+- Anleitung zum Veröffentlichen mit GitHub Desktop und GitHub Pages in `docs/PFLEGE.md`.

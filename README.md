@@ -22,6 +22,9 @@ Ohne Server liest der Kurs seine Inhalte aus `content/inhalte.js`, einer Kopie d
 die der Editor beim Speichern automatisch erneuert. Auf einem Webspace liest er die `.md`-Dateien
 direkt. Details: [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 1.
 
+**Online stellen:** über GitHub Pages (Branch `main`, Ordner `/ (root)`). Anleitung:
+[docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 12. Die Datei `.nojekyll` muss erhalten bleiben.
+
 ## Dokumentation
 
 | Datei | Für wen? |
