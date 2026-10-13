@@ -18,72 +18,93 @@
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
-const { el } = EM.require('js/dom.js');
-const { prefersReducedMotion } = EM.require('js/blocks/block-utils.js');
+  const { el } = EM.require("js/core/dom.js");
+  const { prefersReducedMotion } = EM.require("js/blocks/block-utils.js");
 
-const STEP_MS = 550;
-const LIGHTS = 5;
+  const STEP_MS = 550;
+  const LIGHTS = 5;
 
-/**
- * Erzeugt die Startampel.
- * @param {() => void} onGo  wird aufgerufen, wenn es losgeht (oder übersprungen wird)
- * @returns {{node: HTMLElement, destroy: () => void}}
- */
-function createStartLights(onGo) {
-  const timers = [];
-  let done = false;
-  const reduced = prefersReducedMotion();
+  /**
+   * Erzeugt die Startampel.
+   * @param {() => void} onGo  wird aufgerufen, wenn es losgeht (oder übersprungen wird)
+   * @returns {{node: HTMLElement, destroy: () => void}}
+   */
+  function createStartLights(onGo) {
+    const timers = [];
+    let done = false;
+    const reduced = prefersReducedMotion();
 
-  const lights = Array.from({ length: LIGHTS }, () =>
-    el('span', { class: 'start-lights__column' }, el('span', { class: 'start-lights__lamp' }), el('span', { class: 'start-lights__lamp' })),
-  );
-  const status = el('p', { class: 'start-lights__status', role: 'status' }, reduced ? '' : 'Die Startampel läuft …');
-
-  const go = () => {
-    if (done) return;
-    done = true;
-    timers.forEach(clearTimeout);
-    onGo();
-  };
-
-  const actions = reduced
-    ? el('button', { type: 'button', class: 'button button--primary button--large' }, 'Qualifying starten')
-    : el('button', { type: 'button', class: 'button' }, 'Überspringen');
-  actions.addEventListener('click', go);
-
-  const node = el(
-    'div',
-    { class: 'start-lights' },
-    el('div', { class: 'start-lights__panel', 'aria-hidden': 'true' }, lights),
-    status,
-    el('div', { class: 'block__actions' }, actions),
-  );
-
-  if (!reduced) {
-    lights.forEach((light, index) => {
-      timers.push(setTimeout(() => light.classList.add('is-on'), STEP_MS * (index + 1)));
-    });
-    // Kurze, leicht zufällige Pause bei voller Ampel – wie im echten Start.
-    const out = STEP_MS * (LIGHTS + 1) + Math.round(Math.random() * 400);
-    timers.push(
-      setTimeout(() => {
-        lights.forEach((light) => light.classList.remove('is-on'));
-        status.textContent = 'Los!';
-      }, out),
+    const lights = Array.from({ length: LIGHTS }, () =>
+      el(
+        "span",
+        { class: "start-lights__column" },
+        el("span", { class: "start-lights__lamp" }),
+        el("span", { class: "start-lights__lamp" }),
+      ),
     );
-    timers.push(setTimeout(go, out + 500));
-  }
+    const status = el(
+      "p",
+      { class: "start-lights__status", role: "status" },
+      reduced ? "" : "Die Startampel läuft …",
+    );
 
-  return {
-    node,
-    destroy() {
+    function go() {
+      if (done) {
+        return;
+      }
       done = true;
       timers.forEach(clearTimeout);
-    },
-  };
-}
+      onGo();
+    }
 
-EM.define('js/ui/start-lights.js', { createStartLights });
+    const actions = reduced
+      ? el(
+          "button",
+          { type: "button", class: "button button--primary button--large" },
+          "Qualifying starten",
+        )
+      : el("button", { type: "button", class: "button" }, "Überspringen");
+    actions.addEventListener("click", go);
+
+    const node = el(
+      "div",
+      { class: "start-lights" },
+      el(
+        "div",
+        { class: "start-lights__panel", "aria-hidden": "true" },
+        lights,
+      ),
+      status,
+      el("div", { class: "block__actions" }, actions),
+    );
+
+    if (!reduced) {
+      lights.forEach((light, index) => {
+        timers.push(
+          setTimeout(() => light.classList.add("is-on"), STEP_MS * (index + 1)),
+        );
+      });
+      // Kurze, leicht zufällige Pause bei voller Ampel – wie im echten Start.
+      const out = STEP_MS * (LIGHTS + 1) + Math.round(Math.random() * 400);
+      timers.push(
+        setTimeout(() => {
+          lights.forEach((light) => light.classList.remove("is-on"));
+          status.textContent = "Los!";
+        }, out),
+      );
+      timers.push(setTimeout(go, out + 500));
+    }
+
+    return {
+      node,
+      destroy() {
+        done = true;
+        timers.forEach(clearTimeout);
+      },
+    };
+  }
+
+  EM.define("js/ui/start-lights.js", { createStartLights });
 })();

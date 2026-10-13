@@ -25,6 +25,58 @@ direkt. Details: [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 1.
 **Online stellen:** über GitHub Pages (Branch `main`, Ordner `/ (root)`). Anleitung:
 [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 12. Die Datei `.nojekyll` muss erhalten bleiben.
 
+## In VS Code arbeiten
+
+Den Ordner **`onboarding/`** in VS Code öffnen („Datei → Ordner öffnen…"). VS Code schlägt dann
+vier Erweiterungen vor (Prettier, ESLint, Stylelint, EditorConfig) – annehmen. Danach wird beim
+Speichern automatisch einheitlich formatiert. HTML wird von Hand formatiert.
+
+### Wo finde ich was?
+
+```text
+onboarding/
+├── index.html            Kurs              → css/index.css         + js/pages/index.js
+├── editor.html           Editor            → css/editor.css        + js/pages/editor.js
+├── pruefen.html          Prüfseite         → css/pruefen.css       + js/pages/pruefen.js
+├── tests.html            Selbsttests       → css/tests.css         + js/pages/tests.js
+├── designsystem.html     Designsystem      → css/designsystem.css  + js/pages/designsystem.js
+│
+├── content/              INHALTE (Kursdown-Dateien) – hier wird der Kurs gepflegt
+│   ├── kurs.md, glossar.md, kapitel/*.md
+│   └── inhalte.js        automatisch erzeugte Kopie für den Doppelklick-Start (nicht bearbeiten)
+│
+├── css/
+│   ├── index.css …       Einstiegsdateien: je Seite eine Liste von @import
+│   ├── base/             Ebenen, Schrift, Design-Token, HTML-Elemente, Seitengerüst, Hilfsklassen
+│   ├── components/       Bedienelemente: Buttons, Symbol-Kacheln, Schalter, Statusbar, Kopfleiste …
+│   ├── blocks/           je Baustein eine Datei (gleiche Namen wie in js/blocks/)
+│   ├── views/            Ansichten des Kurses: Startseite, Kapitel, Quiz, Glossar, Zertifikat, Druck
+│   ├── pages/            Teile nur für eine Seite (Prüfseite, Designsystem)
+│   └── editor/           Editor: Gerüst, Kursstruktur, Arbeitsfläche, Formulare, Vorschau …
+│
+├── js/
+│   ├── pages/            Einstieg je HTML-Seite (hier beginnt man beim Lesen)
+│   ├── core/             Grundlagen: Modulsystem (em.js), Lade-Reihenfolge (scripts.js), DOM,
+│   │                     Router, Speicher, Darstellung
+│   ├── content/          Kursdown lesen, prüfen und schreiben
+│   ├── blocks/           je Baustein eine Datei + registry.js (Liste aller Bausteine)
+│   ├── views/            je Kurs-Ansicht eine Datei (Startseite, Kapitel, Quiz …)
+│   ├── course/           Quiz-Ablauf und PDF-Zertifikat
+│   ├── ui/               kleine Oberflächenteile: Symbole, Schalter, Sektoranzeige, Glossar …
+│   └── editor/           Bausteine des Editors
+│
+├── assets/               Bilder, Schriften, Symbole, Logo
+├── vendor/jspdf/         fremde Bibliothek für das PDF (nicht verändern)
+└── docs/                 Dokumentation (siehe unten)
+```
+
+**Faustregeln:** Neue Skriptdatei → in `js/core/scripts.js` eintragen. Neue CSS-Datei → in die
+passende Einstiegsdatei `css/*.css` per `@import` eintragen. Jede Datei beginnt mit einem Kommentar:
+wozu sie da ist, womit sie zusammenspielt und „Wenn du hier etwas ändern willst …".
+
+**Code-Stil:** nach den MDN-Richtlinien (developer.mozilla.org) – formatiert mit Prettier, geprüft
+mit ESLint und Stylelint, HTML/CSS mit dem W3C-Validator. Details: [docs/ENTWICKLER.md](docs/ENTWICKLER.md).
+
 ## Dokumentation
 
 | Datei | Für wen? |

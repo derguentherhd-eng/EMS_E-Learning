@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc",
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      { "message": "Klassennamen nach BEM: block__element--variante (kleingeschrieben, mit Bindestrichen)" }
+    ],
+    "custom-property-pattern": [
+      "^[a-z][a-z0-9]*(-{1,2}[a-z0-9]+)*$",
+      { "message": "Variablennamen kleingeschrieben mit Bindestrichen, z. B. --color-text oder --step--1" }
+    ],
+    "no-descending-specificity": null
+  }
+}

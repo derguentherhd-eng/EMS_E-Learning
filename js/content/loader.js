@@ -20,167 +20,218 @@
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
-const { normalizeText, parseChapter, parseCourse, parseGlossary } = EM.require('js/content/documents.js');
-const { createMirrorReader } = EM.require('js/content/mirror.js');
+  const { normalizeText, parseChapter, parseCourse, parseGlossary } =
+    EM.require("js/content/documents.js");
+  const { createMirrorReader } = EM.require("js/content/mirror.js");
 
-/** Ordner der Inhalte, relativ zur HTML-Seite. */
-const CONTENT_DIR = 'content';
-const CHAPTER_DIR = `${CONTENT_DIR}/kapitel`;
+  /** Ordner der Inhalte, relativ zur HTML-Seite. */
+  const CONTENT_DIR = "content";
+  const CHAPTER_DIR = `${CONTENT_DIR}/kapitel`;
 
-/**
- * @callback ReadText
- * @param {string} path  Pfad ab Projektordner, z. B. 'content/kurs.md'
- * @returns {Promise<string|null>}  Dateiinhalt oder null, wenn die Datei nicht existiert
- */
+  /**
+   * @callback ReadText
+   * @param {string} path  Pfad ab Projektordner, z. B. 'content/kurs.md'
+   * @returns {Promise<string|null>}  Dateiinhalt oder null, wenn die Datei nicht existiert
+   */
 
-/**
- * Lesefunktion über HTTP. cache: 'no-cache' sorgt dafür, dass der Browser immer beim Server
- * nachfragt – sonst sähe man nach dem Speichern im Editor evtl. noch die alte Fassung.
- * @param {string} [base]  Präfix, z. B. '' (gleicher Ordner wie die HTML-Seite)
- * @returns {ReadText}
- */
-function createFetchReader(base = '') {
-  return async (path) => {
-    const response = await fetch(`${base}${path}`, { cache: 'no-cache' });
-    if (response.status === 404) return null;
-    if (!response.ok) throw new Error(`${path}: Server antwortet mit ${response.status}`);
-    return response.text();
-  };
-}
-
-/**
- * Wählt die passende Lesefunktion: über einen Webserver die .md-Dateien, ohne Server (file://)
- * die Offline-Datei content/inhalte.js.
- * @returns {ReadText}
- * @throws {Error} ohne Server, wenn content/inhalte.js fehlt
- */
-function createDefaultReader() {
-  if (window.location.protocol !== 'file:') return createFetchReader();
-  if (!window.EM.inhalte) {
-    throw new Error('Die Datei content/inhalte.js fehlt. Sie wird vom Editor erzeugt: editor.html öffnen und den Projektordner wählen.');
-  }
-  return createMirrorReader(window.EM.inhalte);
-}
-
-/**
- * Lesefunktion für einen über <input type="file" webkitdirectory> eingelesenen Ordner.
- * Funktioniert in allen Browsern und ohne Server – aber nur lesend.
- *
- * Die Pfade im FileList beginnen mit dem gewählten Ordnernamen (z. B. „onboarding/content/…");
- * dieser erste Teil wird abgeschnitten.
- *
- * @param {FileList|File[]} fileList
- * @returns {{readText: ReadText, files: Map<string, File>, list: (dir: string) => string[]}}
- */
-function createFileListReader(fileList) {
-  const files = new Map();
-  for (const file of fileList) {
-    const path = (file.webkitRelativePath || file.name).split('/').slice(1).join('/');
-    files.set(path, file);
-  }
-  return {
-    files,
-    readText: async (path) => (files.has(path) ? normalizeText(await files.get(path).text()) : null),
-    list: (dir) =>
-      [...files.keys()]
-        .filter((path) => path.startsWith(`${dir}/`) && !path.slice(dir.length + 1).includes('/'))
-        .map((path) => path.slice(dir.length + 1))
-        .sort(),
-  };
-}
-
-/**
- * @typedef {Object} CourseModel
- * @property {Object} meta          Einstellungen aus kurs.md (meta.kapitel = Kapitelliste)
- * @property {string} welcome       Willkommenstext
- * @property {import('./documents.js').ChapterModel[]} chapters  geladene, aktive Kapitel in Kursreihenfolge
- * @property {import('./documents.js').GlossaryEntry[]} glossary
- * @property {Object[]} errors      Lade- und Lesefehler aller Dateien
- * @property {Object<string, string>} sources  Originaltext je Pfad (für Prüfseite und Tests)
- */
-
-/**
- * Lädt den kompletten Kurs.
- *
- * @param {ReadText} [readText]
- * @returns {Promise<CourseModel>}
- * @throws {Error} nur wenn kurs.md fehlt oder nicht geladen werden kann
- */
-async function loadCourse(readText = createDefaultReader()) {
-  const sources = {};
-  const coursePath = `${CONTENT_DIR}/kurs.md`;
-  const courseText = await readText(coursePath);
-  if (courseText === null) {
-    throw new Error('Die Datei content/kurs.md wurde nicht gefunden.');
-  }
-  sources[coursePath] = normalizeText(courseText);
-  const courseFile = parseCourse(courseText, coursePath);
-  const errors = [...courseFile.errors];
-
-  const glossaryPath = `${CONTENT_DIR}/glossar.md`;
-  let glossary = [];
-  const glossaryText = await readText(glossaryPath).catch(() => null);
-  if (glossaryText === null) {
-    errors.push({ file: glossaryPath, line: 0, severity: 'warnung', message: 'Die Datei glossar.md fehlt.', fix: 'Lege content/glossar.md an (eine Zeile pro Begriff: „Begriff: Erklärung").' });
-  } else {
-    sources[glossaryPath] = normalizeText(glossaryText);
-    const parsed = parseGlossary(glossaryText, glossaryPath);
-    glossary = parsed.entries;
-    errors.push(...parsed.errors);
-  }
-
-  const seen = new Set();
-  const files = courseFile.meta.kapitel.filter((file) => {
-    if (seen.has(file)) {
-      errors.push({ file: coursePath, line: 0, severity: 'fehler', message: `Das Kapitel „${file}" steht doppelt in der Kapitelliste.`, fix: 'Lösche einen der beiden Einträge unter „kapitel:".' });
-      return false;
-    }
-    seen.add(file);
-    return true;
-  });
-
-  const loaded = await Promise.all(
-    files.map(async (file) => {
-      const path = `${CHAPTER_DIR}/${file}`;
-      try {
-        const text = await readText(path);
-        if (text === null) {
-          errors.push({ file: coursePath, line: 0, severity: 'fehler', message: `Das Kapitel „${file}" steht in der Kapitelliste, die Datei gibt es aber nicht.`, fix: `Lege content/kapitel/${file} an oder entferne den Eintrag aus kurs.md. Prüfe auch die Schreibweise (Groß-/Kleinschreibung, .md am Ende).` });
-          return null;
-        }
-        sources[path] = normalizeText(text);
-        const chapter = parseChapter(text, file, CHAPTER_DIR);
-        errors.push(...chapter.errors);
-        return chapter;
-      } catch (error) {
-        errors.push({ file: path, line: 0, severity: 'fehler', message: `Die Datei konnte nicht geladen werden (${error.message}).`, fix: 'Ohne Server: Ist content/inhalte.js aktuell? (editor.html öffnen, Projektordner wählen, speichern.) Auf dem Webspace: Wurde der Ordner content/ vollständig hochgeladen?' });
+  /**
+   * Lesefunktion über HTTP. cache: 'no-cache' sorgt dafür, dass der Browser immer beim Server
+   * nachfragt – sonst sähe man nach dem Speichern im Editor evtl. noch die alte Fassung.
+   * @param {string} [base]  Präfix, z. B. '' (gleicher Ordner wie die HTML-Seite)
+   * @returns {ReadText}
+   */
+  function createFetchReader(base = "") {
+    return async (path) => {
+      const response = await fetch(`${base}${path}`, { cache: "no-cache" });
+      if (response.status === 404) {
         return null;
       }
-    }),
-  );
+      if (!response.ok) {
+        throw new Error(`${path}: Server antwortet mit ${response.status}`);
+      }
+      return response.text();
+    };
+  }
 
-  return {
-    meta: courseFile.meta,
-    welcome: courseFile.welcome,
-    chapters: loaded.filter((chapter) => chapter !== null && !chapter.fatal),
-    glossary,
-    errors,
-    sources,
-  };
-}
+  /**
+   * Wählt die passende Lesefunktion: über einen Webserver die .md-Dateien, ohne Server (file://)
+   * die Offline-Datei content/inhalte.js.
+   * @returns {ReadText}
+   * @throws {Error} ohne Server, wenn content/inhalte.js fehlt
+   */
+  function createDefaultReader() {
+    if (window.location.protocol !== "file:") {
+      return createFetchReader();
+    }
+    if (!window.EM.inhalte) {
+      throw new Error(
+        "Die Datei content/inhalte.js fehlt. Sie wird vom Editor erzeugt: editor.html öffnen und den Projektordner wählen.",
+      );
+    }
+    return createMirrorReader(window.EM.inhalte);
+  }
 
-/**
- * Bestehensgrenze eines Kapitels: Kapitel-Wert, sonst Kurs-Wert, sonst 80.
- * @param {CourseModel} course
- * @param {import('./documents.js').ChapterModel} chapter
- * @returns {number}
- */
-function passThreshold(course, chapter) {
-  const value = Number(chapter?.meta.bestehensgrenze ?? course.meta.bestehensgrenze ?? 80);
-  return Number.isFinite(value) && value > 0 && value <= 100 ? value : 80;
-}
+  /**
+   * Lesefunktion für einen über <input type="file" webkitdirectory> eingelesenen Ordner.
+   * Funktioniert in allen Browsern und ohne Server – aber nur lesend.
+   *
+   * Die Pfade im FileList beginnen mit dem gewählten Ordnernamen (z. B. „onboarding/content/…");
+   * dieser erste Teil wird abgeschnitten.
+   *
+   * @param {FileList|File[]} fileList
+   * @returns {{readText: ReadText, files: Map<string, File>, list: (dir: string) => string[]}}
+   */
+  function createFileListReader(fileList) {
+    const files = new Map();
+    for (const file of fileList) {
+      const path = (file.webkitRelativePath || file.name)
+        .split("/")
+        .slice(1)
+        .join("/");
+      files.set(path, file);
+    }
+    return {
+      files,
+      readText: async (path) =>
+        files.has(path) ? normalizeText(await files.get(path).text()) : null,
+      list: (dir) =>
+        [...files.keys()]
+          .filter(
+            (path) =>
+              path.startsWith(`${dir}/`) &&
+              !path.slice(dir.length + 1).includes("/"),
+          )
+          .map((path) => path.slice(dir.length + 1))
+          .sort(),
+    };
+  }
 
-EM.define('js/content/loader.js', { createDefaultReader, createFileListReader, createFetchReader, loadCourse, passThreshold, CONTENT_DIR, CHAPTER_DIR });
+  /**
+   * @typedef {Object} CourseModel
+   * @property {Object} meta          Einstellungen aus kurs.md (meta.kapitel = Kapitelliste)
+   * @property {string} welcome       Willkommenstext
+   * @property {import("./documents.js").ChapterModel[]} chapters  geladene, aktive Kapitel in Kursreihenfolge
+   * @property {import("./documents.js").GlossaryEntry[]} glossary
+   * @property {Object[]} errors      Lade- und Lesefehler aller Dateien
+   * @property {Object<string, string>} sources  Originaltext je Pfad (für Prüfseite und Tests)
+   */
+
+  /**
+   * Lädt den kompletten Kurs.
+   *
+   * @param {ReadText} [readText]
+   * @returns {Promise<CourseModel>}
+   * @throws {Error} nur wenn kurs.md fehlt oder nicht geladen werden kann
+   */
+  async function loadCourse(readText = createDefaultReader()) {
+    const sources = {};
+    const coursePath = `${CONTENT_DIR}/kurs.md`;
+    const courseText = await readText(coursePath);
+    if (courseText === null) {
+      throw new Error("Die Datei content/kurs.md wurde nicht gefunden.");
+    }
+    sources[coursePath] = normalizeText(courseText);
+    const courseFile = parseCourse(courseText, coursePath);
+    const errors = [...courseFile.errors];
+
+    const glossaryPath = `${CONTENT_DIR}/glossar.md`;
+    let glossary = [];
+    const glossaryText = await readText(glossaryPath).catch(() => null);
+    if (glossaryText === null) {
+      errors.push({
+        file: glossaryPath,
+        line: 0,
+        severity: "warnung",
+        message: "Die Datei glossar.md fehlt.",
+        fix: 'Lege content/glossar.md an (eine Zeile pro Begriff: „Begriff: Erklärung").',
+      });
+    } else {
+      sources[glossaryPath] = normalizeText(glossaryText);
+      const parsed = parseGlossary(glossaryText, glossaryPath);
+      glossary = parsed.entries;
+      errors.push(...parsed.errors);
+    }
+
+    const seen = new Set();
+    const files = courseFile.meta.kapitel.filter((file) => {
+      if (seen.has(file)) {
+        errors.push({
+          file: coursePath,
+          line: 0,
+          severity: "fehler",
+          message: `Das Kapitel „${file}" steht doppelt in der Kapitelliste.`,
+          fix: 'Lösche einen der beiden Einträge unter „kapitel:".',
+        });
+        return false;
+      }
+      seen.add(file);
+      return true;
+    });
+
+    const loaded = await Promise.all(
+      files.map(async (file) => {
+        const path = `${CHAPTER_DIR}/${file}`;
+        try {
+          const text = await readText(path);
+          if (text === null) {
+            errors.push({
+              file: coursePath,
+              line: 0,
+              severity: "fehler",
+              message: `Das Kapitel „${file}" steht in der Kapitelliste, die Datei gibt es aber nicht.`,
+              fix: `Lege content/kapitel/${file} an oder entferne den Eintrag aus kurs.md. Prüfe auch die Schreibweise (Groß-/Kleinschreibung, .md am Ende).`,
+            });
+            return null;
+          }
+          sources[path] = normalizeText(text);
+          const chapter = parseChapter(text, file, CHAPTER_DIR);
+          errors.push(...chapter.errors);
+          return chapter;
+        } catch (error) {
+          errors.push({
+            file: path,
+            line: 0,
+            severity: "fehler",
+            message: `Die Datei konnte nicht geladen werden (${error.message}).`,
+            fix: "Ohne Server: Ist content/inhalte.js aktuell? (editor.html öffnen, Projektordner wählen, speichern.) Auf dem Webspace: Wurde der Ordner content/ vollständig hochgeladen?",
+          });
+          return null;
+        }
+      }),
+    );
+
+    return {
+      meta: courseFile.meta,
+      welcome: courseFile.welcome,
+      chapters: loaded.filter((chapter) => chapter !== null && !chapter.fatal),
+      glossary,
+      errors,
+      sources,
+    };
+  }
+
+  /**
+   * Bestehensgrenze eines Kapitels: Kapitel-Wert, sonst Kurs-Wert, sonst 80.
+   * @param {CourseModel} course
+   * @param {import("./documents.js").ChapterModel} chapter
+   * @returns {number}
+   */
+  function passThreshold(course, chapter) {
+    const value = Number(
+      chapter?.meta.bestehensgrenze ?? course.meta.bestehensgrenze ?? 80,
+    );
+    return Number.isFinite(value) && value > 0 && value <= 100 ? value : 80;
+  }
+
+  EM.define("js/content/loader.js", {
+    createDefaultReader,
+    createFileListReader,
+    createFetchReader,
+    loadCourse,
+    passThreshold,
+    CONTENT_DIR,
+    CHAPTER_DIR,
+  });
 })();

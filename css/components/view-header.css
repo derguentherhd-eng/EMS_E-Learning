@@ -1,0 +1,31 @@
+/*
+ * components/view-header.css – Kopfbereich einer Ansicht
+ *
+ * „Sektor 3 · Unsere Subteams   Seite 2 von 7" über dem Titel, Titelabstand und Lead-Text.
+ */
+
+@layer components {
+  /* ── Kopfbereich einer Ansicht: „Sektor 3 · Unsere Subteams    Seite 2 von 7" ── */
+  .view-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3xs) var(--space-s);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .view-meta p {
+    margin: 0;
+  }
+
+  .view-title {
+    margin-block-start: var(--space-xs);
+  }
+
+  .lead {
+    font-size: var(--step-1);
+    line-height: 1.45;
+  }
+}

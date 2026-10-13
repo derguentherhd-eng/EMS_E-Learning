@@ -2,7 +2,7 @@
  * lato-pdf.js – die Schrift Lato als eingebettete Daten für das PDF-Zertifikat
  *
  * Warum als JavaScript? Ohne Server (Doppelklick auf index.html) darf der Browser keine
- * Schriftdateien per fetch laden, Skripte aber schon. js/certificate.js lädt diese Datei erst,
+ * Schriftdateien per fetch laden, Skripte aber schon. js/course/certificate.js lädt diese Datei erst,
  * wenn jemand das Zertifikat herunterlädt.
  *
  * Inhalt: die TTF-Dateien aus diesem Ordner (Lato-Regular, Lato-Medium, Lato-Bold), Base64-kodiert.

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--
   editor.html – Editor / Baukasten für die Kursinhalte (lokales Pflegewerkzeug)
 
@@ -9,7 +9,7 @@
   Am besten in Chrome oder Edge öffnen (Doppelklick auf editor.html genügt).
   Diese Datei und den Ordner js/editor/ NICHT auf den öffentlichen Webspace hochladen.
 
-  Die Logik steht in js/editor/ (Einstieg: editor-main.js).
+  Die Logik steht in js/editor/ (Einstieg: js/pages/editor.js).
 -->
 <html lang="de">
   <head>
@@ -20,14 +20,10 @@
     <meta name="color-scheme" content="dark light">
     <meta name="robots" content="noindex">
     <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/tokens.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/editor.css">
-    <script src="js/theme-init.js"></script>
-    <script src="js/em.js"></script>
-    <script src="js/scripts.js" defer data-pakete="kern kurs editor" data-start="js/editor/editor-main.js"></script>
+    <script src="js/core/theme-init.js"></script>
+    <script src="js/core/em.js"></script>
+    <script src="js/core/scripts.js" defer data-pakete="kern kurs editor" data-start="js/pages/editor.js"></script>
   </head>
   <body class="editor">
     <a class="skip-link" href="#editor-main">Zum Arbeitsbereich springen</a>

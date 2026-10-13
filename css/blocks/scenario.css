@@ -1,0 +1,56 @@
+/*
+ * blocks/scenario.css – Baustein szenario
+ *
+ * Gehört zu js/blocks/scenario.js.
+ */
+
+@layer components {
+  /* ── szenario (scenario.js) ── */
+  .scenario__options {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .scenario__options legend {
+    margin-block-end: var(--space-2xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .scenario__option {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    padding: var(--space-xs);
+    background-color: var(--color-bg);
+    border: var(--border-ds) solid var(--color-line);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+  }
+
+  .scenario__option:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .scenario__option + .scenario__option {
+    margin-block-start: var(--space-2xs);
+  }
+
+  /* Gewählt = „gedrückt": Lila, weiße Schrift (7,99), gelber Rand. */
+  .scenario__option:has(:checked) {
+    background-color: var(--color-pressed);
+    color: var(--color-white);
+    border-color: var(--color-tile-border);
+  }
+
+  .scenario__input {
+    flex: none;
+    margin-block-start: 0.2em;
+  }
+
+  .scenario__result:empty {
+    display: none;
+  }
+}

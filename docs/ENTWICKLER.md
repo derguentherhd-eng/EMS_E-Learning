@@ -4,7 +4,8 @@ Für alle, die am Code arbeiten. Inhalte pflegen? Dann `PFLEGE.md`. Schreibweise
 `BAUSTEINE.md`.
 
 **Grundsätze:** Nur HTML, CSS und JavaScript – läuft per Doppelklick auf `index.html` (`file://`)
-und auf jedem statischen Webspace. Kein Server, kein Framework, kein Build, kein `npm`. Einzige
+und auf jedem statischen Webspace. Kein Server, kein Framework, kein Build; zur Laufzeit kein `npm` (die Prüfwerkzeuge in Abschnitt 10
+sind optional). Einzige
 Bibliothek: jsPDF (lokal in `vendor/jspdf/`). Keine externen Requests zur Laufzeit.
 Inhalte stehen ausschließlich in `content/*.md`. Inhalte werden nie als HTML interpretiert.
 Gestaltung nach dem Designsystem des Teams: `docs/DESIGNSYSTEM.md`, zum Ansehen `designsystem.html`.
@@ -14,7 +15,7 @@ Gestaltung nach dem Designsystem des Teams: `docs/DESIGNSYSTEM.md`, zum Ansehen 
 ## 1. Architektur und Datenfluss
 
 ```
-content/*.md ──fetch (Webspace) / content/inhalte.js (file://) / Ordner──▶ loader.js / editor-main.js
+content/*.md ──fetch (Webspace) / content/inhalte.js (file://) / Ordner──▶ loader.js / pages/editor.js
                                               │ Text
                                               ▼
                        frontmatter.js + documents.js (Seiten, Elemente, Bausteine)
@@ -56,12 +57,12 @@ Chrome blockiert ES-Module (`import`/`export`) auf `file://`. Deshalb sind alle 
 **klassische Skripte** in einer Hülle `(function () { 'use strict'; … })();`:
 
 ```js
-const { el } = EM.require('js/dom.js');            // statt import
-EM.define('js/blocks/key-sentence.js', { default: definition });  // statt export
+const { el } = EM.require("js/core/dom.js"); // statt import
+EM.define("js/blocks/key-sentence.js", { default: definition }); // statt export
 ```
 
-`js/em.js` stellt `EM.define`/`EM.require` bereit (meldet doppeltes oder zu frühes Laden mit
-Klartext). `js/scripts.js` lädt die Dateien **in fester Reihenfolge** (Pakete `kern`, `kurs`,
+`js/core/em.js` stellt `EM.define`/`EM.require` bereit (meldet doppeltes oder zu frühes Laden mit
+Klartext). `js/core/scripts.js` lädt die Dateien **in fester Reihenfolge** (Pakete `kern`, `kurs`,
 `editor`); jede Datei muss nach allen stehen, die sie per `EM.require` benutzt. Die HTML-Seiten
 binden nur `theme-init.js`, `em.js` und `scripts.js` ein (`data-pakete`, `data-start`).
 
@@ -77,14 +78,14 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 
 | Datei | Aufgabe |
 |---|---|
-| `js/em.js` | `EM.define`/`EM.require` – Modulsystem ohne ES-Module |
-| `js/scripts.js` | Lade-Reihenfolge aller Skripte (Pakete), lädt auf `file://` `content/inhalte.js` |
-| `js/main.js` | Einstieg Kurs: Speicher, Theme, Menü, Kurs laden, Sektoranzeige, Router |
-| `js/router.js` | Hash-Routen (`parseRoute`), `navigate`, Hash-Bauer |
-| `js/store.js` | Fortschritt in localStorage (Fallback Arbeitsspeicher) + reine Auswertungsfunktionen |
-| `js/dom.js` | `el()`/`append()` – sicherer DOM-Bau, nur Textknoten |
-| `js/render.js` | Markdown-AST und Elemente → DOM; `createBlockContext` |
-| `js/theme-init.js` | Klassisches Skript: setzt `data-theme` vor dem ersten Zeichnen |
+| `js/core/em.js` | `EM.define`/`EM.require` – Modulsystem ohne ES-Module |
+| `js/core/scripts.js` | Lade-Reihenfolge aller Skripte (Pakete), lädt auf `file://` `content/inhalte.js` |
+| `js/pages/index.js` | Einstieg Kurs: Speicher, Theme, Menü, Kurs laden, Sektoranzeige, Router |
+| `js/core/router.js` | Hash-Routen (`parseRoute`), `navigate`, Hash-Bauer |
+| `js/core/store.js` | Fortschritt in localStorage (Fallback Arbeitsspeicher) + reine Auswertungsfunktionen |
+| `js/core/dom.js` | `el()`/`append()` – sicherer DOM-Bau, nur Textknoten |
+| `js/core/render.js` | Markdown-AST und Elemente → DOM; `createBlockContext` |
+| `js/core/theme-init.js` | Klassisches Skript: setzt `data-theme` vor dem ersten Zeichnen |
 | `js/content/frontmatter.js` | Kopfbereich lesen/schreiben |
 | `js/content/markdown.js` | Markdown → AST (Blöcke, Inline), `walkMarkdown`, `countWords` |
 | `js/content/documents.js` | Kapitel, Kurs, Glossar zerlegen; Bausteinkopf; Sicherheitskapitel-Erkennung |
@@ -96,23 +97,36 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/blocks/block-utils.js` | Helfer: Kopfzeile, Trenner, Einträge, Hash, Abschnittshülle |
 | `js/blocks/*.js` | je ein Baustein (siehe Zuordnung unten) |
 | `js/blocks/_vorlage-baustein.js` | kommentierte Vorlage (nicht eingebunden) |
-| `js/quiz/quiz.js` | Ziehung, Bewertung, Fragenablauf, Ergebnis-Streifen |
-| `js/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
+| `js/course/quiz.js` | Ziehung, Bewertung, Fragenablauf, Ergebnis-Streifen |
+| `js/course/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
 | `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole, Statusbar (`statusbar.js`) |
-| `js/designsystem.js` | Logik von `designsystem.html` (Übersicht aller Bedienelemente) |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
-| `js/check-page.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
-| `js/tests.js` | Selbsttests für `tests.html` |
-| `js/editor/*` | Editor (siehe Abschnitt 6) |
+| `js/pages/pruefen.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
+| `js/pages/tests.js` | Selbsttests für `tests.html` |
+| `js/pages/designsystem.js` | Logik von `designsystem.html` (Übersicht aller Bedienelemente) |
+| `js/pages/editor.js` | Einstieg und Steuerzentrale des Editors (Zustand, `commit()`, Laden, Speichern) |
+| `js/editor/*` | Teile des Editors (siehe Abschnitt 6) |
 
 **Zuordnung Baustein → Modul:** info/tipp/achtung → `callouts.js` · aufklappen → `details.js` ·
 karten → `flashcards.js` · zuordnen → `matching.js` · reihenfolge → `ordering.js` ·
 szenario → `scenario.js` · hotspot → `hotspot.js` · ordner → `file-tree.js` · teams → `teams.js` ·
 zeitstrahl → `timeline.js` · checkliste → `checklist.js` · quiz → `quiz-block.js`.
 
-**CSS:** `reset.css` (deklariert die Ebenen `reset, tokens, base, layout, components, utilities`),
-`tokens.css`, `base.css`, `layout.css`, `components.css` (inkl. `utilities`-Ebene), `blocks.css`,
-`print.css` (nur Druck), `editor.css` (nur Editor), `designsystem.css` (nur `designsystem.html`). Eingebunden per `<link>`, kein `@import`.
+**CSS:** Jede HTML-Seite bindet genau **eine Einstiegsdatei** ein (`css/index.css`,
+`css/editor.css`, `css/pruefen.css`, `css/tests.css`, `css/designsystem.css`). Diese enthält nur
+`@import`-Zeilen auf die Teildateien – eine Datei pro Thema:
+
+| Ordner | Inhalt |
+|---|---|
+| `css/base/` | `reset.css` (legt die Ebenen `reset, tokens, base, layout, components, utilities` fest), `fonts.css`, `tokens.css` (alle Design-Token), `elements.css` (HTML-Elemente ohne Klassen), `layout.css` (Seitengerüst), `utilities.css` |
+| `css/components/` | Bedienelemente: `buttons`, `icon-button`, `switch`, `statusbar`, `masthead`, `sector-bar`, `forms`, `dialog`, `notice`, `prose`, `todo`, `glossary-popover`, `view-header`, `start-lights` |
+| `css/blocks/` | `block.css` (gemeinsam) + je Baustein eine Datei, Name wie in `js/blocks/` |
+| `css/views/` | `start`, `chapter`, `glossary`, `quiz`, `certificate`, `print` (nur Druck) |
+| `css/pages/` | `check.css` (Prüfseite/Tests), `designsystem.css` |
+| `css/editor/` | `layout`, `bar`, `tree`, `canvas`, `fields`, `special-editors`, `side-panel`, `palette` |
+
+Die Reihenfolge der Kaskadenebenen bestimmt `@layer` in `base/reset.css`; die `@import`-Reihenfolge
+zählt nur innerhalb einer Ebene. `@import` funktioniert auch per Doppelklick (`file://`).
 
 **Generierte Dateien:** `content/inhalte.js` (vom Editor), `assets/fonts/pdf/lato-pdf.js` (einmalig
 aus den TTF-Dateien erzeugt; bei Schriftwechsel neu erzeugen: Dateiname → Base64 in
@@ -178,23 +192,24 @@ Beispiel: ein Baustein `merksatz` (ein hervorgehobener Satz mit Quelle).
      `list` (`itemFields`, `itemLabel`, `min`). Verschachtelte Werte per Punkt (`fields.kurz`),
      Listen aus Texten mit genau einem Feld `value`. Spezialeditoren: `customEditor: 'quiz' | 'hotspot'`.
    - `images(data)` (optional): Bildpfade, damit die Prüfseite ihre Existenz prüft.
-3. **Eintragen:** den Pfad bei `EM.define` ganz unten anpassen; in `js/scripts.js` im Paket `kern`
+3. **Eintragen:** den Pfad bei `EM.define` ganz unten anpassen; in `js/core/scripts.js` im Paket `kern`
    `'js/blocks/key-sentence.js'` **vor** `'js/blocks/registry.js'` ergänzen; in
    `js/blocks/registry.js` `const { default: keySentence } = EM.require('js/blocks/key-sentence.js');`
    und `keySentence` in `BLOCKS` ergänzen. → Der Baustein wird im Kurs dargestellt, geprüft und erscheint
    **automatisch** in der Editor-Palette mit Formular.
-4. **CSS:** Abschnitt in `css/blocks.css`, Klassen nach BEM (`.key-sentence__text`).
+4. **CSS:** neue Datei `css/blocks/key-sentence.css` (Klassen nach BEM, `.key-sentence__text`) und
+   in `css/index.css`, `css/tests.css` und `css/designsystem.css` per `@import` eintragen.
 5. **Symbol:** `assets/icons/merksatz.svg` als Kachel im Designsystem-Stil: 32×32, lila Fläche
    `#534495` mit `rx="6"` und gelbem Rand, darin das Symbol in Gelb `#ffed00` mit runden Enden
    (Vorlage: eine der vorhandenen Dateien kopieren).
-6. **Tests:** in `js/tests.js` unter `BLOCK_SAMPLES` ein gültiges und ggf. ungültiges Beispiel.
+6. **Tests:** in `js/pages/tests.js` unter `BLOCK_SAMPLES` ein gültiges und ggf. ungültiges Beispiel.
    `tests.html` erzeugt daraus Parser-, Round-Trip- und Schema-Tests.
 7. **Doku:** Abschnitt in `docs/BAUSTEINE.md` (Zweck, Didaktik, Editorname, Kopiervorlage, Fehler)
    und Eintrag in der Übersichtstabelle.
 
 ## 6. Editor
 
-**Dateien:** `editor-main.js` (Zustand, `commit()`, Laden, Speichern, Kapitel-Operationen,
+**Dateien:** `js/pages/editor.js` (Zustand, `commit()`, Laden, Speichern, Kapitel-Operationen,
 Tastenkürzel), `workspace.js` (Dateizugriff), `course-tree.js` (links), `page-canvas.js` (Mitte und
 Eigenschaften), `field-renderers.js` (Formulare aus Schemas), `quiz-editor.js`, `hotspot-editor.js`,
 `glossary-editor.js`, `image-import.js`, `preview.js`, `history.js`, `dialogs.js`, `names.js`.
@@ -289,17 +304,55 @@ Berechnet mit der WCAG-2.x-Formel. Anforderungen: Text ≥ 4,5:1, Grafik/Bediene
 Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text auf Dunkelgrau
 (2,09:1). Rot (#ff2a1f) erscheint nur in der Startampel als Dekoration (`aria-hidden`).
 
-## 9. Formatierungsregeln
+## 9. Code-Stil (nach MDN)
 
-- 2 Leerzeichen Einrückung, Semikolons, einfache Anführungszeichen, ca. 100 Zeichen pro Zeile
-  (lange Meldungstexte dürfen länger sein).
-- `const` vor `let`, nie `var`; strikte Gleichheit; keine Globals außer `window.EM` (Modulsystem, Offline-Inhalte, PDF-Schriften) und `window.jspdf`.
-- Bezeichner Englisch, Kommentare/Doku/Bausteinnamen Deutsch.
-- Jede Datei hat einen Kopfkommentar mit „Wenn du hier etwas ändern willst …". Exportierte und
-  nicht-triviale Funktionen haben JSDoc. Kommentare erklären das Warum.
-- CSS: BEM-Klassen, logische Eigenschaften, alle Werte aus Token, `!important` nur in `utilities`.
-- Keine Inline-Event-Handler, keine Inline-Styles in HTML. Dynamische Positionen (Hotspot, Popover,
-  Vorschau-Skalierung) werden per JavaScript als CSS-Variablen gesetzt.
+Grundlage sind die MDN-Richtlinien für Code („Guidelines for writing code examples" für HTML, CSS
+und JavaScript auf developer.mozilla.org). Die Werkzeug-Einstellungen liegen im Projektordner:
+
+| Datei | Wofür |
+|---|---|
+| `.prettierrc.json` | Formatierung von JavaScript und CSS (wie MDN: 2 Leerzeichen, doppelte Anführungszeichen, Semikolons, 80 Zeichen, Komma am Listenende) |
+| `.prettierignore` | nicht formatieren: `vendor/`, erzeugte Dateien, Markdown, HTML |
+| `eslint.config.mjs` | JavaScript-Regeln (empfohlene Regeln + MDN-Regeln, siehe unten) |
+| `.stylelintrc.json` | CSS-Regeln (`stylelint-config-standard`, Klassen nach BEM) |
+| `.editorconfig` | UTF-8, LF-Zeilenenden, 2 Leerzeichen – für jeden Editor |
+| `.vscode/` | VS-Code-Einstellungen und empfohlene Erweiterungen |
+| `jsconfig.json` | sagt VS Code, welche Dateien zum Projekt gehören (IntelliSense) |
+
+**JavaScript** (von ESLint geprüft):
+- `const`, sonst `let`; nie `var`. Eine Variable pro Anweisung.
+- Benannte Funktionen als `function name() {}`; Pfeilfunktionen nur für Rückrufe
+  (`list.map((item) => item.id)`).
+- Immer geschweifte Klammern bei `if`, `for`, `while`; kein `else` nach `return`.
+- `===`/`!==` (einzige Ausnahme: `value == null` prüft null und undefined zugleich).
+- Template-Literale statt `+`-Verkettung; Objekt-Kurzschreibweise (`{ name, run() {} }`).
+- `String(x)`/`Number(x)` statt versteckter Umwandlung; `Object.hasOwn()`.
+- `textContent` bzw. `el()` statt `innerHTML` (Inhalte werden nie als HTML eingefügt).
+- `addEventListener` statt `onclick`-Attributen; keine Inline-Skripte.
+- Keine globalen Variablen außer `window.EM` (Modulsystem, Offline-Inhalte, PDF-Schriften) und
+  `window.jspdf`.
+- Bezeichner Englisch (camelCase), Kommentare, Dokumentation und Bausteinnamen Deutsch.
+
+**Kommentare:**
+- Jede Datei beginnt mit einem Kopfkommentar: Zweck, Zusammenspiel, „Wenn du hier etwas ändern
+  willst …".
+- Jede Funktion auf oberster Ebene hat einen JSDoc-Kommentar (`/** … */`) – VS Code zeigt ihn beim
+  Überfahren mit der Maus an.
+- Im Code `//`-Kommentare in eigener Zeile über dem Code. Sie erklären das **Warum**, nicht das Was.
+- Abschnitte in längeren Dateien: `// ── Titel ──`.
+
+**CSS** (von Stylelint geprüft):
+- Klassen nach BEM: `.block__element--variante`, Dateiname = Block.
+- Alle Werte aus Design-Token (`var(--…)`), logische Eigenschaften (`inline-size`, `margin-block`).
+- Medienabfragen in der Bereichsschreibweise `@media (width >= 48rem)`.
+- `!important` nur in `base/utilities.css` und für den Druck; Begründung als Kommentar.
+
+**HTML** (vom W3C-Validator geprüft):
+- `<!doctype html>`, `lang="de"`, `<meta charset="utf-8">`, Attribute in doppelten Anführungszeichen,
+  leere Elemente ohne Schrägstrich (`<img …>`), boolesche Attribute ohne Wert (`hidden`, `defer`).
+- Semantische Elemente (`header`, `nav`, `main`, `footer`, `section`) und Kopfkommentar je Seite.
+- Keine Inline-Styles und keine `onclick`-Attribute. Dynamische Positionen (Hotspot, Popover,
+  Vorschau-Skalierung) setzt JavaScript als CSS-Variablen.
 
 ## 10. Tests und Prüfungen
 
@@ -307,7 +360,17 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
   jeder Baustein mit Round-Trip und Schema, alle Inhaltsdateien, Quiz-Bewertung, Fortschritt,
   Zertifikat, Dateinamen, Verlauf).
 - `pruefen.html`: Inhaltsprüfung.
-- HTML/CSS/SVG wurden mit dem Nu Html Checker (lokal, `vnu`) geprüft.
+- **Code prüfen** (optional, braucht Node.js; legt `node_modules/` an, das nicht ins Repository
+  kommt):
+
+  ```bash
+  npm install --no-save eslint@9 @eslint/js@9 globals prettier@3 stylelint@16 stylelint-config-standard@36
+  npx prettier --check "js/**/*.js" "css/**/*.css"
+  npx eslint js
+  npx stylelint "css/**/*.css"
+  ```
+
+- HTML, CSS und SVG: Nu Html Checker des W3C (online unter validator.w3.org/nu oder lokal `vnu`).
 - **Manuell zu prüfen** (nicht automatisiert): Bedienung mit einem echten Screenreader (NVDA,
   VoiceOver), Editor-Download-Modus in Firefox und Safari, Direktmodus mit einem echten Ordner in
   Chrome/Edge, `prefers-reduced-motion` (Startampel ohne Animation, Lernkarten ohne Drehung),
@@ -324,13 +387,16 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 | Schalter-Knopf „An" links | genau wie im Designsystem; umkehrbar über zwei CSS-Variablen |
 | Richtig/Falsch zusätzlich grün/rot | Lernkontext; Bedeutung trägt immer auch Symbol und Text |
 | Kopfleiste und Sektoranzeige in beiden Themes **schwarz** | Logo ist einfarbig gelb (auf Weiß unsichtbar); wirkt wie ein Zeitenmonitor |
-| `js/theme-init.js` synchron im `<head>` | alle anderen Skripte laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
+| `js/core/theme-init.js` synchron im `<head>` | alle anderen Skripte laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
+| Ordner nach Aufgabe (`js/pages`, `core`, `content`, `blocks`, `views`, `course`, `ui`, `editor`; `css/base`, `components`, `blocks`, `views`, `pages`, `editor`) | Dateien findet man über ihre Aufgabe; Baustein-Dateien heißen in `js/` und `css/` gleich |
+| Eine CSS-Einstiegsdatei je Seite mit `@import` | HTML bleibt kurz, CSS in kleinen Dateien; `@import` lädt auch per Doppelklick; der zusätzliche Ladeschritt ist vernachlässigbar |
+| Code-Stil nach MDN; Prettier-, ESLint- und Stylelint-Einstellungen im Projekt | einheitlich und in VS Code automatisch; die Werkzeuge sind optional und zur Laufzeit nicht nötig |
 | Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |
 | `content/inhalte.js` als erzeugte Kopie | einzige Möglichkeit, ohne Server Text nachzuladen; `.md` bleibt Quelle, Editor hält die Kopie aktuell, auf dem Webspace unbenutzt |
 | Kein Server, keine Startskripte (früher `tools/server.py`, `starten.*`) | Vorgabe: nur HTML, CSS, JavaScript |
 | `.nojekyll` im Projektordner | GitHub Pages würde sonst `.md`-Dateien mit Kopfbereich in HTML umwandeln und Dateien/Ordner mit `_` (z. B. `_vorlage-kapitel.md`) weglassen |
 | `##` → `<h1>` der Ansicht, `###` → `<h2>` | genau eine `<h1>` pro Bildschirm |
-| Ergänzungen zu B3: `js/render.js`, `js/views/`, `js/dom.js`, `js/content/documents.js`, `js/check-page.js`, `js/tests.js`, `js/editor/names.js`, `js/editor/dialogs.js`, `assets/icons/`, `js/em.js`, `js/scripts.js`, `js/content/mirror.js`, `content/inhalte.js`, `favicon.ico` | kleinste saubere Aufteilung; Inhalte und Code bleiben getrennt |
+| Ergänzungen zu B3: `js/core/render.js`, `js/views/`, `js/core/dom.js`, `js/content/documents.js`, `js/pages/pruefen.js`, `js/pages/tests.js`, `js/editor/names.js`, `js/editor/dialogs.js`, `assets/icons/`, `js/core/em.js`, `js/core/scripts.js`, `js/content/mirror.js`, `content/inhalte.js`, `favicon.ico` | kleinste saubere Aufteilung; Inhalte und Code bleiben getrennt |
 | Prüfseite: „Projektordner einlesen" bzw. `kapitelOrdner` aus `inhalte.js` | statische Server und `file://` listen keine Ordner; Hinweis, wenn nicht möglich |
 | Freigabe-Hinweis als Systemhinweis für jedes Kapitel mit `freigegeben: nein` | kein Kursinhalt im Code; verschwindet bei `ja` ohne weitere Pflege |
 | Sicherheitskapitel = Kapitel mit Feld `freigegeben` | keine Kapitelnamen im Code |

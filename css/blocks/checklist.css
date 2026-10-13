@@ -1,0 +1,37 @@
+/*
+ * blocks/checklist.css – Baustein checkliste
+ *
+ * Gehört zu js/blocks/checklist.js.
+ */
+
+@layer components {
+  /* ── checkliste (checklist.js) ── */
+  .checklist__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    max-inline-size: none;
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .checklist__item label {
+    flex: 1 1 auto;
+    padding-block: var(--space-2xs);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+  }
+
+  .checklist__input {
+    flex: none;
+  }
+
+  .checklist__item:has(:checked) label {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+
+  .checklist__status {
+    font-weight: var(--font-weight-medium);
+  }
+}

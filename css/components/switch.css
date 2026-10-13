@@ -1,0 +1,52 @@
+/*
+ * components/switch.css – Schalter „An"/„Aus"
+ *
+ * Wird als <span class="switch"> in einen Knopf mit aria-pressed gesetzt (z. B. „Helles
+ * Design" in der Kopfleiste). Den Zustand liest das CSS vom Knopf.
+ */
+
+@layer components {
+  /* ── Schalter (Designsystem „An"/„Aus") ──
+   * Wird als <span class="switch"> in einen Knopf mit aria-pressed gesetzt; der Zustand kommt
+   * vom Knopf. An: lila Spur, gelber Knopf links. Aus: dunkle Spur, lila Knopf rechts.
+   * Beide gelb umrandet, Knopf mit weißem Ring. Die Seite des Knopfs folgt bewusst dem
+   * Designsystem; umdrehen: --switch-on-pos und --switch-off-pos tauschen. */
+  .switch {
+    --switch-on-pos: 0.2rem;
+    --switch-off-pos: calc(100% - 1.25rem - 0.2rem);
+
+    position: relative;
+    flex: none;
+    inline-size: 3rem;
+    block-size: 1.75rem;
+    background-color: var(--color-control-off);
+    border: var(--border-ds) solid var(--color-control-border);
+    border-radius: var(--radius-pill);
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+
+  .switch::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--switch-off-pos);
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    background-color: var(--color-purple);
+    border: var(--border-ds) solid var(--color-white);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: inset-inline-start var(--duration-base) var(--ease-out);
+  }
+
+  [aria-pressed="true"] > .switch,
+  [aria-checked="true"] > .switch {
+    background-color: var(--color-purple);
+  }
+
+  [aria-pressed="true"] > .switch::after,
+  [aria-checked="true"] > .switch::after {
+    inset-inline-start: var(--switch-on-pos);
+    background-color: var(--color-yellow);
+  }
+}

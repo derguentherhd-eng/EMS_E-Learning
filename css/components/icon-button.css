@@ -1,0 +1,56 @@
+/*
+ * components/icon-button.css – Symbol-Kacheln
+ *
+ * Lila Fläche, gelber Rand, gelbes Symbol – Hamburgermenü, Kreuz, Haken, Pfeile.
+ * .icon-button ist ein Knopf, die übrigen Selektoren machen aus einem Symbol (<svg> aus
+ * js/ui/icons.js) eine Kachel, z. B. bei Rückmeldungen und im Quiz.
+ */
+
+@layer components {
+  /* ── Symbol-Kachel als Knopf (Hamburgermenü, Kreuz, Pfeile) ──
+   * Lila Fläche, gelber Rand, gelbes Symbol – direkt aus dem Designsystem. */
+  .icon-button {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--touch-target);
+    block-size: var(--touch-target);
+    padding: 0;
+    background-color: var(--color-tile);
+    color: var(--color-on-tile);
+    border: var(--border-ds) solid var(--color-tile-border);
+    border-radius: var(--radius-m);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .icon-button:hover:not(:disabled) {
+    transform: scale(1.06);
+  }
+
+  .icon-button:disabled {
+    background-color: var(--color-control-off);
+    color: var(--color-text-muted);
+    border-color: var(--color-line-strong);
+    cursor: not-allowed;
+  }
+
+  .icon-button__icon {
+    inline-size: 72%;
+    block-size: 72%;
+  }
+
+  /* Symbole aus js/ui/icons.js, die als Kachel erscheinen (Rückmeldungen, Haken, Kreuz).
+   * Das <svg> selbst bekommt Fläche, Rand und Innenabstand. */
+  .icon-tile,
+  .feedback__icon,
+  .quiz__mark-icon,
+  .review__icon {
+    box-sizing: border-box;
+    padding: 0.12em;
+    background-color: var(--color-tile);
+    color: var(--color-on-tile);
+    border: var(--border-ds) solid var(--color-tile-border);
+    border-radius: 0.3em;
+  }
+}

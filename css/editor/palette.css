@@ -1,0 +1,71 @@
+/*
+ * editor/palette.css – Editor: Palette „Element einfügen"
+ *
+ * Liste der Bausteine mit Symbol-Kacheln (js/editor/page-canvas.js).
+ */
+
+@layer components {
+  /* ── Palette „Element einfügen" ── */
+  .palette {
+    display: grid;
+    gap: 2px;
+    max-block-size: 55vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  .palette li + li {
+    margin-block-start: 0;
+  }
+
+  .palette__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    inline-size: 100%;
+    padding: var(--space-2xs) var(--space-xs);
+    background-color: var(--color-bg);
+    border: var(--border-ds) solid var(--color-line);
+    border-radius: var(--radius-m);
+    color: var(--color-text);
+    text-align: start;
+  }
+
+  .palette__option:hover {
+    border-color: var(--color-accent-line);
+  }
+
+  .palette__option > span {
+    display: grid;
+  }
+
+  .palette__description {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .palette__icon {
+    flex: none;
+    inline-size: 2rem;
+    block-size: 2rem;
+  }
+
+  .save-list {
+    padding: 0;
+    list-style: none;
+  }
+
+  .save-list__item {
+    display: grid;
+    gap: var(--space-3xs);
+    max-inline-size: none;
+    padding-block: var(--space-2xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .save-list__item .button {
+    justify-self: start;
+  }
+}

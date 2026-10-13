@@ -1,142 +1,63 @@
 /*
- * designsystem.css – nur für die Übersichtsseite designsystem.html
+ * designsystem.css – alle Stile für die Designsystem-Übersicht (designsystem.html, Einstiegsdatei)
  *
- * Enthält ausschließlich die Anordnung der Beispiele (Farbfelder, Reihen, Beschriftungen).
- * Das Aussehen der Bedienelemente selbst kommt aus components.css und blocks.css – genau wie im
- * Kurs. Wird nur von designsystem.html eingebunden.
+ * Alles, was der Kurs nutzt, plus die Anordnung der Beispiele.
+ * Diese Datei enthält nur die Liste der Teildateien. Die Gestaltung selbst steht in den
+ * Ordnern base/, components/, blocks/, views/, pages/ und editor/ (eine Datei pro Thema).
+ *
+ * Reihenfolge: Die Kaskadenebenen (@layer) legt base/reset.css fest – spätere Ebenen gewinnen
+ * unabhängig von der Spezifität. Innerhalb einer Ebene gilt die Reihenfolge dieser Liste.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neue Teildatei: Datei anlegen und hier mit @import eintragen (vor base/utilities.css).
  */
 
-@layer components {
-  .ds-tag {
-    display: inline-block;
-    padding: 0.05em 0.5em;
-    border: var(--border-ds) solid var(--color-accent-line);
-    border-radius: var(--radius-s);
-    font-size: var(--step--1);
-    font-style: normal;
-    font-weight: var(--font-weight-medium);
-    vertical-align: 0.1em;
-  }
+/* Grundlagen: Ebenen, Schrift, Design-Token, HTML-Elemente, Seitengerüst */
+@import url("base/reset.css");
+@import url("base/fonts.css");
+@import url("base/tokens.css");
+@import url("base/elements.css");
+@import url("base/layout.css");
 
-  .ds-swatches {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
-    gap: var(--space-s);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+/* Bedienelemente */
+@import url("components/buttons.css");
+@import url("components/icon-button.css");
+@import url("components/switch.css");
+@import url("components/statusbar.css");
+@import url("components/masthead.css");
+@import url("components/view-header.css");
+@import url("components/notice.css");
+@import url("components/prose.css");
+@import url("components/todo.css");
+@import url("components/sector-bar.css");
+@import url("components/glossary-popover.css");
+@import url("components/forms.css");
+@import url("components/dialog.css");
+@import url("components/start-lights.css");
 
-  .ds-swatch {
-    display: grid;
-    align-content: end;
-    gap: var(--space-3xs);
-    min-block-size: 9rem;
-    max-inline-size: none;
-    margin: 0;
-    padding: var(--space-s);
-    border: var(--border-thin) solid var(--color-line);
-    border-radius: var(--radius-l);
-  }
+/* Interaktive Bausteine (je eine Datei pro Baustein in js/blocks/) */
+@import url("blocks/block.css");
+@import url("blocks/callouts.css");
+@import url("blocks/details.css");
+@import url("blocks/flashcards.css");
+@import url("blocks/matching.css");
+@import url("blocks/ordering.css");
+@import url("blocks/scenario.css");
+@import url("blocks/hotspot.css");
+@import url("blocks/file-tree.css");
+@import url("blocks/teams.css");
+@import url("blocks/timeline.css");
+@import url("blocks/checklist.css");
 
-  .ds-swatches > .ds-swatch + .ds-swatch {
-    margin-block-start: 0;
-  }
+/* Ansichten des Kurses (js/views/) */
+@import url("views/start.css");
+@import url("views/chapter.css");
+@import url("views/glossary.css");
+@import url("views/quiz.css");
+@import url("views/certificate.css");
 
-  .ds-swatch span {
-    font-size: var(--step--1);
-  }
+/* Anordnung der Beispiele */
+@import url("pages/designsystem.css");
 
-  .ds-swatch--yellow {
-    background-color: var(--color-yellow);
-    color: var(--color-graphite);
-  }
-
-  .ds-swatch--purple {
-    background-color: var(--color-purple);
-    color: var(--color-white);
-  }
-
-  .ds-swatch--graphite {
-    background-color: var(--color-graphite);
-    color: var(--color-white);
-  }
-
-  .ds-swatch--black {
-    background-color: var(--color-black);
-    color: var(--color-white);
-  }
-
-  .ds-type__h1 {
-    font-size: var(--step-4);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-  }
-
-  .ds-type__h2 {
-    font-size: var(--step-2);
-    font-weight: var(--font-weight-medium);
-    line-height: var(--line-height-tight);
-  }
-
-  .ds-type__h1 span,
-  .ds-type__h2 span,
-  .ds-type__note {
-    color: var(--color-text-muted);
-    font-size: var(--step--1);
-    font-style: normal;
-    font-weight: var(--font-weight-regular);
-  }
-
-  .ds-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: var(--space-m);
-  }
-
-  .ds-row--start {
-    align-items: center;
-  }
-
-  .ds-sample {
-    display: grid;
-    justify-items: center;
-    gap: var(--space-2xs);
-    margin: 0;
-  }
-
-  .ds-tile {
-    inline-size: var(--touch-target);
-    block-size: var(--touch-target);
-  }
-
-  .ds-switch-demo {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    min-block-size: var(--touch-target);
-    padding: 0;
-    background: none;
-    border: 0;
-    color: var(--color-text);
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-  }
-
-  .ds-statusbars {
-    display: grid;
-    gap: var(--space-s);
-    max-inline-size: 32rem;
-  }
-
-  .ds-masthead-sample {
-    padding: var(--space-s);
-    background-color: var(--color-black);
-    border-radius: var(--radius-l);
-  }
-
-  .ds-masthead-sample .sector-bar__segment {
-    padding-inline: var(--space-s);
-  }
-}
+/* Hilfsklassen (immer zuletzt) */
+@import url("base/utilities.css");

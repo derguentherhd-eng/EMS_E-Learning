@@ -1,0 +1,44 @@
+/*
+ * components/prose.css – Fließtext aus den Inhaltsdateien
+ *
+ * Abstände im Text aus content/*.md (Klasse .prose), Bilder, Tabellen, Symbol an externen Links.
+ */
+
+@layer components {
+  /* ── Fließtext aus den Inhaltsdateien ── */
+  .prose > * + * {
+    margin-block-start: var(--space-s);
+  }
+
+  .prose > :is(h2, h3, h4) {
+    margin-block-start: var(--space-l);
+  }
+
+  .prose > :is(h2, h3, h4) + * {
+    margin-block-start: var(--space-xs);
+  }
+
+  .link__icon {
+    display: inline-block;
+    inline-size: 0.85em;
+    block-size: 0.85em;
+    margin-inline-start: 0.15em;
+    vertical-align: -0.05em;
+  }
+
+  .figure img {
+    border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-m);
+  }
+
+  .inline-image {
+    display: inline-block;
+    block-size: 1.4em;
+    inline-size: auto;
+    vertical-align: middle;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+}

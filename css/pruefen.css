@@ -1,0 +1,42 @@
+/*
+ * pruefen.css – alle Stile für die Prüfseite (pruefen.html, Einstiegsdatei)
+ *
+ * Grundlagen, Bedienelemente und die Darstellung der Meldungen.
+ * Diese Datei enthält nur die Liste der Teildateien. Die Gestaltung selbst steht in den
+ * Ordnern base/, components/, blocks/, views/, pages/ und editor/ (eine Datei pro Thema).
+ *
+ * Reihenfolge: Die Kaskadenebenen (@layer) legt base/reset.css fest – spätere Ebenen gewinnen
+ * unabhängig von der Spezifität. Innerhalb einer Ebene gilt die Reihenfolge dieser Liste.
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neue Teildatei: Datei anlegen und hier mit @import eintragen (vor base/utilities.css).
+ */
+
+/* Grundlagen: Ebenen, Schrift, Design-Token, HTML-Elemente, Seitengerüst */
+@import url("base/reset.css");
+@import url("base/fonts.css");
+@import url("base/tokens.css");
+@import url("base/elements.css");
+@import url("base/layout.css");
+
+/* Bedienelemente */
+@import url("components/buttons.css");
+@import url("components/icon-button.css");
+@import url("components/switch.css");
+@import url("components/statusbar.css");
+@import url("components/masthead.css");
+@import url("components/view-header.css");
+@import url("components/notice.css");
+@import url("components/prose.css");
+@import url("components/todo.css");
+@import url("components/sector-bar.css");
+@import url("components/glossary-popover.css");
+@import url("components/forms.css");
+@import url("components/dialog.css");
+@import url("components/start-lights.css");
+
+/* Prüfseite */
+@import url("pages/check.css");
+
+/* Hilfsklassen (immer zuletzt) */
+@import url("base/utilities.css");

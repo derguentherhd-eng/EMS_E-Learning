@@ -1,0 +1,157 @@
+/*
+ * components/sector-bar.css – Sektoranzeige
+ *
+ * Die Kacheln S1–S6 und das Ziel unter der Kopfleiste. Erzeugt von js/ui/sector-bar.js.
+ */
+
+@layer components {
+  /* ── Sektoranzeige: schwarzer Streifen wie ein Zeitenmonitor, Segmente als abgerundete
+   * Kacheln im Stil des Designsystems ──
+   * Kontraste auf Schwarz: offen #1E1E1E mit Rand #5a5a5a (3,04) · bestanden Gelb (17,37) mit
+   * dunkler Schrift · Bestzeit Lila mit gelbem Rand (17,37) und gelber Schrift (6,61) +
+   * Stern-Symbol und Text. Zustand nie nur über Farbe. */
+  .sector-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    max-inline-size: 72rem;
+    margin-inline: auto;
+    padding: var(--space-2xs) var(--gutter) var(--space-s);
+    color: var(--color-masthead-text);
+  }
+
+  .sector-bar__list {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sector-bar__item {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+
+  .sector-bar__item + .sector-bar__item {
+    margin-block-start: 0;
+  }
+
+  .sector-bar__item--finish {
+    flex: 0 0 var(--touch-target);
+  }
+
+  .sector-bar__segment {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xs);
+    min-block-size: var(--touch-target);
+    padding-inline: var(--space-3xs);
+    background-color: var(--color-graphite);
+    color: var(--color-masthead-text);
+    border: var(--border-ds) solid var(--color-sector-open);
+    border-radius: var(--radius-m);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step--1);
+    line-height: 1.1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+
+  .sector-bar__segment--bestanden {
+    background-color: var(--color-sector-done);
+    border-color: var(--color-sector-done);
+    color: var(--color-graphite);
+  }
+
+  .sector-bar__segment--bestzeit {
+    background-color: var(--color-sector-best);
+    border-color: var(--color-yellow);
+    color: var(--color-yellow);
+  }
+
+  /* Aktueller Sektor: gelbe Linie unter der Kachel (auf Gelb sitzt sie auf Schwarz). */
+  .sector-bar__segment[aria-current]::after {
+    content: "";
+    position: absolute;
+    inset-inline: 4px;
+    inset-block-end: -9px;
+    block-size: 3px;
+    background-color: var(--color-yellow);
+    border-radius: var(--radius-pill);
+  }
+
+  .sector-bar__segment:hover {
+    border-color: var(--color-yellow);
+  }
+
+  .sector-bar__label {
+    display: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sector-bar__icon {
+    flex: none;
+    inline-size: 1em;
+    block-size: 1em;
+  }
+
+  .sector-bar__finish {
+    background-color: transparent;
+  }
+
+  .sector-bar__finish--ready {
+    border-color: var(--color-yellow);
+  }
+
+  .sector-bar__finish--done {
+    background-color: var(--color-yellow);
+    border-color: var(--color-yellow);
+    color: var(--color-graphite);
+  }
+
+  .sector-bar__caption {
+    flex: none;
+    margin: 0;
+    color: var(--color-masthead-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  @media (width >= 48rem) {
+    .sector-bar__list {
+      gap: 6px;
+    }
+
+    .sector-bar__segment {
+      padding-inline: var(--space-2xs);
+    }
+
+    .sector-bar__label {
+      display: inline;
+    }
+
+    .sector-bar__number {
+      color: inherit;
+      opacity: 0.85;
+    }
+
+    .sector-bar__caption {
+      display: none;
+    }
+  }
+
+  /* Auf schmalen Handys reicht der Platz neben sechs Segmenten nicht für die Beschriftung.
+   * Den aktuellen Sektor zeigt dort die gelbe Unterkante. */
+  @media (width <= 30rem) {
+    .sector-bar__caption {
+      display: none;
+    }
+  }
+}

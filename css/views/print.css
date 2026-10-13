@@ -1,0 +1,43 @@
+/*
+ * views/print.css – Druckansicht
+ *
+ * Zweck: Wird nur beim Drucken angewendet (in css/index.css mit „@import … print" eingebunden). Wichtigster
+ * Einsatz: das Ersatz-Zertifikat, falls die PDF-Bibliothek jsPDF nicht geladen werden kann.
+ * Dann druckt man die Zertifikatsseite und wählt „Als PDF sichern".
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Elemente, die nie gedruckt werden sollen: Klasse .no-print oder Selektor unten ergänzen.
+ */
+
+@layer utilities {
+  .masthead,
+  .site-footer,
+  .pager,
+  .skip-link,
+  .no-print {
+    display: none !important; /* Begründung: Druck darf keine Bedienelemente zeigen */
+  }
+
+  html,
+  body {
+    background: #fff !important; /* Begründung: Druck immer schwarz auf weiß */
+    color: #000 !important;
+  }
+
+  .page {
+    max-inline-size: none;
+    padding: 0;
+  }
+
+  /* Ersatz-Zertifikat: eigene Druckseite im Querformat, ohne Rahmen. */
+  .print-certificate {
+    page: certificate;
+    border: 0;
+    break-inside: avoid;
+  }
+}
+
+@page certificate {
+  size: a4 landscape;
+  margin: 12mm;
+}

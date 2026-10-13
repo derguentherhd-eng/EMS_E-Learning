@@ -1,0 +1,48 @@
+/*
+ * blocks/ordering.css – Baustein reihenfolge
+ *
+ * Gehört zu js/blocks/ordering.js. Die Pfeil-Knöpfe sind Symbol-Kacheln (icon-button.css).
+ */
+
+@layer components {
+  /* ── reihenfolge (ordering.js) ──
+   * Platznummer als Symbol-Kachel, Pfeile als Kachel-Knöpfe (components/icon-button.css). */
+  .ordering__item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-xs);
+    max-inline-size: none;
+    padding-block: var(--space-2xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .ordering__position {
+    display: grid;
+    place-items: center;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    background-color: var(--color-tile);
+    color: var(--color-on-tile);
+    border: var(--border-ds) solid var(--color-tile-border);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .is-correct .ordering__position {
+    box-shadow: 0 0 0 3px var(--color-success);
+  }
+
+  .is-wrong .ordering__position {
+    box-shadow: 0 0 0 3px var(--color-error);
+  }
+
+  .ordering__buttons {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .ordering__result:empty {
+    display: none;
+  }
+}

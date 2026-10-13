@@ -1,0 +1,154 @@
+/*
+ * editor/tree.css – Editor: Kursstruktur (linke Spalte)
+ *
+ * Gehört zu js/editor/course-tree.js.
+ */
+
+@layer components {
+  /* ── Kursstruktur (links) ── */
+  .tree ul,
+  .tree ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tree li + li {
+    margin-block-start: 0;
+  }
+
+  .tree__heading {
+    margin-block: var(--space-s) var(--space-3xs);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .tree__link {
+    border-radius: var(--radius-s);
+    display: block;
+    inline-size: 100%;
+    padding: var(--space-3xs) var(--space-2xs);
+    background: none;
+    border: 0;
+    color: var(--color-text);
+    text-align: start;
+    font-size: var(--step--1);
+  }
+
+  .tree__link:hover {
+    background-color: var(--color-surface-strong);
+  }
+
+  /* Ausgewählt = „gedrückt": Lila mit weißer Schrift. */
+  .tree__link[aria-current="true"] {
+    background-color: var(--color-pressed);
+    color: var(--color-white);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .tree__link--add {
+    color: var(--color-text-muted);
+  }
+
+  .tree__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3xs);
+  }
+
+  .tree__row .tree__link {
+    flex: 1 1 auto;
+    font-size: var(--step-0);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .tree__number {
+    color: var(--color-text-muted);
+  }
+
+  .tree__toggle,
+  .tree__move {
+    border-radius: var(--radius-s);
+    flex: none;
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    padding: 0;
+    background: none;
+    border: var(--border-thin) solid transparent;
+    color: var(--color-text-muted);
+  }
+
+  .tree__toggle:hover,
+  .tree__move:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .tree__move:disabled {
+    opacity: 0.35;
+  }
+
+  .tree__toggle-spacer {
+    inline-size: 1.75rem;
+  }
+
+  .tree__order {
+    display: flex;
+  }
+
+  .tree__badge {
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .tree__badge--dirty {
+    color: var(--color-text-muted);
+  }
+
+  .tree__badge--error {
+    color: var(--color-error);
+  }
+
+  .tree .tree__pages {
+    margin-inline-start: 2rem;
+    border-inline-start: var(--border-thin) solid var(--color-line);
+  }
+
+  .tree__add {
+    margin-block-start: var(--space-xs);
+  }
+
+  .tree__group {
+    margin-block-start: var(--space-s);
+  }
+
+  .tree__group summary {
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step--1);
+  }
+
+  .tree__inactive {
+    padding-block: var(--space-3xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .tree__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3xs);
+  }
+
+  .tree__empty {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .is-dragging {
+    opacity: 0.5;
+  }
+
+  .is-drop-target {
+    box-shadow: 0 -3px 0 var(--color-focus);
+  }
+}

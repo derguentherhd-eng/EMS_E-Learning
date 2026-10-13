@@ -1,0 +1,79 @@
+/*
+ * blocks/teams.css – Baustein teams
+ *
+ * Gehört zu js/blocks/teams.js.
+ */
+
+@layer components {
+  /* ── teams (teams.js) ── */
+  .teams__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .teams__count {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .teams__item {
+    max-inline-size: none;
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .teams__summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3xs) var(--space-s);
+    padding-block: var(--space-xs);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .teams__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .teams__name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .teams__area {
+    align-self: center;
+    padding: 0.1em 0.55em;
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-s);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .teams__short {
+    grid-column: 1 / -1;
+    color: var(--color-text-muted);
+  }
+
+  .teams__body {
+    display: grid;
+    gap: var(--space-s);
+    padding-block-end: var(--space-s);
+  }
+
+  .teams__image {
+    max-inline-size: 24rem;
+    border-radius: var(--radius-m);
+  }
+
+  .teams__facts dt {
+    margin-block-start: var(--space-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .teams__facts dd {
+    max-inline-size: var(--measure);
+  }
+}

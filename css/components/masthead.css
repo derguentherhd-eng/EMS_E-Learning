@@ -1,0 +1,130 @@
+/*
+ * components/masthead.css – Kopfleiste: Sprunglink, Logo, Navigation, Menü-Knopf
+ *
+ * Schwarzer Streifen oben auf jeder Seite (in beiden Designs schwarz, weil das Logo gelb ist).
+ * Der Menü-Knopf auf dem Handy ist eine Symbol-Kachel (siehe icon-button.css).
+ * Gehört zu: index.html, js/pages/index.js (Menü auf/zu).
+ */
+
+@layer components {
+  /* ── Skip-Link: erstes Element der Seite, sichtbar sobald er Fokus hat ── */
+  .skip-link {
+    position: absolute;
+    inset-inline-start: var(--space-s);
+    inset-block-start: var(--space-s);
+    z-index: 100;
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-medium);
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+    outline: 3px solid var(--color-black);
+  }
+
+  /* ── Kopfleiste (immer schwarz) ── */
+  .masthead {
+    --color-button-bg: var(--color-graphite);
+    --color-accent-line: var(--color-yellow);
+    --color-control-off: var(--color-graphite);
+    --color-control-border: var(--color-yellow);
+    --color-text: var(--color-masthead-text);
+  }
+
+  .masthead :focus-visible {
+    outline-color: var(--color-masthead-focus);
+  }
+
+  .masthead__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    color: var(--color-masthead-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step-1);
+    line-height: 1;
+  }
+
+  .masthead__logo {
+    inline-size: 2.6rem;
+    block-size: auto;
+  }
+
+  .masthead__menu-toggle {
+    margin-inline-start: auto;
+  }
+
+  @media (width >= 48rem) {
+    .masthead__menu-toggle {
+      display: none;
+    }
+  }
+
+  .masthead__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .masthead__links li + li {
+    margin-block-start: 0;
+  }
+
+  .masthead__links a,
+  .masthead__links button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    min-block-size: var(--touch-target);
+    padding-inline: var(--space-2xs);
+    background: none;
+    border: 0;
+    color: var(--color-masthead-text);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  /* Theme-Umschalter in der Kopfleiste: Schalter + Text. */
+  .theme-toggle {
+    cursor: pointer;
+  }
+
+  .masthead__links a:hover,
+  .masthead__links button:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .masthead__links a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--color-yellow);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.35em;
+  }
+
+  @media (width >= 48rem) {
+    .masthead__links {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+  }
+
+  /* Mobil ist die Navigation eingeklappt, bis der Menü-Knopf gedrückt wird.
+   * Ohne JavaScript bleibt sie sichtbar (die Klasse setzt erst main.js). */
+  @media (width <= 47.99rem) {
+    .masthead--collapsible .masthead__nav:not(.masthead__nav--open) {
+      display: none;
+    }
+  }
+}

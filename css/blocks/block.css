@@ -1,0 +1,95 @@
+/*
+ * blocks/block.css – Gemeinsame Teile aller Bausteine
+ *
+ * Rahmen (.block), Titel, Hinweise, Aktionsleiste und Rückmeldungen (.feedback), die alle
+ * interaktiven Bausteine aus js/blocks/ verwenden.
+ */
+
+@layer components {
+  /* Gemeinsamer Rahmen aller Bausteine: abgerundete Fläche ohne Schatten. */
+  .block {
+    padding: var(--space-s);
+    background-color: var(--color-surface);
+    border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-l);
+  }
+
+  /* ── Gemeinsame Teile interaktiver Bausteine ── */
+  .block > * + * {
+    margin-block-start: var(--space-s);
+  }
+
+  .block__title {
+    font-size: var(--step-1);
+  }
+
+  .block__hint {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .block__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .block__status:empty {
+    display: none;
+  }
+
+  .block__status {
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Rückmeldung: immer Symbol-Kachel (Haken/Kreuz) + Text, Farbe nur zusätzlich. */
+  .feedback {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: 4px solid var(--color-line-strong);
+    border-radius: var(--radius-m);
+    background-color: var(--color-bg);
+  }
+
+  .feedback > * + * {
+    margin-block-start: var(--space-2xs);
+  }
+
+  .feedback--correct {
+    border-inline-start-color: var(--color-success);
+    background-color: var(--color-success-bg);
+  }
+
+  .feedback--wrong {
+    border-inline-start-color: var(--color-error);
+    background-color: var(--color-error-bg);
+  }
+
+  .feedback__icon {
+    display: inline-block;
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    margin-inline-end: var(--space-2xs);
+    vertical-align: -0.4em;
+  }
+
+  /* Listen der Bausteine ohne Aufzählungszeichen und Standardabstände. */
+  .matching__list,
+  .ordering__list,
+  .hotspot__list,
+  .teams__list,
+  .checklist__list,
+  .file-tree__tasks {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Zeilen in Listen-Bausteinen trennt eine Linie, kein zusätzlicher Abstand. */
+  .matching__row + .matching__row,
+  .ordering__item + .ordering__item,
+  .checklist__item + .checklist__item,
+  .teams__item + .teams__item,
+  .hotspot__item + .hotspot__item {
+    margin-block-start: 0;
+  }
+}

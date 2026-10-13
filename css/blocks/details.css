@@ -1,0 +1,53 @@
+/*
+ * blocks/details.css – Baustein aufklappen
+ *
+ * Gehört zu js/blocks/details.js. Die Plus/Minus-Kachel nutzen auch die Steckbriefe im
+ * Baustein teams.
+ */
+
+@layer components {
+  /* ── aufklappen (details.js) ──
+   * Plus/Minus als Symbol-Kachel aus dem Designsystem („Auf und Zuklappen"). */
+  .details {
+    border-block: var(--border-thin) solid var(--color-line-strong);
+  }
+
+  .details__summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-block-size: var(--touch-target);
+    padding-block: var(--space-2xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .details__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .details__summary::before,
+  .teams__name::before {
+    content: "";
+    flex: none;
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    background: url("../../assets/icons/ui/plus-kachel.svg") center / contain
+      no-repeat;
+  }
+
+  .details[open] > .details__summary::before,
+  .teams__card[open] .teams__name::before {
+    background-image: url("../../assets/icons/ui/minus-kachel.svg");
+  }
+
+  .details__summary:hover::before,
+  .teams__summary:hover .teams__name::before {
+    transform: scale(1.06);
+  }
+
+  .details__body {
+    padding-block-end: var(--space-s);
+  }
+}

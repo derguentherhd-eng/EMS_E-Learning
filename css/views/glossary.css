@@ -1,0 +1,37 @@
+/*
+ * views/glossary.css – Glossarseite
+ *
+ * Suche und Begriffsliste unter #/glossar (js/views/glossary-page.js).
+ */
+
+@layer components {
+  /* ── Glossarseite ── */
+  .glossary-search {
+    display: grid;
+    gap: var(--space-3xs);
+    max-inline-size: 28rem;
+  }
+
+  .glossary-search__count {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .glossary-list__term {
+    margin-block-start: var(--space-m);
+    padding-block-start: var(--space-xs);
+    border-block-start: var(--border-thin) solid var(--color-line);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--step-1);
+    scroll-margin-block-start: var(--space-xl);
+  }
+
+  .glossary-list__term--target {
+    border-block-start: var(--border-thick) solid var(--color-accent-line);
+  }
+
+  .glossary-list__text {
+    max-inline-size: var(--measure);
+    margin-block-start: var(--space-3xs);
+  }
+}

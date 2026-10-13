@@ -1,0 +1,100 @@
+/*
+ * editor/layout.css – Editor: Seitengerüst
+ *
+ * Kopfleiste · drei Spalten (Kursstruktur | Arbeitsfläche | Eigenschaften/Vorschau) ·
+ * Statuszeile. Gedacht für Bildschirme ab 1024 px; darunter stapeln sich die Spalten.
+ */
+
+@layer layout {
+  .editor {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-block-size: 100vh;
+  }
+
+  .editor-bar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-masthead-bg);
+    color: var(--color-masthead-text);
+
+    /* Die Leiste ist in beiden Designs schwarz: Bedienelemente wie im dunklen Design. */
+    --color-button-bg: var(--color-graphite);
+    --color-accent-line: var(--color-yellow);
+    --color-control-off: var(--color-graphite);
+    --color-control-border: var(--color-yellow);
+    --color-text: var(--color-masthead-text);
+    --color-surface-strong: #333;
+  }
+
+  .editor-bar :focus-visible {
+    outline-color: var(--color-masthead-focus);
+  }
+
+  .editor-start {
+    max-inline-size: 48rem;
+    margin: var(--space-xl) auto;
+    padding-inline: var(--gutter);
+  }
+
+  .editor-start > * + * {
+    margin-block-start: var(--space-s);
+  }
+
+  .editor-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    min-block-size: 0;
+  }
+
+  @media (width >= 64rem) {
+    .editor-layout {
+      grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr) minmax(
+          22rem,
+          27rem
+        );
+    }
+
+    /* Jede Spalte scrollt für sich, die Kopfleiste bleibt stehen. */
+    .editor-column {
+      position: sticky;
+      inset-block-start: 3.25rem;
+      max-block-size: calc(100vh - 3.25rem - 2.5rem);
+      overflow-y: auto;
+    }
+  }
+
+  .editor-column {
+    padding: var(--space-s);
+    border-inline-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .editor-column--main {
+    padding-inline: var(--space-l);
+  }
+
+  .editor-column--side {
+    border-inline-end: 0;
+    display: grid;
+    gap: var(--space-s);
+    align-content: start;
+  }
+
+  .editor-status {
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 20;
+    min-block-size: 2.5rem;
+    padding: var(--space-2xs) var(--space-s);
+    background-color: var(--color-surface);
+    border-block-start: var(--border-thin) solid var(--color-line-strong);
+    font-size: var(--step--1);
+  }
+}

@@ -1,0 +1,76 @@
+/*
+ * blocks/callouts.css – Bausteine info, tipp, achtung
+ *
+ * Gehört zu js/blocks/callouts.js.
+ */
+
+@layer components {
+  /* ── info, tipp, achtung (callouts.js) ──
+   * info/tipp: ruhige Fläche mit lila Akzentlinie links. achtung ist laut: gelb-schwarze
+   * Boxengassen-Schraffur oben und gelber Rand. Die Schraffur ist ein Muster aus zwei
+   * Volltonfarben, kein Deko-Verlauf. */
+  .callout {
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-surface);
+    border-inline-start: 4px solid var(--color-purple);
+    border-radius: var(--radius-l);
+  }
+
+  .callout__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .callout__icon {
+    inline-size: 1.15em;
+    block-size: 1.15em;
+  }
+
+  .callout__title {
+    margin-block-start: var(--space-3xs);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--step-1);
+  }
+
+  .callout__body {
+    margin-block-start: var(--space-2xs);
+  }
+
+  .callout--achtung {
+    overflow: hidden;
+    padding: 0 var(--space-s) var(--space-s);
+    border: var(--border-ds) solid var(--color-yellow);
+  }
+
+  .callout--achtung::before {
+    content: "";
+    display: block;
+    block-size: 0.75rem;
+    margin-inline: calc(-1 * var(--space-s));
+    margin-block-end: var(--space-xs);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-yellow) 0 12px,
+      var(--color-black) 12px 24px
+    );
+  }
+
+  .callout--achtung .callout__label {
+    color: var(--color-text);
+  }
+
+  /* Im hellen Theme ist ein gelber Rahmen auf Weiß unsichtbar (1,21:1) → Schwarz. */
+  :root[data-theme="light"] .callout--achtung {
+    border-color: var(--color-black);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .callout--achtung {
+      border-color: var(--color-black);
+    }
+  }
+}

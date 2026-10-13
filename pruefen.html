@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--
   pruefen.html – Prüfseite für die Kursinhalte (Wartungswerkzeug)
 
@@ -6,7 +6,7 @@
   Zeilennummer, Schweregrad und Lösungsvorschlag. Vor jeder Veröffentlichung öffnen!
   Erklärung der Meldungen: docs/PFLEGE.md, Abschnitt „Prüfseite benutzen".
 
-  Die Logik steht in js/check-page.js und js/content/validate.js.
+  Die Logik steht in js/pages/pruefen.js und js/content/validate.js.
 -->
 <html lang="de">
   <head>
@@ -16,14 +16,10 @@
     <meta name="description" content="Prüft die Inhaltsdateien des Rookie-Onboardings auf Fehler, fehlende Angaben und offene Platzhalter.">
     <meta name="color-scheme" content="dark light">
     <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/tokens.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <script src="js/theme-init.js"></script>
-    <script src="js/em.js"></script>
-    <script src="js/scripts.js" defer data-pakete="kern" data-start="js/check-page.js"></script>
+    <link rel="stylesheet" href="css/pruefen.css">
+    <script src="js/core/theme-init.js"></script>
+    <script src="js/core/em.js"></script>
+    <script src="js/core/scripts.js" defer data-pakete="kern" data-start="js/pages/pruefen.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>

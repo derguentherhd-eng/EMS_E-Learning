@@ -1,2 +1,8 @@
+# Zeilenenden einheitlich (LF), egal ob unter Windows, macOS oder Linux gearbeitet wird.
+* text=auto eol=lf
 *.woff2 binary
 *.ttf binary
+*.webp binary
+*.png binary
+*.ico binary
+*.pdf binary

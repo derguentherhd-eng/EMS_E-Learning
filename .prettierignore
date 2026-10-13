@@ -1,0 +1,9 @@
+# Nicht automatisch formatieren:
+# – fremder Code und erzeugte Dateien
+vendor/
+content/inhalte.js
+assets/fonts/pdf/lato-pdf.js
+# – Inhalte und Dokumentation (Kursdown/Markdown wird von Hand bzw. vom Editor geschrieben)
+*.md
+# – HTML wird von Hand formatiert (MDN-Stil: keine „/>" an leeren Elementen)
+*.html

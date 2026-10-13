@@ -1,0 +1,136 @@
+/*
+ * views/start.css – Startseite
+ *
+ * „Weiter, wo du aufgehört hast" und die Sektorenliste im Stil eines Zeitenmonitors
+ * (js/views/start.js).
+ */
+
+@layer components {
+  /* ── Startseite ── */
+  .start-continue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+  }
+
+  .start-continue__where {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ── Zeitenmonitor-Liste (Sektoren auf der Startseite) ── */
+  .timing-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: var(--border-thick) solid var(--color-accent-line);
+  }
+
+  .timing-list__item {
+    max-inline-size: none;
+  }
+
+  .timing-list__item + .timing-list__item {
+    margin-block-start: 0;
+  }
+
+  .timing-list__item--finish:first-of-type,
+  .timing-list__item:not(.timing-list__item--finish)
+    + .timing-list__item--finish {
+    border-block-start: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  .timing-list__row {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr auto;
+    grid-template-areas:
+      "pos title title"
+      "pos status time";
+    align-items: center;
+    gap: var(--space-3xs) var(--space-xs);
+    min-block-size: 3.5rem;
+    padding: var(--space-xs) var(--space-2xs);
+    color: var(--color-text);
+    font-style: normal;
+    text-decoration: none;
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  a.timing-list__row:hover {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-m);
+  }
+
+  a.timing-list__row:hover .timing-list__title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .timing-list__row--locked {
+    color: var(--color-text-muted);
+  }
+
+  .timing-list__pos {
+    grid-area: pos;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step-1);
+  }
+
+  .timing-list__title {
+    grid-area: title;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .timing-list__time {
+    grid-area: time;
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    text-align: end;
+  }
+
+  .timing-list__status {
+    grid-area: status;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Status-Chips in den Sektorfarben – gleiche Sprache wie die Sektoranzeige. */
+  .timing-list__status--bestanden,
+  .timing-list__status--bestzeit,
+  .timing-list__status--ready {
+    padding: 0.15em 0.55em;
+    border-radius: var(--radius-s);
+  }
+
+  .timing-list__status--bestanden {
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+  }
+
+  .timing-list__status--bestzeit {
+    background-color: var(--color-purple);
+    color: var(--color-yellow);
+    border: var(--border-ds) solid var(--color-yellow);
+  }
+
+  .timing-list__status--ready {
+    border: var(--border-ds) solid var(--color-accent-line);
+  }
+
+  .timing-list__icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  @media (width >= 40rem) {
+    .timing-list__row {
+      grid-template-columns: 3.5rem 1fr 4.5rem 15rem;
+      grid-template-areas: "pos title time status";
+    }
+  }
+}

@@ -6,8 +6,9 @@ Was dort nicht enthalten war, wurde **im selben Stil ergänzt** (unten mit *Erwe
 **Zum Anschauen:** `designsystem.html` per Doppelklick öffnen. Die Seite zeigt alle Farben,
 Schriften und Bedienelemente mit den echten Stildateien – auch im hellen Design (Schalter oben).
 
-**Wo es im Code steht:** Alle Werte als Variablen in `css/tokens.css`. Bedienelemente in
-`css/components.css`, Bausteine in `css/blocks.css`, Editor in `css/editor.css`.
+**Wo es im Code steht:** Alle Werte als Variablen in `css/base/tokens.css`. Bedienelemente in
+`css/components/` (z. B. `buttons.css`, `icon-button.css`, `switch.css`, `statusbar.css`),
+Bausteine in `css/blocks/`, Editor in `css/editor/`.
 
 ---
 
@@ -83,7 +84,7 @@ die Plus/Minus-Kacheln und der Haken aus `assets/icons/ui/`.
 | Aus | dunkle Spur, lila Knopf **rechts** mit weißem Ring, gelber Rand |
 
 Verwendet für „Helles Design" in der Kopfleiste. Die Knopf-Seite folgt genau dem Designsystem
-(umgekehrt zu vielen Handys). Umdrehen: in `css/components.css` bei `.switch` die Werte von
+(umgekehrt zu vielen Handys). Umdrehen: in `css/components/switch.css` die Werte von
 `--switch-on-pos` und `--switch-off-pos` tauschen.
 
 ## 6. Statusbar

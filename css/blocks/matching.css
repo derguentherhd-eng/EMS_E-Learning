@@ -1,0 +1,42 @@
+/*
+ * blocks/matching.css – Baustein zuordnen
+ *
+ * Gehört zu js/blocks/matching.js.
+ */
+
+@layer components {
+  /* ── zuordnen (matching.js) ── */
+  .matching__row {
+    display: grid;
+    gap: var(--space-2xs) var(--space-s);
+    max-inline-size: none;
+    padding-block: var(--space-xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .matching__term {
+    align-self: center;
+  }
+
+  .matching__select {
+    inline-size: 100%;
+  }
+
+  .matching__feedback {
+    grid-column: 1 / -1;
+  }
+
+  @media (width >= 40rem) {
+    .matching__row {
+      grid-template-columns: 1fr minmax(12rem, 16rem);
+    }
+  }
+
+  .is-correct .matching__select {
+    border-color: var(--color-success);
+  }
+
+  .is-wrong .matching__select {
+    border-color: var(--color-error);
+  }
+}

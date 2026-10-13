@@ -94,3 +94,11 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Schalter „Helles Design" im Stil des Designsystems; Statusbar über Kapitelseiten und Quizfragen (neu).
 - Kästchen und Optionsfelder, Antworten, Sektoranzeige, Hotspots, Zeitstrahl, Kästen, Dialoge im selben Stil.
 - Neu: `designsystem.html` (Übersicht aller Bedienelemente) und `docs/DESIGNSYSTEM.md`.
+
+### Code aufgeräumt (2026-10-13)
+- Ordnerstruktur nach Aufgaben: `js/pages/` (Einstieg je HTML-Seite), `js/core/`, `js/course/`; CSS in `css/base/`, `components/`, `blocks/`, `views/`, `pages/`, `editor/` – eine Datei pro Thema, je Seite eine Einstiegsdatei mit `@import`.
+- Code-Stil nach den MDN-Richtlinien: Prettier-Formatierung (JS, CSS), ESLint- und Stylelint-Regeln im Projekt, alle Prüfungen ohne Befund; HTML, CSS und SVG W3C-valide.
+- Benannte Funktionen als Funktionsdeklarationen, immer geschweifte Klammern, Kommentare als `//` bzw. JSDoc; jede Funktion auf oberster Ebene dokumentiert.
+- VS-Code-Einstellungen (`.vscode/`, `.editorconfig`, `jsconfig.json`) und Übersicht „Wo finde ich was?" in der README.
+- Aussehen und Verhalten unverändert (Bildschirmfotos vorher/nachher verglichen, 145 Selbsttests grün).
+- Kapitel Arbeitssicherheit: Dauer auf 50 Minuten korrigiert (Schätzung des Editors).

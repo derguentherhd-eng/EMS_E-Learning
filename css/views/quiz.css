@@ -1,0 +1,230 @@
+/*
+ * views/quiz.css – Quiz und Ergebnis
+ *
+ * Fragen, Antworten, Sicherheitsfragen, Ergebnis-Streifen und Wiederholungsliste
+ * (js/course/quiz.js, js/views/quiz-view.js, js/views/qualifying.js).
+ */
+
+@layer components {
+  /* ── Quiz (js/course/quiz.js) ── */
+  .quiz__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .quiz__legend {
+    padding: 0;
+  }
+
+  .quiz__question {
+    font-size: var(--step-3);
+  }
+
+  .quiz__hint {
+    margin-block: var(--space-xs) var(--space-s);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .quiz__options {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .quiz__form > .block__actions {
+    margin-block-start: var(--space-m);
+  }
+
+  /* Antwortmöglichkeiten: abgerundete Flächen. Gewählt = „gedrückt" (Lila, weiße Schrift,
+   * gelber Rand). Nach dem Prüfen zusätzlich grüner bzw. roter Rand und Haken/Kreuz-Kachel
+   * mit Text „Richtig"/„Falsch" – die Farbe ist nie das einzige Merkmal. */
+  .quiz__option {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-2xs) var(--space-xs);
+    min-block-size: 3rem;
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-surface);
+    border: var(--border-ds) solid var(--color-line);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-regular);
+    cursor: pointer;
+  }
+
+  .quiz__option:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .quiz__option:has(:checked) {
+    background-color: var(--color-pressed);
+    color: var(--color-white);
+    border-color: var(--color-tile-border);
+  }
+
+  .quiz__option:has(:disabled) {
+    cursor: default;
+  }
+
+  .quiz__option.is-correct {
+    border-color: var(--color-success);
+    box-shadow: inset 0 0 0 2px var(--color-success);
+  }
+
+  .quiz__option.is-wrong {
+    border-color: var(--color-error);
+    box-shadow: inset 0 0 0 2px var(--color-error);
+  }
+
+  .quiz__mark:empty {
+    display: none;
+  }
+
+  .quiz__mark {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .quiz__mark-icon {
+    inline-size: 1.6em;
+    block-size: 1.6em;
+  }
+
+  /* Sicherheitsfrage: dieselbe Boxengassen-Schraffur wie der Achtung-Kasten, als Streifen am
+   * linken Rand einer abgerundeten Fläche. */
+  .quiz__critical {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    overflow: hidden;
+    padding: var(--space-2xs) var(--space-s) var(--space-2xs)
+      calc(0.75rem + var(--space-s));
+    background-color: var(--color-surface);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .quiz__critical::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: 0.75rem;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-yellow) 0 8px,
+      var(--color-black) 8px 16px
+    );
+  }
+
+  .quiz__critical-icon {
+    flex: none;
+    inline-size: 1.2em;
+    block-size: 1.2em;
+  }
+
+  .quiz__feedback:empty {
+    display: none;
+  }
+
+  .feedback--hint {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
+  }
+
+  /* ── Ergebnis ── */
+  .quiz-result__title--best {
+    /* Bestzeit: lila Fläche mit gelber Schrift (6,61:1) und gelbem Rand – wie „gedrückt". */
+    justify-self: start;
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    background-color: var(--color-purple);
+    color: var(--color-yellow);
+    border: var(--border-ds) solid var(--color-yellow);
+    border-radius: var(--radius-m);
+  }
+
+  .quiz-result__score {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .quiz-result__percent {
+    font-size: var(--step-4);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Ergebnis-Streifen: eine Kachel pro Frage. Richtig = Gelb mit dunklem Haken,
+   * falsch = dunkle Kachel mit grauem Rand und weißem Kreuz. */
+  .result-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: var(--space-2xs);
+    list-style: none;
+    background-color: var(--color-black);
+    border-radius: var(--radius-m);
+  }
+
+  .result-strip__cell {
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2rem;
+    margin: 0;
+    border-radius: var(--radius-s);
+  }
+
+  .result-strip__cell--correct {
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+  }
+
+  .result-strip__cell--wrong {
+    background-color: var(--color-graphite);
+    color: var(--color-white);
+    border: var(--border-ds) solid #5a5a5a;
+  }
+
+  .result-strip__icon {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+  }
+
+  .review__title {
+    font-size: var(--step-1);
+  }
+
+  .review__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .review__item {
+    display: flex;
+    gap: var(--space-2xs);
+    padding-block: var(--space-2xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .review__icon {
+    flex: none;
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    margin-block-start: 0.05em;
+  }
+
+  .review__question {
+    font-weight: var(--font-weight-medium);
+  }
+}

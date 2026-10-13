@@ -2,3 +2,4 @@
 # Sicherungskopien des Editors bleiben nur auf dem eigenen Rechner (nicht ins öffentliche Repository).
 content/_backup/*
 !content/_backup/.gitkeep
+node_modules/

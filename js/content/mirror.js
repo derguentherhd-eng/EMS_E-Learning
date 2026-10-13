@@ -20,74 +20,93 @@
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
-/**
- * @typedef {Object} MirrorData
- * @property {string} erzeugt               Zeitpunkt der Erzeugung (ISO)
- * @property {string[]} kapitelOrdner       Dateinamen in content/kapitel/
- * @property {Object<string, string>} dateien  Pfad ab Projektordner → Dateiinhalt
- */
+  /**
+   * @typedef {Object} MirrorData
+   * @property {string} erzeugt               Zeitpunkt der Erzeugung (ISO)
+   * @property {string[]} kapitelOrdner       Dateinamen in content/kapitel/
+   * @property {Object<string, string>} dateien  Pfad ab Projektordner → Dateiinhalt
+   */
 
-/**
- * Welche Dateien gehören in die Offline-Datei?
- * @param {string[]} chapterFiles  Dateinamen in content/kapitel/
- * @param {string} [logoPath]      Pfad des Logos aus kurs.md
- * @returns {string[]}
- */
-function collectMirrorPaths(chapterFiles, logoPath = '') {
-  const paths = ['content/kurs.md', 'content/glossar.md', 'content/_vorlage-kapitel.md'];
-  for (const file of chapterFiles) paths.push(`content/kapitel/${file}`);
-  if (/\.svg$/i.test(logoPath)) paths.push(logoPath);
-  return paths;
-}
-
-/**
- * Baut den Text von content/inhalte.js.
- * @param {Object<string, string>} files  Pfad → Inhalt
- * @param {string[]} chapterFiles
- * @param {Date} [date]
- * @returns {string}
- */
-function buildMirrorScript(files, chapterFiles, date = new Date()) {
-  /** @type {MirrorData} */
-  const data = { erzeugt: date.toISOString(), kapitelOrdner: [...chapterFiles].sort(), dateien: files };
-  return [
-    '/*',
-    ' * content/inhalte.js – AUTOMATISCH ERZEUGT vom Editor. Bitte nicht von Hand bearbeiten.',
-    ' *',
-    ' * Kopie aller Inhaltsdateien, damit der Kurs auch per Doppelklick auf index.html (ohne',
-    ' * Server) funktioniert. Die eigentlichen Inhalte stehen in den .md-Dateien. Nach Änderungen',
-    ' * von Hand: editor.html öffnen und den Projektordner wählen – die Datei wird dann erneuert.',
-    ' */',
-    `EM.inhalte = ${JSON.stringify(data, null, 2)};`,
-    '',
-  ].join('\n');
-}
-
-/**
- * Liest den Text einer content/inhalte.js wieder ein (für Editor und Tests).
- * @param {string} text
- * @returns {MirrorData|null}
- */
-function parseMirrorScript(text) {
-  const match = text.match(/EM\.inhalte = ([\s\S]*);\s*$/);
-  if (!match) return null;
-  try {
-    return JSON.parse(match[1]);
-  } catch {
-    return null;
+  /**
+   * Welche Dateien gehören in die Offline-Datei?
+   * @param {string[]} chapterFiles  Dateinamen in content/kapitel/
+   * @param {string} [logoPath]      Pfad des Logos aus kurs.md
+   * @returns {string[]}
+   */
+  function collectMirrorPaths(chapterFiles, logoPath = "") {
+    const paths = [
+      "content/kurs.md",
+      "content/glossar.md",
+      "content/_vorlage-kapitel.md",
+    ];
+    for (const file of chapterFiles) {
+      paths.push(`content/kapitel/${file}`);
+    }
+    if (/\.svg$/i.test(logoPath)) {
+      paths.push(logoPath);
+    }
+    return paths;
   }
-}
 
-/**
- * Lesefunktion (wie createFetchReader in loader.js), die aus der Offline-Datei liest.
- * @param {MirrorData} data
- * @returns {import('./loader.js').ReadText}
- */
-function createMirrorReader(data) {
-  return async (path) => data.dateien[path] ?? null;
-}
+  /**
+   * Baut den Text von content/inhalte.js.
+   * @param {Object<string, string>} files  Pfad → Inhalt
+   * @param {string[]} chapterFiles
+   * @param {Date} [date]
+   * @returns {string}
+   */
+  function buildMirrorScript(files, chapterFiles, date = new Date()) {
+    /** @type {MirrorData} */
+    const data = {
+      erzeugt: date.toISOString(),
+      kapitelOrdner: [...chapterFiles].sort(),
+      dateien: files,
+    };
+    return [
+      "/*",
+      " * content/inhalte.js – AUTOMATISCH ERZEUGT vom Editor. Bitte nicht von Hand bearbeiten.",
+      " *",
+      " * Kopie aller Inhaltsdateien, damit der Kurs auch per Doppelklick auf index.html (ohne",
+      " * Server) funktioniert. Die eigentlichen Inhalte stehen in den .md-Dateien. Nach Änderungen",
+      " * von Hand: editor.html öffnen und den Projektordner wählen – die Datei wird dann erneuert.",
+      " */",
+      `EM.inhalte = ${JSON.stringify(data, null, 2)};`,
+      "",
+    ].join("\n");
+  }
 
-EM.define('js/content/mirror.js', { collectMirrorPaths, buildMirrorScript, parseMirrorScript, createMirrorReader });
+  /**
+   * Liest den Text einer content/inhalte.js wieder ein (für Editor und Tests).
+   * @param {string} text
+   * @returns {MirrorData|null}
+   */
+  function parseMirrorScript(text) {
+    const match = text.match(/EM\.inhalte = ([\s\S]*);\s*$/);
+    if (!match) {
+      return null;
+    }
+    try {
+      return JSON.parse(match[1]);
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Lesefunktion (wie createFetchReader in loader.js), die aus der Offline-Datei liest.
+   * @param {MirrorData} data
+   * @returns {import("./loader.js").ReadText}
+   */
+  function createMirrorReader(data) {
+    return async (path) => data.dateien[path] ?? null;
+  }
+
+  EM.define("js/content/mirror.js", {
+    collectMirrorPaths,
+    buildMirrorScript,
+    parseMirrorScript,
+    createMirrorReader,
+  });
 })();

@@ -1,0 +1,42 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.rulers": [
+    80
+  ],
+  "files.eol": "\n",
+  "files.encoding": "utf8",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "files.trimTrailingWhitespace": false
+  },
+  "css.validate": true,
+  "stylelint.validate": [
+    "css"
+  ],
+  "eslint.validate": [
+    "javascript"
+  ],
+  "search.exclude": {
+    "vendor/**": true,
+    "content/inhalte.js": true,
+    "assets/fonts/pdf/lato-pdf.js": true,
+    "node_modules/**": true
+  },
+  "files.exclude": {
+    "node_modules": true
+  }
+}

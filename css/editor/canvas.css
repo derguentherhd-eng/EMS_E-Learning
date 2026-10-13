@@ -1,0 +1,208 @@
+/*
+ * editor/canvas.css – Editor: Arbeitsfläche (mittlere Spalte)
+ *
+ * Seitenliste, Element-Karten und Einfügen-Knöpfe (js/editor/page-canvas.js).
+ */
+
+@layer components {
+  /* ── Arbeitsfläche (Mitte) ── */
+  .canvas__info {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .canvas__info--warn {
+    color: var(--color-error);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .canvas__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .canvas__heading {
+    margin-block-start: var(--space-l);
+    padding-block-start: var(--space-xs);
+    border-block-start: var(--border-thin) solid var(--color-line);
+    font-size: var(--step-0);
+  }
+
+  .canvas__source,
+  .card__text {
+    border-radius: var(--radius-m);
+    overflow-x: auto;
+    padding: var(--space-xs);
+    background-color: var(--color-surface);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: var(--step--1);
+    white-space: pre-wrap;
+  }
+
+  .canvas__source-input {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: var(--step--1);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  /* Seitenliste der Kapitelübersicht */
+  .page-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .page-list__item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-3xs) var(--space-s);
+    align-items: center;
+    max-inline-size: none;
+    padding-block: var(--space-2xs);
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .page-list__item + .page-list__item {
+    margin-block-start: 0;
+  }
+
+  .page-list__open {
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--color-link);
+    text-align: start;
+    text-decoration: underline;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .page-list__meta {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+  }
+
+  .page-list__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3xs);
+  }
+
+  /* Karten im Baukasten */
+  .cards {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cards > li + li {
+    margin-block-start: 0;
+  }
+
+  .cards__insert {
+    max-inline-size: none;
+  }
+
+  .cards__insert-button {
+    border-radius: var(--radius-m);
+    inline-size: 100%;
+    min-block-size: 2rem;
+    padding: 0;
+    background: none;
+    border: var(--border-thin) dashed transparent;
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    opacity: 0.6;
+  }
+
+  .cards__insert-button:hover,
+  .cards__insert-button:focus-visible,
+  .cards__insert:last-child .cards__insert-button {
+    border-color: var(--color-line-strong);
+    opacity: 1;
+  }
+
+  .card {
+    border-radius: var(--radius-l);
+    max-inline-size: none;
+    background-color: var(--color-surface);
+    border: var(--border-thin) solid var(--color-line);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+  }
+
+  .card--selected {
+    border-color: var(--color-accent-line);
+    border-inline-start-color: var(--color-accent-line);
+  }
+
+  .card--raw {
+    border-inline-start-color: var(--color-error);
+  }
+
+  .card__head {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .card__select {
+    display: grid;
+    flex: 1 1 auto;
+    gap: var(--space-3xs);
+    padding: var(--space-2xs) var(--space-xs);
+    background: none;
+    border: 0;
+    color: var(--color-text);
+    text-align: start;
+  }
+
+  .card__type {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--step--1);
+  }
+
+  .card__summary {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    overflow-wrap: anywhere;
+  }
+
+  .card__tools {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--space-3xs);
+  }
+
+  .card__tool {
+    border-radius: var(--radius-s);
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    background: none;
+    border: var(--border-thin) solid transparent;
+    color: var(--color-text);
+  }
+
+  .card__tool:hover {
+    border-color: var(--color-line-strong);
+  }
+
+  .card__tool:disabled {
+    opacity: 0.35;
+  }
+
+  .card__body {
+    padding: 0 var(--space-xs) var(--space-xs);
+  }
+
+  .card__problem {
+    padding: 0 var(--space-xs) var(--space-xs);
+    color: var(--color-error);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+}

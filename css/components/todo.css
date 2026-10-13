@@ -1,0 +1,41 @@
+/*
+ * components/todo.css – Platzhalter „Inhalt folgt"
+ *
+ * So erscheint {{TODO: …}} aus den Inhaltsdateien im Kurs: deutlich, aber nicht alarmierend.
+ */
+
+@layer components {
+  /* ── Platzhalter „Inhalt folgt" ({{TODO: …}}): deutlich, aber nicht alarmierend ── */
+  .todo {
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-todo-bg);
+    border: 2px dashed var(--color-line-strong);
+    border-radius: var(--radius-m);
+  }
+
+  .todo__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .todo__icon {
+    inline-size: 1.1em;
+    block-size: 1.1em;
+  }
+
+  .todo__text {
+    margin-block-start: var(--space-3xs);
+  }
+
+  .todo--inline {
+    display: inline;
+    padding: 0.05em 0.3em;
+    border-width: 1px;
+  }
+
+  .todo--inline .todo__label {
+    display: inline;
+  }
+}

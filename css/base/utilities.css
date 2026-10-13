@@ -1,0 +1,25 @@
+/*
+ * base/utilities.css – Hilfsklassen
+ *
+ * Die einzige Ebene, die !important nutzen darf – sie muss jede andere Regel schlagen.
+ */
+
+@layer utilities {
+  /* Für Screenreader lesbar, aber unsichtbar (z. B. Zustand eines Sektors). */
+  .visually-hidden {
+    position: absolute !important; /* Begründung: muss jede Komponentenregel schlagen */
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Das hidden-Attribut muss immer gewinnen, auch wenn eine Komponente display setzt. */
+  [hidden] {
+    display: none !important;
+  }
+}

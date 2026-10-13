@@ -1,0 +1,48 @@
+/*
+ * blocks/timeline.css – Baustein zeitstrahl
+ *
+ * Gehört zu js/blocks/timeline.js.
+ */
+
+@layer components {
+  /* ── zeitstrahl (timeline.js) ──
+   * Lila Linie, Punkte wie der Knopf der Statusbar: gelb mit lila Rand. */
+  .timeline__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-inline-start: var(--border-thick) solid var(--color-purple);
+  }
+
+  .timeline__entry {
+    position: relative;
+    max-inline-size: none;
+    padding: 0 0 var(--space-s) var(--space-m);
+  }
+
+  .timeline__entry + .timeline__entry {
+    margin-block-start: 0;
+  }
+
+  .timeline__entry::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(-0.6rem - 1.5px);
+    inset-block-start: 0.3em;
+    inline-size: 1.2rem;
+    block-size: 1.2rem;
+    background-color: var(--color-yellow);
+    border: var(--border-ds) solid var(--color-purple);
+    border-radius: 50%;
+  }
+
+  .timeline__when {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .timeline__title {
+    font-weight: var(--font-weight-medium);
+  }
+}

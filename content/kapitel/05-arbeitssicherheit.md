@@ -1,7 +1,7 @@
 ---
 titel: Arbeitssicherheit
 kurztitel: Sicherheit
-dauer: 35
+dauer: 50
 version: 2
 freigegeben: nein
 lernziele:

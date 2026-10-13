@@ -1,0 +1,50 @@
+/*
+ * components/start-lights.css – Startampel
+ *
+ * Die Ampel vor dem Qualifying (js/ui/start-lights.js). Rot ist die einzige Farbe außerhalb
+ * des Designsystems – eine Startampel ist rot. Rein dekorativ.
+ */
+
+@layer components {
+  /* ── Startampel (js/ui/start-lights.js) ──
+   * Rot ist bewusst die einzige Farbe außerhalb des Team-CD: Eine Startampel ist rot. */
+  .start-lights {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-s);
+  }
+
+  .start-lights__panel {
+    display: flex;
+    gap: var(--space-2xs);
+    padding: var(--space-xs);
+    background-color: var(--color-black);
+    border: var(--border-ds) solid var(--color-yellow);
+    border-radius: var(--radius-l);
+  }
+
+  .start-lights__column {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs);
+    background-color: #111;
+    border-radius: var(--radius-m);
+  }
+
+  .start-lights__lamp {
+    inline-size: clamp(1.75rem, 8vw, 2.75rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #2b2b2b;
+    transition: background-color var(--duration-fast) linear;
+  }
+
+  .start-lights__column.is-on .start-lights__lamp {
+    background-color: #ff2a1f;
+  }
+
+  .start-lights__status {
+    font-size: var(--step-1);
+    font-weight: var(--font-weight-bold);
+  }
+}

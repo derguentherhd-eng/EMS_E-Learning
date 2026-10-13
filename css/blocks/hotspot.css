@@ -1,0 +1,95 @@
+/*
+ * blocks/hotspot.css – Baustein hotspot
+ *
+ * Gehört zu js/blocks/hotspot.js.
+ */
+
+@layer components {
+  /* ── hotspot (hotspot.js) ── */
+  .hotspot__figure {
+    margin: 0;
+  }
+
+  .hotspot__stage {
+    position: relative;
+  }
+
+  .hotspot__image {
+    inline-size: 100%;
+    border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-m);
+  }
+
+  /* Punkte wie Knöpfe aus dem Designsystem: „nicht gedrückt" gelb mit lila Rand,
+   * „gedrückt" (geöffnet) lila mit gelber Zahl und gelbem Rand. Position kommt als --x/--y
+   * aus hotspot.js (Prozent vom Bild). */
+  .hotspot__marker {
+    position: absolute;
+    inset-inline-start: var(--x);
+    inset-block-start: var(--y);
+    display: grid;
+    place-items: center;
+    inline-size: var(--touch-target);
+    block-size: var(--touch-target);
+    padding: 0;
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+    border: 3px solid var(--color-purple);
+    border-radius: 50%;
+    font-weight: var(--font-weight-bold);
+    transform: translate(-50%, -50%);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .hotspot__marker:hover,
+  .hotspot__marker.is-active {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+
+  .hotspot__marker.is-active {
+    background-color: var(--color-purple);
+    color: var(--color-yellow);
+    border-color: var(--color-yellow);
+  }
+
+  .hotspot__item {
+    border-block-end: var(--border-thin) solid var(--color-line);
+  }
+
+  .hotspot__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    inline-size: 100%;
+    min-block-size: var(--touch-target);
+    padding: var(--space-2xs) 0;
+    background: none;
+    border: 0;
+    text-align: start;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .hotspot__number {
+    display: grid;
+    place-items: center;
+    flex: none;
+    inline-size: 1.85rem;
+    block-size: 1.85rem;
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+    border: var(--border-ds) solid var(--color-purple);
+    border-radius: 50%;
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .hotspot__toggle[aria-expanded="true"] .hotspot__number {
+    background-color: var(--color-purple);
+    color: var(--color-yellow);
+    border-color: var(--color-yellow);
+  }
+
+  .hotspot__panel {
+    padding: 0 0 var(--space-xs) calc(1.85rem + var(--space-xs));
+  }
+}

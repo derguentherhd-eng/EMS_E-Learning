@@ -1,0 +1,54 @@
+/*
+ * base/fonts.css – Schrift Lato (alle Schnitte)
+ *
+ * Laut Designsystem sind alle Texte in Lato. Die Dateien liegen lokal in assets/fonts/ (keine
+ * Verbindung zu Google Fonts – Datenschutz, funktioniert ohne Internet). Sie sind auf
+ * lateinische Zeichen inkl. Umlaute reduziert, damit sie klein bleiben. font-display: swap
+ * zeigt sofort die Ersatzschrift, bis Lato geladen ist.
+ * Lizenz: SIL Open Font License 1.1 (assets/fonts/OFL-Lato.txt).
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Neuer Schnitt: Datei nach assets/fonts/ legen und hier ein @font-face ergänzen.
+ *   – Pfade sind relativ zu DIESER Datei (css/base/), deshalb ../../assets/.
+ */
+
+@font-face {
+  font-family: Lato;
+  src: url("../../assets/fonts/lato-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../assets/fonts/lato-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Medium (500): „Unterüberschrift" und „Hervorhebung im Fließtext" laut Designsystem. */
+@font-face {
+  font-family: Lato;
+  src: url("../../assets/fonts/lato-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../assets/fonts/lato-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../assets/fonts/lato-bolditalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

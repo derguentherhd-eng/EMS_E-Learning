@@ -1,0 +1,49 @@
+/*
+ * components/statusbar.css – Statusbar (Fortschrittsbalken)
+ *
+ * Lila Spur, gelbe Füllung, gelber Knopf. Erzeugt von js/ui/statusbar.js über Kapitelseiten
+ * und Quizfragen. Der Wert kommt als CSS-Variable --value (0 bis 1).
+ */
+
+@layer components {
+  /* ── Statusbar (Designsystem): lila Spur, gelbe Füllung, gelber Knopf mit lila Rand ──
+   * Der Fortschritt kommt als --value (0 bis 1) aus js/ui/statusbar.js. Rein grafisch: Der
+   * Text daneben („Seite 2 von 7") trägt dieselbe Information für Screenreader. */
+  .statusbar {
+    --knob: 1.15rem;
+
+    position: relative;
+    block-size: 0.7rem;
+    margin-block: var(--space-2xs);
+    background-color: var(--color-purple);
+    border-radius: var(--radius-pill);
+  }
+
+  .statusbar::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: max(var(--knob), calc(var(--value, 0) * 100%));
+    background-color: var(--color-yellow);
+    border: 1.5px solid var(--color-purple);
+    border-radius: var(--radius-pill);
+  }
+
+  .statusbar::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: clamp(
+      0px,
+      calc(var(--value, 0) * 100% - var(--knob) / 2),
+      calc(100% - var(--knob))
+    );
+    inline-size: var(--knob);
+    block-size: var(--knob);
+    background-color: var(--color-yellow);
+    border: 2px solid var(--color-purple);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+}

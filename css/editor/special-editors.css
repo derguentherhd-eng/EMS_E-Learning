@@ -1,0 +1,122 @@
+/*
+ * editor/special-editors.css – Editor: Quiz-, Glossar- und Hotspot-Editor
+ *
+ * Gehört zu js/editor/quiz-editor.js, glossary-editor.js und hotspot-editor.js.
+ */
+
+@layer components {
+  /* ── Quiz-Editor ── */
+  .quiz-editor__pool {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .quiz-editor__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .quiz-editor__question {
+    max-inline-size: none;
+  }
+
+  .quiz-editor__question + .quiz-editor__question {
+    margin-block-start: var(--space-s);
+  }
+
+  .quiz-editor__badge {
+    margin-inline-start: var(--space-2xs);
+    padding: 0 0.4em;
+    background-color: var(--color-yellow);
+    color: var(--color-black);
+  }
+
+  .quiz-editor__answers {
+    margin: 0;
+    padding: var(--space-2xs);
+    border: var(--border-thin) solid var(--color-line);
+  }
+
+  .quiz-editor__answers > legend {
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .quiz-editor__answer-list {
+    margin: 0 0 var(--space-2xs);
+    padding: 0;
+    list-style: none;
+  }
+
+  .quiz-editor__answer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-2xs);
+    max-inline-size: none;
+  }
+
+  .quiz-editor__answer + .quiz-editor__answer {
+    margin-block-start: var(--space-3xs);
+  }
+
+  .quiz-editor__correct {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3xs);
+    font-size: var(--step--1);
+  }
+
+  .quiz-editor__correct label {
+    font-weight: var(--font-weight-regular);
+  }
+
+  .quiz-editor__tools {
+    display: flex;
+  }
+
+  /* ── Glossar-Editor ── */
+  .glossary-editor td {
+    vertical-align: top;
+  }
+
+  .glossary-editor td:first-child {
+    inline-size: 11rem;
+  }
+
+  .glossary-editor__usage {
+    font-size: var(--step--1);
+    inline-size: 9rem;
+  }
+
+  /* ── Hotspot-Editor ── */
+  .hotspot-editor__stage {
+    position: relative;
+    cursor: crosshair;
+  }
+
+  .hotspot-editor__image {
+    inline-size: 100%;
+    border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-m);
+  }
+
+  .hotspot-editor__marker {
+    position: absolute;
+    inset-inline-start: var(--x);
+    inset-block-start: var(--y);
+    display: grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    background-color: var(--color-yellow);
+    color: var(--color-graphite);
+    border: 3px solid var(--color-purple);
+    border-radius: 50%;
+    font-weight: var(--font-weight-bold);
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    touch-action: none;
+  }
+}

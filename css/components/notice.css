@@ -1,0 +1,25 @@
+/*
+ * components/notice.css – Hinweise der Oberfläche
+ *
+ * Kurze Meldungen außerhalb der Inhalte, z. B. „Speichern ist nicht möglich".
+ */
+
+@layer components {
+  /* ── Hinweise der Oberfläche (z. B. „Speichern nicht möglich") ── */
+  .notice {
+    padding: var(--space-xs) var(--space-s);
+    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
+    background-color: var(--color-surface);
+  }
+
+  .notice--error {
+    border-inline-start-color: var(--color-error);
+    background-color: var(--color-error-bg);
+  }
+
+  .notice--success {
+    border-inline-start-color: var(--color-success);
+    background-color: var(--color-success-bg);
+  }
+}

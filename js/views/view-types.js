@@ -10,22 +10,22 @@
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
-/**
- * @typedef {Object} ViewContext
- * @property {import('../router.js').Route} route     aktuelle Adresse
- * @property {import('../content/loader.js').CourseModel} course
- * @property {import('../store.js').Store} store
- */
+  /**
+   * @typedef {Object} ViewContext
+   * @property {import('../core/router.js').Route} route     aktuelle Adresse
+   * @property {import('../content/loader.js').CourseModel} course
+   * @property {import('../core/store.js').Store} store
+   */
 
-/**
- * @typedef {Object} ViewResult
- * @property {string} title            Für document.title (vor „– Kursname")
- * @property {Node} node               Inhalt für <main>
- * @property {boolean} [wide]          Breitere Inhaltsspalte (z. B. Glossar)
- * @property {string|null} [chapterId] Kapitel, das die Sektoranzeige hervorheben soll
- * @property {HTMLElement} [focus]     Fokusziel statt der <h1> (z. B. Glossarbegriff)
- * @property {() => void} [destroy]    Aufräumen beim Verlassen (Timer, Listener)
- */
+  /**
+   * @typedef {Object} ViewResult
+   * @property {string} title            Für document.title (vor „– Kursname")
+   * @property {Node} node               Inhalt für <main>
+   * @property {boolean} [wide]          Breitere Inhaltsspalte (z. B. Glossar)
+   * @property {string|null} [chapterId] Kapitel, das die Sektoranzeige hervorheben soll
+   * @property {HTMLElement} [focus]     Fokusziel statt der <h1> (z. B. Glossarbegriff)
+   * @property {() => void} [destroy]    Aufräumen beim Verlassen (Timer, Listener)
+   */
 })();
