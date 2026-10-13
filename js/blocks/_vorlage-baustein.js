@@ -13,7 +13,8 @@
  *     Ganz unten in der neuen Datei den Pfad bei EM.define anpassen.
  *     → Der Baustein funktioniert jetzt im Kurs, wird geprüft und erscheint im Editor.
  *  4. Aussehen: in css/blocks.css einen Abschnitt „merksatz" mit Klassen .key-sentence…
- *  5. Symbol für die Editor-Palette: assets/icons/merksatz.svg (24×24, eine Farbe).
+ *  5. Symbol für die Editor-Palette: assets/icons/merksatz.svg – Kachel im Designsystem-Stil
+ *     (vorhandene Datei kopieren: lila Fläche, gelber Rand, gelbes Symbol).
  *  6. In js/tests.js in BLOCK_SAMPLES ein gültiges und (falls möglich) ein ungültiges Beispiel
  *     ergänzen → tests.html prüft Parser und Round-Trip automatisch.
  *  7. In docs/BAUSTEINE.md einen Abschnitt mit Kopiervorlage schreiben.

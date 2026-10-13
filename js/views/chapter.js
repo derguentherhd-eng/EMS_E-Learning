@@ -23,6 +23,7 @@ const { el } = EM.require('js/dom.js');
 const { createBlockContext, renderElement } = EM.require('js/render.js');
 const { chapterHash } = EM.require('js/router.js');
 const { markVisited } = EM.require('js/store.js');
+const { statusBar } = EM.require('js/ui/statusbar.js');
 const { isReleased, isSafetyChapter } = EM.require('js/content/documents.js');
 const { renderNotFound } = EM.require('js/views/not-found.js');
 
@@ -63,6 +64,7 @@ function renderChapter({ route, course, store }) {
         el('p', {}, `Sektor ${index + 1} · ${chapter.meta.kurztitel ?? chapter.meta.titel}`),
         el('p', {}, `Seite ${pageNumber} von ${total} · ca. ${chapter.meta.dauer} min`),
       ),
+      statusBar(pageNumber, total),
       el('h1', { class: 'view-title' }, page.title),
     ),
     pageNumber === 1 ? renderFirstPageIntro(chapter) : null,

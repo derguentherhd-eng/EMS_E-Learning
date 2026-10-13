@@ -5,6 +5,10 @@
  * CSS-Dateien verwenden ausschließlich diese Variablen. Wer z. B. ein Grau ändern will, ändert
  * es hier – und nur hier.
  *
+ * Grundlage ist das Designsystem des Teams („Designsystem für E learning.pdf", beschrieben in
+ * docs/DESIGNSYSTEM.md): Primär Gelb #FFED00, Sekundär Lila #534495, Hintergrund #1E1E1E,
+ * Schwarz #000000, alle Texte in Lato, abgerundete Flächen, gelbe Ränder an lila Symbolen.
+ *
  * Themes:
  *   – Standard ist das dunkle Theme (Werkstatt-/Boxengassen-Gefühl).
  *   – Hell wird aktiv, wenn das System hell eingestellt ist UND niemand „Dunkel" gewählt hat,
@@ -14,10 +18,12 @@
  *   Mindestwerte: Fließtext 4,5:1 · große Schrift und Bedienelemente 3:1.
  *   Die vollständige Tabelle steht in docs/ENTWICKLER.md.
  *
- * Verbindliche Farbregeln des Teams (nicht „verschönern"!):
- *   – Gelb nie als Textfarbe auf hellem Grund (Gelb auf Weiß = 1,21:1, unlesbar).
- *   – Lila nie als Textfarbe auf Dunkelgrau (2,09:1). Lila als Fläche nur mit weißer Schrift.
- *   – Im hellen Theme ist Gelb nur Fläche mit schwarzer Schrift oder eine dicke Linie.
+ * Verbindliche Farbregeln aus dem Designsystem (nicht „verschönern"!):
+ *   – Auf Gelb nur dunkle Schrift (#1E1E1E 13,79 · Schwarz 17,37). Nie Weiß oder Gelb auf Gelb.
+ *   – Auf Lila nur Gelb (6,61) oder Weiß (7,99). Nie Schwarz auf Lila.
+ *   – Auf #1E1E1E nur Weiß/Hellgrau oder Gelb (13,79). Nie Lila (2,09) oder Schwarz als Schrift.
+ *   – Im hellen Theme zusätzlich: Gelb nie als Textfarbe (1,21:1 auf Weiß), nur als Fläche mit
+ *     dunkler Schrift. Lila darf dort Text- und Linkfarbe sein (7,38).
  *
  * Wenn du hier etwas ändern willst …
  *   – Farbe ändern: Kontrast neu prüfen (z. B. mit dem Kontrastrechner der Firefox-Entwickler-
@@ -46,6 +52,15 @@
   font-display: swap;
 }
 
+/* Medium (500): „Unterüberschrift" und „Hervorhebung im Fließtext" laut Designsystem. */
+@font-face {
+  font-family: 'Lato';
+  src: url('../assets/fonts/lato-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Lato';
   src: url('../assets/fonts/lato-bold.woff2') format('woff2');
@@ -59,14 +74,6 @@
   src: url('../assets/fonts/lato-bolditalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('../assets/fonts/lato-black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
   font-display: swap;
 }
 
@@ -96,10 +103,32 @@
     --color-error-bg: #4a2220; /* Textfarbe darauf: 12,17 */
     --color-todo-bg: #3a3420; /* „Inhalt folgt"-Kasten; Textfarbe darauf: 11,09 */
 
-    /* Primärer Button: Gelb mit schwarzer Schrift (17,37) in beiden Themes. */
+    /* Button „nicht gedrückt": Gelb mit #1E1E1E-Schrift (13,79) in beiden Themes.
+     * Button „gedrückt" (aktiv, ausgewählt, aria-pressed): Lila mit gelber Schrift (6,61). */
     --color-primary: var(--color-yellow);
-    --color-on-primary: var(--color-black);
+    --color-on-primary: var(--color-graphite);
     --color-primary-border: var(--color-yellow);
+    --color-pressed: var(--color-purple);
+    --color-on-pressed: var(--color-yellow);
+
+    /* Symbol-Kacheln (Hamburgermenü, Haken, Kreuz, Plus/Minus): lila Fläche, gelber Rand,
+     * gelbes Symbol. Auf #1E1E1E hat Lila nur 2,09:1 – die Kachel ist über den gelben Rand
+     * (13,79) erkennbar. Im hellen Theme trägt die lila Fläche selbst (7,38). */
+    --color-tile: var(--color-purple);
+    --color-tile-border: var(--color-yellow);
+    --color-on-tile: var(--color-yellow);
+
+    /* Schalter „Aus" und leere Kästchen: dunkle Fläche mit gelbem Rand. */
+    --color-control-off: var(--color-graphite);
+    --color-control-border: var(--color-yellow);
+
+    /* Fläche der Zweit-Buttons (.button ohne --primary): dunkel, im hellen Theme weiß. In der
+     * immer schwarzen Kopfleiste wird sie lokal auf Dunkel zurückgesetzt. */
+    --color-button-bg: var(--color-control-off);
+
+    /* Akzentlinie (Rand von Dialogen, umgedrehten Karten, Zielen, Zweit-Buttons):
+     * Gelb auf Dunkel (13,79), Lila auf Hell (7,38). */
+    --color-accent-line: var(--color-yellow);
 
     /* ── Kopfleiste + Sektoranzeige: in BEIDEN Themes schwarz ──
      * Grund: Das Teamlogo ist einfarbig Gelb und braucht dunklen Grund; außerdem wirkt der
@@ -121,9 +150,11 @@
     /* ── Schrift ── */
     --font-sans: 'Lato', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
       sans-serif;
+    /* Designsystem: Überschrift Bold · Unterüberschrift und Hervorhebung Medium · Text Regular ·
+     * Links Italic. Lato Black wird nicht mehr verwendet. */
     --font-weight-regular: 400;
+    --font-weight-medium: 500;
     --font-weight-bold: 700;
-    --font-weight-black: 900;
 
     /* Typoskala im Verhältnis 1,25. Fließtext wächst auf großen Bildschirmen leicht mit. */
     --step--1: 0.875rem; /* nur Metadaten, nie Fließtext */
@@ -148,10 +179,15 @@
     --space-2xl: 4rem;
     --gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
 
-    /* ── Form: kantig, technisch. Keine großen Rundungen, keine Standard-Schatten. ── */
+    /* ── Form laut Designsystem: abgerundete Rechtecke (Buttons und Symbol-Kacheln haben dieselbe
+     * Rundung), Schalter und Statusbar als Pille, Knöpfe rund. Keine Schatten, keine Verläufe. ── */
     --radius-0: 0;
-    --radius-s: 2px;
+    --radius-s: 4px; /* kleine Teile: Chips, Code, Nummern */
+    --radius-m: 8px; /* Buttons, Eingabefelder, Symbol-Kacheln */
+    --radius-l: 12px; /* Flächen: Bausteine, Dialoge, Karten */
+    --radius-pill: 999px; /* Schalter, Statusbar */
     --border-thin: 1px;
+    --border-ds: 2px; /* gelber Rand an Kacheln, Schaltern, aktiven Elementen */
     --border-thick: 3px;
     --focus-ring: 3px solid var(--color-focus);
     --focus-offset: 2px;
@@ -190,6 +226,12 @@
       --color-todo-bg: #fff7a8; /* Textfarbe darauf: 15,18 */
       /* Gelber Button auf hellem Grund hätte nur 1,2:1 Kontur → schwarzer Rand (19+:1). */
       --color-primary-border: var(--color-black);
+      --color-accent-line: var(--color-purple);
+      --color-button-bg: var(--color-surface);
+      /* Leere Kästchen und Schalter »Aus« im hellen Theme: helle Fläche mit lila Rand – dunkle
+       * Kästchen sähen auf hellem Grund wie schon angehakt aus. */
+      --color-control-off: var(--color-surface);
+      --color-control-border: var(--color-purple);
     }
   }
 
@@ -210,6 +252,10 @@
     --color-error-bg: #fbe5e3;
     --color-todo-bg: #fff7a8;
     --color-primary-border: var(--color-black);
+    --color-accent-line: var(--color-purple);
+    --color-button-bg: var(--color-surface);
+    --color-control-off: var(--color-surface);
+    --color-control-border: var(--color-purple);
   }
 
   @media (prefers-reduced-motion: reduce) {

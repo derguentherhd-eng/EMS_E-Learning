@@ -95,21 +95,27 @@ function updateNavigation(route) {
   }
 }
 
-/* ── Menü auf schmalen Bildschirmen (Aufklapp-Muster mit aria-expanded) ── */
+/* ── Menü auf schmalen Bildschirmen (Aufklapp-Muster mit aria-expanded) ──
+ * Der Knopf ist eine Symbol-Kachel aus dem Designsystem: Hamburgermenü, geöffnet ein Kreuz. */
 function setupMenu() {
   document.querySelector('.masthead')?.classList.add('masthead--collapsible');
   menuToggle.hidden = false;
-  menuToggle.prepend(icon('menu', 'button__icon'));
+  setMenuState(false);
   menuToggle.addEventListener('click', () => {
-    const open = menuToggle.getAttribute('aria-expanded') !== 'true';
-    menuToggle.setAttribute('aria-expanded', String(open));
-    nav.classList.toggle('masthead__nav--open', open);
+    setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
   });
 }
 
+/** @param {boolean} open */
+function setMenuState(open) {
+  menuToggle.setAttribute('aria-expanded', String(open));
+  nav.classList.toggle('masthead__nav--open', open);
+  menuToggle.querySelector('svg')?.remove();
+  menuToggle.prepend(icon(open ? 'cross' : 'menu', 'icon-button__icon'));
+}
+
 function closeMenu() {
-  menuToggle.setAttribute('aria-expanded', 'false');
-  nav.classList.remove('masthead__nav--open');
+  setMenuState(false);
 }
 
 /**
@@ -141,7 +147,7 @@ document.querySelector('.skip-link')?.addEventListener('click', (event) => {
 /* ── Start ── */
 async function init() {
   const themeButton = /** @type {HTMLButtonElement} */ (document.querySelector('.theme-toggle'));
-  themeButton.prepend(icon('sun', 'button__icon'));
+  themeButton.prepend(el('span', { class: 'switch', 'aria-hidden': 'true' }));
   setupThemeToggle(themeButton, store);
   setupMenu();
   if (!store.isPersistent()) {

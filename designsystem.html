@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  designsystem.html – Übersicht des Designsystems (lebende Vorlage)
+
+  Zeigt alle Farben, Schriften und Bedienelemente des Kurses mit den echten CSS-Dateien.
+  Grundlage ist das Designsystem des Teams („Designsystem für E learning.pdf"); was dort nicht
+  enthalten war, wurde im selben Stil ergänzt und ist hier mit „Erweiterung" markiert.
+  Beschreibung in Worten: docs/DESIGNSYSTEM.md.
+
+  Wenn du hier etwas ändern willst …
+    – Aussehen ändern: in css/tokens.css bzw. css/components.css – diese Seite zeigt es sofort.
+    – Neues Bedienelement: hier ein Beispiel ergänzen, damit alle sehen, wie es aussieht.
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Designsystem – Rookie-Onboarding</title>
+    <meta name="description" content="Übersicht über Farben, Schriften und Bedienelemente des Rookie-Onboardings von Einstein Motorsport.">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/blocks.css">
+    <link rel="stylesheet" href="css/designsystem.css">
+    <script src="js/theme-init.js"></script>
+    <script src="js/em.js"></script>
+    <script src="js/scripts.js" defer data-pakete="kern" data-start="js/designsystem.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="masthead__brand" href="index.html">
+          <img class="masthead__logo" src="assets/logo/logo.svg" alt="Einstein Motorsport" width="284" height="269">
+          <span>Designsystem</span>
+        </a>
+        <nav class="masthead__nav" aria-label="Werkzeuge">
+          <ul class="masthead__links">
+            <li><a href="index.html">Zum Kurs</a></li>
+            <li><a href="editor.html">Editor</a></li>
+            <li><button class="theme-toggle" type="button" aria-pressed="false">Helles Design</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page page--wide stack--loose" id="main" tabindex="-1">
+      <div class="stack">
+        <h1>Designsystem</h1>
+        <p class="lead">Alle Farben, Schriften und Bedienelemente des Kurses auf einen Blick – mit den echten Stildateien. Elemente, die im Designsystem des Teams noch nicht enthalten waren und im selben Stil ergänzt wurden, sind mit <span class="ds-tag">Erweiterung</span> markiert.</p>
+      </div>
+
+      <section class="stack" aria-labelledby="farben">
+        <h2 id="farben">Farben</h2>
+        <ul class="ds-swatches">
+          <li class="ds-swatch ds-swatch--yellow"><strong>Primär</strong> #FFED00<span>Schrift darauf: nur dunkel (#1E1E1E 13,79 : 1)</span></li>
+          <li class="ds-swatch ds-swatch--purple"><strong>Sekundär</strong> #534495<span>Schrift darauf: Gelb (6,61 : 1) oder Weiß (7,99 : 1)</span></li>
+          <li class="ds-swatch ds-swatch--graphite"><strong>Hintergrund</strong> #1E1E1E<span>Schrift darauf: Weiß oder Gelb (13,79 : 1)</span></li>
+          <li class="ds-swatch ds-swatch--black"><strong>Schwarzton</strong> #000000<span>Kopfleiste, Sektoranzeige</span></li>
+        </ul>
+        <h3>Nicht erlaubt</h3>
+        <ul>
+          <li>Weiße oder gelbe Schrift auf Gelb</li>
+          <li>Schwarze Schrift auf Lila</li>
+          <li>Lila oder schwarze Schrift auf #1E1E1E</li>
+          <li>Im hellen Design: Gelb als Schriftfarbe (1,21 : 1)</li>
+        </ul>
+      </section>
+
+      <section class="stack" aria-labelledby="schrift">
+        <h2 id="schrift">Schrift: immer Lato</h2>
+        <div class="ds-type stack--tight">
+          <p class="ds-type__h1">Überschrift <span>Lato Bold</span></p>
+          <p class="ds-type__h2">Unterüberschrift <span>Lato Medium</span></p>
+          <p>Text <span class="ds-type__note">Lato Regular</span></p>
+          <p><strong>Hervorhebung im Fließtext</strong> <span class="ds-type__note">Lato Medium</span></p>
+          <p><a href="#schrift">Link im Fließtext</a> <span class="ds-type__note">Lato Italic, unterstrichen, Gelb (hell: Lila)</span></p>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="buttons">
+        <h2 id="buttons">Buttons</h2>
+        <div class="ds-row">
+          <figure class="ds-sample"><button class="button button--primary" type="button">Button</button><figcaption>nicht gedrückt</figcaption></figure>
+          <figure class="ds-sample"><button class="button button--primary is-pressed" type="button">Button</button><figcaption>gedrückt</figcaption></figure>
+          <figure class="ds-sample"><button class="button" type="button">Zweitaktion</button><figcaption>Zweitaktion <span class="ds-tag">Erweiterung</span></figcaption></figure>
+          <figure class="ds-sample"><button class="button" type="button" disabled>Gesperrt</button><figcaption>gesperrt <span class="ds-tag">Erweiterung</span></figcaption></figure>
+          <figure class="ds-sample"><button class="button button--quiet" type="button">Leise Aktion</button><figcaption>leise <span class="ds-tag">Erweiterung</span></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="symbole">
+        <h2 id="symbole">Symbol-Kacheln</h2>
+        <p>Lila Fläche, gelber Rand, gelbes Symbol mit runden Enden.</p>
+        <div class="ds-row">
+          <figure class="ds-sample"><button class="icon-button" type="button" data-icon="menu"><span class="visually-hidden">Menü</span></button><figcaption>Hamburgermenü</figcaption></figure>
+          <figure class="ds-sample"><button class="icon-button" type="button" data-icon="cross"><span class="visually-hidden">Schließen</span></button><figcaption>Kreuz</figcaption></figure>
+          <figure class="ds-sample"><button class="icon-button" type="button" data-icon="check"><span class="visually-hidden">Abgehakt</span></button><figcaption>Abgehakt</figcaption></figure>
+          <figure class="ds-sample"><img class="ds-tile" src="assets/icons/ui/plus-kachel.svg" alt="" width="44" height="44"><figcaption>Aufklappen</figcaption></figure>
+          <figure class="ds-sample"><img class="ds-tile" src="assets/icons/ui/minus-kachel.svg" alt="" width="44" height="44"><figcaption>Zuklappen</figcaption></figure>
+          <figure class="ds-sample"><button class="icon-button" type="button" data-icon="arrowUp"><span class="visually-hidden">Nach oben</span></button><figcaption>Pfeil <span class="ds-tag">Erweiterung</span></figcaption></figure>
+          <figure class="ds-sample"><button class="icon-button" type="button" data-icon="arrowDown" disabled><span class="visually-hidden">Nach unten</span></button><figcaption>gesperrt <span class="ds-tag">Erweiterung</span></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="schalter">
+        <h2 id="schalter">Schalter und Statusbar</h2>
+        <div class="ds-row">
+          <figure class="ds-sample"><button class="ds-switch-demo" type="button" aria-pressed="true" data-switch-demo><span class="switch" aria-hidden="true"></span>Beispiel</button><figcaption>An</figcaption></figure>
+          <figure class="ds-sample"><button class="ds-switch-demo" type="button" aria-pressed="false" data-switch-demo><span class="switch" aria-hidden="true"></span>Beispiel</button><figcaption>Aus</figcaption></figure>
+        </div>
+        <div class="ds-statusbars">
+          <div class="statusbar" data-value="0.15"></div>
+          <div class="statusbar" data-value="0.55"></div>
+          <div class="statusbar" data-value="1"></div>
+        </div>
+        <p class="ds-type__note">Die Statusbar zeigt den Fortschritt auf Kapitelseiten und im Quiz. Die Zahl („Seite 2 von 7") steht immer zusätzlich als Text daneben.</p>
+      </section>
+
+      <section class="stack" aria-labelledby="formulare">
+        <h2 id="formulare">Formulare <span class="ds-tag">Erweiterung</span></h2>
+        <div class="ds-row ds-row--start">
+          <label class="choice"><input type="checkbox"> Kästchen leer</label>
+          <label class="choice"><input type="checkbox" checked> Kästchen abgehakt</label>
+          <label class="choice"><input type="radio" name="ds-radio"> Option</label>
+          <label class="choice"><input type="radio" name="ds-radio" checked> Option gewählt</label>
+        </div>
+        <div class="field">
+          <label for="ds-input">Eingabefeld</label>
+          <input class="field__input" id="ds-input" type="text" placeholder="z. B. dein Name">
+        </div>
+        <div class="field">
+          <label for="ds-select">Auswahl</label>
+          <select class="field__input" id="ds-select"><option>Bitte wählen …</option><option>Gebotszeichen</option></select>
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="zustaende">
+        <h2 id="zustaende">Zustände und Hinweise <span class="ds-tag">Erweiterung</span></h2>
+        <div class="ds-masthead-sample">
+          <ul class="sector-bar__list">
+            <li class="sector-bar__item"><span class="sector-bar__segment sector-bar__segment--offen">S1 offen</span></li>
+            <li class="sector-bar__item"><span class="sector-bar__segment sector-bar__segment--bestanden">S2 bestanden</span></li>
+            <li class="sector-bar__item"><span class="sector-bar__segment sector-bar__segment--bestzeit">S3 Bestzeit</span></li>
+          </ul>
+        </div>
+        <div class="ds-row ds-row--start">
+          <span class="timing-list__status timing-list__status--bestanden">Bestanden · 90 %</span>
+          <span class="timing-list__status timing-list__status--bestzeit">Bestzeit · 100 %</span>
+          <span class="timing-list__status timing-list__status--ready">Bereit</span>
+        </div>
+        <p class="notice">Hinweis der Oberfläche, z. B. „Speichern ist gerade nicht möglich".</p>
+        <div class="feedback feedback--correct" data-feedback="check"><strong>Richtig.</strong> Rückmeldung mit Haken-Kachel.</div>
+        <div class="feedback feedback--wrong" data-feedback="cross"><strong>Nicht ganz.</strong> Rückmeldung mit Kreuz-Kachel.</div>
+      </section>
+
+      <section class="stack" aria-labelledby="bausteine">
+        <h2 id="bausteine">Bausteine im Kurs</h2>
+        <p>So erscheinen die interaktiven Bausteine – erzeugt aus echtem Kursdown mit demselben Code wie im Kurs.</p>
+        <div class="chapter stack" data-demo-blocks></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>Grundlage: Designsystem des Teams. Beschreibung: docs/DESIGNSYSTEM.md.</p>
+      </div>
+    </footer>
+  </body>
+</html>

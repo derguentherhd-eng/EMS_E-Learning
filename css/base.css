@@ -30,9 +30,10 @@
     font-size: var(--step-0);
   }
 
-  /* ── Überschriften ──
+  /* ── Überschriften (Designsystem: „Überschrift" Lato Bold, „unter Überschrift" Lato Medium) ──
    * h1 = Titel der Ansicht (in Kapiteln: „## Seitentitel" aus Markdown).
-   * h2 = Zwischenüberschrift („### …" aus Markdown) und Abschnitte in Ansichten. */
+   * h2 = Zwischenüberschrift („### …" aus Markdown) und Abschnitte in Ansichten.
+   * Größenverhältnis wie im Designsystem: h1 ≈ 1,6 × h2, h2 ≈ 1,55 × Text. */
   h1,
   h2,
   h3,
@@ -43,18 +44,18 @@
 
   h1 {
     font-size: var(--step-4);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     letter-spacing: -0.01em;
   }
 
   h2 {
     font-size: var(--step-2);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   h3 {
     font-size: var(--step-1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   h4 {
@@ -68,16 +69,23 @@
     text-wrap: pretty;
   }
 
+  /* „Hervorhebung im Fließtext" laut Designsystem: Lato Medium. */
   strong,
   b {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
-  /* ── Links: immer unterstrichen, damit sie nicht nur über Farbe erkennbar sind. ── */
+  /* ── Links: im Fließtext kursiv (Designsystem) und immer unterstrichen, damit sie nicht nur
+   * über Farbe erkennbar sind. Farbe: Gelb im dunklen, Lila im hellen Theme. ── */
   a {
     color: var(--color-link);
     text-decoration-thickness: 0.08em;
     text-underline-offset: 0.18em;
+  }
+
+  /* Kursiv nur im Fließtext – Navigation und Buttons bleiben aufrecht. */
+  :is(p, li, td, dd, figcaption, blockquote) a:not(.button) {
+    font-style: italic;
   }
 
   a:hover {
@@ -107,7 +115,7 @@
 
   blockquote {
     padding-inline-start: var(--space-s);
-    border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    border-inline-start: var(--border-thick) solid var(--color-purple);
     color: var(--color-text);
     font-style: italic;
   }
@@ -132,12 +140,13 @@
   }
 
   th {
-    font-weight: var(--font-weight-bold);
-    border-block-end-color: var(--color-line-strong);
+    font-weight: var(--font-weight-medium);
+    border-block-end: var(--border-ds) solid var(--color-purple);
   }
 
   figure img {
     background-color: var(--color-surface);
+    border-radius: var(--radius-m);
   }
 
   figcaption {
@@ -146,9 +155,13 @@
     color: var(--color-text-muted);
   }
 
-  /* ── Formulare ── */
+  /* ── Formulare ──
+   * Eingabefelder: abgerundet wie Buttons. Kontrollkästchen und Optionsfelder im Stil der
+   * Symbol-Kacheln des Designsystems: leer = dunkle Fläche mit gelbem Rand (wie Schalter „Aus"),
+   * gewählt = lila Fläche mit gelbem Rand und gelbem Haken bzw. gelbem Punkt (wie „Abgehakt").
+   * Die echten <input>-Elemente bleiben erhalten (Tastatur, Screenreader, Formulare). */
   label {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   input:not([type='checkbox'], [type='radio']),
@@ -157,25 +170,61 @@
     min-block-size: var(--touch-target);
     padding: var(--space-2xs) var(--space-xs);
     background-color: var(--color-surface);
-    border: var(--border-thin) solid var(--color-line-strong);
-    border-radius: var(--radius-s);
+    border: var(--border-ds) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
+  }
+
+  :is(input:not([type='checkbox'], [type='radio']), select, textarea):hover {
+    border-color: var(--color-text-muted);
   }
 
   input[type='checkbox'],
   input[type='radio'] {
-    inline-size: 1.25rem;
-    block-size: 1.25rem;
-    accent-color: var(--color-yellow);
+    appearance: none;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    margin: 0;
+    background-color: var(--color-control-off);
+    border: var(--border-ds) solid var(--color-control-border);
+    border-radius: 6px;
+    cursor: pointer;
   }
 
-  /* Im hellen Theme wäre ein gelbes Häkchen kaum sichtbar → Lila (7,99 zu Weiß). */
-  :root[data-theme='light'] :is(input[type='checkbox'], input[type='radio']) {
-    accent-color: var(--color-purple);
+  input[type='radio'] {
+    border-radius: 50%;
   }
 
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme='dark']) :is(input[type='checkbox'], input[type='radio']) {
-      accent-color: var(--color-purple);
+  input[type='checkbox']:checked {
+    background: var(--color-tile) url('../assets/icons/ui/haken-symbol.svg') center / 80% no-repeat;
+  }
+
+  input[type='radio']:checked {
+    background-color: var(--color-tile);
+  }
+
+  /* Gewählter Punkt: gelb mit weißem Ring – wie der Knopf im Schalter „An". */
+  input[type='radio']:checked::after {
+    content: '';
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    background-color: var(--color-yellow);
+    border: 1.5px solid var(--color-white);
+    border-radius: 50%;
+  }
+
+  input:is([type='checkbox'], [type='radio']):disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  /* Windows-Kontrastmodus: Browser zeichnen die Felder dann selbst. */
+  @media (forced-colors: active) {
+    input[type='checkbox'],
+    input[type='radio'] {
+      appearance: auto;
     }
   }
 

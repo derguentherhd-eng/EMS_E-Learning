@@ -31,6 +31,16 @@
     color: var(--color-masthead-text);
   }
 
+  /* Die Leiste ist in beiden Themes schwarz: Buttons wie im dunklen Theme. */
+  .editor-bar {
+    --color-button-bg: var(--color-graphite);
+    --color-accent-line: var(--color-yellow);
+    --color-control-off: var(--color-graphite);
+    --color-control-border: var(--color-yellow);
+    --color-text: var(--color-masthead-text);
+    --color-surface-strong: #333333;
+  }
+
   .editor-bar :focus-visible {
     outline-color: var(--color-masthead-focus);
   }
@@ -101,13 +111,14 @@
   }
 
   .editor-bar__title {
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     font-size: var(--step-1);
   }
 
   .editor-bar__mode {
     padding: 0.1em 0.6em;
-    border: var(--border-thin) solid var(--color-masthead-muted);
+    border: var(--border-ds) solid var(--color-masthead-muted);
+    border-radius: var(--radius-s);
     color: var(--color-masthead-muted);
     font-size: var(--step--1);
     font-weight: var(--font-weight-bold);
@@ -133,15 +144,6 @@
     flex-wrap: wrap;
     gap: var(--space-2xs);
     margin-inline-start: auto;
-  }
-
-  .editor-bar .button:not(.button--primary) {
-    color: var(--color-masthead-text);
-    border-color: var(--color-masthead-muted);
-  }
-
-  .editor-bar .button:not(.button--primary):hover {
-    background-color: #222222;
   }
 
   .editor-start__actions {
@@ -188,6 +190,7 @@
   }
 
   .tree__link {
+    border-radius: var(--radius-s);
     display: block;
     inline-size: 100%;
     padding: var(--space-3xs) var(--space-2xs);
@@ -202,9 +205,10 @@
     background-color: var(--color-surface-strong);
   }
 
+  /* Ausgewählt = „gedrückt": Lila mit weißer Schrift. */
   .tree__link[aria-current='true'] {
-    background-color: var(--color-surface-strong);
-    box-shadow: inset var(--border-thick) 0 0 var(--color-text);
+    background-color: var(--color-pressed);
+    color: var(--color-white);
     font-weight: var(--font-weight-bold);
   }
 
@@ -230,6 +234,7 @@
 
   .tree__toggle,
   .tree__move {
+    border-radius: var(--radius-s);
     flex: none;
     inline-size: 1.75rem;
     block-size: 1.75rem;
@@ -258,7 +263,7 @@
 
   .tree__badge {
     font-size: var(--step--1);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
   .tree__badge--dirty {
@@ -339,6 +344,7 @@
 
   .canvas__source,
   .card__text {
+    border-radius: var(--radius-m);
     overflow-x: auto;
     padding: var(--space-xs);
     background-color: var(--color-surface);
@@ -416,6 +422,7 @@
   }
 
   .cards__insert-button {
+    border-radius: var(--radius-m);
     inline-size: 100%;
     min-block-size: 2rem;
     padding: 0;
@@ -434,6 +441,7 @@
   }
 
   .card {
+    border-radius: var(--radius-l);
     max-inline-size: none;
     background-color: var(--color-surface);
     border: var(--border-thin) solid var(--color-line);
@@ -441,8 +449,8 @@
   }
 
   .card--selected {
-    border-color: var(--color-text);
-    border-inline-start-color: var(--color-text);
+    border-color: var(--color-accent-line);
+    border-inline-start-color: var(--color-accent-line);
   }
 
   .card--raw {
@@ -466,7 +474,7 @@
   }
 
   .card__type {
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     font-size: var(--step--1);
   }
 
@@ -483,6 +491,7 @@
   }
 
   .card__tool {
+    border-radius: var(--radius-s);
     inline-size: 2rem;
     block-size: 2rem;
     padding: 0;
@@ -555,6 +564,7 @@
   }
 
   .field__thumb {
+    border-radius: var(--radius-s);
     max-inline-size: 12rem;
     max-block-size: 8rem;
     border: var(--border-thin) solid var(--color-line);
@@ -577,6 +587,7 @@
   }
 
   .toolbar__button {
+    border-radius: var(--radius-s);
     min-block-size: 2rem;
     padding: 0 var(--space-2xs);
     background-color: var(--color-surface-strong);
@@ -590,6 +601,7 @@
   }
 
   .field-list {
+    border-radius: var(--radius-m);
     margin: 0;
     padding: var(--space-xs);
     border: var(--border-thin) solid var(--color-line);
@@ -620,6 +632,7 @@
   }
 
   .field-list__fieldset {
+    border-radius: var(--radius-m);
     display: grid;
     gap: var(--space-xs);
     margin: 0;
@@ -733,6 +746,7 @@
   .hotspot-editor__image {
     inline-size: 100%;
     border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-m);
   }
 
   .hotspot-editor__marker {
@@ -745,10 +759,10 @@
     block-size: 2rem;
     padding: 0;
     background-color: var(--color-yellow);
-    color: var(--color-black);
-    border: 2px solid var(--color-black);
+    color: var(--color-graphite);
+    border: 3px solid var(--color-purple);
     border-radius: 50%;
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     transform: translate(-50%, -50%);
     cursor: grab;
     touch-action: none;
@@ -767,11 +781,11 @@
     border: 0;
     border-block-end: var(--border-thick) solid transparent;
     color: var(--color-text-muted);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .tabs [role='tab'][aria-selected='true'] {
-    border-block-end-color: var(--color-text);
+    border-block-end-color: var(--color-accent-line);
     color: var(--color-text);
   }
 
@@ -788,16 +802,11 @@
     gap: 2px;
   }
 
-  .preview__toggle [aria-pressed='true'] {
-    background-color: var(--color-text);
-    border-color: var(--color-text);
-    color: var(--color-bg);
-  }
-
   .preview__stage {
     block-size: var(--preview-stage-height, 30rem);
     overflow: hidden;
     border: var(--border-thin) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
   }
 
   /* Breite/Höhe/Skalierung setzt preview.js als Variablen. */
@@ -860,7 +869,7 @@
   }
 
   .hints__badge {
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
   .hints__badge--fehler {
@@ -893,13 +902,14 @@
     inline-size: 100%;
     padding: var(--space-2xs) var(--space-xs);
     background-color: var(--color-bg);
-    border: var(--border-thin) solid var(--color-line);
+    border: var(--border-ds) solid var(--color-line);
+    border-radius: var(--radius-m);
     color: var(--color-text);
     text-align: start;
   }
 
   .palette__option:hover {
-    border-color: var(--color-text);
+    border-color: var(--color-accent-line);
   }
 
   .palette__option > span {

@@ -7,6 +7,7 @@ Für alle, die am Code arbeiten. Inhalte pflegen? Dann `PFLEGE.md`. Schreibweise
 und auf jedem statischen Webspace. Kein Server, kein Framework, kein Build, kein `npm`. Einzige
 Bibliothek: jsPDF (lokal in `vendor/jspdf/`). Keine externen Requests zur Laufzeit.
 Inhalte stehen ausschließlich in `content/*.md`. Inhalte werden nie als HTML interpretiert.
+Gestaltung nach dem Designsystem des Teams: `docs/DESIGNSYSTEM.md`, zum Ansehen `designsystem.html`.
 
 ---
 
@@ -97,7 +98,8 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/blocks/_vorlage-baustein.js` | kommentierte Vorlage (nicht eingebunden) |
 | `js/quiz/quiz.js` | Ziehung, Bewertung, Fragenablauf, Ergebnis-Streifen |
 | `js/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
-| `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole |
+| `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole, Statusbar (`statusbar.js`) |
+| `js/designsystem.js` | Logik von `designsystem.html` (Übersicht aller Bedienelemente) |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
 | `js/check-page.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
 | `js/tests.js` | Selbsttests für `tests.html` |
@@ -110,7 +112,7 @@ zeitstrahl → `timeline.js` · checkliste → `checklist.js` · quiz → `quiz-
 
 **CSS:** `reset.css` (deklariert die Ebenen `reset, tokens, base, layout, components, utilities`),
 `tokens.css`, `base.css`, `layout.css`, `components.css` (inkl. `utilities`-Ebene), `blocks.css`,
-`print.css` (nur Druck), `editor.css` (nur Editor). Eingebunden per `<link>`, kein `@import`.
+`print.css` (nur Druck), `editor.css` (nur Editor), `designsystem.css` (nur `designsystem.html`). Eingebunden per `<link>`, kein `@import`.
 
 **Generierte Dateien:** `content/inhalte.js` (vom Editor), `assets/fonts/pdf/lato-pdf.js` (einmalig
 aus den TTF-Dateien erzeugt; bei Schriftwechsel neu erzeugen: Dateiname → Base64 in
@@ -182,7 +184,9 @@ Beispiel: ein Baustein `merksatz` (ein hervorgehobener Satz mit Quelle).
    und `keySentence` in `BLOCKS` ergänzen. → Der Baustein wird im Kurs dargestellt, geprüft und erscheint
    **automatisch** in der Editor-Palette mit Formular.
 4. **CSS:** Abschnitt in `css/blocks.css`, Klassen nach BEM (`.key-sentence__text`).
-5. **Symbol:** `assets/icons/merksatz.svg` (24×24, Linien in `#8a8a8a`).
+5. **Symbol:** `assets/icons/merksatz.svg` als Kachel im Designsystem-Stil: 32×32, lila Fläche
+   `#534495` mit `rx="6"` und gelbem Rand, darin das Symbol in Gelb `#ffed00` mit runden Enden
+   (Vorlage: eine der vorhandenen Dateien kopieren).
 6. **Tests:** in `js/tests.js` unter `BLOCK_SAMPLES` ein gültiges und ggf. ungültiges Beispiel.
    `tests.html` erzeugt daraus Parser-, Round-Trip- und Schema-Tests.
 7. **Doku:** Abschnitt in `docs/BAUSTEINE.md` (Zweck, Didaktik, Editorname, Kopiervorlage, Fehler)
@@ -270,13 +274,17 @@ Berechnet mit der WCAG-2.x-Formel. Anforderungen: Text ≥ 4,5:1, Grafik/Bediene
 | Hell | Text | success-bg / error-bg / todo-bg | 14,48 / 13,83 / 15,18 ✓ |
 | Hell | Rand primärer Button #000 | bg | 19,40 ✓ (UI) |
 | Beide | Schwarz auf Gelb | | 17,37 ✓ |
+| Beide | #1E1E1E auf Gelb (Buttons, Chips) | | 13,79 ✓ |
 | Beide | Weiß auf Lila | | 7,99 ✓ |
+| Beide | Gelb auf Lila („gedrückt", Symbol-Kacheln) | | 6,61 ✓ |
+| Dunkel | Lila-Kachel auf #1E1E1E | | 2,09 – Kachel über gelben Rand erkennbar (13,79 ✓ UI) |
+| Hell | Lila-Kachel / Kästchenrand auf Hell | bg / surface | 7,38 / 7,99 ✓ (UI) |
 | Beide | Kopfleiste Weiß / #b8b8b8 auf Schwarz | | 21,00 / 10,59 ✓ |
 | Beide | Fokus Gelb auf Schwarz | | 17,37 ✓ (UI) |
-| Sektor | offen #5a5a5a auf Schwarz | | 3,04 ✓ (UI); Weiß darauf 6,90 ✓ |
-| Sektor | bestanden Gelb auf Schwarz | | 17,37 ✓ |
-| Sektor | Bestzeit Lila auf Schwarz | | **2,63** – ausgeglichen durch weiße Markierung (7,99), Sternsymbol und Text |
-| Editor | Palettensymbol #8a8a8a | Dunkel / Hell | 4,83 / 3,19 ✓ (UI) |
+| Sektor | offen: Rand #5a5a5a auf Schwarz | | 3,04 ✓ (UI); Weiß auf #1E1E1E 16,67 ✓ |
+| Sektor | bestanden Gelb auf Schwarz | | 17,37 ✓; Schrift #1E1E1E 13,79 ✓ |
+| Sektor | Bestzeit Lila auf Schwarz | | 2,63 – ausgeglichen durch gelben Rand (17,37), gelbe Schrift (6,61), Sternsymbol und Text |
+| Editor | Palettensymbol: Kachel mit gelbem Rand | Dunkel / Hell | 13,79 / Lila-Fläche 7,38 ✓ (UI) |
 
 Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text auf Dunkelgrau
 (2,09:1). Rot (#ff2a1f) erscheint nur in der Startampel als Dekoration (`aria-hidden`).
@@ -311,6 +319,10 @@ Nicht verwendet (und verboten): Gelb als Text auf Hell (1,21:1), Lila als Text a
 |---|---|
 | Projekt im Unterordner `onboarding/`, Git-Repo darin | wie in der Spezifikation (B3), Ordner ist in sich vollständig |
 | Schrift ausschließlich **Lato** (lokal, subsettet), PDF bettet Lato-TTF ein | Vorgabe des Teams; Umlaute im PDF korrekt |
+| Gestaltung nach dem **Designsystem des Teams**; Fehlendes im selben Stil ergänzt (`docs/DESIGNSYSTEM.md`) | einheitliches Erscheinungsbild; Erweiterungen sind dokumentiert und in `designsystem.html` sichtbar |
+| Lato Medium (500) aus dem offiziellen Lato-2.015-Paket ergänzt, Lato Black entfernt | Designsystem nutzt Medium für Unterüberschrift und Hervorhebung, Bold für Überschriften |
+| Schalter-Knopf „An" links | genau wie im Designsystem; umkehrbar über zwei CSS-Variablen |
+| Richtig/Falsch zusätzlich grün/rot | Lernkontext; Bedeutung trägt immer auch Symbol und Text |
 | Kopfleiste und Sektoranzeige in beiden Themes **schwarz** | Logo ist einfarbig gelb (auf Weiß unsichtbar); wirkt wie ein Zeitenmonitor |
 | `js/theme-init.js` synchron im `<head>` | alle anderen Skripte laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
 | Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |

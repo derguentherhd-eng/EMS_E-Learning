@@ -85,3 +85,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Willkommenstext: Sektoren in beliebiger Reihenfolge, Hinweis auf direkten Start mit der Arbeitssicherheit.
 - Behoben: Breite Tabellen verbreiterten auf dem Handy die ganze Seite statt nur seitlich zu scrollen.
 - Das Kapitel bleibt `freigegeben: nein`, bis die Sicherheitsverantwortlichen es geprüft haben.
+
+### Designsystem (2026-10-13)
+- Gesamter Kurs, Editor, Prüfseite und PDF-Zertifikat an das Designsystem des Teams angepasst; Fehlendes im selben Stil ergänzt.
+- Schrift: Überschriften Lato Bold, Unterüberschriften und Hervorhebungen Lato Medium (neu), Links im Fließtext kursiv. Lato Black entfernt.
+- Buttons gelb, „gedrückt" lila mit gelber Schrift; Zweitaktionen dunkel mit gelbem Rand. Abgerundete Ecken überall.
+- Symbol-Kacheln (lila, gelber Rand): Hamburgermenü/Kreuz, Haken, Plus/Minus, Pfeile; Editor-Palette ebenso.
+- Schalter „Helles Design" im Stil des Designsystems; Statusbar über Kapitelseiten und Quizfragen (neu).
+- Kästchen und Optionsfelder, Antworten, Sektoranzeige, Hotspots, Zeitstrahl, Kästen, Dialoge im selben Stil.
+- Neu: `designsystem.html` (Übersicht aller Bedienelemente) und `docs/DESIGNSYSTEM.md`.

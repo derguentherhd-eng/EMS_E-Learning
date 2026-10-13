@@ -7,6 +7,10 @@
  * Alle Symbole sind dekorativ (aria-hidden). Die Bedeutung steht IMMER zusätzlich als Text
  * daneben oder als versteckter Text für Screenreader. Ein Symbol allein trägt nie Information.
  *
+ * Stil laut Designsystem: kräftige Linien mit runden Enden. Als Kachel (lila Fläche, gelber
+ * Rand, gelbes Symbol) erscheinen sie über CSS – siehe .icon-button und .icon-tile in
+ * css/components.css.
+ *
  * Wenn du hier etwas ändern willst …
  *   – Neues Symbol: Eintrag in PATHS ergänzen (Pfaddaten für ein 24×24-Raster, Linienstil).
  *     Symbole für die Baustein-Palette des Editors liegen dagegen als Dateien in assets/icons/.
@@ -31,6 +35,8 @@ const PATHS = {
   info: 'M12 8h.01M11 12h1v5h1M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z',
   warning: 'M12 3L2 20h20L12 3zM12 10v4M12 17h.01',
   flag: 'M5 21V4M5 4h13l-2 4 2 4H5',
+  arrowUp: 'M12 19V5M5.5 11.5L12 5l6.5 6.5',
+  arrowDown: 'M12 5v14M5.5 12.5L12 19l6.5-6.5',
 };
 
 /**
@@ -46,9 +52,9 @@ function icon(name, className = 'icon') {
   svg.setAttribute('height', '20');
   svg.setAttribute('fill', 'none');
   svg.setAttribute('stroke', 'currentColor');
-  svg.setAttribute('stroke-width', '2.2');
-  svg.setAttribute('stroke-linecap', 'square');
-  svg.setAttribute('stroke-linejoin', 'miter');
+  svg.setAttribute('stroke-width', '2.6');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
   svg.setAttribute('class', className);

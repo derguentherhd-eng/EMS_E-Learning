@@ -24,6 +24,7 @@
 
 const { el } = EM.require('js/dom.js');
 const { icon } = EM.require('js/ui/icons.js');
+const { statusBar } = EM.require('js/ui/statusbar.js');
 const { renderInline } = EM.require('js/render.js');
 const { shuffle } = EM.require('js/blocks/block-utils.js');
 
@@ -200,6 +201,7 @@ function runQuiz(container, { questions, label, glossary, random = Math.random, 
         'div',
         { class: 'quiz stack' },
         el('div', { class: 'view-meta' }, el('p', {}, label(entry)), el('p', {}, `Frage ${index + 1} von ${questions.length}`)),
+        statusBar(index + 1, questions.length),
         question.critical
           ? el('p', { class: 'quiz__critical' }, icon('warning', 'quiz__critical-icon'), 'Sicherheitsfrage – muss richtig beantwortet werden')
           : null,

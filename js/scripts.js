@@ -26,6 +26,7 @@
     kern: [
       'js/dom.js',
       'js/ui/icons.js',
+    'js/ui/statusbar.js',
       'js/router.js',
       'js/store.js',
       'js/ui/theme.js',

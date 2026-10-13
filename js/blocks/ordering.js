@@ -78,8 +78,8 @@ const definition = {
     const draw = (focusStep = null, focusDirection = null) => {
       list.replaceChildren(
         ...order.map((step, index) => {
-          const up = el('button', { type: 'button', class: 'button button--small ordering__move', disabled: index === 0, 'aria-label': `„${step}" nach oben` }, '↑');
-          const down = el('button', { type: 'button', class: 'button button--small ordering__move', disabled: index === order.length - 1, 'aria-label': `„${step}" nach unten` }, '↓');
+          const up = el('button', { type: 'button', class: 'icon-button ordering__move', disabled: index === 0, 'aria-label': `„${step}" nach oben` }, icon('arrowUp', 'icon-button__icon'));
+          const down = el('button', { type: 'button', class: 'icon-button ordering__move', disabled: index === order.length - 1, 'aria-label': `„${step}" nach unten` }, icon('arrowDown', 'icon-button__icon'));
           up.addEventListener('click', () => move(index, -1));
           down.addEventListener('click', () => move(index, 1));
           const item = el(

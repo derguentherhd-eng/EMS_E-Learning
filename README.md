@@ -31,13 +31,15 @@ direkt. Details: [docs/PFLEGE.md](docs/PFLEGE.md), Abschnitt 1.
 |---|---|
 | [docs/PFLEGE.md](docs/PFLEGE.md) | Alle, die Inhalte pflegen – ohne Programmierkenntnisse |
 | [docs/BAUSTEINE.md](docs/BAUSTEINE.md) | Nachschlagewerk aller Bausteine mit Kopiervorlagen |
+| [docs/DESIGNSYSTEM.md](docs/DESIGNSYSTEM.md) | Farben, Schrift, Bedienelemente – zum Ansehen: `designsystem.html` |
 | [docs/ENTWICKLER.md](docs/ENTWICKLER.md) | Aufbau des Codes, neue Bausteine, Entscheidungen |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | Was sich wann geändert hat |
 
 ## Lizenzen
 
-- **Schrift Lato** – SIL Open Font License 1.1, © tyPoland Łukasz Dziedzic
-  ([assets/fonts/OFL-Lato.txt](assets/fonts/OFL-Lato.txt)).
+- **Schrift Lato 2.015** (Regular, Italic, Medium, Bold, Bold Italic) – SIL Open Font License 1.1,
+  © tyPoland Łukasz Dziedzic ([assets/fonts/OFL-Lato.txt](assets/fonts/OFL-Lato.txt)).
+  Medium stammt aus dem offiziellen Web-Paket von latofonts.com (npm „lato-font" 3.0.0).
 - **jsPDF 4.2.1** – MIT-Lizenz ([vendor/jspdf/LICENSE](vendor/jspdf/LICENSE)).
 - **Logo** – Eigentum von Einstein Motorsport.
 - **Bilder in `assets/bilder/sicherheit/`** – aus der Teampräsentation „GNTM 15.04.2026", Teil

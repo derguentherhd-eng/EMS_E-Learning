@@ -33,8 +33,8 @@ const JSPDF_PATH = 'vendor/jspdf/jspdf.umd.min.js';
 const FONT_SCRIPT = 'assets/fonts/pdf/lato-pdf.js';
 const FONTS = [
   { file: 'Lato-Regular.ttf', family: 'Lato', style: 'normal' },
+  { file: 'Lato-Medium.ttf', family: 'LatoMedium', style: 'normal' },
   { file: 'Lato-Bold.ttf', family: 'Lato', style: 'bold' },
-  { file: 'Lato-Black.ttf', family: 'LatoBlack', style: 'normal' },
 ];
 
 /* ───────────────────────────── Prüfcode und Dateiname ───────────────────────────── */
@@ -131,9 +131,10 @@ function buildCertificatePdf(JsPDF, data, assets) {
     doc.addFileToVFS(font.file, font.base64);
     doc.addFont(font.file, font.family, font.style);
   }
+  // Schriftschnitte wie im Designsystem: Überschrift Bold, Unterüberschrift/Hervorhebung Medium.
   const font = (weight) => {
     if (!hasLato) doc.setFont('helvetica', weight === 'regular' ? 'normal' : 'bold');
-    else if (weight === 'black') doc.setFont('LatoBlack', 'normal');
+    else if (weight === 'medium') doc.setFont('LatoMedium', 'normal');
     else doc.setFont('Lato', weight === 'bold' ? 'bold' : 'normal');
   };
 
@@ -149,14 +150,15 @@ function buildCertificatePdf(JsPDF, data, assets) {
   doc.rect(0, 0, W, 46, 'F');
   if (assets.logo) doc.addImage(assets.logo, 'PNG', M, 6, 36, 34);
   doc.setTextColor(255, 255, 255);
-  font('black');
+  font('bold');
   doc.setFontSize(20);
   doc.text(data.courseTitle, W - M, 20, { align: 'right' });
   font('regular');
   doc.setFontSize(11);
   doc.text(data.team, W - M, 27, { align: 'right' });
 
-  // Sektoren als schräge Segmente (gelb = bestanden, lila = Bestzeit)
+  // Sektoren als abgerundete Kacheln wie in der Sektoranzeige (gelb = bestanden,
+  // lila mit gelbem Rand = Bestzeit)
   const count = Math.max(data.chapters.length, 1);
   const stripLeft = 70;
   const stripWidth = W - M - stripLeft;
@@ -165,18 +167,20 @@ function buildCertificatePdf(JsPDF, data, assets) {
   data.chapters.forEach((chapter, index) => {
     const x = stripLeft + index * (segment + gap);
     doc.setFillColor(...(chapter.best ? PURPLE : YELLOW));
-    doc.lines([[segment, 0], [-2, 5], [-segment, 0]], x + 2, 34, [1, 1], 'F', true);
+    doc.setDrawColor(...YELLOW);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(x, 33, segment, 6, 1.2, 1.2, chapter.best ? 'FD' : 'F');
   });
 
   // ── Titel und Name ──
-  doc.setTextColor(0, 0, 0);
-  font('black');
+  doc.setTextColor(30, 30, 30);
+  font('bold');
   doc.setFontSize(32);
   doc.text(data.title, M, 70);
   font('regular');
   doc.setFontSize(13);
   doc.text('Hiermit bestätigen wir, dass', M, 84);
-  font('black');
+  font('medium');
   doc.setFontSize(30);
   doc.text(data.name, M, 98, { maxWidth: W - 2 * M });
   font('regular');
@@ -184,18 +188,18 @@ function buildCertificatePdf(JsPDF, data, assets) {
   doc.text(`das ${data.courseTitle} von ${data.team} erfolgreich abgeschlossen hat.`, M, 108, { maxWidth: W - 2 * M });
 
   // ── Links: abgeschlossene Sektoren ──
-  font('bold');
+  font('medium');
   doc.setFontSize(10);
   doc.text('Abgeschlossene Sektoren', M, 124);
   font('regular');
   doc.setFontSize(10);
   data.chapters.forEach((chapter, index) => {
     const y = 131 + index * 6;
-    // Farbfeld wie in der Sektoranzeige; schwarze Kontur, weil Gelb auf Weiß kaum sichtbar ist.
+    // Kachel wie in der Sektoranzeige; lila Kontur, weil Gelb auf Weiß kaum sichtbar ist.
     doc.setFillColor(...(chapter.best ? PURPLE : YELLOW));
-    doc.setDrawColor(0, 0, 0);
-    doc.setLineWidth(0.2);
-    doc.rect(M, y - 3, 3, 3, 'FD');
+    doc.setDrawColor(...PURPLE);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(M, y - 3.2, 3.6, 3.6, 0.7, 0.7, 'FD');
     doc.text(`S${chapter.number}  ${chapter.title}${chapter.best ? '  (Bestzeit)' : ''}`, M + 6, y);
   });
 
@@ -208,7 +212,7 @@ function buildCertificatePdf(JsPDF, data, assets) {
   ];
   facts.forEach(([label, value], index) => {
     const y = 124 + index * 12;
-    font('bold');
+    font('medium');
     doc.setFontSize(9);
     doc.setTextColor(...GREY);
     doc.text(label, right, y);
@@ -223,7 +227,7 @@ function buildCertificatePdf(JsPDF, data, assets) {
   doc.setDrawColor(0, 0, 0);
   doc.setLineWidth(0.3);
   doc.line(right, signY, W - M, signY);
-  font('bold');
+  font('medium');
   doc.setFontSize(10);
   if (data.signatureName) doc.text(data.signatureName, right, signY + 5);
   font('regular');

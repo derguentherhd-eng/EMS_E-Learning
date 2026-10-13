@@ -7,10 +7,13 @@
  * Namensregel (BEM): .block__element--variante
  *   z. B. .sector-bar__segment--done = Segment der Sektoranzeige im Zustand „bestanden".
  *
- * Gestaltungsregeln dieses Projekts (siehe Phase-0-Plan, Abschnitt 5):
- *   – Kantig: Radius höchstens 2 px, keine Standard-Schatten, keine Verläufe als Deko.
- *   – Gelb-Budget: Gelb nur für primäre Aktion, bestandene Sektoren, Fokus (dunkel),
- *     Achtung-Schraffur und Links (dunkel). Lila nur für „Bestzeit".
+ * Gestaltungsregeln: Designsystem des Teams, beschrieben in docs/DESIGNSYSTEM.md.
+ *   – Buttons: „nicht gedrückt" Gelb mit dunkler Schrift, „gedrückt" Lila mit gelber Schrift.
+ *   – Symbol-Kacheln (Menü, Haken, Kreuz, Plus/Minus, Pfeile): lila Fläche, gelber Rand,
+ *     gelbes Symbol mit runden Enden.
+ *   – Schalter: „An" lila mit gelbem Knopf, „Aus" dunkel mit lila Knopf, beide gelb umrandet.
+ *   – Statusbar: lila Spur, gelbe Füllung, gelber Knopf mit lila Rand.
+ *   – Abgerundete Ecken (--radius-*), keine Schatten, keine Verläufe als Deko.
  *   – Keine Pfeile in Buttontexten; die Richtung ergibt sich aus der Position.
  *
  * Wenn du hier etwas ändern willst …
@@ -27,8 +30,9 @@
     z-index: 100;
     padding: var(--space-2xs) var(--space-s);
     background-color: var(--color-yellow);
-    color: var(--color-black);
-    font-weight: var(--font-weight-bold);
+    color: var(--color-graphite);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-medium);
     transform: translateY(-200%);
   }
 
@@ -38,9 +42,12 @@
   }
 
   /* ── Buttons ──
-   * <button class="button">            sekundär (Kontur)
-   * <button class="button button--primary">  primär (Gelb, schwarze Schrift, 17,37:1)
-   * <a class="button …">                Link, der wie ein Button aussieht (Navigation) */
+   * <button class="button button--primary">  Hauptaktion: Gelb, dunkle Schrift (13,79:1)
+   * <button class="button">            Zweitaktion: dunkle Fläche mit gelbem Rand (im hellen
+   *                                    Theme weiße Fläche mit lila Rand) – Erweiterung des
+   *                                    Designsystems im Stil des Schalters „Aus"
+   * <a class="button …">                Link, der wie ein Button aussieht (Navigation)
+   * Gedrückt (:active, aria-pressed="true", .is-pressed): Lila mit gelber Schrift (6,61:1). */
   .button {
     display: inline-flex;
     align-items: center;
@@ -49,15 +56,18 @@
     min-block-size: var(--touch-target);
     min-inline-size: var(--touch-target);
     padding: var(--space-2xs) var(--space-m);
-    background-color: transparent;
+    background-color: var(--color-button-bg);
     color: var(--color-text);
-    border: 2px solid var(--color-line-strong);
-    border-radius: var(--radius-s);
-    font-weight: var(--font-weight-bold);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-m);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
     line-height: 1.2;
     text-align: center;
     text-decoration: none;
-    transition: background-color var(--duration-fast) var(--ease-out);
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
   }
 
   .button:hover {
@@ -71,14 +81,30 @@
   }
 
   .button--primary:hover {
-    /* Etwas dunkleres Gelb; Schwarz darauf bleibt deutlich über 4,5:1. */
-    background-color: #f2e100;
+    /* Etwas helleres Gelb; die dunkle Schrift bleibt deutlich über 4,5:1. */
+    background-color: #fff35c;
+  }
+
+  /* „gedrückt" laut Designsystem. */
+  .button:active:not(:disabled),
+  .button[aria-pressed='true'],
+  .button.is-pressed {
+    background-color: var(--color-pressed);
+    color: var(--color-on-pressed);
+    border-color: var(--color-tile-border);
   }
 
   .button--quiet {
+    background-color: transparent;
     border-color: transparent;
+    font-style: italic;
     text-decoration: underline;
     text-underline-offset: 0.18em;
+  }
+
+  .button--quiet:hover {
+    background-color: transparent;
+    text-decoration-thickness: 0.16em;
   }
 
   .button--small {
@@ -99,7 +125,141 @@
     flex: none;
   }
 
+  /* ── Symbol-Kachel als Knopf (Hamburgermenü, Kreuz, Pfeile) ──
+   * Lila Fläche, gelber Rand, gelbes Symbol – direkt aus dem Designsystem. */
+  .icon-button {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--touch-target);
+    block-size: var(--touch-target);
+    padding: 0;
+    background-color: var(--color-tile);
+    color: var(--color-on-tile);
+    border: var(--border-ds) solid var(--color-tile-border);
+    border-radius: var(--radius-m);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .icon-button:hover:not(:disabled) {
+    transform: scale(1.06);
+  }
+
+  .icon-button:disabled {
+    background-color: var(--color-control-off);
+    color: var(--color-text-muted);
+    border-color: var(--color-line-strong);
+    cursor: not-allowed;
+  }
+
+  .icon-button__icon {
+    inline-size: 72%;
+    block-size: 72%;
+  }
+
+  /* Symbole aus js/ui/icons.js, die als Kachel erscheinen (Rückmeldungen, Haken, Kreuz).
+   * Das <svg> selbst bekommt Fläche, Rand und Innenabstand. */
+  .icon-tile,
+  .feedback__icon,
+  .quiz__mark-icon,
+  .review__icon {
+    box-sizing: border-box;
+    padding: 0.12em;
+    background-color: var(--color-tile);
+    color: var(--color-on-tile);
+    border: var(--border-ds) solid var(--color-tile-border);
+    border-radius: 0.3em;
+  }
+
+  /* ── Schalter (Designsystem „An"/„Aus") ──
+   * Wird als <span class="switch"> in einen Knopf mit aria-pressed gesetzt; der Zustand kommt
+   * vom Knopf. An: lila Spur, gelber Knopf links. Aus: dunkle Spur, lila Knopf rechts.
+   * Beide gelb umrandet, Knopf mit weißem Ring. Die Seite des Knopfs folgt bewusst dem
+   * Designsystem; umdrehen: --switch-on-pos und --switch-off-pos tauschen. */
+  .switch {
+    --switch-on-pos: 0.2rem;
+    --switch-off-pos: calc(100% - 1.25rem - 0.2rem);
+    position: relative;
+    flex: none;
+    inline-size: 3rem;
+    block-size: 1.75rem;
+    background-color: var(--color-control-off);
+    border: var(--border-ds) solid var(--color-control-border);
+    border-radius: var(--radius-pill);
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+
+  .switch::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--switch-off-pos);
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    background-color: var(--color-purple);
+    border: var(--border-ds) solid var(--color-white);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: inset-inline-start var(--duration-base) var(--ease-out);
+  }
+
+  [aria-pressed='true'] > .switch,
+  [aria-checked='true'] > .switch {
+    background-color: var(--color-purple);
+  }
+
+  [aria-pressed='true'] > .switch::after,
+  [aria-checked='true'] > .switch::after {
+    inset-inline-start: var(--switch-on-pos);
+    background-color: var(--color-yellow);
+  }
+
+  /* ── Statusbar (Designsystem): lila Spur, gelbe Füllung, gelber Knopf mit lila Rand ──
+   * Der Fortschritt kommt als --value (0 bis 1) aus js/ui/statusbar.js. Rein grafisch: Der
+   * Text daneben („Seite 2 von 7") trägt dieselbe Information für Screenreader. */
+  .statusbar {
+    --knob: 1.15rem;
+    position: relative;
+    block-size: 0.7rem;
+    margin-block: var(--space-2xs);
+    background-color: var(--color-purple);
+    border-radius: var(--radius-pill);
+  }
+
+  .statusbar::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: max(var(--knob), calc(var(--value, 0) * 100%));
+    background-color: var(--color-yellow);
+    border: 1.5px solid var(--color-purple);
+    border-radius: var(--radius-pill);
+  }
+
+  .statusbar::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: clamp(0px, calc(var(--value, 0) * 100% - var(--knob) / 2), calc(100% - var(--knob)));
+    inline-size: var(--knob);
+    block-size: var(--knob);
+    background-color: var(--color-yellow);
+    border: 2px solid var(--color-purple);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
   /* ── Kopfleiste (immer schwarz) ── */
+  .masthead {
+    --color-button-bg: var(--color-graphite);
+    --color-accent-line: var(--color-yellow);
+    --color-control-off: var(--color-graphite);
+    --color-control-border: var(--color-yellow);
+    --color-text: var(--color-masthead-text);
+  }
+
   .masthead :focus-visible {
     outline-color: var(--color-masthead-focus);
   }
@@ -111,7 +271,7 @@
     min-block-size: var(--touch-target);
     color: var(--color-masthead-text);
     text-decoration: none;
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     font-size: var(--step-1);
     line-height: 1;
   }
@@ -123,12 +283,6 @@
 
   .masthead__menu-toggle {
     margin-inline-start: auto;
-    color: var(--color-masthead-text);
-    border-color: var(--color-masthead-muted);
-  }
-
-  .masthead__menu-toggle:hover {
-    background-color: #222222;
   }
 
   @media (min-width: 48rem) {
@@ -160,8 +314,14 @@
     background: none;
     border: 0;
     color: var(--color-masthead-text);
-    font-weight: var(--font-weight-bold);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
     text-decoration: none;
+  }
+
+  /* Theme-Umschalter in der Kopfleiste: Schalter + Text. */
+  .theme-toggle {
+    cursor: pointer;
   }
 
   .masthead__links a:hover,
@@ -201,7 +361,7 @@
     gap: var(--space-3xs) var(--space-s);
     color: var(--color-text-muted);
     font-size: var(--step--1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .view-meta p {
@@ -221,6 +381,7 @@
   .notice {
     padding: var(--space-xs) var(--space-s);
     border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
     background-color: var(--color-surface);
   }
 
@@ -297,6 +458,7 @@
   .check-item {
     max-inline-size: none;
     padding: var(--space-xs) var(--space-s);
+    border-radius: var(--radius-s);
     border-block-end: var(--border-thin) solid var(--color-line);
     border-inline-start: var(--border-thick) solid var(--color-line-strong);
   }
@@ -393,6 +555,7 @@
 
   .figure img {
     border: var(--border-thin) solid var(--color-line);
+    border-radius: var(--radius-m);
   }
 
   .inline-image {
@@ -411,6 +574,7 @@
     padding: var(--space-xs) var(--space-s);
     background-color: var(--color-todo-bg);
     border: 2px dashed var(--color-line-strong);
+    border-radius: var(--radius-m);
   }
 
   .todo__label {
@@ -439,9 +603,11 @@
     display: inline;
   }
 
-  /* ── Sektoranzeige: schwarzer Streifen wie ein Zeitenmonitor ──
-   * Kontraste auf Schwarz: offen #5a5a5a 3,04 · Gelb 17,37 · Lila 2,63 (deshalb zusätzlich
-   * weiße Markierung oben, 7,99 auf Lila, plus Stern-Symbol und Text). */
+  /* ── Sektoranzeige: schwarzer Streifen wie ein Zeitenmonitor, Segmente als abgerundete
+   * Kacheln im Stil des Designsystems ──
+   * Kontraste auf Schwarz: offen #1E1E1E mit Rand #5a5a5a (3,04) · bestanden Gelb (17,37) mit
+   * dunkler Schrift · Bestzeit Lila mit gelbem Rand (17,37) und gelber Schrift (6,61) +
+   * Stern-Symbol und Text. Zustand nie nur über Farbe. */
   .sector-bar {
     display: flex;
     align-items: center;
@@ -476,58 +642,50 @@
 
   .sector-bar__segment {
     position: relative;
-    isolation: isolate;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-3xs);
     min-block-size: var(--touch-target);
-    padding-inline: var(--space-2xs);
+    padding-inline: var(--space-3xs);
+    background-color: var(--color-graphite);
     color: var(--color-masthead-text);
-    font-weight: var(--font-weight-black);
+    border: var(--border-ds) solid var(--color-sector-open);
+    border-radius: var(--radius-m);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
     font-size: var(--step--1);
     line-height: 1.1;
     text-decoration: none;
     white-space: nowrap;
-  }
-
-  /* Die schräge Fläche liegt auf einem Pseudo-Element. So wird weder der Text noch der
-   * Fokusring des Links mit verzerrt oder abgeschnitten. */
-  .sector-bar__segment::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: var(--color-sector-open);
-    transform: skewX(-14deg);
     transition: background-color var(--duration-base) var(--ease-out);
   }
 
   .sector-bar__segment--bestanden {
-    color: var(--color-black);
-  }
-
-  .sector-bar__segment--bestanden::before {
     background-color: var(--color-sector-done);
+    border-color: var(--color-sector-done);
+    color: var(--color-graphite);
   }
 
-  .sector-bar__segment--bestzeit::before {
-    /* Harte Kante, kein Deko-Verlauf: 4 px weiße Markierung oben, darunter Lila. */
-    background: linear-gradient(to bottom, var(--color-white) 0 4px, var(--color-sector-best) 4px);
+  .sector-bar__segment--bestzeit {
+    background-color: var(--color-sector-best);
+    border-color: var(--color-yellow);
+    color: var(--color-yellow);
   }
 
+  /* Aktueller Sektor: gelbe Linie unter der Kachel (auf Gelb sitzt sie auf Schwarz). */
   .sector-bar__segment[aria-current]::after {
     content: '';
     position: absolute;
-    inset-inline: 2px;
-    inset-block-end: -7px;
+    inset-inline: 4px;
+    inset-block-end: -9px;
     block-size: 3px;
-    background-color: var(--color-white);
-    transform: skewX(-14deg);
+    background-color: var(--color-yellow);
+    border-radius: var(--radius-pill);
   }
 
-  .sector-bar__segment:hover::before {
-    filter: brightness(1.15);
+  .sector-bar__segment:hover {
+    border-color: var(--color-yellow);
   }
 
   .sector-bar__label {
@@ -542,22 +700,18 @@
     block-size: 1em;
   }
 
-  .sector-bar__finish::before {
+  .sector-bar__finish {
     background-color: transparent;
-    border: 2px solid var(--color-sector-open);
   }
 
-  .sector-bar__finish--ready::before {
+  .sector-bar__finish--ready {
     border-color: var(--color-yellow);
   }
 
   .sector-bar__finish--done {
-    color: var(--color-black);
-  }
-
-  .sector-bar__finish--done::before {
     background-color: var(--color-yellow);
     border-color: var(--color-yellow);
+    color: var(--color-graphite);
   }
 
   .sector-bar__caption {
@@ -565,10 +719,18 @@
     margin: 0;
     color: var(--color-masthead-muted);
     font-size: var(--step--1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   @media (min-width: 48rem) {
+    .sector-bar__list {
+      gap: 6px;
+    }
+
+    .sector-bar__segment {
+      padding-inline: var(--space-2xs);
+    }
+
     .sector-bar__label {
       display: inline;
     }
@@ -584,7 +746,7 @@
   }
 
   /* Auf schmalen Handys reicht der Platz neben sechs Segmenten nicht für die Beschriftung.
-   * Den aktuellen Sektor zeigt dort die weiße Unterkante. */
+   * Den aktuellen Sektor zeigt dort die gelbe Unterkante. */
   @media (max-width: 30rem) {
     .sector-bar__caption {
       display: none;
@@ -601,7 +763,7 @@
 
   .start-continue__where {
     color: var(--color-text-muted);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   /* ── Zeitenmonitor-Liste (Sektoren auf der Startseite) ── */
@@ -609,7 +771,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    border-block-start: var(--border-thick) solid var(--color-text);
+    border-block-start: var(--border-thick) solid var(--color-accent-line);
   }
 
   .timing-list__item {
@@ -636,12 +798,14 @@
     min-block-size: 3.5rem;
     padding: var(--space-xs) var(--space-2xs);
     color: var(--color-text);
+    font-style: normal;
     text-decoration: none;
     border-block-end: var(--border-thin) solid var(--color-line);
   }
 
   a.timing-list__row:hover {
     background-color: var(--color-surface);
+    border-radius: var(--radius-m);
   }
 
   a.timing-list__row:hover .timing-list__title {
@@ -655,13 +819,13 @@
 
   .timing-list__pos {
     grid-area: pos;
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     font-size: var(--step-1);
   }
 
   .timing-list__title {
     grid-area: title;
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .timing-list__time {
@@ -678,28 +842,30 @@
     align-items: center;
     gap: var(--space-3xs);
     font-size: var(--step--1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   /* Status-Chips in den Sektorfarben – gleiche Sprache wie die Sektoranzeige. */
   .timing-list__status--bestanden,
   .timing-list__status--bestzeit,
   .timing-list__status--ready {
-    padding: 0.15em 0.5em;
+    padding: 0.15em 0.55em;
+    border-radius: var(--radius-s);
   }
 
   .timing-list__status--bestanden {
     background-color: var(--color-yellow);
-    color: var(--color-black);
+    color: var(--color-graphite);
   }
 
   .timing-list__status--bestzeit {
     background-color: var(--color-purple);
-    color: var(--color-white);
+    color: var(--color-yellow);
+    border: var(--border-ds) solid var(--color-yellow);
   }
 
   .timing-list__status--ready {
-    border: 2px solid var(--color-text);
+    border: var(--border-ds) solid var(--color-accent-line);
   }
 
   .timing-list__icon {
@@ -722,7 +888,8 @@
   .goals {
     padding: var(--space-s);
     background-color: var(--color-surface);
-    border-inline-start: var(--border-thick) solid var(--color-text);
+    border-inline-start: 4px solid var(--color-accent-line);
+    border-radius: var(--radius-l);
   }
 
   .goals__title {
@@ -766,8 +933,8 @@
     padding: var(--space-xs) var(--space-s);
     background-color: var(--color-surface-strong);
     color: var(--color-text);
-    border: 2px solid var(--color-line-strong);
-    border-block-start: 4px solid var(--color-text);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-l);
     font-size: var(--step-0);
     line-height: 1.45;
   }
@@ -785,7 +952,7 @@
   }
 
   .glossary-popover__term {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .glossary-popover__link {
@@ -809,13 +976,13 @@
     margin-block-start: var(--space-m);
     padding-block-start: var(--space-xs);
     border-block-start: var(--border-thin) solid var(--color-line);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
     font-size: var(--step-1);
     scroll-margin-block-start: var(--space-xl);
   }
 
   .glossary-list__term--target {
-    border-block-start: var(--border-thick) solid var(--color-link);
+    border-block-start: var(--border-thick) solid var(--color-accent-line);
   }
 
   .glossary-list__text {
@@ -833,7 +1000,7 @@
   .choice-group legend {
     margin-block-end: var(--space-2xs);
     font-size: var(--step-2);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .choice {
@@ -858,8 +1025,8 @@
     padding: var(--space-m);
     background-color: var(--color-surface);
     color: var(--color-text);
-    border: 2px solid var(--color-line-strong);
-    border-block-start: 4px solid var(--color-text);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-l);
   }
 
   .dialog::backdrop {
@@ -893,7 +1060,7 @@
   .quiz__hint {
     margin-block: var(--space-xs) var(--space-s);
     color: var(--color-text-muted);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .quiz__options {
@@ -901,6 +1068,13 @@
     gap: var(--space-2xs);
   }
 
+  .quiz__form > .block__actions {
+    margin-block-start: var(--space-m);
+  }
+
+  /* Antwortmöglichkeiten: abgerundete Flächen. Gewählt = „gedrückt" (Lila, weiße Schrift,
+   * gelber Rand). Nach dem Prüfen zusätzlich grüner bzw. roter Rand und Haken/Kreuz-Kachel
+   * mit Text „Richtig"/„Falsch" – die Farbe ist nie das einzige Merkmal. */
   .quiz__option {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -909,7 +1083,8 @@
     min-block-size: 3rem;
     padding: var(--space-xs) var(--space-s);
     background-color: var(--color-surface);
-    border: 2px solid var(--color-line);
+    border: var(--border-ds) solid var(--color-line);
+    border-radius: var(--radius-m);
     font-weight: var(--font-weight-regular);
     cursor: pointer;
   }
@@ -919,8 +1094,9 @@
   }
 
   .quiz__option:has(:checked) {
-    border-color: var(--color-text);
-    box-shadow: inset var(--border-thick) 0 0 var(--color-text);
+    background-color: var(--color-pressed);
+    color: var(--color-white);
+    border-color: var(--color-tile-border);
   }
 
   .quiz__option:has(:disabled) {
@@ -929,12 +1105,12 @@
 
   .quiz__option.is-correct {
     border-color: var(--color-success);
-    box-shadow: inset 6px 0 0 var(--color-success);
+    box-shadow: inset 0 0 0 2px var(--color-success);
   }
 
   .quiz__option.is-wrong {
     border-color: var(--color-error);
-    box-shadow: inset 6px 0 0 var(--color-error);
+    box-shadow: inset 0 0 0 2px var(--color-error);
   }
 
   .quiz__mark:empty {
@@ -945,34 +1121,38 @@
     grid-column: 2;
     display: inline-flex;
     align-items: center;
-    gap: var(--space-3xs);
+    gap: var(--space-2xs);
     font-size: var(--step--1);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .is-correct .quiz__mark {
-    color: var(--color-success);
-  }
-
-  .is-wrong .quiz__mark {
-    color: var(--color-error);
+    font-weight: var(--font-weight-medium);
   }
 
   .quiz__mark-icon {
-    inline-size: 1.1em;
-    block-size: 1.1em;
+    inline-size: 1.6em;
+    block-size: 1.6em;
   }
 
-  /* Sicherheitsfrage: dieselbe Boxengassen-Schraffur wie der Achtung-Kasten. */
+  /* Sicherheitsfrage: dieselbe Boxengassen-Schraffur wie der Achtung-Kasten, als Streifen am
+   * linken Rand einer abgerundeten Fläche. */
   .quiz__critical {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-2xs);
-    padding: var(--space-2xs) var(--space-s);
-    border-inline-start: 0.75rem solid transparent;
-    border-image: repeating-linear-gradient(-45deg, var(--color-yellow) 0 8px, var(--color-black) 8px 16px) 1;
+    overflow: hidden;
+    padding: var(--space-2xs) var(--space-s) var(--space-2xs) calc(0.75rem + var(--space-s));
     background-color: var(--color-surface);
-    font-weight: var(--font-weight-bold);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-m);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .quiz__critical::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: 0.75rem;
+    background-image: repeating-linear-gradient(-45deg, var(--color-yellow) 0 8px, var(--color-black) 8px 16px);
   }
 
   .quiz__critical-icon {
@@ -988,36 +1168,42 @@
   .feedback--hint {
     padding: var(--space-xs) var(--space-s);
     border-inline-start: var(--border-thick) solid var(--color-line-strong);
+    border-radius: var(--radius-m);
   }
 
   /* ── Ergebnis ── */
   .quiz-result__title--best {
-    /* Bestzeit: lila Fläche mit weißer Schrift (7,99:1) – Lila nie als Textfarbe auf Dunkel. */
+    /* Bestzeit: lila Fläche mit gelber Schrift (6,61:1) und gelbem Rand – wie „gedrückt". */
     justify-self: start;
     display: inline-block;
-    padding: 0.1em 0.35em;
+    padding: 0.1em 0.4em;
     background-color: var(--color-purple);
-    color: var(--color-white);
+    color: var(--color-yellow);
+    border: var(--border-ds) solid var(--color-yellow);
+    border-radius: var(--radius-m);
   }
 
   .quiz-result__score {
     font-size: var(--step-1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .quiz-result__percent {
     font-size: var(--step-4);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
+  /* Ergebnis-Streifen: eine Kachel pro Frage. Richtig = Gelb mit dunklem Haken,
+   * falsch = dunkle Kachel mit grauem Rand und weißem Kreuz. */
   .result-strip {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     margin: 0;
     padding: var(--space-2xs);
     list-style: none;
     background-color: var(--color-black);
+    border-radius: var(--radius-m);
   }
 
   .result-strip__cell {
@@ -1026,23 +1212,23 @@
     inline-size: 2.5rem;
     block-size: 2rem;
     margin: 0;
-    transform: skewX(-14deg);
+    border-radius: var(--radius-s);
   }
 
   .result-strip__cell--correct {
     background-color: var(--color-yellow);
-    color: var(--color-black);
+    color: var(--color-graphite);
   }
 
   .result-strip__cell--wrong {
-    background-color: #5a5a5a;
+    background-color: var(--color-graphite);
     color: var(--color-white);
+    border: var(--border-ds) solid #5a5a5a;
   }
 
   .result-strip__icon {
     inline-size: 1.1rem;
     block-size: 1.1rem;
-    transform: skewX(14deg);
   }
 
   .review__title {
@@ -1064,14 +1250,13 @@
 
   .review__icon {
     flex: none;
-    inline-size: 1.1em;
-    block-size: 1.1em;
-    margin-block-start: 0.25em;
-    color: var(--color-error);
+    inline-size: 1.5em;
+    block-size: 1.5em;
+    margin-block-start: 0.05em;
   }
 
   .review__question {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   /* ── Startampel (js/ui/start-lights.js) ──
@@ -1087,6 +1272,8 @@
     gap: var(--space-2xs);
     padding: var(--space-xs);
     background-color: var(--color-black);
+    border: var(--border-ds) solid var(--color-yellow);
+    border-radius: var(--radius-l);
   }
 
   .start-lights__column {
@@ -1094,12 +1281,13 @@
     gap: var(--space-2xs);
     padding: var(--space-2xs);
     background-color: #111111;
+    border-radius: var(--radius-m);
   }
 
   .start-lights__lamp {
     inline-size: clamp(1.75rem, 8vw, 2.75rem);
     aspect-ratio: 1;
-    border-radius: 50%; /* Lampen sind rund – Ausnahme vom kantigen Stil */
+    border-radius: 50%;
     background-color: #2b2b2b;
     transition: background-color var(--duration-fast) linear;
   }
@@ -1110,7 +1298,7 @@
 
   .start-lights__status {
     font-size: var(--step-1);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 }
 
@@ -1139,7 +1327,7 @@
 
   .field__error {
     color: var(--color-error);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
   }
 
   .certificate__status:empty {
@@ -1178,7 +1366,7 @@
     display: grid;
     text-align: end;
     font-size: var(--step-2);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
   .print-certificate__course span {
@@ -1188,13 +1376,13 @@
 
   .print-certificate__title {
     font-size: var(--step-4);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     line-height: 1.1;
   }
 
   .print-certificate__name {
     font-size: var(--step-3);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
   .print-certificate__columns {
