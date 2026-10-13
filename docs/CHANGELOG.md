@@ -119,3 +119,4 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - „Weiter" erst nach richtig gelösten Übungen; Sicherheitsquiz erst nach allen Seiten.
 - Neu: PDF-Nachweis Sicherheitsunterweisung mit Name, Datum und Zahl der Anläufe – zur Abgabe bei der Projektleitung.
 - Willkommenstext neutral für reine Sicherheitsunterweisung und ganzes Onboarding.
+- Klarstellung: Die Online-Unterweisung ist Teil der Sicherheitsunterweisung; maschinenbezogene Einweisungen erfolgen zusätzlich vor Ort. Ansprechpersonen (Teamleitung, Projektleitung) eingetragen; Hinweis, dass es im Verein keine festen Ersthelfer gibt. Kapitelversion 4.

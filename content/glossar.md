@@ -35,6 +35,6 @@ Thermisches Durchgehen: Eine beschädigte oder überhitzte Lithium-Zelle heizt s
 Tilt-Test: Teil der technischen Abnahme: Das Auto wird stark zur Seite geneigt, um zu prüfen, dass nichts ausläuft und es nicht umkippt.
 Tractive System: Das Hochvolt-Antriebssystem des Elektroautos: Akku, Leistungselektronik, Motoren und alle Leitungen dazwischen. Kurz: TS. Erkennbar an der Signalfarbe Orange.
 TSAL: Tractive System Active Light – Warnleuchte oben am Überrollbügel. Blinkt sie rot, ist das Hochvoltsystem aktiv: Finger weg vom Rennwagen. Leuchtet sie dauerhaft grün, ist es aus.
-Unterweisung: Verpflichtende Einweisung in Gefahren und Schutzmaßnahmen durch eine verantwortliche Person – vor der ersten Tätigkeit und danach regelmäßig.
+Unterweisung: Verpflichtende Einweisung in Gefahren und Schutzmaßnahmen – vor der ersten Tätigkeit und danach regelmäßig. Bei uns besteht sie aus der Online-Unterweisung (Sektor Arbeitssicherheit) und den maschinenbezogenen Einweisungen vor Ort.
 Versionierung: Eine Datei bekommt neue Versionen, statt dass immer neue Kopien entstehen. So ist klar, welche Fassung aktuell ist.
 Winkelschleifer: Handmaschine mit einer schnell drehenden Trenn- oder Schleifscheibe, umgangssprachlich „Flex". Nur mit Gehörschutz, Schutzbrille und montierter Schutzhaube – und bei uns nur vor der Werkstatt.

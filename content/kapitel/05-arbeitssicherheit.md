@@ -2,7 +2,7 @@
 titel: Arbeitssicherheit
 kurztitel: Sicherheit
 dauer: 50
-version: 3
+version: 4
 freigegeben: nein
 lernziele:
   - Du erkennst Sicherheitszeichen und weißt, welche Schutzausrüstung du wann brauchst.
@@ -29,8 +29,8 @@ Die gute Nachricht: Fast alle Unfälle lassen sich mit ein paar klaren Regeln ve
 - **Ist ein Gerät beschädigt,** steckst du es aus, verstaust es sicher, sicherst es gegen Wiedereinschalten und meldest den Schaden.
 - **Jedes Sicherheitsrisiko, das du entdeckst, meldest du** – auch wenn es nicht „deins" ist.
 
-:::achtung Dieses Kapitel ersetzt keine Unterweisung
-Bevor du in der Werkstatt arbeitest, bekommst du eine verpflichtende Sicherheitsunterweisung von einer verantwortlichen Person – vor Ort, bezogen auf die Maschinen und Tätigkeiten. Dieser Kurs bereitet dich nur darauf vor.
+:::achtung Teil deiner Sicherheitsunterweisung
+Diese Online-Unterweisung ist **Teil der Sicherheitsunterweisung** von Einstein Motorsport. Dazu kommen **maschinenbezogene Einweisungen vor Ort** – an jeder Maschine, die du benutzen willst.
 :::
 
 ## Sicherheitszeichen lesen
@@ -443,7 +443,7 @@ Für Harze nimmst du **Nitrilhandschuhe** – keine Latex- und keine Stoffhandsc
 - **Harz im Auge:** sofort mindestens 10 Minuten mit Wasser spülen und danach zum Arzt.
 - Zu jedem Gefahrstoff gibt es ein **Sicherheitsdatenblatt.** Lies es, bevor du mit dem Stoff arbeitest.
 
-{{TODO: Wo liegen die Sicherheitsdatenblätter für unsere Harze und Chemikalien, und wo werden Harzreste entsorgt?}}
+**Wo liegen die Sicherheitsdatenblätter, wohin mit Harzresten?** Frag deine **Teamleitung** – bevor du mit dem Stoff arbeitest.
 
 ### Vorsicht, heiß: Harz richtig anmischen
 
@@ -521,28 +521,33 @@ Bei einem Notfall zählt jede Sekunde. Deshalb gilt **vor jeder Arbeit:** Schau 
 2. Maschine über den [[Notaus]] abschalten. Am Rennwagen: einen Abschaltknopf drücken, wenn du gefahrlos drankommst, und laut nach Team HV rufen.
 3. Notruf **112** wählen – Wo ist es passiert? Was ist passiert? Wie viele Verletzte? Welche Verletzungen? Warten auf Rückfragen.
 4. **Den Rettungswagen einweisen lassen:** Wenn möglich, eine zweite Person holen, die am Eingang der Hochschule auf den Rettungswagen wartet und ihn zum richtigen Ort bringt. Tipp: Bei Google Maps findet man die Werkstatt unter **„Einstein Motorsport"** – das kannst du den Einsatzkräften sagen.
-5. [[Erste Hilfe]] leisten, Ersthelferin oder Ersthelfer holen.
-6. Den Unfall melden – auch kleine Verletzungen werden dokumentiert.
+5. [[Erste Hilfe]] leisten – so gut du kannst. Feste Ersthelferinnen und Ersthelfer gibt es bei uns nicht (siehe unten).
+6. Den Unfall der **Projektleitung** melden – auch kleine Verletzungen werden dokumentiert.
 
 :::achtung Bei einem Stromunfall
 Hängt jemand am Strom, **fass die Person niemals mit der Hand an** – sonst fließt der Strom auch durch dich. Zuerst den Strom abschalten (Not-Aus, Abschaltknopf). Geht das nicht, die Person mit einem **Besen oder einem anderen nicht leitenden Gegenstand** wegstoßen. Dann sofort Team HV und die 112 rufen. Nach jedem Stromunfall muss die betroffene Person ärztlich untersucht werden, auch wenn sie sich gut fühlt.
 :::
 
-{{TODO: Interne Notrufnummer der Hochschule, Namen bzw. Rollen der Ersthelferinnen und Ersthelfer im Team und wo Unfälle gemeldet werden (z. B. Verbandbuch).}}
+:::info Warum es bei uns keine festen Ersthelfer gibt
+Einstein Motorsport ist ein Verein: Kaum jemand ist dauerhaft und planbar in der Werkstatt. Deshalb kann es keine festen Ersthelferinnen und Ersthelfer geben. Umso wichtiger: Im Notfall **sofort die 112 wählen** – und nie allein in der Werkstatt arbeiten.
+:::
 
-## Deine verpflichtende Unterweisung
+## Deine Sicherheitsunterweisung
 
-Jetzt kennst du die Grundlagen. Bevor du selbst in der Werkstatt arbeitest, nimmst du an der **verpflichtenden [[Unterweisung|Sicherheitsunterweisung]]** teil. Sie ist vorgeschrieben, wird dokumentiert und regelmäßig wiederholt. Für einzelne Maschinen (zum Beispiel Fräs- und Drehmaschine) und für die Elektrik gibt es **zusätzliche Einweisungen.**
+Jetzt kennst du die Grundlagen. Die [[Unterweisung|Sicherheitsunterweisung]] bei Einstein Motorsport besteht aus zwei Teilen:
 
-{{TODO: Wer führt die Sicherheitsunterweisung durch (Rolle, z. B. Werkstattleitung), wie meldest du dich dafür an und wie oft wird sie wiederholt?}}
+1. **Diese Online-Unterweisung.** Nach dem bestandenen Quiz lädst du deinen Nachweis als PDF herunter und gibst ihn bei der **Projektleitung** ab.
+2. **Maschinenbezogene Einweisungen vor Ort** – für jede Maschine, die du benutzen willst, zum Beispiel Ständerbohrmaschine, Bandschleifer, Fräs- und Drehmaschine, und für die Elektrik.
+
+**Wer weist dich ein?** Das erfährst du bei der **Projektleitung** oder deiner **Teamleitung**.
 
 :::achtung
-Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur kurz". Das Zertifikat dieses Kurses ist **keine** Sicherheitsunterweisung.
+Ohne Nachweis und ohne Einweisung an der Maschine keine Arbeit in der Werkstatt – auch nicht „nur kurz". Das Onboarding-Zertifikat am Ende des gesamten Kurses ist **kein** Nachweis der Sicherheitsunterweisung.
 :::
 
 ## Das nimmst du mit
 
-- Dieses Kapitel **bereitet vor** – die verpflichtende Unterweisung ersetzt es nicht.
+- Diese Online-Unterweisung ist **Teil deiner Sicherheitsunterweisung**. Nachweis-PDF bei der Projektleitung abgeben; **maschinenbezogene Einweisungen** gibt es zusätzlich vor Ort.
 - **Sicherheitszeichen:** blau = Gebot, rot durchgestrichen = Verbot, gelb = Warnung, rote Raute = Gefahrstoff.
 - **Hochvolt (600 V):** Nur Team HV mit Schulung. Orange heißt Hochvolt – Finger weg. Steht das Auto unter Spannung: **nie vor, hinter oder neben dem Auto.**
 - **TSAL:** Rot blinkend oder rot und grün zugleich = **Finger weg vom Rennwagen.** Grün = Hochvolt aus, Arbeiten nur mit Freigabe. Dunkel = in der Regel sicher, außer Team HV sagt etwas anderes.
@@ -596,11 +601,12 @@ Ohne bestandene Unterweisung keine Arbeit in der Werkstatt – auch nicht „nur
 > Fräs- und Drehmaschine dürfen nur mit einer eigenen, gesonderten Einweisung benutzt werden.
 ~ Regeln in der Werkstatt
 
-?! Ersetzt dieser Kurs die Sicherheitsunterweisung in der Werkstatt?
-- [ ] Ja, das Zertifikat gilt als Unterweisung
-- [x] Nein, die verpflichtende Unterweisung durch eine verantwortliche Person ist trotzdem nötig
-> Der Kurs bereitet nur vor. Die Unterweisung ist vorgeschrieben, maschinen- und tätigkeitsbezogen und wird dokumentiert.
-~ Deine verpflichtende Unterweisung
+?! Du hast die Online-Unterweisung bestanden. Darfst du jetzt jede Maschine in der Werkstatt benutzen?
+- [ ] Ja, die Online-Unterweisung gilt für alle Maschinen
+- [x] Nein, für jede Maschine brauche ich zusätzlich eine Einweisung vor Ort
+- [ ] Ja, wenn ich den Nachweis ausgedruckt habe
+> Die Online-Unterweisung ist ein Teil der Sicherheitsunterweisung. Maschinenbezogene Einweisungen gibt es zusätzlich vor Ort – erst danach darfst du die Maschine benutzen.
+~ Deine Sicherheitsunterweisung
 
 ? Das TSAL leuchtet gar nicht – weder rot noch grün. Was bedeutet das?
 - [x] Das Auto ist in der Regel sicher, außer jemand aus Team HV sagt etwas anderes
