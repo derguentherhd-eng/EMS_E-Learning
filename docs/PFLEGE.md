@@ -91,6 +91,49 @@ angegebenen Ordner und klicke „Erledigt". Kapitel verschieben (archivieren, um
 in diesem Modus selbst im Dateimanager erledigen – der Editor sagt dir genau, welche Datei wohin
 gehört.
 
+### Direkt auf GitHub speichern (jeder Browser, auch online)
+
+So arbeitest du in **Safari, Firefox oder online** unter `…github.io/…/editor.html`, ohne Dateien
+herunterzuladen: Der Editor liest die Dateien direkt aus dem GitHub-Repository und speichert jede
+Änderung als **Commit**. Die Website ist danach in 1–2 Minuten aktualisiert. GitHub Desktop
+brauchst du dafür nicht.
+
+**Einmalig: Zugangsschlüssel anlegen** (damit nur du speichern darfst)
+
+1. Auf github.com oben rechts auf dein Profilbild → **Settings**.
+2. Links ganz unten **Developer settings** → **Personal access tokens** → **Fine-grained tokens**
+   → **Generate new token**.
+3. **Token name:** z. B. „Rookie-Onboarding Editor". **Expiration:** z. B. 90 Tage (danach legst du
+   einfach einen neuen an).
+4. **Repository access:** „Only select repositories" → das Kurs-Repository auswählen.
+5. **Permissions** → **Repository permissions** → **Contents** auf **Read and write** stellen.
+   (Mehr braucht es nicht.)
+6. Unten **Generate token** → den Schlüssel (beginnt mit `github_pat_`) **sofort kopieren** – GitHub
+   zeigt ihn nur dieses eine Mal.
+
+**Im Editor verbinden**
+
+1. `editor.html` öffnen (online oder per Doppelklick).
+2. Im Kasten **„Direkt auf GitHub speichern"**: Repository eintragen (online ist es schon
+   vorausgefüllt), Branch `main` lassen, den Schlüssel einfügen.
+3. Optional **„Schlüssel in diesem Browser merken"** – nur auf deinem eigenen Gerät. Sonst fragt
+   der Editor nach dem Schließen des Tabs erneut.
+4. **Mit GitHub verbinden.** Oben steht jetzt „Modus: GitHub (…)".
+
+**Speichern:** wie immer mit **Speichern** (`Cmd/Strg + S`). Der Editor fragt nach einer kurzen
+Beschreibung (vorausgefüllt) und speichert alle geänderten Dateien – auch `content/inhalte.js` – als
+einen Commit. Sicherungskopien sind nicht nötig: Jede frühere Fassung steht in der
+Versionsgeschichte auf GitHub („Commits"). Hat in der Zwischenzeit jemand anderes dieselbe Datei
+geändert, fragt der Editor nach, bevor er etwas überschreibt.
+
+> **Wichtig, wenn du auch lokal arbeitest:** Nach dem Speichern auf GitHub ist dein Ordner auf dem
+> Rechner nicht mehr aktuell. Bevor du dort weiterarbeitest, in GitHub Desktop **Fetch origin** und
+> dann **Pull origin** klicken.
+
+> **Schlüssel verloren oder auf einem fremden Gerät gemerkt?** Auf github.com unter **Developer
+> settings → Personal access tokens** den Schlüssel löschen („Delete"). Im Editor meldest du dich auf
+> dem Startbildschirm mit **„Abmelden (Schlüssel vergessen)"** ab.
+
 ## 3. Ich will einen Text ändern
 
 **Im Editor:** Links das Kapitel aufklappen → Seite wählen → in der Mitte die Karte
@@ -332,7 +375,9 @@ Einmal pro Jahr, am besten direkt nach der Übergabe an die neue Teamleitung:
 | Kapitel fehlt im Kurs | Nicht in `kurs.md` eingetragen oder Tippfehler im Dateinamen | Prüfseite öffnen, Eintrag korrigieren (Groß-/Kleinschreibung, `.md`). |
 | Umlaute kaputt (z. B. „Ã¼") | Datei nicht als UTF-8 gespeichert | Im Texteditor „Speichern unter → Kodierung UTF-8". |
 | Baustein erscheint als „kann nicht angezeigt werden" | Syntaxfehler | Prüfseite zeigt die Zeile; Vorlage in `docs/BAUSTEINE.md`. |
-| Editor: „Projektordner öffnen" fehlt | Firefox oder Safari | `editor.html` in Chrome oder Edge öffnen – oder „Projektordner einlesen (Download-Modus)" nutzen. |
+| Editor: „Projektordner öffnen" fehlt | Firefox oder Safari | „Direkt auf GitHub speichern" nutzen (Abschnitt 2) – oder `editor.html` in Chrome bzw. Edge öffnen. |
+| Editor: „GitHub kennt diesen Zugangsschlüssel nicht" | Schlüssel falsch kopiert oder abgelaufen | Neuen Schlüssel anlegen (Abschnitt 2). |
+| Editor: „GitHub verweigert den Zugriff" | Schlüssel darf nicht schreiben | Beim Schlüssel „Contents: Read and write" für das Repository einstellen. |
 | Editor fragt „Datei wurde außerhalb geändert" | Jemand hat die Datei inzwischen anders bearbeitet | „Diese Datei auslassen", Editor neu laden, Änderung wiederholen. Oder überschreiben – die andere Fassung landet in `_backup/`. |
 | Bild wird nicht angezeigt | Pfad oder Groß-/Kleinschreibung falsch | Pfad ab Projektordner: `assets/bilder/name.webp`. |
 

@@ -106,3 +106,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 ### Robuster auf GitHub Pages (2026-10-13)
 - Fehlt online eine `.md`-Datei (z. B. weil `.nojekyll` beim Hochladen über die Webseite verloren ging), liest der Kurs die Kopie in `content/inhalte.js` statt abzubrechen. Hinweis dazu in der Browser-Konsole.
 - `docs/PFLEGE.md`: Hinweis, dass der Upload über die GitHub-Webseite Dateien mit Punkt am Anfang weglässt.
+
+### Editor speichert direkt auf GitHub (2026-10-13)
+- Neuer GitHub-Modus im Editor: Repository und Zugangsschlüssel eingeben, dann liest der Editor direkt aus GitHub und speichert jede Änderung als einen Commit – in jedem Browser und online. Kein Herunterladen, kein GitHub Desktop nötig.
+- Konfliktprüfung, wenn auf GitHub inzwischen dieselbe Datei geändert wurde; Archivieren und Umbenennen funktionieren als Teil des Commits.
+- Anleitung zum Zugangsschlüssel in `docs/PFLEGE.md`, Abschnitt 2.

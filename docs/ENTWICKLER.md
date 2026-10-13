@@ -105,6 +105,7 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/pages/tests.js` | Selbsttests für `tests.html` |
 | `js/pages/designsystem.js` | Logik von `designsystem.html` (Übersicht aller Bedienelemente) |
 | `js/pages/editor.js` | Einstieg und Steuerzentrale des Editors (Zustand, `commit()`, Laden, Speichern) |
+| `js/editor/github.js` | GitHub-Modus: Repository lesen, Änderungen als ein Commit speichern |
 | `js/editor/*` | Teile des Editors (siehe Abschnitt 6) |
 
 **Zuordnung Baustein → Modul:** info/tipp/achtung → `callouts.js` · aufklappen → `details.js` ·
@@ -233,6 +234,15 @@ beim nächsten Start `queryPermission`/`requestPermission`. Chrome/Edge, auch au
 **Download-Modus:** lesen per `<input type="file" webkitdirectory>` („Projektordner einlesen",
 `createFolderWorkspace`) oder – nur auf http(s) – per `fetch`; speichern per Download mit
 Zielordner. Erkennung per Feature-Detection (`supportsDirectAccess()`), nie per Browsername.
+
+**GitHub-Modus** (`js/editor/github.js`): liest den Dateibaum des Branches über die GitHub-API
+(`git/trees?recursive=1`, Blobs bei Bedarf) und speichert über die Git-Data-API als **ein Commit**
+(Bilder als Blobs → Baum mit geänderten, neuen und entfernten Dateien → Commit → Branch per
+`PATCH` ohne `force`). Hat sich der Branch seit dem Laden bewegt, werden nur die betroffenen Dateien
+verglichen; bei Überschneidung fragt der Editor. Liegt das Projekt in einem Unterordner des
+Repositorys, wird er über `content/kurs.md` gefunden. Zugang per Fine-grained Token
+(„Contents: Read and write"), standardmäßig nur in `sessionStorage`. Einzige Stelle mit
+Internetverbindung (`api.github.com`); Kurs, Prüfseite und Tests bleiben ohne externe Requests.
 
 **Offline-Datei:** Beim Laden liest der Editor `content/inhalte.js` mit. `collectChanges()` hängt
 eine Änderung „Offline-Datei" an, wenn die aus den (neuen) `.md`-Texten erzeugte Kopie vom
@@ -390,6 +400,7 @@ und JavaScript auf developer.mozilla.org). Die Werkzeug-Einstellungen liegen im 
 | `js/core/theme-init.js` synchron im `<head>` | alle anderen Skripte laufen verzögert → sonst kurzes Aufblitzen im falschen Theme; Inline-Skripte verboten |
 | Ordner nach Aufgabe (`js/pages`, `core`, `content`, `blocks`, `views`, `course`, `ui`, `editor`; `css/base`, `components`, `blocks`, `views`, `pages`, `editor`) | Dateien findet man über ihre Aufgabe; Baustein-Dateien heißen in `js/` und `css/` gleich |
 | Eine CSS-Einstiegsdatei je Seite mit `@import` | HTML bleibt kurz, CSS in kleinen Dateien; `@import` lädt auch per Doppelklick; der zusätzliche Ladeschritt ist vernachlässigbar |
+| Editor kann direkt auf GitHub speichern (Token, ein Commit pro Speichern) | Safari/Firefox und online ohne Ordnerzugriff; Versionsgeschichte ersetzt Sicherungskopien; Kurs selbst bleibt ohne externe Requests |
 | Code-Stil nach MDN; Prettier-, ESLint- und Stylelint-Einstellungen im Projekt | einheitlich und in VS Code automatisch; die Werkzeuge sind optional und zur Laufzeit nicht nötig |
 | Klassische Skripte mit `EM.define`/`EM.require` statt ES-Modulen | Vorgabe „Doppelklick auf index.html": Chrome sperrt Module und `fetch` auf `file://` |
 | `content/inhalte.js` als erzeugte Kopie | einzige Möglichkeit, ohne Server Text nachzuladen; `.md` bleibt Quelle, Editor hält die Kopie aktuell, auf dem Webspace unbenutzt |

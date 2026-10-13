@@ -16,6 +16,7 @@
  *
  * Zusammenspiel:
  *   workspace.js     Dateien lesen/schreiben (Direkt- oder Download-Modus)
+ *   github.js        GitHub-Modus: aus dem Repository lesen, als ein Commit speichern
  *   course-tree.js   linke Spalte · page-canvas.js mittlere Spalte und Elementformulare
  *   preview.js       Live-Vorschau · history.js Rückgängig/Wiederholen · dialogs.js Dialoge
  *
@@ -59,6 +60,12 @@
     restoreDirectory,
     supportsDirectAccess,
   } = EM.require("js/editor/workspace.js");
+  const {
+    connectGitHub,
+    forgetToken,
+    loadSettings: loadGitHubSettings,
+    saveSettings: saveGitHubSettings,
+  } = EM.require("js/editor/github.js");
   const { buildMirrorScript, collectMirrorPaths, parseMirrorScript } =
     EM.require("js/content/mirror.js");
   const { backupPath, chapterFileName, slugify, uniqueName } =
@@ -117,6 +124,8 @@
     history: createHistory(),
     /** Bilder, die im Download-Modus noch heruntergeladen werden müssen: Pfad → {blob, url} */
     pendingAssets: new Map(),
+    /** Vorschau-Adressen gespeicherter Bilder, die online noch nicht veröffentlicht sind */
+    savedAssetUrls: new Map(),
     imageNames: [],
     validation: [],
   };
@@ -645,10 +654,11 @@
     );
     regions.start.hidden = true;
     regions.layout.hidden = false;
-    regions.mode.textContent =
-      workspace.mode === "direkt"
-        ? `Modus: Direkt (Ordner „${workspace.label}")`
-        : `Modus: Download (${workspace.label})`;
+    regions.mode.textContent = {
+      direkt: `Modus: Direkt (Ordner „${workspace.label}")`,
+      github: `Modus: GitHub (${workspace.label})`,
+      download: `Modus: Download (${workspace.label})`,
+    }[workspace.mode];
     regions.mode.dataset.mode = workspace.mode;
     preview ??= createPreview(regions.previewPanel, api);
     renderAll();
@@ -777,7 +787,7 @@
     return { files, chapterFiles };
   }
 
-  /** Speichern: im Direktmodus in die Dateien, sonst als Download-Liste. */
+  /** Speichern: im Direktmodus in die Dateien, im GitHub-Modus als Commit, sonst als Download-Liste. */
   async function save() {
     const changes = collectChanges();
     if (changes.length === 0) {
@@ -799,6 +809,8 @@
     }
     if (state.workspace.mode === "direkt") {
       await saveDirect(changes);
+    } else if (state.workspace.mode === "github") {
+      await saveGitHub(changes);
     } else {
       await saveDownload(changes);
     }
@@ -995,6 +1007,69 @@
     if (!done) {
       return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
     }
+    markSaved(changes);
+    setStatus(
+      "Als gespeichert markiert. Lade den Kurs neu, um die Änderungen zu sehen.",
+    );
+  }
+
+  /**
+   * GitHub-Modus: alle Änderungen als einen Commit ins Repository speichern. Die Beschreibung
+   * ist vorausgefüllt und erscheint in der Versionsgeschichte (wie „Summary" in GitHub Desktop).
+   * @param {Object[]} changes  aus collectChanges()
+   */
+  async function saveGitHub(changes) {
+    const labels = [
+      ...new Set(
+        changes
+          .filter((change) => !change.mirror)
+          .map((change) => change.label),
+      ),
+    ];
+    const message = await promptDialog({
+      title: "Auf GitHub speichern",
+      label: "Was hast du geändert?",
+      value: `Editor: ${labels.join(", ") || "Offline-Datei aktualisiert"}`,
+      hint: "Kurze Beschreibung für die Versionsgeschichte. Nach dem Speichern ist die Website in 1–2 Minuten aktualisiert.",
+      confirmLabel: "Auf GitHub speichern",
+    });
+    if (message === null) {
+      return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
+    }
+    setStatus("Wird auf GitHub gespeichert …");
+    try {
+      let result = await state.workspace.commitChanges(changes, message);
+      if (result.conflicts) {
+        const overwrite = await confirmDialog({
+          title: "Auf GitHub wurde inzwischen etwas geändert",
+          text: `Seit du den Editor geöffnet hast, wurden auf GitHub diese Dateien geändert: ${result.conflicts.join(", ")}. Wenn du trotzdem speicherst, ersetzt deine Fassung die andere (sie bleibt in der Versionsgeschichte erhalten). Sonst: Abbrechen, Editor neu laden und die Änderung wiederholen.`,
+          confirmLabel: "Meine Fassung speichern",
+          cancelLabel: "Abbrechen",
+          danger: true,
+        });
+        if (!overwrite) {
+          return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
+        }
+        result = await state.workspace.commitChanges(changes, message, {
+          overwrite: true,
+        });
+      }
+      markSaved(changes);
+      const count = changes.length;
+      setStatus(
+        `Auf GitHub gespeichert (${count} ${count === 1 ? "Datei" : "Dateien"}). Die Website ist in 1–2 Minuten aktualisiert.`,
+      );
+    } catch (error) {
+      setStatus(`Nicht gespeichert: ${error.message}`);
+    }
+  }
+
+  /**
+   * Übernimmt gespeicherte Änderungen als neuen Ausgangsstand (Download- und GitHub-Modus):
+   * Danach gilt nichts mehr als „ungespeichert".
+   * @param {Object[]} changes  aus collectChanges()
+   */
+  function markSaved(changes) {
     for (const change of changes) {
       if (change.mirror) {
         state.mirror = parseMirrorScript(change.text);
@@ -1015,12 +1090,13 @@
         };
       }
       if (change.blob) {
+        const pending = state.pendingAssets.get(change.path);
+        if (pending) {
+          state.savedAssetUrls.set(change.path, pending.url);
+        }
         state.pendingAssets.delete(change.path);
       }
     }
-    setStatus(
-      "Als gespeichert markiert. Lade den Kurs neu, um die Änderungen zu sehen.",
-    );
   }
 
   // ───────────────────────────── Kapitel- und Seitenoperationen ─────────────────────────────
@@ -1300,9 +1376,13 @@
     return result.path;
   }
 
-  /** Pfad → anzeigbare Adresse (für Bilder, die im Download-Modus noch nicht abgelegt sind). */
+  /** Pfad → anzeigbare Adresse (auch für Bilder, die noch nicht gespeichert bzw. veröffentlicht sind). */
   function imageUrl(path) {
-    return state.pendingAssets.get(path)?.url ?? path;
+    return (
+      state.pendingAssets.get(path)?.url ??
+      state.savedAssetUrls.get(path) ??
+      path
+    );
   }
 
   /**
@@ -1561,6 +1641,152 @@
       );
     }
     area.replaceChildren(...buttons);
+    renderGitHubStart(run, !directPossible);
+  }
+
+  /**
+   * Startbildschirm, Abschnitt „Direkt auf GitHub speichern": Konto, Repository, Branch und
+   * Zugangsschlüssel eingeben – oder mit dem gemerkten Schlüssel weiterarbeiten.
+   * @param {(task: () => Promise<void>) => Promise<void>} run  zeigt Fehler im Startbildschirm an
+   * @param {boolean} recommended  true = als Hauptweg hervorheben (z. B. Safari, Firefox, online)
+   */
+  function renderGitHubStart(run, recommended) {
+    const container = /** @type {HTMLElement} */ (
+      regions.start.querySelector("[data-start-github]")
+    );
+    const settings = loadGitHubSettings();
+    const highlight =
+      recommended || window.location.hostname.endsWith(".github.io");
+    const primary = highlight ? " button--primary" : "";
+
+    async function connect(config, remember) {
+      setStatus("Verbindung zu GitHub wird hergestellt …");
+      const workspace = await connectGitHub(config);
+      saveGitHubSettings(config, remember);
+      await loadProject(workspace);
+    }
+
+    if (settings.token) {
+      container.replaceChildren(
+        el("h2", {}, "Direkt auf GitHub speichern"),
+        el(
+          "p",
+          {},
+          `Gespeichert wird als Commit in ${settings.owner}/${settings.repo} (Branch ${settings.branch}).`,
+        ),
+        el(
+          "div",
+          { class: "editor-start__actions" },
+          el(
+            "button",
+            {
+              type: "button",
+              class: `button button--large${primary}`,
+              onclick: () => run(() => connect(settings, settings.remembered)),
+            },
+            `Mit GitHub weiterarbeiten (${settings.repo})`,
+          ),
+          el(
+            "button",
+            {
+              type: "button",
+              class: "button button--quiet",
+              onclick: () => {
+                forgetToken();
+                renderGitHubStart(run, recommended);
+              },
+            },
+            "Abmelden (Schlüssel vergessen)",
+          ),
+        ),
+      );
+      return;
+    }
+
+    /** Eingabefeld mit Beschriftung und optionalem Hinweis. */
+    function field(id, label, attributes, hint = "") {
+      return el(
+        "div",
+        { class: "field" },
+        el("label", { for: id }, label),
+        hint ? el("p", { class: "field__hint" }, hint) : null,
+        el("input", { id, class: "field__input", ...attributes }),
+      );
+    }
+    const repository = settings.owner
+      ? `${settings.owner}/${settings.repo}`
+      : "";
+    const form = el(
+      "form",
+      { class: "editor-start__github-form stack", novalidate: true },
+      field(
+        "github-repository",
+        "Repository",
+        {
+          type: "text",
+          value: repository,
+          placeholder: "konto/repository",
+          autocomplete: "off",
+          spellcheck: "false",
+        },
+        "Wie in der Adresse auf github.com, z. B. derguentherhd-eng/rookie-onboarding.",
+      ),
+      field("github-branch", "Branch", {
+        type: "text",
+        value: settings.branch,
+        autocomplete: "off",
+        spellcheck: "false",
+      }),
+      field(
+        "github-token",
+        "Zugangsschlüssel (Token)",
+        {
+          type: "password",
+          autocomplete: "off",
+          spellcheck: "false",
+          placeholder: "github_pat_…",
+        },
+        "Wird nur an api.github.com geschickt. Anleitung: docs/PFLEGE.md, Abschnitt 2.",
+      ),
+      el(
+        "label",
+        { class: "choice" },
+        el("input", { type: "checkbox", id: "github-remember" }),
+        " Schlüssel in diesem Browser merken (nur auf eigenen Geräten)",
+      ),
+      el(
+        "button",
+        { type: "submit", class: `button button--large${primary}` },
+        "Mit GitHub verbinden",
+      ),
+    );
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const [owner = "", repo = ""] = form
+        .querySelector("#github-repository")
+        .value.trim()
+        .replace(/^https?:\/\/github\.com\//, "")
+        .replace(/\.git$/, "")
+        .split("/");
+      const config = {
+        owner,
+        repo,
+        branch: form.querySelector("#github-branch").value.trim() || "main",
+        token: form.querySelector("#github-token").value.trim(),
+      };
+      run(() =>
+        connect(config, form.querySelector("#github-remember").checked),
+      );
+    });
+    container.replaceChildren(
+      el("h2", {}, "Direkt auf GitHub speichern"),
+      el(
+        "p",
+        {},
+        "Funktioniert in jedem Browser und online: Der Editor liest die Dateien aus dem GitHub-Repository und speichert jede Änderung als Commit. Die Website ist danach in 1–2 Minuten aktualisiert – GitHub Desktop ist dafür nicht nötig.",
+      ),
+      form,
+    );
   }
 
   /** Verbindet Kopfleiste, Reiter und Tastenkürzel mit den Editor-Funktionen. */

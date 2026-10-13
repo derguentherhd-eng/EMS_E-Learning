@@ -52,6 +52,23 @@
     gap: var(--space-s);
   }
 
+  /* Startbildschirm, Abschnitt „Direkt auf GitHub speichern" (js/editor/github.js). */
+  .editor-start__github {
+    max-inline-size: 40rem;
+    padding: var(--space-m);
+    background-color: var(--color-surface);
+    border: var(--border-ds) solid var(--color-accent-line);
+    border-radius: var(--radius-l);
+  }
+
+  .editor-start__github:empty {
+    display: none;
+  }
+
+  .editor-start__github > * + * {
+    margin-block-start: var(--space-s);
+  }
+
   .editor-start__folder:focus-within {
     outline: var(--focus-ring);
     outline-offset: var(--focus-offset);

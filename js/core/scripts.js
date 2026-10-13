@@ -74,6 +74,7 @@
       "js/editor/names.js",
       "js/editor/history.js",
       "js/editor/workspace.js",
+      "js/editor/github.js",
       "js/editor/dialogs.js",
       "js/editor/field-renderers.js",
       "js/editor/quiz-editor.js",

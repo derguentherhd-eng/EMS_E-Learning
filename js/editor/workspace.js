@@ -12,6 +12,9 @@
  *   Inhalte werden per fetch geladen. „Speichern" bietet die geänderten Dateien zum
  *   Herunterladen an – mit genauer Angabe, in welchen Ordner sie gehören.
  *
+ * Dritter Weg: der GitHub-Modus (js/editor/github.js) liest und speichert direkt im
+ * GitHub-Repository – mit denselben Lese-Funktionen wie hier, gespeichert wird als Commit.
+ *
  * Welcher Modus möglich ist, wird per Feature-Erkennung entschieden (gibt es
  * showDirectoryPicker und einen sicheren Kontext?), nie über den Browsernamen.
  *
