@@ -63,12 +63,14 @@ export function append(parent, ...children) {
   return parent;
 }
 
+/** Zähler für uniqueId(). */
+let idCounter = 0;
+
 /**
  * Liefert eine fortlaufende, seitenweit eindeutige ID (für aria-controls, label for …).
  * @param {string} [prefix]
  * @returns {string}
  */
-let idCounter = 0;
 export function uniqueId(prefix = 'id') {
   idCounter += 1;
   return `${prefix}-${idCounter}`;

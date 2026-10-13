@@ -57,3 +57,7 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Automatische Prüfung aller Ansichten: genau eine h1, keine Sprünge in der Überschriftenhierarchie, benannte Bedienelemente, Alternativtexte, beschriftete Felder.
 - Vollständige Kontrasttabelle (beide Themes) geprüft und in docs/ENTWICKLER.md dokumentiert.
 - Sektorbeschriftung auf schmalen Handys ausgeblendet (lief am Rand aus dem Bild), favicon.ico ergänzt.
+
+### Phase 10 – Dokumentation und Abschluss (2026-10-13)
+- `docs/PFLEGE.md` (Pflege ohne Programmierkenntnisse), `docs/BAUSTEINE.md` (alle Bausteine mit Kopiervorlagen), `docs/ENTWICKLER.md` (Architektur, neue Bausteine, Kontraste, Entscheidungen, Grenzen).
+- Abschlussprüfung gegen die Definition of Done; Betrieb aus einem Unterordner eines Standard-Webservers geprüft.
