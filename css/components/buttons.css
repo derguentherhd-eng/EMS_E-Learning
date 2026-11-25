@@ -47,8 +47,7 @@
   }
 
   .button--primary:hover {
-    /* Etwas helleres Gelb; die dunkle Schrift bleibt deutlich über 4,5:1. */
-    background-color: #fff35c;
+    background-color: var(--color-primary-hover);
   }
 
   /* „gedrückt" laut Designsystem. */

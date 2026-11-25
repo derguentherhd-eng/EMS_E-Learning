@@ -80,7 +80,7 @@
     content: "";
     position: absolute;
     inset-inline: 4px;
-    inset-block-end: -9px;
+    inset-block-end: -8px;
     block-size: 3px;
     background-color: var(--color-yellow);
     border-radius: var(--radius-pill);
@@ -126,7 +126,7 @@
 
   @media (width >= 48rem) {
     .sector-bar__list {
-      gap: 6px;
+      gap: var(--space-2xs);
     }
 
     .sector-bar__segment {

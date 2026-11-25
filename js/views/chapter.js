@@ -144,10 +144,13 @@
         hint.textContent = "";
         // Kurz leeren, damit Screenreader die Meldung erneut vorlesen.
         setTimeout(update, 30);
-        article.querySelector('[data-exercise="offen"]')?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        const openExercise = article.querySelector('[data-exercise="offen"]');
+        if (openExercise) {
+          // Fokus auf die offene Übung, damit Tastaturnutzer dort weitermachen.
+          openExercise.setAttribute("tabindex", "-1");
+          openExercise.focus({ preventScroll: true });
+          openExercise.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
       }
     });
     article.addEventListener("exercise-change", update);

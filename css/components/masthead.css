@@ -23,7 +23,8 @@
 
   .skip-link:focus {
     transform: none;
-    outline: 3px solid var(--color-black);
+    outline: var(--border-thick) solid var(--color-black);
+    outline-offset: var(--focus-offset);
   }
 
   /* ── Kopfleiste (immer schwarz) ── */

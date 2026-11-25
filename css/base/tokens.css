@@ -64,6 +64,10 @@
     --color-primary: var(--color-yellow);
     --color-on-primary: var(--color-graphite);
     --color-primary-border: var(--color-yellow);
+    --color-primary-hover: #fff35c; /* helleres Gelb, dunkle Schrift bleibt über 4,5:1 */
+    --color-lights-housing: #111; /* Startampel: Gehäuse */
+    --color-lights-off: #2b2b2b; /* Startampel: Lampe aus */
+    --color-lights-on: #ff2a1f; /* Startampel: Lampe an */
     --color-pressed: var(--color-purple);
     --color-on-pressed: var(--color-yellow);
 
@@ -156,10 +160,17 @@
     --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
     /* ── Layout ── */
-    --layout-max: 72rem; /* Breite von Kopfleiste, Sektoranzeige, Inhalt und Fußzeile */
+    --layout-max: 72rem; /* Breite von Kopfleiste, Sektoranzeige, Inhalt und Fußzeile; ab 100rem 84rem */
     --content-max: var(--layout-max); /* Breite der Inhaltsspalte (Tabellen, Bilder, Bausteine) */
     --masthead-height: 3.5rem;
     --pager-height: 4.5rem;
+  }
+
+  /* ── Breite Bildschirme: mehr Platz nutzen, Prosa bleibt durch --measure begrenzt ── */
+  @media (width >= 100rem) {
+    :root {
+      --layout-max: 84rem;
+    }
   }
 
   /* ── Helles Theme ──

@@ -27,7 +27,7 @@
     display: grid;
     gap: var(--space-2xs);
     padding: var(--space-2xs);
-    background-color: #111;
+    background-color: var(--color-lights-housing);
     border-radius: var(--radius-m);
   }
 
@@ -35,12 +35,12 @@
     inline-size: clamp(1.75rem, 8vw, 2.75rem);
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: #2b2b2b;
+    background-color: var(--color-lights-off);
     transition: background-color var(--duration-fast) linear;
   }
 
   .start-lights__column.is-on .start-lights__lamp {
-    background-color: #ff2a1f;
+    background-color: var(--color-lights-on);
   }
 
   .start-lights__status {

@@ -27,10 +27,10 @@
   .timeline__entry::before {
     content: "";
     position: absolute;
-    inset-inline-start: calc(-0.6rem - 1.5px);
+    inset-inline-start: calc(-0.5rem - 1.5px);
     inset-block-start: 0.3em;
-    inline-size: 1.2rem;
-    block-size: 1.2rem;
+    inline-size: 1rem;
+    block-size: 1rem;
     background-color: var(--color-yellow);
     border: var(--border-ds) solid var(--color-purple);
     border-radius: 50%;

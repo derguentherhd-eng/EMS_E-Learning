@@ -282,6 +282,12 @@
   function setupLanguageToggle(button) {
     const label = button.querySelector("[data-language-label]") ?? button;
     const defaultLabel = label.textContent;
+    const hintText = "Zum Übersetzen klicken";
+    // Unsichtbare Statusmeldung für Screenreader (Ladefortschritt des Modells).
+    const status = document.createElement("span");
+    status.className = "visually-hidden";
+    status.setAttribute("role", "status");
+    button.after(status);
 
     function update() {
       button.setAttribute("aria-pressed", String(active));
@@ -310,20 +316,29 @@
           if (availability === "unavailable") {
             if (userAction) {
               showBrowserHelp();
+            } else {
+              button.title = hintText;
             }
             return;
           }
           // Ohne Klick darf der Browser nichts herunterladen – dann beim nächsten Klick.
           if (!userAction && availability !== "available") {
+            button.title = hintText;
             return;
           }
           button.setAttribute("aria-busy", "true");
           label.textContent = "English …";
+          status.textContent = "Sprachmodell wird geladen.";
           translator = await self.Translator.create({
             ...LANGUAGES,
             monitor(monitor) {
               monitor.addEventListener("downloadprogress", (event) => {
-                label.textContent = `English … ${Math.round(event.loaded * 100)} %`;
+                const percent = Math.round(event.loaded * 100);
+                label.textContent = `English … ${percent} %`;
+                // Nur in 25-%-Schritten melden, damit es nicht ständig vorgelesen wird.
+                if (percent % 25 === 0) {
+                  status.textContent = `Sprachmodell: ${percent} %`;
+                }
               });
             },
           });
@@ -335,6 +350,7 @@
         }
         await translateTree(document.documentElement);
         storeLanguage("en");
+        button.removeAttribute("title");
       } catch {
         active = false;
         update();
@@ -344,6 +360,7 @@
       } finally {
         button.removeAttribute("aria-busy");
         label.textContent = defaultLabel;
+        status.textContent = "";
       }
     }
 

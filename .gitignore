@@ -3,3 +3,4 @@
 content/_backup/*
 !content/_backup/.gitkeep
 node_modules/
+.claude/design-findings.md

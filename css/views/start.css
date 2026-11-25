@@ -43,7 +43,7 @@
 
   .timing-list__row {
     display: grid;
-    grid-template-columns: 3.25rem 1fr auto;
+    grid-template-columns: 3.5rem 1fr auto;
     grid-template-areas:
       "pos title title"
       "pos status time";
@@ -129,7 +129,7 @@
 
   @media (width >= 40rem) {
     .timing-list__row {
-      grid-template-columns: 3.5rem 1fr 4.5rem 15rem;
+      grid-template-columns: 3.5rem 1fr 4.5rem 16rem;
       grid-template-areas: "pos title time status";
     }
   }

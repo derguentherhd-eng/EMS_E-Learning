@@ -81,8 +81,8 @@
     display: grid;
     place-items: center;
     flex: none;
-    inline-size: 1.85rem;
-    block-size: 1.85rem;
+    inline-size: 2rem;
+    block-size: 2rem;
     background-color: var(--color-yellow);
     color: var(--color-graphite);
     border: var(--border-ds) solid var(--color-purple);
@@ -98,6 +98,6 @@
   }
 
   .hotspot__panel {
-    padding: 0 0 var(--space-xs) calc(1.85rem + var(--space-xs));
+    padding: 0 0 var(--space-xs) calc(2rem + var(--space-xs));
   }
 }

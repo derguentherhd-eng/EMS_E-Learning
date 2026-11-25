@@ -35,7 +35,7 @@
   .file-tree__group {
     padding-inline-start: var(--space-m);
     border-inline-start: var(--border-thin) dashed var(--color-line-strong);
-    margin-inline-start: 0.6rem;
+    margin-inline-start: 0.5rem;
   }
 
   .file-tree__item {
@@ -63,7 +63,7 @@
 
   .file-tree__item:focus-visible > .file-tree__label {
     outline: var(--focus-ring);
-    outline-offset: -2px;
+    outline-offset: calc(-1 * var(--focus-offset));
   }
 
   /* Ausgewählt = „gedrückt": Lila mit weißer Schrift (7,99). */

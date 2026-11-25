@@ -142,3 +142,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Bildreihen: Bilder direkt hintereinander stehen nebeneinander (`renderElements()` in js/core/render.js, `.figure-row`).
 - Fotos: hochauflösendes Streckenfoto für „Dynamisch“, Teamfoto ohne leeren Asphalt zugeschnitten.
 - Neuer Sprachschalter „English“ in der Kopfleiste (js/ui/language.js): Übersetzung über die eingebaute Übersetzung des Browsers (Translator-API), sonst Anleitung für die Browser-Übersetzung.
+
+### Design-Review PC-first (2026-11-25)
+- Design-Team-Review (Swiss/Rams/Raster 8, PC-first): Inhaltsbreite ab 1600 px auf 84rem, neue Tokens für Primär-Hover und Startampel, einheitliche Fokusringe (Skip-Link, Ordner-Baustein), Abstände aufs 8er-Raster.
+- Gesperrtes „Weiter“: Enter setzt den Fokus direkt auf die offene Übung.
+- Sprachschalter: Fortschritt beim Laden des Sprachmodells wird für Screenreader angesagt; Hinweis am Schalter, wenn die gespeicherte Sprache nicht automatisch geladen werden kann.
