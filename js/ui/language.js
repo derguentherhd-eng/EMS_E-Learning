@@ -19,7 +19,7 @@
  * Zusammenspiel: js/pages/index.js verbindet den Knopf .language-toggle in der Kopfleiste.
  *
  * Wenn du hier etwas ändern willst …
- *   – Texte des Hinweisdialogs: showBrowserHelp().
+ *   – Texte des Hinweisdialogs: HELP_TEXTS (oben in der Datei).
  *   – Welche Attribute mitübersetzt werden: ATTRIBUTES.
  */
 
@@ -31,8 +31,49 @@
   const STORAGE_KEY = "em-sprache";
   const LANGUAGES = { sourceLanguage: "de", targetLanguage: "en" };
 
+  /**
+   * Wartezeit auf Translator.availability(). Manche Browser kennen die Schnittstelle, antworten
+   * aber nie – dann geben wir nach dieser Zeit auf.
+   */
+  const AVAILABILITY_TIMEOUT_MS = 5000;
+  /** event.loaded ist ein Anteil von 0 bis 1; für die Anzeige rechnen wir in Prozent um. */
+  const PERCENT_FACTOR = 100;
+  /** Fortschritt nur in diesen Prozentschritten vorlesen, damit es nicht ständig spricht. */
+  const PERCENT_ANNOUNCE_STEP = 25;
+  /** Obergrenze des Übersetzungs-Caches, damit der Speicher bei langen Sitzungen nicht wächst. */
+  const CACHE_MAX_ENTRIES = 2000;
+
+  /** Texte des Hinweisdialogs für Browser ohne Translator-API (Englisch, mit deutscher Zeile). */
+  const HELP_TEXTS = {
+    title: "Read this course in English",
+    intro:
+      "This browser can’t switch the page automatically. Use its built-in translation instead:",
+    chrome: [
+      "Chrome / Edge: ",
+      "right-click the page → “Translate to English”.",
+    ],
+    safari: [
+      "Safari: ",
+      "click the translate icon in the address bar → “Translate to English”.",
+    ],
+    firefox: [
+      "Firefox: ",
+      "click the translate icon in the address bar → “Translate”.",
+    ],
+    german:
+      "Dein Browser kann die Seite nicht automatisch umstellen. Nutze die Übersetzung deines Browsers wie oben beschrieben.",
+    ok: "OK",
+  };
+
   /** Elemente, deren Inhalt nie übersetzt wird. */
-  const SKIP = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "CODE", "PRE", "TEXTAREA"]);
+  const SKIP = new Set([
+    "SCRIPT",
+    "STYLE",
+    "NOSCRIPT",
+    "CODE",
+    "PRE",
+    "TEXTAREA",
+  ]);
 
   /** Attribute, die Menschen zu sehen oder zu hören bekommen. */
   const ATTRIBUTES = ["alt", "title", "aria-label", "placeholder"];
@@ -51,6 +92,10 @@
   const originalAttributes = new Map();
   /** Bereits übersetzte Texte (Deutsch → Englisch). */
   const cache = new Map();
+  /** Textknoten, die gerade übersetzt werden (verhindert doppelte Übersetzung bei Überlappung). */
+  const pendingNodes = new WeakSet();
+  /** Attribute, die gerade übersetzt werden, je Element. */
+  const pendingAttributes = new WeakMap();
 
   /**
    * Liest die gespeicherte Wahl. Ohne Speicher (z. B. privates Fenster) gilt Deutsch.
@@ -73,7 +118,10 @@
     }
   }
 
-  /** @returns {boolean} Hat der Browser eine eingebaute Übersetzung für Webseiten? */
+  /**
+   * @returns {boolean} Hat der Browser eine eingebaute Übersetzung für Webseiten?
+   * Die Translator-API gibt es ab Chrome 138 (Mindestversion); Safari und Firefox fehlen sie.
+   */
   function hasBuiltInTranslator() {
     return "Translator" in self;
   }
@@ -92,6 +140,9 @@
     let result = cache.get(core);
     if (result === undefined) {
       result = await translator.translate(core);
+      if (cache.size >= CACHE_MAX_ENTRIES) {
+        cache.clear();
+      }
       cache.set(core, result);
     }
     return before + result + after;
@@ -107,7 +158,11 @@
     const elements = [];
     if (root.nodeType === Node.TEXT_NODE) {
       const parent = root.parentElement;
-      if (parent && !parent.closest('[translate="no"]') && !SKIP.has(parent.nodeName)) {
+      if (
+        parent &&
+        !parent.closest('[translate="no"]') &&
+        !SKIP.has(parent.nodeName)
+      ) {
         texts.push(/** @type {Text} */ (root));
       }
       return { texts, elements };
@@ -121,7 +176,8 @@
       {
         acceptNode(node) {
           if (node instanceof Element) {
-            return SKIP.has(node.nodeName) || node.getAttribute("translate") === "no"
+            return SKIP.has(node.nodeName) ||
+              node.getAttribute("translate") === "no"
               ? NodeFilter.FILTER_REJECT
               : NodeFilter.FILTER_ACCEPT;
           }
@@ -140,6 +196,20 @@
     return { texts, elements };
   }
 
+  /** Wirft Einträge für Knoten und Elemente weg, die nicht mehr im Dokument stehen. */
+  function pruneDisconnected() {
+    for (const node of originalText.keys()) {
+      if (!node.isConnected) {
+        originalText.delete(node);
+      }
+    }
+    for (const element of originalAttributes.keys()) {
+      if (!element.isConnected) {
+        originalAttributes.delete(element);
+      }
+    }
+  }
+
   /**
    * Übersetzt alle Texte und Attribute unterhalb von root.
    * @param {Node} root
@@ -150,12 +220,14 @@
     const jobs = [];
     for (const node of texts) {
       // Eigene Übersetzung? Dann ist nichts zu tun. Sonst ist der Text neu (deutsch).
-      if (translatedText.get(node) === node.data) {
+      if (translatedText.get(node) === node.data || pendingNodes.has(node)) {
         continue;
       }
       const german = node.data;
+      pendingNodes.add(node);
       jobs.push(
         translate(german).then((english) => {
+          pendingNodes.delete(node);
           if (!active || node.data !== german) {
             return;
           }
@@ -169,11 +241,22 @@
       for (const name of ATTRIBUTES) {
         const german = element.getAttribute(name);
         const saved = originalAttributes.get(element);
-        if (!german || saved?.[name]?.english === german) {
+        let pending = pendingAttributes.get(element);
+        if (
+          !german ||
+          saved?.[name]?.english === german ||
+          pending?.has(name)
+        ) {
           continue;
         }
+        if (!pending) {
+          pending = new Set();
+          pendingAttributes.set(element, pending);
+        }
+        pending.add(name);
         jobs.push(
           translate(german).then((english) => {
+            pending.delete(name);
             if (!active || element.getAttribute(name) !== german) {
               return;
             }
@@ -186,6 +269,7 @@
       }
     }
     await Promise.all(jobs);
+    pruneDisconnected();
   }
 
   /** Stellt alle deutschen Texte wieder her. */
@@ -204,6 +288,7 @@
     }
     originalText.clear();
     originalAttributes.clear();
+    cache.clear();
   }
 
   /** Übersetzt alles, was nach dem Einschalten neu auf der Seite erscheint. */
@@ -212,6 +297,7 @@
       if (!active) {
         return;
       }
+      pruneDisconnected();
       const roots = new Set();
       for (const record of records) {
         if (record.type === "childList") {
@@ -222,7 +308,9 @@
       }
       for (const root of roots) {
         if (root.isConnected) {
-          translateTree(root).catch(() => {});
+          translateTree(root).catch((error) => {
+            console.warn("Übersetzung fehlgeschlagen:", error);
+          });
         }
       }
     });
@@ -237,40 +325,61 @@
 
   /**
    * Erklärt, wie man die eingebaute Übersetzung des Browsers startet (Browser ohne Translator-API).
+   * @param {HTMLElement} [returnFocusTo]  Wird nach dem Schließen fokussiert.
    */
-  function showBrowserHelp() {
+  function showBrowserHelp(returnFocusTo) {
     const dialog = el(
       "dialog",
-      { class: "dialog", "aria-labelledby": "language-help-title", lang: "en", translate: "no" },
+      {
+        class: "dialog",
+        "aria-labelledby": "language-help-title",
+        lang: "en",
+        translate: "no",
+      },
       el(
         "form",
         { method: "dialog", class: "stack" },
-        el("h2", { id: "language-help-title" }, "Read this course in English"),
-        el(
-          "p",
-          {},
-          "This browser can’t switch the page automatically. Use its built-in translation instead:",
-        ),
+        el("h2", { id: "language-help-title" }, HELP_TEXTS.title),
+        el("p", {}, HELP_TEXTS.intro),
         el(
           "ul",
           {},
-          el("li", {}, el("strong", {}, "Chrome / Edge: "), "right-click the page → “Translate to English”."),
-          el("li", {}, el("strong", {}, "Safari: "), "click the translate icon in the address bar → “Translate to English”."),
-          el("li", {}, el("strong", {}, "Firefox: "), "click the translate icon in the address bar → “Translate”."),
+          el(
+            "li",
+            {},
+            el("strong", {}, HELP_TEXTS.chrome[0]),
+            HELP_TEXTS.chrome[1],
+          ),
+          el(
+            "li",
+            {},
+            el("strong", {}, HELP_TEXTS.safari[0]),
+            HELP_TEXTS.safari[1],
+          ),
+          el(
+            "li",
+            {},
+            el("strong", {}, HELP_TEXTS.firefox[0]),
+            HELP_TEXTS.firefox[1],
+          ),
         ),
-        el(
-          "p",
-          { lang: "de" },
-          "Dein Browser kann die Seite nicht automatisch umstellen. Nutze die Übersetzung deines Browsers wie oben beschrieben.",
-        ),
+        el("p", { lang: "de" }, HELP_TEXTS.german),
         el(
           "div",
           { class: "dialog__actions" },
-          el("button", { class: "button button--primary", value: "ok" }, "OK"),
+          el(
+            "button",
+            { class: "button button--primary", value: "ok" },
+            HELP_TEXTS.ok,
+          ),
         ),
       ),
     );
-    dialog.addEventListener("close", () => dialog.remove());
+    dialog.addEventListener("close", () => {
+      dialog.remove();
+      // Fokus zurück zum Sprachknopf, sonst landet er am Seitenanfang.
+      returnFocusTo?.focus();
+    });
     document.body.append(dialog);
     dialog.showModal();
   }
@@ -300,22 +409,21 @@
     async function switchOn(userAction) {
       if (!hasBuiltInTranslator()) {
         if (userAction) {
-          showBrowserHelp();
+          showBrowserHelp(button);
         }
         return;
       }
       try {
         if (!translator) {
-          // Manche Browser kennen die Schnittstelle, antworten aber nie – dann nach 5 s aufgeben.
           const availability = await Promise.race([
             self.Translator.availability(LANGUAGES),
             new Promise((resolve) => {
-              setTimeout(() => resolve("unavailable"), 5000);
+              setTimeout(() => resolve("unavailable"), AVAILABILITY_TIMEOUT_MS);
             }),
           ]);
           if (availability === "unavailable") {
             if (userAction) {
-              showBrowserHelp();
+              showBrowserHelp(button);
             } else {
               button.title = hintText;
             }
@@ -333,10 +441,9 @@
             ...LANGUAGES,
             monitor(monitor) {
               monitor.addEventListener("downloadprogress", (event) => {
-                const percent = Math.round(event.loaded * 100);
+                const percent = Math.round(event.loaded * PERCENT_FACTOR);
                 label.textContent = `English … ${percent} %`;
-                // Nur in 25-%-Schritten melden, damit es nicht ständig vorgelesen wird.
-                if (percent % 25 === 0) {
+                if (percent % PERCENT_ANNOUNCE_STEP === 0) {
                   status.textContent = `Sprachmodell: ${percent} %`;
                 }
               });
@@ -355,7 +462,7 @@
         active = false;
         update();
         if (userAction) {
-          showBrowserHelp();
+          showBrowserHelp(button);
         }
       } finally {
         button.removeAttribute("aria-busy");
@@ -366,6 +473,8 @@
 
     function switchOff() {
       active = false;
+      observer?.disconnect();
+      observer = null;
       restore();
       update();
       storeLanguage("de");

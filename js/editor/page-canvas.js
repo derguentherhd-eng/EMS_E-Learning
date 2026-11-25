@@ -17,19 +17,24 @@
  * Rechte Spalte (renderProperties): Formular des ausgewählten Elements, gebaut aus dem
  * Schema des Bausteins (field-renderers.js).
  *
+ * Aufgeteilt in: canvas-elements.js (Karten, Palette), canvas-fields.js (Felder,
+ * rechte Spalte), canvas-dnd.js (Verschieben/Ziehen). Diese Datei bleibt der
+ * öffentliche Einstieg (renderMiddle, renderProperties) und baut die Ansichten.
+ *
  * Wenn du hier etwas ändern willst …
- *   – Felder der Kurseinstellungen: COURSE_FIELDS. Felder des Kapitelkopfs: CHAPTER_FIELDS.
+ *   – Felder der Kurseinstellungen/des Kapitelkopfs: canvas-fields.js.
+ *   – Karten und Palette: canvas-elements.js. Verschieben: canvas-dnd.js.
+ *   – Dauerschätzung: WORDS_PER_MINUTE & Co. unten.
  */
 
 (function () {
   "use strict";
 
   const { el } = EM.require("js/core/dom.js");
-  const { getBlock, listBlocks } = EM.require("js/blocks/registry.js");
+  const { getBlock } = EM.require("js/blocks/registry.js");
   const { parseBody, isSafetyChapter } = EM.require("js/content/documents.js");
   const { serializeElement } = EM.require("js/content/serialize.js");
   const { countWords } = EM.require("js/content/markdown.js");
-  const { openDialog } = EM.require("js/editor/dialogs.js");
   const { renderFields, renderMarkdownField } = EM.require(
     "js/editor/field-renderers.js",
   );
@@ -37,112 +42,34 @@
     "js/editor/quiz-editor.js",
   );
   const { renderGlossaryEditor } = EM.require("js/editor/glossary-editor.js");
-  const { renderHotspotEditor } = EM.require("js/editor/hotspot-editor.js");
+  const { addDrag, movePage, movePageTo, duplicatePage } = EM.require(
+    "js/editor/canvas-dnd.js",
+  );
+  const { insertButton, renderCard } = EM.require(
+    "js/editor/canvas-elements.js",
+  );
+  const { CHAPTER_FIELDS, COURSE_FIELDS, middleContext, renderProperties } =
+    EM.require("js/editor/canvas-fields.js");
 
-  const COURSE_FIELDS = [
-    { key: "titel", type: "text", label: "Kurstitel", required: true },
-    { key: "team", type: "text", label: "Team" },
-    {
-      key: "kursversion",
-      type: "text",
-      label: "Kursversion",
-      required: true,
-      help: "Erhöhen (z. B. 1.0 → 1.1), wenn sich der Kurs grundlegend ändert. Wer das Qualifying mit einer älteren Version bestanden hat, muss es dann neu machen.",
-    },
-    {
-      key: "bestehensgrenze",
-      type: "number",
-      label: "Bestehensgrenze in Prozent",
-      min: 1,
-      max: 100,
-    },
-    {
-      key: "qualifying-fragen",
-      type: "number",
-      label: "Anzahl Fragen im Qualifying",
-      min: 1,
-      max: 50,
-    },
-    {
-      key: "zertifikat-titel",
-      type: "text",
-      label: "Titel auf dem Zertifikat",
-    },
-    {
-      key: "zertifikat-unterschrift-name",
-      type: "text",
-      label: "Unterschrift: Name",
-    },
-    {
-      key: "zertifikat-unterschrift-rolle",
-      type: "text",
-      label: "Unterschrift: Rolle",
-    },
-    { key: "logo", type: "image", label: "Logo (SVG empfohlen)" },
-  ];
-
-  const CHAPTER_FIELDS = [
-    { key: "titel", type: "text", label: "Titel", required: true },
-    {
-      key: "kurztitel",
-      type: "text",
-      label: "Kurztitel (Sektoranzeige)",
-      required: true,
-      help: "Höchstens ca. 20 Zeichen.",
-    },
-    {
-      key: "dauer",
-      type: "number",
-      label: "Dauer in Minuten",
-      min: 1,
-      max: 120,
-      required: true,
-    },
-    {
-      key: "version",
-      type: "number",
-      label: "Version",
-      min: 1,
-      required: true,
-      help: "Erhöhen, wenn sich das Quiz ändert – dann müssen alle das Quiz neu machen.",
-    },
-    {
-      key: "bestehensgrenze",
-      type: "number",
-      label: "Eigene Bestehensgrenze (optional)",
-      min: 1,
-      max: 100,
-      help: "Leer lassen = Wert aus den Kurseinstellungen.",
-    },
-    {
-      key: "lernziele",
-      type: "list",
-      label: "Lernziele",
-      itemLabel: "Lernziel",
-      itemFields: [{ key: "value", type: "text", label: "Lernziel" }],
-    },
-  ];
-
-  const IMAGE_FIELDS = [
-    { key: "src", type: "image", label: "Bild", required: true },
-    {
-      key: "alt",
-      type: "text",
-      label: "Alternativtext (was ist zu sehen?)",
-      required: true,
-      help: "Pflicht. Menschen mit Screenreader hören diesen Text statt das Bild zu sehen.",
-    },
-    { key: "caption", type: "text", label: "Bildunterschrift (optional)" },
-  ];
-
-  /** Lesetempo für die Schätzung (Wörter pro Minute) und Zeit je Interaktion. */
+  /** Lesetempo für die Schätzung (Wörter pro Minute). */
   const WORDS_PER_MINUTE = 180;
+  /** Zeit je Interaktion (Minuten). */
   const MINUTES_PER_INTERACTION = 0.75;
+  /** Zeit je Quizfrage (Minuten). */
+  const MINUTES_PER_QUIZ_QUESTION = 0.4;
+  /** Ab dieser relativen Abweichung von der angegebenen Dauer wird gewarnt. */
+  const DURATION_TOLERANCE = 0.4;
+  /** Ab dieser Wortzahl gilt eine Seite als zu lang für den Bildschirm. */
+  const LONG_PAGE_WORDS = 250;
+  /** Zeilenzahl der Quelltext-Ansicht. */
+  const SOURCE_ROWS = 24;
 
   // ───────────────────────────── Mittlere Spalte ─────────────────────────────
 
   /**
-   * @param {Object} editor
+   * Mittlere Spalte je nach Auswahl: Kurseinstellungen, Glossar, Quiz, Seite
+   * oder Kapitelübersicht.
+   * @param {Object} editor Editor-Objekt.
    * @returns {HTMLElement}
    */
   function renderMiddle(editor) {
@@ -170,24 +97,12 @@
     return renderChapterOverview(editor, entry);
   }
 
-  /** Formular-Kontext für Felder in der mittleren Spalte. */
-  function middleContext(editor, idPrefix, chapterFile = null) {
-    return {
-      idPrefix,
-      change: (mutate, options = {}) =>
-        editor.commit(mutate, {
-          source: "middle",
-          coalesce: options.key,
-          structural: options.structural,
-          chapter: chapterFile,
-        }),
-      pickImage: editor.pickImage,
-      pickGlossaryTerm: editor.pickGlossaryTerm,
-      imageUrl: editor.imageUrl,
-    };
-  }
-
-  /** Mittlere Spalte für „Kurseinstellungen": Formular für die Felder aus content/kurs.md. */
+  /**
+   * Mittlere Spalte für „Kurseinstellungen": Formular für die Felder aus
+   * content/kurs.md.
+   * @param {Object} editor Editor-Objekt.
+   * @returns {HTMLElement}
+   */
   function renderCourseSettings(editor) {
     const course = editor.state.doc.course;
     const context = middleContext(editor, "kurs");
@@ -227,7 +142,12 @@
     );
   }
 
-  /** Mittlere Spalte für ein Kapitel, das nicht gelesen werden konnte: Fehler und Originaltext. */
+  /**
+   * Mittlere Spalte für ein Kapitel, das nicht gelesen werden konnte:
+   * Fehler und Originaltext.
+   * @param {Object} entry Kapiteleintrag ohne Modell.
+   * @returns {HTMLElement}
+   */
   function renderBroken(entry) {
     return el(
       "section",
@@ -246,7 +166,11 @@
     );
   }
 
-  /** Geschätzte Lesedauer in Minuten (Wörter + Interaktionen). */
+  /**
+   * Geschätzte Lesedauer in Minuten (Wörter + Interaktionen).
+   * @param {Object[]} elements Elemente einer Seite.
+   * @returns {{words: number, minutes: number}}
+   */
   function estimateMinutes(elements) {
     let words = 0;
     let interactions = 0;
@@ -270,7 +194,13 @@
     };
   }
 
-  /** Mittlere Spalte für ein Kapitel: Kopfdaten, Seitenliste und Kapitel-Aktionen. */
+  /**
+   * Mittlere Spalte für ein Kapitel: Kopfdaten, Seitenliste und
+   * Kapitel-Aktionen.
+   * @param {Object} editor Editor-Objekt.
+   * @param {Object} entry Kapiteleintrag.
+   * @returns {HTMLElement}
+   */
   function renderChapterOverview(editor, entry) {
     const model = entry.model;
     const { operations, state } = editor;
@@ -281,7 +211,10 @@
       model.pages.reduce(
         (sum, page) => sum + estimateMinutes(page.elements).minutes,
         0,
-      ) + (model.quiz ? model.quiz.data.questions.length * 0.4 : 0);
+      ) +
+      (model.quiz
+        ? model.quiz.data.questions.length * MINUTES_PER_QUIZ_QUESTION
+        : 0);
     const location =
       entry.location === "archiv"
         ? "archiviert"
@@ -491,7 +424,7 @@
       el(
         "p",
         {
-          class: `canvas__info${Math.abs(total - Number(model.meta.dauer)) > Number(model.meta.dauer) * 0.4 ? " canvas__info--warn" : ""}`,
+          class: `canvas__info${Math.abs(total - Number(model.meta.dauer)) > Number(model.meta.dauer) * DURATION_TOLERANCE ? " canvas__info--warn" : ""}`,
         },
         `Geschätzte Dauer: ca. ${Math.max(1, Math.round(total))} min · angegeben: ${model.meta.dauer ?? "–"} min`,
       ),
@@ -560,56 +493,16 @@
     );
   }
 
-  /** Verschiebt eine Seite um eine Position nach oben (delta = −1) oder unten (delta = 1). */
-  function movePage(editor, file, index, delta) {
-    editor.commit(
-      (doc) => {
-        const pages = doc.chapters.find((entry) => entry.file === file).model
-          .pages;
-        [pages[index], pages[index + delta]] = [
-          pages[index + delta],
-          pages[index],
-        ];
-      },
-      { chapter: file },
-    );
-    editor.setStatus(`Seite ist jetzt an Position ${index + delta + 1}.`);
-  }
-
-  /** Verschiebt eine Seite an eine beliebige Stelle (Ziehen und Ablegen). */
-  function movePageTo(editor, file, from, to) {
-    if (from === to) {
-      return;
-    }
-    editor.commit(
-      (doc) => {
-        const pages = doc.chapters.find((entry) => entry.file === file).model
-          .pages;
-        const [page] = pages.splice(from, 1);
-        pages.splice(to, 0, page);
-      },
-      { chapter: file },
-    );
-  }
-
-  /** Fügt direkt hinter der Seite eine Kopie mit dem Zusatz „(Kopie)" ein. */
-  function duplicatePage(editor, file, index) {
-    editor.commit(
-      (doc) => {
-        const pages = doc.chapters.find((entry) => entry.file === file).model
-          .pages;
-        const copy = structuredClone(pages[index]);
-        copy.title = `${copy.title} (Kopie)`;
-        pages.splice(index + 1, 0, copy);
-      },
-      { chapter: file },
-    );
-    editor.select({ kind: "page", file, page: index + 1 });
-  }
-
   // ───────────────────────────── Seite (Baukasten) ─────────────────────────────
 
-  /** Mittlere Spalte für eine Seite: Titel und die Elemente als Karten (der Baukasten). */
+  /**
+   * Mittlere Spalte für eine Seite: Titel und die Elemente als Karten
+   * (der Baukasten) bzw. die Quelltext-Ansicht.
+   * @param {Object} editor Editor-Objekt.
+   * @param {Object} entry Kapiteleintrag.
+   * @param {number} pageIndex Index der Seite.
+   * @returns {HTMLElement}
+   */
   function renderPage(editor, entry, pageIndex) {
     const { state } = editor;
     const model = entry.model;
@@ -649,7 +542,7 @@
         {
           id: "page-source",
           class: "field__input field__textarea canvas__source-input",
-          rows: 24,
+          rows: SOURCE_ROWS,
           spellcheck: "false",
         },
         pageSource(page),
@@ -714,9 +607,9 @@
       el(
         "p",
         {
-          class: `canvas__info${estimate.words > 250 ? " canvas__info--warn" : ""}`,
+          class: `canvas__info${estimate.words > LONG_PAGE_WORDS ? " canvas__info--warn" : ""}`,
         },
-        `ca. ${Math.max(1, Math.round(estimate.minutes))} min · ${estimate.words} Wörter${estimate.words > 250 ? " – eher lang für eine Bildschirmseite" : ""}`,
+        `ca. ${Math.max(1, Math.round(estimate.minutes))} min · ${estimate.words} Wörter${estimate.words > LONG_PAGE_WORDS ? " – eher lang für eine Bildschirmseite" : ""}`,
       ),
       el(
         "div",
@@ -763,7 +656,11 @@
     );
   }
 
-  /** Kursdown-Text einer Seite (für die Quelltext-Ansicht). */
+  /**
+   * Kursdown-Text einer Seite (für die Quelltext-Ansicht).
+   * @param {Object} page Seite mit title und elements.
+   * @returns {string}
+   */
   function pageSource(page) {
     return [`## ${page.title}`, ...page.elements.map(serializeElement)].join(
       "\n\n",
@@ -771,8 +668,12 @@
   }
 
   /**
-   * Liest bearbeiteten Quelltext ein und ersetzt die Seite (bzw. mehrere Seiten, falls weitere
-   * „## "-Überschriften hinzugekommen sind).
+   * Liest bearbeiteten Quelltext ein und ersetzt die Seite (bzw. mehrere
+   * Seiten, falls weitere „## "-Überschriften hinzugekommen sind).
+   * @param {Object} editor Editor-Objekt.
+   * @param {Object} entry Kapiteleintrag.
+   * @param {number} pageIndex Index der Seite.
+   * @param {string} text Bearbeiteter Kursdown-Text.
    * @returns {{ok: boolean, message?: string}}
    */
   function applySource(editor, entry, pageIndex, text) {
@@ -811,626 +712,6 @@
           : "Quelltext übernommen.",
     );
     return { ok: true };
-  }
-
-  /** Knopf „+ Element einfügen" an einer Position. */
-  function insertButton(editor, entry, pageIndex, index) {
-    return el(
-      "li",
-      { class: "cards__insert" },
-      el(
-        "button",
-        {
-          type: "button",
-          class: "cards__insert-button",
-          onclick: () => openPalette(editor, entry, pageIndex, index),
-        },
-        "+ Element einfügen",
-        el("span", { class: "visually-hidden" }, ` an Position ${index + 1}`),
-      ),
-    );
-  }
-
-  /** Eine Karte im Baukasten. */
-  function renderCard(editor, entry, pageIndex, index) {
-    const { state } = editor;
-    const page = entry.model.pages[pageIndex];
-    const element = page.elements[index];
-    const file = entry.file;
-    const selected =
-      state.selection.kind === "page" &&
-      state.selection.page === pageIndex &&
-      state.selection.element === index;
-    const key = `${file}:${pageIndex}:${index}`;
-    const expanded = state.ui.expanded.has(key);
-    const label = elementLabel(element);
-
-    function move(delta) {
-      editor.commit(
-        () => {
-          [page.elements[index], page.elements[index + delta]] = [
-            page.elements[index + delta],
-            page.elements[index],
-          ];
-        },
-        { chapter: file },
-      );
-      editor.select({
-        kind: "page",
-        file,
-        page: pageIndex,
-        element: index + delta,
-      });
-      editor.setStatus(
-        `„${label}" ist jetzt an Position ${index + delta + 1}.`,
-      );
-    }
-    function toggle() {
-      if (expanded) {
-        state.ui.expanded.delete(key);
-      } else {
-        state.ui.expanded.add(key);
-      }
-      editor.rerenderMiddle();
-    }
-
-    const card = el(
-      "li",
-      {
-        class: `card${selected ? " card--selected" : ""}${element.type === "raw" ? " card--raw" : ""}`,
-        draggable: "true",
-      },
-      el(
-        "div",
-        { class: "card__head" },
-        el(
-          "button",
-          {
-            type: "button",
-            class: "card__select",
-            "aria-pressed": String(selected),
-            onclick: () =>
-              editor.select({
-                kind: "page",
-                file,
-                page: pageIndex,
-                element: index,
-              }),
-          },
-          el("span", { class: "card__type" }, label),
-          el("span", { class: "card__summary" }, summary(element, false)),
-        ),
-        el(
-          "span",
-          { class: "card__tools" },
-          el(
-            "button",
-            {
-              type: "button",
-              class: "card__tool",
-              disabled: index === 0,
-              "aria-label": `„${label}" nach oben`,
-              onclick: () => move(-1),
-            },
-            "↑",
-          ),
-          el(
-            "button",
-            {
-              type: "button",
-              class: "card__tool",
-              disabled: index === page.elements.length - 1,
-              "aria-label": `„${label}" nach unten`,
-              onclick: () => move(1),
-            },
-            "↓",
-          ),
-          el(
-            "button",
-            {
-              type: "button",
-              class: "card__tool",
-              "aria-label": `„${label}" duplizieren`,
-              onclick: () => {
-                editor.commit(
-                  () =>
-                    page.elements.splice(
-                      index + 1,
-                      0,
-                      structuredClone(element),
-                    ),
-                  { chapter: file },
-                );
-                editor.select({
-                  kind: "page",
-                  file,
-                  page: pageIndex,
-                  element: index + 1,
-                });
-              },
-            },
-            "⧉",
-          ),
-          el(
-            "button",
-            {
-              type: "button",
-              class: "card__tool",
-              "aria-label": `„${label}" entfernen`,
-              onclick: () => {
-                editor.commit(() => page.elements.splice(index, 1), {
-                  chapter: file,
-                });
-                editor.select({ kind: "page", file, page: pageIndex });
-                editor.setStatus(
-                  `„${label}" entfernt. Rückgängig mit Strg/Cmd+Z.`,
-                );
-              },
-            },
-            "✕",
-          ),
-          el(
-            "button",
-            {
-              type: "button",
-              class: "card__tool",
-              "aria-expanded": String(expanded),
-              "aria-label": `„${label}" ${expanded ? "zuklappen" : "aufklappen"}`,
-              onclick: toggle,
-            },
-            expanded ? "▴" : "▾",
-          ),
-        ),
-      ),
-      expanded
-        ? el("div", { class: "card__body" }, summary(element, true))
-        : null,
-      element.type === "raw"
-        ? el(
-            "p",
-            { class: "card__problem" },
-            `Nicht lesbarer Abschnitt – im Quelltext bearbeiten. ${element.errors[0]?.message ?? ""}`,
-          )
-        : null,
-    );
-    addDrag(card, "text/x-element", index, (from) => {
-      if (from === index) {
-        return;
-      }
-      editor.commit(
-        () => {
-          const [moved] = page.elements.splice(from, 1);
-          page.elements.splice(index, 0, moved);
-        },
-        { chapter: file },
-      );
-    });
-    return card;
-  }
-
-  /** Name eines Elements (für Karte und Ansagen). */
-  function elementLabel(element) {
-    if (element.type === "text") {
-      return "Textabschnitt";
-    }
-    if (element.type === "image") {
-      return "Bild";
-    }
-    if (element.type === "raw") {
-      return "Nicht lesbarer Abschnitt";
-    }
-    return getBlock(element.name)?.editor.label ?? element.name;
-  }
-
-  /** Kurzbeschreibung (zugeklappt) bzw. vollständiger Inhalt (aufgeklappt). */
-  function summary(element, full) {
-    function cut(text) {
-      return full || text.length <= 140 ? text : `${text.slice(0, 140)} …`;
-    }
-    if (element.type === "text") {
-      return full
-        ? el("pre", { class: "card__text" }, element.markdown)
-        : cut(element.markdown.replace(/\s+/g, " "));
-    }
-    if (element.type === "image") {
-      return `${element.src}${element.alt ? ` – ${element.alt}` : " – Alternativtext fehlt!"}`;
-    }
-    if (element.type === "raw") {
-      return full
-        ? el("pre", { class: "card__text" }, element.text)
-        : cut(element.text.split("\n")[0]);
-    }
-    const data = element.data ?? {};
-    const counts = Object.entries(data)
-      .filter(([, value]) => Array.isArray(value))
-      .map(([, value]) => value.length);
-    const title = data.title ? `„${data.title}"` : "";
-    if (full) {
-      return el("pre", { class: "card__text" }, serializeElement(element));
-    }
-    return [
-      title,
-      counts.length ? `${counts.join(" / ")} Einträge` : "",
-      !data.title && data.markdown
-        ? cut(data.markdown.replace(/\s+/g, " "))
-        : "",
-    ]
-      .filter(Boolean)
-      .join(" · ");
-  }
-
-  /**
-   * Palette „Element einfügen" mit Suchfeld.
-   */
-  async function openPalette(editor, entry, pageIndex, index) {
-    const id = "palette-title";
-    const options = [
-      {
-        name: "text",
-        label: "Textabschnitt",
-        description: "Absätze, Listen, Zwischenüberschriften, Tabellen.",
-        icon: "assets/icons/text.svg",
-        create: () => ({ type: "text", markdown: "Neuer Text.", line: 0 }),
-      },
-      {
-        name: "image",
-        label: "Bild",
-        description:
-          "Ein Bild mit Alternativtext und optionaler Bildunterschrift.",
-        icon: "assets/icons/bild.svg",
-        create: () => ({
-          type: "image",
-          src: "",
-          alt: "",
-          caption: "",
-          line: 0,
-        }),
-      },
-      ...listBlocks()
-        .filter((block) => block.name !== "quiz")
-        .map((block) => ({
-          name: block.name,
-          label: block.editor.label,
-          description: block.editor.description,
-          icon: block.editor.icon,
-          create: () => ({
-            type: "block",
-            name: block.name,
-            data: block.editor.createDefault(),
-            line: 0,
-          }),
-        })),
-    ];
-    const choice = await openDialog((close) => {
-      const search = el("input", {
-        type: "search",
-        id: "palette-search",
-        class: "field__input",
-        autocomplete: "off",
-        autofocus: true,
-        "aria-controls": "palette-list",
-      });
-      const list = el(
-        "ul",
-        { class: "palette", id: "palette-list" },
-        options.map((option) =>
-          el(
-            "li",
-            {
-              "data-search":
-                `${option.label} ${option.description} ${option.name}`.toLowerCase(),
-            },
-            el(
-              "button",
-              {
-                type: "button",
-                class: "palette__option",
-                onclick: () => close(option),
-              },
-              el("img", {
-                src: option.icon,
-                alt: "",
-                class: "palette__icon",
-                width: 32,
-                height: 32,
-              }),
-              el(
-                "span",
-                {},
-                el("strong", {}, option.label),
-                el(
-                  "span",
-                  { class: "palette__description" },
-                  option.description,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-      const count = el(
-        "p",
-        { class: "field__hint", role: "status" },
-        `${options.length} Elemente`,
-      );
-      search.addEventListener("input", () => {
-        const query = search.value.trim().toLowerCase();
-        let visible = 0;
-        for (const item of list.children) {
-          item.hidden = query !== "" && !item.dataset.search.includes(query);
-          if (!item.hidden) {
-            visible += 1;
-          }
-        }
-        count.textContent = `${visible} Elemente`;
-      });
-      return [
-        el("h2", { id }, "Element einfügen"),
-        el(
-          "div",
-          { class: "field" },
-          el("label", { for: "palette-search" }, "Suchen"),
-          search,
-          count,
-        ),
-        list,
-        el(
-          "div",
-          { class: "dialog__actions" },
-          el(
-            "button",
-            { type: "button", class: "button", onclick: () => close(null) },
-            "Abbrechen",
-          ),
-        ),
-      ];
-    }, id);
-    if (!choice) {
-      return;
-    }
-    editor.commit(
-      (doc) => {
-        doc.chapters
-          .find((candidate) => candidate.file === entry.file)
-          .model.pages[pageIndex].elements.splice(index, 0, choice.create());
-      },
-      { chapter: entry.file },
-    );
-    editor.select({
-      kind: "page",
-      file: entry.file,
-      page: pageIndex,
-      element: index,
-    });
-    editor.setStatus(
-      `„${choice.label}" eingefügt. Bearbeite es rechts unter „Eigenschaften".`,
-    );
-  }
-
-  /** Drag & Drop innerhalb einer Liste (zusätzlich zu den ↑/↓-Knöpfen). */
-  function addDrag(item, type, index, onDrop) {
-    item.addEventListener("dragstart", (event) => {
-      event.stopPropagation();
-      event.dataTransfer.setData(type, String(index));
-      event.dataTransfer.effectAllowed = "move";
-      item.classList.add("is-dragging");
-    });
-    item.addEventListener("dragend", () =>
-      item.classList.remove("is-dragging"),
-    );
-    item.addEventListener("dragover", (event) => {
-      if (!event.dataTransfer.types.includes(type)) {
-        return;
-      }
-      event.preventDefault();
-      item.classList.add("is-drop-target");
-    });
-    item.addEventListener("dragleave", () =>
-      item.classList.remove("is-drop-target"),
-    );
-    item.addEventListener("drop", (event) => {
-      if (!event.dataTransfer.types.includes(type)) {
-        return;
-      }
-      event.preventDefault();
-      item.classList.remove("is-drop-target");
-      onDrop(Number(event.dataTransfer.getData(type)));
-    });
-  }
-
-  // ───────────────────────────── Rechte Spalte: Eigenschaften ─────────────────────────────
-
-  /**
-   * Formular des ausgewählten Elements.
-   * @param {Object} editor
-   * @returns {HTMLElement}
-   */
-  function renderProperties(editor) {
-    const { state } = editor;
-    const selection = state.selection;
-    function empty(text) {
-      return el(
-        "div",
-        { class: "stack" },
-        el("h2", { class: "editor-column__title" }, "Eigenschaften"),
-        el("p", { class: "canvas__info" }, text),
-      );
-    }
-    if (
-      !state.doc ||
-      selection.kind !== "page" ||
-      selection.element === undefined
-    ) {
-      return empty(
-        "Wähle in der Mitte ein Element aus, um es hier zu bearbeiten.",
-      );
-    }
-    const entry = editor.entryByFile(selection.file);
-    const page = entry?.model?.pages[selection.page];
-    const element = page?.elements[selection.element];
-    if (!element) {
-      return empty("Dieses Element gibt es nicht mehr.");
-    }
-
-    const file = entry.file;
-    const idPrefix = `el-${entry.model.id}-${selection.page}-${selection.element}`;
-    const context = {
-      idPrefix,
-      change: (mutate, options = {}) =>
-        editor.commit(mutate, {
-          source: "right",
-          coalesce: options.key,
-          structural: options.structural,
-          chapter: file,
-        }),
-      pickImage: editor.pickImage,
-      pickGlossaryTerm: editor.pickGlossaryTerm,
-      imageUrl: editor.imageUrl,
-    };
-    const heading = el(
-      "h2",
-      { class: "editor-column__title" },
-      `Eigenschaften: ${elementLabel(element)}`,
-    );
-
-    if (element.type === "text") {
-      return el(
-        "div",
-        { class: "stack" },
-        heading,
-        renderMarkdownField({
-          id: `${idPrefix}-text`,
-          label: el("label", { for: `${idPrefix}-text` }, "Text"),
-          hint: el(
-            "p",
-            { class: "field__hint", id: `${idPrefix}-text-hint` },
-            '„### " = Zwischenüberschrift, „- " = Liste. Mehr in docs/BAUSTEINE.md.',
-          ),
-          hintId: `${idPrefix}-text-hint`,
-          value: element.markdown,
-          set: (value) =>
-            context.change(
-              () => {
-                element.markdown = value;
-              },
-              { key: `${idPrefix}-text` },
-            ),
-          context,
-          warnPageSyntax: true,
-        }),
-      );
-    }
-    if (element.type === "image") {
-      return el(
-        "div",
-        { class: "stack" },
-        heading,
-        renderFields(IMAGE_FIELDS, element, context),
-      );
-    }
-    if (element.type === "raw") {
-      return renderRawEditor(editor, entry, selection, element, heading);
-    }
-
-    const definition = getBlock(element.name);
-    if (definition.editor.customEditor === "hotspot") {
-      return el(
-        "div",
-        { class: "stack" },
-        heading,
-        renderHotspotEditor(element.data, context, definition.editor.fields),
-      );
-    }
-    return el(
-      "div",
-      { class: "stack" },
-      heading,
-      el("p", { class: "field__hint" }, definition.editor.description),
-      renderFields(definition.editor.fields, element.data, context),
-    );
-  }
-
-  /** Nicht lesbarer Abschnitt: Rohtext bearbeiten und neu einlesen. */
-  function renderRawEditor(editor, entry, selection, element, heading) {
-    const id = `raw-${entry.model.id}-${selection.page}-${selection.element}`;
-    const textarea = el(
-      "textarea",
-      {
-        id,
-        class: "field__input field__textarea",
-        rows: 14,
-        spellcheck: "false",
-      },
-      element.text,
-    );
-    textarea.addEventListener("input", () =>
-      editor.commit(
-        () => {
-          element.text = textarea.value;
-        },
-        { source: "right", coalesce: id, chapter: entry.file },
-      ),
-    );
-    const reparse = el(
-      "button",
-      { type: "button", class: "button button--primary button--small" },
-      "Erneut einlesen",
-    );
-    reparse.addEventListener("click", () => {
-      const items = parseBody(textarea.value, 1, entry.model.path).filter(
-        (item) => item.type !== "page",
-      );
-      const stillRaw = items.some((item) => item.type === "raw");
-      editor.commit(
-        () => {
-          entry.model.pages[selection.page].elements.splice(
-            selection.element,
-            1,
-            ...items,
-          );
-        },
-        { chapter: entry.file },
-      );
-      editor.select({
-        kind: "page",
-        file: entry.file,
-        page: selection.page,
-        element: selection.element,
-      });
-      editor.setStatus(
-        stillRaw
-          ? "Immer noch nicht lesbar – siehe Meldung."
-          : "Abschnitt ist jetzt lesbar.",
-      );
-    });
-    return el(
-      "div",
-      { class: "stack" },
-      heading,
-      el(
-        "div",
-        { class: "notice notice--error" },
-        el(
-          "p",
-          {},
-          "Der Editor versteht diesen Abschnitt nicht. Er bleibt unverändert erhalten.",
-        ),
-        el(
-          "ul",
-          {},
-          element.errors.map((error) =>
-            el("li", {}, `${error.message} ${error.fix ?? ""}`),
-          ),
-        ),
-      ),
-      el(
-        "div",
-        { class: "field" },
-        el("label", { for: id }, "Quelltext des Abschnitts"),
-        textarea,
-      ),
-      reparse,
-    );
   }
 
   EM.define("js/editor/page-canvas.js", { renderMiddle, renderProperties });

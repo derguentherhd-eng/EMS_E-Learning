@@ -32,6 +32,12 @@
  *   :::merksatz Quelle: Werkstattordnung
  *   Wer allein arbeitet, arbeitet nicht.
  *   :::
+ *
+ * Wenn du hier etwas ändern willst …
+ *   – Diese Datei ist nur Anschauungsmaterial und wird nicht geladen: Änderungen hier wirken
+ *     sich nirgends aus. Halte sie aber aktuell, wenn sich der Aufbau eines Bausteins ändert
+ *     (registry.js, block-utils.js, Editor-Felder).
+ *   – Neuer Baustein: Datei kopieren (siehe Anleitung oben), nicht diese Datei umbauen.
  */
 
 (function () {

@@ -192,6 +192,7 @@
       window.localStorage.removeItem(testKey);
       return window.localStorage;
     } catch {
+      // localStorage gesperrt oder nicht vorhanden: nur Arbeitsspeicher nutzen.
       return null;
     }
   }
@@ -207,6 +208,7 @@
     try {
       return normalizeState(JSON.parse(storage.getItem(STORAGE_KEY) ?? "null"));
     } catch {
+      // Gespeicherter Stand ist unlesbar oder kein JSON: sauber neu beginnen.
       return createEmptyState();
     }
   }

@@ -51,7 +51,10 @@
     kind: window.location.protocol === "file:" ? "offline" : "server",
   };
 
-  /** Führt die komplette Prüfung aus und zeigt das Ergebnis. */
+  /**
+   * Führt die komplette Prüfung aus und zeigt das Ergebnis.
+   * @returns {Promise<void>}
+   */
   async function run() {
     summaryOutput.textContent = "Prüfung läuft …";
     results.replaceChildren();
@@ -82,7 +85,10 @@
     showResults(errors, course);
   }
 
-  /** Zeigt an, welcher Stand geprüft wird. */
+  /**
+   * Zeigt an, welcher Stand geprüft wird.
+   * @returns {void}
+   */
   function showSource() {
     const output = document.querySelector("[data-source]");
     if (!output) {
@@ -100,9 +106,15 @@
   /**
    * Prüft, ob alle Bilddateien existieren. Ein Bild wird testweise geladen – das funktioniert
    * mit und ohne Server. Bei einem eingelesenen Ordner wird direkt in der Dateiliste geschaut.
+   * @param {Object} course Geladener Kurs.
    * @returns {Promise<Object[]>}
    */
   async function checkImages(course) {
+    /**
+     * Prüft, ob ein Bild geladen werden kann.
+     * @param {string} src Pfad des Bildes.
+     * @returns {Promise<boolean>}
+     */
     function exists(src) {
       if (source.kind === "ordner") {
         return Promise.resolve(source.reader.files.has(src));
@@ -132,6 +144,7 @@
    * Sucht Kapiteldateien, die nicht in kurs.md stehen. Die Dateiliste kommt aus dem eingelesenen
    * Ordner bzw. der Offline-Datei. Ein Webserver kann Ordner meist nicht auflisten – dann gibt es
    * einen Hinweis statt einer Prüfung.
+   * @param {Object} course Geladener Kurs.
    * @returns {Promise<Object[]>}
    */
   async function checkUnlistedChapters(course) {
@@ -166,7 +179,12 @@
       }));
   }
 
-  /** Zeigt die Zahlen oben, z. B. „3 Fehler · 5 Warnungen · 12 offene Platzhalter". */
+  /**
+   * Zeigt die Zahlen oben, z. B. „3 Fehler · 5 Warnungen · 12 offene
+   * Platzhalter".
+   * @param {Object} summary Zählwerte je Schweregrad.
+   * @returns {void}
+   */
   function showSummary(summary) {
     const parts = [
       `${summary.fehler} ${summary.fehler === 1 ? "Fehler" : "Fehler"}`,
@@ -196,7 +214,12 @@
     }
   }
 
-  /** Gruppiert die Meldungen nach Datei und zeigt sie an. */
+  /**
+   * Gruppiert die Meldungen nach Datei und zeigt sie an.
+   * @param {Object[]} errors Meldungen der Prüfung.
+   * @param {Object} course Geladener Kurs.
+   * @returns {void}
+   */
   function showResults(errors, course) {
     if (errors.length === 0) {
       results.replaceChildren(
@@ -264,7 +287,12 @@
     );
   }
 
-  /** Eine Meldung der Prüfung als Listeneintrag (Schweregrad, Zeile, Text, Lösung). */
+  /**
+   * Eine Meldung der Prüfung als Listeneintrag (Schweregrad, Zeile, Text,
+   * Lösung).
+   * @param {Object} error Meldung.
+   * @returns {HTMLElement}
+   */
   function renderItem(error) {
     const type = error.kind === "todo" ? "todo" : error.severity;
     const severity = SEVERITY[type];
@@ -294,13 +322,23 @@
     );
   }
 
-  /** Position einer Datei in der Anzeige-Reihenfolge (unbekannte Dateien ans Ende). */
+  /**
+   * Position einer Datei in der Anzeige-Reihenfolge (unbekannte Dateien
+   * ans Ende).
+   * @param {string[]} order Dateien in Anzeige-Reihenfolge.
+   * @param {string} file Dateiname.
+   * @returns {number}
+   */
   function rank(order, file) {
     const index = order.indexOf(file);
     return index === -1 ? order.length : index;
   }
 
-  /** Sortierschlüssel: Fehler vor Warnungen vor Hinweisen vor Platzhaltern. */
+  /**
+   * Sortierschlüssel: Fehler vor Warnungen vor Hinweisen vor Platzhaltern.
+   * @param {Object} error Meldung.
+   * @returns {number}
+   */
   function severityOrder(error) {
     return SEVERITY[error.kind === "todo" ? "todo" : error.severity].order;
   }

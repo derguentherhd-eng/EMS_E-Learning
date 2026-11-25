@@ -69,6 +69,7 @@
                 class: `sector-bar__segment sector-bar__segment--${status}`,
                 href: chapterHash(chapter.id, 1),
                 title: label,
+                "aria-label": label,
                 "aria-current": chapter.id === currentId ? "step" : null,
               },
               el(

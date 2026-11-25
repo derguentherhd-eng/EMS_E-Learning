@@ -15,6 +15,10 @@
     max-inline-size: none;
     padding-block: var(--space-2xs);
     border-block-end: var(--border-thin) solid var(--color-line);
+
+    /* Ziehen: ganze Zeile mit der Maus, per Touch nur die Platznummer (Griff). */
+    cursor: grab;
+    user-select: none;
   }
 
   .ordering__position {
@@ -27,6 +31,7 @@
     border: var(--border-ds) solid var(--color-tile-border);
     border-radius: var(--radius-m);
     font-weight: var(--font-weight-bold);
+    touch-action: none;
   }
 
   .is-correct .ordering__position {
@@ -35,16 +40,6 @@
 
   .is-wrong .ordering__position {
     box-shadow: 0 0 0 3px var(--color-error);
-  }
-
-  /* Ziehen: ganze Zeile mit der Maus, per Touch nur die Platznummer (Griff). */
-  .ordering__item {
-    cursor: grab;
-    user-select: none;
-  }
-
-  .ordering__position {
-    touch-action: none;
   }
 
   .ordering__item.is-dragging {

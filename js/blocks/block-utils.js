@@ -9,6 +9,7 @@
  * _vorlage-baustein.js zeigt, wie man die Helfer benutzt.
  *
  * Wenn du hier etwas ändern willst …
+ *   – Ziehen/Umsortieren (Reihenfolge-Baustein): enablePointerReorder().
  *   – Änderungen wirken auf ALLE Bausteine. Danach unbedingt tests.html laufen lassen.
  */
 
@@ -341,6 +342,84 @@
     };
   }
 
+  /**
+   * Macht eine Liste per Maus, Stift oder Finger umsortierbar (zusätzlich zu Knöpfen).
+   * Mit der Maus lässt sich die ganze Zeile ziehen, per Touch nur der Griff
+   * `.ordering__position`, damit man auf dem Handy über die Liste weiterscrollen kann.
+   * Knöpfe in der Zeile starten kein Ziehen. Während des Ziehens wird die Zeile direkt im
+   * DOM verschoben; beim Loslassen meldet onReorder die alte und die neue Position.
+   * Das Verhalten bei pointerdown (preventDefault) verhindert Textauswahl nur beim Ziehen.
+   * @param {HTMLElement} list  Liste, deren Kinder die ziehbaren Zeilen (.ordering__item) sind
+   * @param {(from: number, to: number) => void} onReorder  Wird nur bei geänderter Position
+   *   aufgerufen; die Liste muss danach neu gezeichnet werden.
+   */
+  function enablePointerReorder(list, onReorder) {
+    /** @type {{ item: HTMLElement, pointerId: number, from: number }|null} */
+    let drag = null;
+
+    list.addEventListener("pointerdown", (event) => {
+      const target = /** @type {Element} */ (event.target);
+      const item = /** @type {HTMLElement|null} */ (
+        target.closest(".ordering__item")
+      );
+      if (!item || event.button !== 0 || target.closest("button")) {
+        return;
+      }
+      if (
+        event.pointerType === "touch" &&
+        !target.closest(".ordering__position")
+      ) {
+        return;
+      }
+      event.preventDefault();
+      try {
+        item.setPointerCapture(event.pointerId);
+      } catch {
+        // Ohne Capture funktioniert das Ziehen innerhalb der Liste trotzdem.
+      }
+      item.classList.add("is-dragging");
+      drag = {
+        item,
+        pointerId: event.pointerId,
+        from: [...list.children].indexOf(item),
+      };
+    });
+
+    list.addEventListener("pointermove", (event) => {
+      if (!drag || event.pointerId !== drag.pointerId) {
+        return;
+      }
+      const others = [...list.children].filter((child) => child !== drag?.item);
+      const before = others.find((child) => {
+        const box = child.getBoundingClientRect();
+        return event.clientY < box.top + box.height / 2;
+      });
+      if (before) {
+        if (drag.item.nextElementSibling !== before) {
+          list.insertBefore(drag.item, before);
+        }
+      } else if (list.lastElementChild !== drag.item) {
+        list.append(drag.item);
+      }
+    });
+
+    /** @param {PointerEvent} event */
+    function endDrag(event) {
+      if (!drag || event.pointerId !== drag.pointerId) {
+        return;
+      }
+      const { item, from } = drag;
+      drag = null;
+      item.classList.remove("is-dragging");
+      const to = [...list.children].indexOf(item);
+      if (to !== from) {
+        onReorder(from, to);
+      }
+    }
+    list.addEventListener("pointerup", endDrag);
+    list.addEventListener("pointercancel", endDrag);
+  }
+
   EM.define("js/blocks/block-utils.js", {
     formatHeader,
     formatBlock,
@@ -356,5 +435,6 @@
     prefersReducedMotion,
     blockSection,
     trackExercise,
+    enablePointerReorder,
   });
 })();

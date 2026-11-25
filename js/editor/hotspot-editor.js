@@ -17,9 +17,23 @@
   const { el } = EM.require("js/core/dom.js");
   const { renderFields } = EM.require("js/editor/field-renderers.js");
 
-  /** Prozentwert auf eine Nachkommastelle begrenzen (so wird er auch gespeichert). */
+  /** Obergrenze der Prozentwerte (Position im Bild). */
+  const PERCENT_MAX = 100;
+  /** Rundungsfaktor: eine Nachkommastelle. */
+  const PERCENT_PRECISION = 10;
+
+  /**
+   * Prozentwert auf eine Nachkommastelle begrenzen (so wird er auch
+   * gespeichert).
+   * @param {number} value Rohwert.
+   * @returns {number} Wert zwischen 0 und PERCENT_MAX.
+   */
   function clampPercent(value) {
-    return Math.round(Math.min(100, Math.max(0, value)) * 10) / 10;
+    return (
+      Math.round(
+        Math.min(PERCENT_MAX, Math.max(0, value)) * PERCENT_PRECISION,
+      ) / PERCENT_PRECISION
+    );
   }
 
   /**
@@ -46,10 +60,10 @@
       image.addEventListener("click", (event) => {
         const rect = image.getBoundingClientRect();
         const x = clampPercent(
-          ((event.clientX - rect.left) / rect.width) * 100,
+          ((event.clientX - rect.left) / rect.width) * PERCENT_MAX,
         );
         const y = clampPercent(
-          ((event.clientY - rect.top) / rect.height) * 100,
+          ((event.clientY - rect.top) / rect.height) * PERCENT_MAX,
         );
         context.change(
           () =>
@@ -74,6 +88,10 @@
           },
           String(index + 1),
         );
+        /**
+         * Setzt den Marker an die gespeicherte Position (in Prozent).
+         * @returns {void}
+         */
         function place() {
           marker.style.setProperty("--x", `${point.x}%`);
           marker.style.setProperty("--y", `${point.y}%`);
@@ -108,16 +126,25 @@
           let moved = false;
           const start = { x: point.x, y: point.y };
           const rect = image.getBoundingClientRect();
+          /**
+           * Zieht den Marker mit dem Zeiger mit.
+           * @param {PointerEvent} moveEvent Zeigerbewegung.
+           * @returns {void}
+           */
           function onMove(moveEvent) {
             moved = true;
             point.x = clampPercent(
-              ((moveEvent.clientX - rect.left) / rect.width) * 100,
+              ((moveEvent.clientX - rect.left) / rect.width) * PERCENT_MAX,
             );
             point.y = clampPercent(
-              ((moveEvent.clientY - rect.top) / rect.height) * 100,
+              ((moveEvent.clientY - rect.top) / rect.height) * PERCENT_MAX,
             );
             place();
           }
+          /**
+           * Beendet das Ziehen und meldet die neue Position (Rückgängig).
+           * @returns {void}
+           */
           function onUp() {
             marker.removeEventListener("pointermove", onMove);
             marker.removeEventListener("pointerup", onUp);

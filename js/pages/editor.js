@@ -19,10 +19,15 @@
  *   github.js        GitHub-Modus: aus dem Repository lesen, als ein Commit speichern
  *   course-tree.js   linke Spalte · page-canvas.js mittlere Spalte und Elementformulare
  *   preview.js       Live-Vorschau · history.js Rückgängig/Wiederholen · dialogs.js Dialoge
+ *   editor-save.js        Änderungen ermitteln und speichern (alle drei Modi)
+ *   editor-validation.js  Live-Prüfung und Hinweisliste
+ *   editor-shortcuts.js   Tastenkürzel und Warnung beim Verlassen
  *
  * Wenn du hier etwas ändern willst …
  *   – Neue Kapitel-Aktion: Funktion in `operations` ergänzen, Knopf in course-tree.js oder
  *     page-canvas.js. Immer über commit(), sonst funktioniert „Rückgängig" nicht.
+ *   – Speichern: js/editor/editor-save.js · Prüfung: js/editor/editor-validation.js ·
+ *     Tastenkürzel: js/editor/editor-shortcuts.js.
  */
 
 (function () {
@@ -44,7 +49,6 @@
     serializeElement,
     serializeGlossary,
   } = EM.require("js/content/serialize.js");
-  const { validateCourse } = EM.require("js/content/validate.js");
   const {
     createHistory,
     record,
@@ -54,7 +58,6 @@
   const {
     createDownloadWorkspace,
     createFolderWorkspace,
-    downloadBlob,
     forgetDirectory,
     openDirectory,
     restoreDirectory,
@@ -66,9 +69,8 @@
     loadSettings: loadGitHubSettings,
     saveSettings: saveGitHubSettings,
   } = EM.require("js/editor/github.js");
-  const { buildMirrorScript, collectMirrorPaths, parseMirrorScript } =
-    EM.require("js/content/mirror.js");
-  const { backupPath, chapterFileName, slugify, uniqueName } =
+  const { parseMirrorScript } = EM.require("js/content/mirror.js");
+  const { chapterFileName, slugify, uniqueName } =
     EM.require("js/editor/names.js");
   const { confirmDialog, openDialog, promptDialog } = EM.require(
     "js/editor/dialogs.js",
@@ -77,6 +79,9 @@
   const { renderMiddle, renderProperties } = EM.require(
     "js/editor/page-canvas.js",
   );
+  const { createValidation } = EM.require("js/editor/editor-validation.js");
+  const { createSaver } = EM.require("js/editor/editor-save.js");
+  const { installShortcuts } = EM.require("js/editor/editor-shortcuts.js");
   const { createPreview } = EM.require("js/editor/preview.js");
   const { importImage } = EM.require("js/editor/image-import.js");
   const { applyTheme } = EM.require("js/ui/theme.js");
@@ -87,6 +92,19 @@
   const TEMPLATE_PATH = "content/_vorlage-kapitel.md";
   const MIRROR_PATH = "content/inhalte.js";
   const DIRS = { kapitel: "content/kapitel", archiv: "content/_archiv" };
+
+  /** Wartezeit (ms) nach der letzten Änderung, bis die Vorschau neu aufgebaut wird. */
+  const PREVIEW_DELAY_MS = 250;
+  /**
+   * Pause (ms) zwischen Leeren und Neusetzen der Statuszeile, damit Screenreader auch eine
+   * gleichlautende Meldung erneut vorlesen.
+   */
+  const STATUS_RESET_MS = 30;
+  /**
+   * Zeitgrenze (ms) für das Wiederherstellen des zuletzt gewählten Ordners. Hängt die
+   * Browser-Datenbank (IndexedDB), erscheint der Startbildschirm trotzdem.
+   */
+  const RESTORE_TIMEOUT_MS = 2000;
 
   // ───────────────────────────── Zustand ─────────────────────────────
 
@@ -170,6 +188,8 @@
   };
 
   let preview = null;
+  /** Gibt es ungespeicherte Änderungen? Wird in renderBar() aus collectChanges() abgeleitet. */
+  let dirty = false;
 
   // ───────────────────────────── Pfade und Abfragen ─────────────────────────────
 
@@ -373,6 +393,7 @@
   /** Kopfleiste: Kursname, Modus, ungespeicherte Dateien. */
   function renderBar() {
     const changes = collectChanges();
+    dirty = changes.length > 0;
     regions.title.textContent = state.doc?.course.meta.titel ?? "Editor";
     regions.dirty.textContent =
       changes.length === 0
@@ -403,130 +424,19 @@
     clearTimeout(previewTimer);
     previewTimer = setTimeout(
       () => preview?.update(state, courseModel, entryByFile),
-      250,
+      PREVIEW_DELAY_MS,
     );
   }
 
-  let validationTimer = 0;
-  /** Startet die Live-Prüfung kurz nach der letzten Änderung. */
-  function scheduleValidation() {
-    clearTimeout(validationTimer);
-    validationTimer = setTimeout(runValidation, 400);
-  }
-
-  /** Live-Prüfung mit validate.js plus didaktische Hinweise. */
-  function runValidation() {
-    if (!state.doc) {
-      return;
-    }
-    const selectedEntry = state.selection.file
-      ? entryByFile(state.selection.file)
-      : null;
-    state.validation = validateCourse(
-      courseModel(selectedEntry?.model ? selectedEntry : null),
-      { didactic: true },
-    );
-    const currentPath = selectedEntry
-      ? chapterPath(selectedEntry)
-      : state.selection.kind === "glossary"
-        ? GLOSSARY_PATH
-        : COURSE_PATH;
-    const shown = state.ui.hintsAll
-      ? state.validation
-      : state.validation.filter((item) => item.file === currentPath);
-    const errors = state.validation.filter(
-      (item) => item.severity === "fehler",
-    ).length;
-
-    const toggle = el(
-      "button",
-      {
-        type: "button",
-        class: "button button--small",
-        "aria-pressed": String(state.ui.hintsAll),
-      },
-      "Alle Dateien",
-    );
-    toggle.addEventListener("click", () => {
-      state.ui.hintsAll = !state.ui.hintsAll;
-      runValidation();
-    });
-    regions.hints.replaceChildren(
-      el(
-        "div",
-        { class: "hints__head" },
-        el("h2", { class: "hints__title" }, `Hinweise (${shown.length})`),
-        toggle,
-      ),
-      el(
-        "p",
-        { class: "hints__summary" },
-        errors === 0
-          ? "Keine Fehler im ganzen Kurs."
-          : `${errors} Fehler im ganzen Kurs.`,
-      ),
-      shown.length === 0
-        ? el("p", { class: "hints__empty" }, "Keine Hinweise für diese Datei.")
-        : el(
-            "ul",
-            { class: "hints__list" },
-            shown.slice(0, 80).map(renderHint),
-          ),
-    );
-  }
-
-  /** Ein Eintrag in der Hinweisliste rechts (mit Sprung zur betroffenen Stelle). */
-  function renderHint(item) {
-    const label = {
-      fehler: "Fehler",
-      warnung: "Warnung",
-      hinweis: item.kind === "todo" ? "Platzhalter" : "Hinweis",
-    }[item.severity];
-    const jump = item.ref ? () => jumpTo(item.ref) : null;
-    const content = [
-      el(
-        "span",
-        { class: `hints__badge hints__badge--${item.severity}` },
-        label,
-      ),
-      " ",
-      item.message,
-    ];
-    return el(
-      "li",
-      { class: "hints__item" },
-      jump
-        ? el(
-            "button",
-            { type: "button", class: "hints__jump", onclick: jump },
-            content,
-          )
-        : el("p", {}, content),
-      item.fix ? el("p", { class: "hints__fix" }, item.fix) : null,
-    );
-  }
-
-  /** Springt zu dem Element, auf das eine Meldung zeigt. */
-  function jumpTo(ref) {
-    const entry = state.doc.chapters.find(
-      (candidate) => candidate.model?.id === ref.chapterId,
-    );
-    if (!entry) {
-      return;
-    }
-    if (ref.page === "quiz") {
-      select({ kind: "quiz", file: entry.file });
-    } else if (typeof ref.page === "number" && ref.page >= 0) {
-      select({
-        kind: "page",
-        file: entry.file,
-        page: ref.page,
-        element: ref.element ?? undefined,
-      });
-    } else {
-      select({ kind: "chapter", file: entry.file });
-    }
-  }
+  const { scheduleValidation, runValidation } = createValidation({
+    state,
+    hintsRegion: regions.hints,
+    entryByFile,
+    courseModel,
+    chapterPath,
+    select,
+    paths: { course: COURSE_PATH, glossary: GLOSSARY_PATH },
+  });
 
   /**
    * Zeigt eine Meldung in der Statuszeile unten (wird von Screenreadern vorgelesen).
@@ -537,7 +447,7 @@
     // Kurze Verzögerung, damit Screenreader auch eine gleichlautende Meldung erneut vorlesen.
     setTimeout(() => {
       regions.status.textContent = message;
-    }, 30);
+    }, STATUS_RESET_MS);
   }
 
   // ───────────────────────────── Laden ─────────────────────────────
@@ -676,428 +586,20 @@
 
   // ───────────────────────────── Speichern ─────────────────────────────
 
-  /** Vergleichsstand einer Datei: kanonische Fassung beim Laden bzw. zuletzt gespeicherter Text. */
-  function baselineText(path) {
-    return state.files[path]?.canonical ?? state.files[path]?.text;
-  }
-
-  /**
-   * Ermittelt alle nötigen Dateioperationen.
-   * @returns {{path: string, label: string, text?: string, blob?: Blob, from?: string, entry?: ChapterEntry}[]}
-   */
-  function collectChanges() {
-    if (!state.doc) {
-      return [];
-    }
-    const changes = [];
-    const courseText = serializeCourse(state.doc.course);
-    if (courseText !== baselineText(COURSE_PATH)) {
-      changes.push({
-        path: COURSE_PATH,
-        label: "Kurseinstellungen",
-        text: courseText,
-      });
-    }
-    const glossaryText = serializeGlossary(state.doc.glossary);
-    if (
-      glossaryText !== (baselineText(GLOSSARY_PATH) ?? "") &&
-      !(glossaryText === "\n" && !baselineText(GLOSSARY_PATH))
-    ) {
-      changes.push({
-        path: GLOSSARY_PATH,
-        label: "Glossar",
-        text: glossaryText,
-      });
-    }
-    for (const entry of state.doc.chapters) {
-      const path = chapterPath(entry);
-      const from = entry.origin ? chapterPath(entry.origin) : null;
-      const text = entry.model
-        ? serializeChapter(entry.model)
-        : entry.brokenText;
-      const original = from ? baselineText(from) : null;
-      if (from === null || from !== path || text !== original) {
-        changes.push({
-          path,
-          from,
-          text,
-          entry,
-          label: entry.model?.meta.titel ?? entry.file,
-        });
-      }
-    }
-    for (const [path, asset] of state.pendingAssets) {
-      changes.push({ path, label: "Bild", blob: asset.blob });
-    }
-
-    // Offline-Datei: gilt als geändert, sobald sie nicht mehr zum Stand nach dem Speichern passt.
-    const mirror = expectedMirror(changes);
-    const same =
-      state.mirror &&
-      JSON.stringify(state.mirror.dateien) === JSON.stringify(mirror.files) &&
-      JSON.stringify(state.mirror.kapitelOrdner) ===
-        JSON.stringify(mirror.chapterFiles);
-    if (!same) {
-      changes.push({
-        path: MIRROR_PATH,
-        label: "Offline-Datei",
-        text: buildMirrorScript(mirror.files, mirror.chapterFiles),
-        mirror: true,
-      });
-    }
-    return changes;
-  }
-
-  /**
-   * Inhalt der Offline-Datei content/inhalte.js, wie sie NACH dem Speichern sein muss:
-   * unveränderte Dateien mit ihrem Text auf der Platte, geänderte mit dem neuen Text.
-   * @param {Object[]} changes  übrige Änderungen aus collectChanges()
-   * @returns {{files: Object<string, string>, chapterFiles: string[]}}
-   */
-  function expectedMirror(changes) {
-    const changed = new Map(
-      changes
-        .filter((change) => typeof change.text === "string")
-        .map((change) => [change.path, change.text]),
-    );
-    const chapterFiles = state.doc.chapters
-      .filter((entry) => entry.location === "kapitel")
-      .map((entry) => entry.file)
-      .sort();
-    const files = {};
-    for (const path of collectMirrorPaths(
-      chapterFiles,
-      String(state.doc.course.meta.logo ?? ""),
-    )) {
-      let text = changed.get(path);
-      if (text === undefined && path === TEMPLATE_PATH) {
-        text = state.template;
-      } else if (
-        text === undefined &&
-        path === String(state.doc.course.meta.logo)
-      ) {
-        text = state.logoText;
-      } else if (text === undefined) {
-        text = state.files[path]?.text;
-      }
-      if (typeof text === "string") {
-        files[path] = text;
-      }
-    }
-    return { files, chapterFiles };
-  }
-
-  /** Speichern: im Direktmodus in die Dateien, im GitHub-Modus als Commit, sonst als Download-Liste. */
-  async function save() {
-    const changes = collectChanges();
-    if (changes.length === 0) {
-      return setStatus("Keine ungespeicherten Änderungen.");
-    }
-    runValidation();
-    const errors = state.validation.filter(
-      (item) => item.severity === "fehler",
-    ).length;
-    if (errors > 0) {
-      const proceed = await confirmDialog({
-        title: "Trotzdem speichern?",
-        text: `Die Prüfung meldet ${errors} Fehler. Du kannst trotzdem speichern – es geht nichts verloren. Im Kurs funktionieren die betroffenen Stellen aber erst, wenn die Fehler behoben sind.`,
-        confirmLabel: "Trotzdem speichern",
-      });
-      if (!proceed) {
-        return;
-      }
-    }
-    if (state.workspace.mode === "direkt") {
-      await saveDirect(changes);
-    } else if (state.workspace.mode === "github") {
-      await saveGitHub(changes);
-    } else {
-      await saveDownload(changes);
-    }
-    renderAll();
-  }
-
-  /** Direktmodus: Konflikte prüfen, Sicherungskopie anlegen, schreiben/verschieben. */
-  async function saveDirect(changes) {
-    const workspace = state.workspace;
-    const saved = [];
-    // Die Offline-Datei wird zum Schluss aus dem tatsächlichen Stand auf der Platte erzeugt.
-    for (const change of changes.filter((entry) => !entry.mirror)) {
-      try {
-        const source = change.from === undefined ? change.path : change.from;
-        if (source && state.files[source]) {
-          // Konfliktprüfung: Wurde die Datei seit dem Öffnen außerhalb des Editors geändert?
-          const onDisk = await workspace.readFile(source);
-          if (
-            onDisk &&
-            state.files[source].lastModified !== null &&
-            onDisk.lastModified !== state.files[source].lastModified
-          ) {
-            const overwrite = await confirmDialog({
-              title: "Datei wurde außerhalb geändert",
-              text: `„${source}" wurde geändert, seit du den Editor geöffnet hast (z. B. in einem Texteditor). Wenn du überschreibst, landet die andere Fassung als Sicherungskopie in content/_backup/.`,
-              confirmLabel: "Überschreiben",
-              cancelLabel: "Diese Datei auslassen",
-              danger: true,
-            });
-            if (!overwrite) {
-              continue;
-            }
-            state.files[source].backedUp = false;
-          }
-          // Beim ersten Speichern pro Sitzung: bisherige Fassung sichern.
-          if (onDisk && !state.files[source].backedUp) {
-            await workspace.writeText(backupPath(source), onDisk.text);
-            state.files[source].backedUp = true;
-          }
-          if (change.from && change.from !== change.path) {
-            await workspace.move(change.from, change.path);
-          }
-        }
-        if (change.blob) {
-          await workspace.writeBlob(change.path, change.blob);
-        } else {
-          await workspace.writeText(change.path, change.text);
-        }
-        const lastModified = await workspace.lastModified(change.path);
-        state.files[change.path] = {
-          text: change.text ?? "",
-          lastModified,
-          backedUp: true,
-        };
-        if (change.from && change.from !== change.path) {
-          delete state.files[change.from];
-        }
-        if (change.entry) {
-          change.entry.origin = {
-            file: change.entry.file,
-            location: change.entry.location,
-          };
-        }
-        if (change.blob) {
-          state.pendingAssets.delete(change.path);
-        }
-        saved.push(change.path.split("/").pop());
-      } catch (error) {
-        setStatus(`Fehler beim Speichern von ${change.path}: ${error.message}`);
-        return;
-      }
-    }
-    try {
-      if (await writeMirrorFromDisk()) {
-        saved.push("inhalte.js (Offline-Datei)");
-      }
-    } catch (error) {
-      setStatus(
-        `Die Offline-Datei content/inhalte.js konnte nicht geschrieben werden: ${error.message}`,
-      );
-      return;
-    }
-    setStatus(
-      saved.length > 0
-        ? `Gespeichert: ${saved.join(", ")}. Sicherungskopien liegen in content/_backup/.`
-        : "Nichts gespeichert.",
-    );
-  }
-
-  /**
-   * Erzeugt content/inhalte.js aus den Dateien, wie sie gerade auf der Platte liegen, und schreibt
-   * sie, falls sie sich geändert hat (nur Direktmodus).
-   * @returns {Promise<boolean>} true, wenn die Datei neu geschrieben wurde
-   */
-  async function writeMirrorFromDisk() {
-    const workspace = state.workspace;
-    const chapterFiles = (await workspace.list(DIRS.kapitel))
-      .filter((name) => name.endsWith(".md"))
-      .sort();
-    const logoPath = String(state.doc.course.meta.logo ?? "");
-    const files = {};
-    for (const path of collectMirrorPaths(chapterFiles, logoPath)) {
-      const file = await workspace.readFile(path);
-      if (file) {
-        files[path] = normalizeText(file.text);
-      }
-    }
-    state.logoText = files[logoPath] ?? state.logoText;
-    if (
-      state.mirror &&
-      JSON.stringify(state.mirror.dateien) === JSON.stringify(files) &&
-      JSON.stringify(state.mirror.kapitelOrdner) ===
-        JSON.stringify(chapterFiles)
-    ) {
-      return false;
-    }
-    const text = buildMirrorScript(files, chapterFiles);
-    await workspace.writeText(MIRROR_PATH, text);
-    state.mirror = parseMirrorScript(text);
-    return true;
-  }
-
-  /** Download-Modus: Dateien zum Herunterladen anbieten, mit Zielordner. */
-  async function saveDownload(changes) {
-    const id = "save-dialog-title";
-    const rows = changes.map((change) => {
-      const name = change.path.split("/").pop();
-      const folder = change.path.split("/").slice(0, -1).join("/");
-      const button = el(
-        "button",
-        { type: "button", class: "button button--small" },
-        "Herunterladen",
-      );
-      button.addEventListener("click", () => {
-        downloadBlob(
-          name,
-          change.blob ??
-            new Blob([change.text], { type: "text/markdown;charset=utf-8" }),
-        );
-        button.textContent = "Heruntergeladen ✓";
-      });
-      const moveNote =
-        change.from && change.from !== change.path
-          ? el(
-              "p",
-              { class: "field__hint" },
-              `Danach die alte Datei „${change.from}" löschen bzw. verschieben (der Editor kann das ohne Ordnerzugriff nicht).`,
-            )
-          : null;
-      return el(
-        "li",
-        { class: "save-list__item" },
-        el(
-          "p",
-          {},
-          el("strong", {}, name),
-          ` → in den Ordner `,
-          el("code", {}, `${folder}/`),
-        ),
-        moveNote,
-        button,
-      );
-    });
-    const done = await openDialog(
-      (close) => [
-        el("h2", { id }, "Dateien herunterladen"),
-        el(
-          "p",
-          {},
-          "Ohne Ordnerzugriff kann der Editor nicht direkt speichern. Lade jede Datei herunter und lege sie in den angegebenen Ordner im Projekt (vorhandene Datei ersetzen).",
-        ),
-        el("ul", { class: "save-list" }, rows),
-        el(
-          "div",
-          { class: "dialog__actions" },
-          el(
-            "button",
-            { type: "button", class: "button", onclick: () => close(false) },
-            "Später",
-          ),
-          el(
-            "button",
-            {
-              type: "button",
-              class: "button button--primary",
-              onclick: () => close(true),
-            },
-            "Erledigt – alle Dateien abgelegt",
-          ),
-        ),
-      ],
-      id,
-    );
-    if (!done) {
-      return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
-    }
-    markSaved(changes);
-    setStatus(
-      "Als gespeichert markiert. Lade den Kurs neu, um die Änderungen zu sehen.",
-    );
-  }
-
-  /**
-   * GitHub-Modus: alle Änderungen als einen Commit ins Repository speichern. Die Beschreibung
-   * ist vorausgefüllt und erscheint in der Versionsgeschichte (wie „Summary" in GitHub Desktop).
-   * @param {Object[]} changes  aus collectChanges()
-   */
-  async function saveGitHub(changes) {
-    const labels = [
-      ...new Set(
-        changes
-          .filter((change) => !change.mirror)
-          .map((change) => change.label),
-      ),
-    ];
-    const message = await promptDialog({
-      title: "Auf GitHub speichern",
-      label: "Was hast du geändert?",
-      value: `Editor: ${labels.join(", ") || "Offline-Datei aktualisiert"}`,
-      hint: "Kurze Beschreibung für die Versionsgeschichte. Nach dem Speichern ist die Website in 1–2 Minuten aktualisiert.",
-      confirmLabel: "Auf GitHub speichern",
-    });
-    if (message === null) {
-      return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
-    }
-    setStatus("Wird auf GitHub gespeichert …");
-    try {
-      let result = await state.workspace.commitChanges(changes, message);
-      if (result.conflicts) {
-        const overwrite = await confirmDialog({
-          title: "Auf GitHub wurde inzwischen etwas geändert",
-          text: `Seit du den Editor geöffnet hast, wurden auf GitHub diese Dateien geändert: ${result.conflicts.join(", ")}. Wenn du trotzdem speicherst, ersetzt deine Fassung die andere (sie bleibt in der Versionsgeschichte erhalten). Sonst: Abbrechen, Editor neu laden und die Änderung wiederholen.`,
-          confirmLabel: "Meine Fassung speichern",
-          cancelLabel: "Abbrechen",
-          danger: true,
-        });
-        if (!overwrite) {
-          return setStatus("Nicht gespeichert. Deine Änderungen sind noch da.");
-        }
-        result = await state.workspace.commitChanges(changes, message, {
-          overwrite: true,
-        });
-      }
-      markSaved(changes);
-      const count = changes.length;
-      setStatus(
-        `Auf GitHub gespeichert (${count} ${count === 1 ? "Datei" : "Dateien"}). Die Website ist in 1–2 Minuten aktualisiert.`,
-      );
-    } catch (error) {
-      setStatus(`Nicht gespeichert: ${error.message}`);
-    }
-  }
-
-  /**
-   * Übernimmt gespeicherte Änderungen als neuen Ausgangsstand (Download- und GitHub-Modus):
-   * Danach gilt nichts mehr als „ungespeichert".
-   * @param {Object[]} changes  aus collectChanges()
-   */
-  function markSaved(changes) {
-    for (const change of changes) {
-      if (change.mirror) {
-        state.mirror = parseMirrorScript(change.text);
-        continue;
-      }
-      state.files[change.path] = {
-        text: change.text ?? "",
-        lastModified: null,
-        backedUp: true,
-      };
-      if (change.from && change.from !== change.path) {
-        delete state.files[change.from];
-      }
-      if (change.entry) {
-        change.entry.origin = {
-          file: change.entry.file,
-          location: change.entry.location,
-        };
-      }
-      if (change.blob) {
-        const pending = state.pendingAssets.get(change.path);
-        if (pending) {
-          state.savedAssetUrls.set(change.path, pending.url);
-        }
-        state.pendingAssets.delete(change.path);
-      }
-    }
-  }
+  const { collectChanges, save } = createSaver({
+    state,
+    chapterPath,
+    setStatus,
+    runValidation,
+    renderAll,
+    paths: {
+      course: COURSE_PATH,
+      glossary: GLOSSARY_PATH,
+      template: TEMPLATE_PATH,
+      mirror: MIRROR_PATH,
+      dirs: DIRS,
+    },
+  });
 
   // ───────────────────────────── Kapitel- und Seitenoperationen ─────────────────────────────
 
@@ -1551,7 +1053,9 @@
       const none = { workspace: null, needsPermission: false, name: "" };
       const remembered = await Promise.race([
         restoreDirectory(false).catch(() => none),
-        new Promise((resolve) => setTimeout(() => resolve(none), 2000)),
+        new Promise((resolve) =>
+          setTimeout(() => resolve(none), RESTORE_TIMEOUT_MS),
+        ),
       ]);
       if (remembered.workspace) {
         await run(() => loadProject(remembered.workspace));
@@ -1821,30 +1325,12 @@
       });
     }
 
-    // Tastenkürzel: Strg/Cmd+Z, Strg/Cmd+Umschalt+Z (oder Strg+Y), Strg/Cmd+S.
-    document.addEventListener("keydown", (event) => {
-      if (!state.doc || !(event.ctrlKey || event.metaKey)) {
-        return;
-      }
-      const key = event.key.toLowerCase();
-      if (key === "z" && !event.shiftKey) {
-        event.preventDefault();
-        undo();
-      } else if ((key === "z" && event.shiftKey) || key === "y") {
-        event.preventDefault();
-        redo();
-      } else if (key === "s") {
-        event.preventDefault();
-        save();
-      }
-    });
-
-    // Warnung beim Verlassen mit ungespeicherten Änderungen.
-    window.addEventListener("beforeunload", (event) => {
-      if (collectChanges().length > 0) {
-        event.preventDefault();
-        event.returnValue = "";
-      }
+    installShortcuts({
+      isReady: () => Boolean(state.doc),
+      undo,
+      redo,
+      save,
+      isDirty: () => dirty,
     });
 
     // Editor folgt dem gespeicherten Theme des Kurses (nur Darstellung des Editors selbst).

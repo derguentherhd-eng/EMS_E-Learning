@@ -150,6 +150,7 @@
     try {
       return decodeURIComponent(part);
     } catch {
+      // Ungültige %-Kodierung in der Adresse: den Teil unverändert verwenden.
       return part;
     }
   }

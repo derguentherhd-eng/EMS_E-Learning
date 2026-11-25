@@ -23,8 +23,11 @@
   const { renderStart } = EM.require("js/views/start.js");
   const { renderGlossaryPage } = EM.require("js/views/glossary-page.js");
 
-  const COURSE_CSS = ["index"]; // css/index.css bindet alle Kurs-Stile ein
+  /** CSS-Dateien des Kurses; css/index.css bindet alle Kurs-Stile ein. */
+  const COURSE_CSS = ["index"];
+  /** Breite des Vorschau-Fensters in Pixeln (Handy bzw. Desktop). */
   const WIDTHS = { mobile: 375, desktop: 1024 };
+  /** Höhe des Vorschau-Fensters in Pixeln (vor der Skalierung). */
   const HEIGHT = 720;
 
   /**
@@ -44,6 +47,14 @@
     let ready = false;
     let pending = null;
 
+    /**
+     * Umschalter aus Knöpfen (z. B. Handy/Desktop, Seite/Kapitel).
+     * @param {string} label Beschriftung für Screenreader.
+     * @param {function(): string} current Liefert den aktuellen Wert.
+     * @param {Array<[string, string]>} values Paare aus Wert und Text.
+     * @param {function(string): void} onPick Wird mit dem Wert aufgerufen.
+     * @returns {HTMLElement}
+     */
     function toggle(label, current, values, onPick) {
       return el(
         "div",
@@ -108,7 +119,10 @@
       stage,
     );
 
-    /** Skaliert das iframe auf die verfügbare Breite. */
+    /**
+     * Skaliert das iframe auf die verfügbare Breite.
+     * @returns {void}
+     */
     function layout() {
       const width = WIDTHS[editor.state.ui.previewWidth];
       const scale = Math.min(1, stage.clientWidth / width || 1);
@@ -161,6 +175,10 @@
 
     return {
       update(state, courseModel, entryByFile) {
+        /**
+         * Rendert die Vorschau neu (sofort oder nach dem Laden des iframes).
+         * @returns {void}
+         */
         function run() {
           pending = null;
           const doc = frame.contentDocument;
@@ -189,7 +207,14 @@
     };
   }
 
-  /** Rendert die passende Kursansicht zur aktuellen Auswahl im Editor. */
+  /**
+   * Rendert die passende Kursansicht zur aktuellen Auswahl im Editor.
+   * @param {Object} state Editor-Zustand (Auswahl, Dokument, UI).
+   * @param {Function} courseModel Liefert das Kursmodell.
+   * @param {Function} entryByFile Sucht ein Kapitel nach Dateiname.
+   * @param {Object} store Zustand des Kurses in der Vorschau.
+   * @returns {HTMLElement} Inhalt für das <main> des iframes.
+   */
   function renderSelection(state, courseModel, entryByFile, store) {
     const selection = state.selection;
     const entry = selection.file ? entryByFile(selection.file) : null;
@@ -227,7 +252,10 @@
     }
   }
 
-  /** Grundgerüst des iframes: Kurs-CSS und ein leeres <main>. */
+  /**
+   * Grundgerüst des iframes: Kurs-CSS und ein leeres <main>.
+   * @returns {string} HTML für srcdoc.
+   */
   function frameDocument() {
     const links = COURSE_CSS.map(
       (name) => `<link rel="stylesheet" href="css/${name}.css">`,

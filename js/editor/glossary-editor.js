@@ -16,11 +16,19 @@
   const { serializeChapter } = EM.require("js/content/serialize.js");
 
   /**
-   * @param {Object} editor
+   * Mittlere Spalte „Glossar": Tabelle der Begriffe mit Verwendungsnachweis.
+   * @param {Object} editor Editor-Objekt (state, commit).
    * @returns {HTMLElement}
    */
   function renderGlossaryEditor(editor) {
     const { doc } = editor.state;
+    /**
+     * Schreibt eine Änderung am Glossar in den Editor-Zustand.
+     * @param {function(Object): void} mutate Änderung am Dokument.
+     * @param {string|null} [key] Schlüssel zum Zusammenfassen von Eingaben.
+     * @param {boolean} [structural] true, wenn die Liste neu aufgebaut wird.
+     * @returns {*} Rückgabewert von editor.commit.
+     */
     function change(mutate, key = null, structural = false) {
       return editor.commit(mutate, {
         source: "middle",
@@ -36,6 +44,11 @@
         title: entry.model.meta.kurztitel || entry.model.meta.titel,
         text: serializeChapter(entry.model).toLocaleLowerCase("de"),
       }));
+    /**
+     * Titel der Kapitel, in denen der Begriff als [[Begriff]] vorkommt.
+     * @param {string} term Begriff.
+     * @returns {string[]} Kapiteltitel.
+     */
     function usage(term) {
       return texts
         .filter((chapter) =>

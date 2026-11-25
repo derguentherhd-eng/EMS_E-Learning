@@ -24,6 +24,10 @@
   const { prefersReducedMotion } = EM.require("js/blocks/block-utils.js");
 
   const STEP_MS = 550;
+  /** Höchstens so viel zufällige Pause bei voller Ampel (wie im echten Start). */
+  const JITTER_MS = 400;
+  /** So lange bleibt „Los!“ sichtbar, bevor der Kurs weitergeht. */
+  const HOLD_MS = 500;
   const LIGHTS = 5;
 
   /**
@@ -87,14 +91,18 @@
         );
       });
       // Kurze, leicht zufällige Pause bei voller Ampel – wie im echten Start.
-      const out = STEP_MS * (LIGHTS + 1) + Math.round(Math.random() * 400);
+      const out =
+        STEP_MS * (LIGHTS + 1) + Math.round(Math.random() * JITTER_MS);
       timers.push(
         setTimeout(() => {
           lights.forEach((light) => light.classList.remove("is-on"));
           status.textContent = "Los!";
+          // Die Lichter sind aus, die Zeitgeber der Ampel werden nicht mehr gebraucht;
+          // nur der Wechsel nach HOLD_MS (letzter Eintrag) bleibt aktiv.
+          timers.splice(0, timers.length - 1).forEach(clearTimeout);
         }, out),
       );
-      timers.push(setTimeout(go, out + 500));
+      timers.push(setTimeout(go, out + HOLD_MS));
     }
 
     return {
@@ -102,6 +110,7 @@
       destroy() {
         done = true;
         timers.forEach(clearTimeout);
+        timers.length = 0;
       },
     };
   }

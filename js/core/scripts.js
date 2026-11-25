@@ -86,7 +86,22 @@
       "js/editor/image-import.js",
       "js/editor/preview.js",
       "js/editor/course-tree.js",
+      "js/editor/canvas-dnd.js",
+      "js/editor/canvas-elements.js",
+      "js/editor/canvas-fields.js",
       "js/editor/page-canvas.js",
+      "js/editor/editor-validation.js",
+      "js/editor/editor-save.js",
+      "js/editor/editor-shortcuts.js",
+    ],
+    /** Nur für tests.html: Testrahmen und Testfälle (Runner ist js/pages/tests.js). */
+    tests: [
+      "js/tests/test-utils.js",
+      "js/tests/tests-markdown.js",
+      "js/tests/tests-blocks.js",
+      "js/tests/tests-course.js",
+      "js/tests/tests-editor.js",
+      "js/tests/tests-content.js",
     ],
   };
 

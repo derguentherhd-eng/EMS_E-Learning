@@ -161,7 +161,10 @@
 
     /* ── Layout ── */
     --layout-max: 72rem; /* Breite von Kopfleiste, Sektoranzeige, Inhalt und Fußzeile; ab 100rem 84rem */
-    --content-max: var(--layout-max); /* Breite der Inhaltsspalte (Tabellen, Bilder, Bausteine) */
+    --content-max: var(
+      --layout-max
+    ); /* Breite der Inhaltsspalte (Tabellen, Bilder, Bausteine) */
+
     --masthead-height: 3.5rem;
     --pager-height: 4.5rem;
   }

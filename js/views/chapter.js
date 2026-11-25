@@ -20,13 +20,21 @@
   "use strict";
 
   const { el } = EM.require("js/core/dom.js");
-  const { createBlockContext, renderElements } = EM.require("js/core/render.js");
+  const { createBlockContext, renderElements } =
+    EM.require("js/core/render.js");
   const { chapterHash } = EM.require("js/core/router.js");
   const { markVisited } = EM.require("js/core/store.js");
   const { statusBar } = EM.require("js/ui/statusbar.js");
   const { isReleased, isSafetyChapter } = EM.require("js/content/documents.js");
   const { renderNotFound } = EM.require("js/views/not-found.js");
   const { renderSafetyRecord } = EM.require("js/views/safety-record-view.js");
+
+  /**
+   * Pause (ms), in der der Hinweis unter „Weiter" leer bleibt, bevor er neu gesetzt wird.
+   * Ohne das Leeren liest ein Screenreader denselben Text bei einem zweiten Klick nicht
+   * erneut vor, weil sich der Inhalt der aria-live-Region nicht ändert.
+   */
+  const LIVE_REGION_RESET_MS = 30;
 
   /**
    * @param {import("./view-types.js").ViewContext} context
@@ -122,6 +130,8 @@
       "aria-live": "polite",
     });
     article.append(hint);
+    /** @type {ReturnType<typeof setTimeout>|undefined} */
+    let liveRegionTimer;
 
     function update() {
       const open = article.querySelectorAll('[data-exercise="offen"]').length;
@@ -143,7 +153,8 @@
         event.preventDefault();
         hint.textContent = "";
         // Kurz leeren, damit Screenreader die Meldung erneut vorlesen.
-        setTimeout(update, 30);
+        clearTimeout(liveRegionTimer);
+        liveRegionTimer = setTimeout(update, LIVE_REGION_RESET_MS);
         const openExercise = article.querySelector('[data-exercise="offen"]');
         if (openExercise) {
           // Fokus auf die offene Übung, damit Tastaturnutzer dort weitermachen.

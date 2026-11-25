@@ -17,6 +17,7 @@
  *
  * Wenn du hier etwas ändern willst …
  *   – Aussehen: css/blocks/ordering.css.
+ *   – Ziehen per Maus/Finger: enablePointerReorder() in js/blocks/block-utils.js.
  */
 
 (function () {
@@ -27,6 +28,7 @@
   const {
     blockError,
     blockSection,
+    enablePointerReorder,
     formatBlock,
     formatHeader,
     oneLine,
@@ -194,75 +196,15 @@
         announcer.textContent = `„${order[target]}" ist jetzt an Position ${target + 1} von ${order.length}.`;
       }
 
-      // ── Ziehen mit Maus, Stift oder Finger (zusätzlich zu den Pfeilknöpfen) ──
-      // Mit der Maus lässt sich die ganze Zeile ziehen, per Touch nur die Platznummer (Griff),
-      // damit man auf dem Handy über die Liste weiterhin scrollen kann.
-      /** @type {{ item: HTMLElement, pointerId: number, from: number }|null} */
-      let drag = null;
-
-      list.addEventListener("pointerdown", (event) => {
-        const target = /** @type {Element} */ (event.target);
-        const item = /** @type {HTMLElement|null} */ (
-          target.closest(".ordering__item")
-        );
-        if (!item || event.button !== 0 || target.closest("button")) {
-          return;
-        }
-        if (event.pointerType === "touch" && !target.closest(".ordering__position")) {
-          return;
-        }
-        event.preventDefault();
-        try {
-          item.setPointerCapture(event.pointerId);
-        } catch {
-          // Ohne Capture funktioniert das Ziehen innerhalb der Liste trotzdem.
-        }
-        item.classList.add("is-dragging");
-        drag = {
-          item,
-          pointerId: event.pointerId,
-          from: [...list.children].indexOf(item),
-        };
-      });
-
-      list.addEventListener("pointermove", (event) => {
-        if (!drag || event.pointerId !== drag.pointerId) {
-          return;
-        }
-        const others = [...list.children].filter((child) => child !== drag?.item);
-        const before = others.find((child) => {
-          const box = child.getBoundingClientRect();
-          return event.clientY < box.top + box.height / 2;
-        });
-        if (before) {
-          if (drag.item.nextElementSibling !== before) {
-            list.insertBefore(drag.item, before);
-          }
-        } else if (list.lastElementChild !== drag.item) {
-          list.append(drag.item);
-        }
-      });
-
-      /** @param {PointerEvent} event */
-      function endDrag(event) {
-        if (!drag || event.pointerId !== drag.pointerId) {
-          return;
-        }
-        const { item, from } = drag;
-        drag = null;
-        item.classList.remove("is-dragging");
-        const to = [...list.children].indexOf(item);
-        if (to === from) {
-          return;
-        }
+      // Ziehen mit Maus, Stift oder Finger (zusätzlich zu den Pfeilknöpfen). Danach bleibt der
+      // Tastaturfokus am verschobenen Schritt (Pfeilknopf), wie beim Verschieben per Knopf.
+      enablePointerReorder(list, (from, to) => {
         const [step] = order.splice(from, 1);
         order.splice(to, 0, step);
         result.replaceChildren();
-        draw();
+        draw(step, to > from ? 1 : -1);
         announcer.textContent = `„${step}" ist jetzt an Position ${to + 1} von ${order.length}.`;
-      }
-      list.addEventListener("pointerup", endDrag);
-      list.addEventListener("pointercancel", endDrag);
+      });
 
       const checkButton = el(
         "button",

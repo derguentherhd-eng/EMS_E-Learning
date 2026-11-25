@@ -357,6 +357,7 @@
         return { ...font, base64 };
       });
     } catch {
+      // Schriften nicht ladbar (z. B. offline): PDF dann mit Standardschrift.
       return [];
     }
   }
@@ -389,6 +390,7 @@
             .drawImage(image, 0, 0, canvas.width, canvas.height);
           resolve(canvas.toDataURL("image/png"));
         } catch {
+          // Canvas nicht lesbar (z. B. file://): kein Logo, kein Abbruch.
           resolve(null); // Zertifikat dann ohne Logo
         }
       });

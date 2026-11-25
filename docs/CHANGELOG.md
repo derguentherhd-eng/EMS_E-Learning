@@ -149,3 +149,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Sprachschalter: Fortschritt beim Laden des Sprachmodells wird für Screenreader angesagt; Hinweis am Schalter, wenn die gespeicherte Sprache nicht automatisch geladen werden kann.
 - Schrift kompakter für Laptop und PC: Fließtext fest 16 px, Überschriften kleiner (Skala ca. 1,18), kein Mitwachsen der Schrift auf großen Monitoren mehr; dafür Inhaltsbreite ab 2240 px 96rem. Grafiken wieder höchstens 800 px breit.
 - Reihenfolge-Übungen: Schritte lassen sich jetzt zusätzlich mit der Maus ziehen (per Touch über die Platznummer); Pfeilknöpfe bleiben für Tastatur.
+
+### Code-Audit und Umbau für Wartbarkeit (2026-11-25)
+- Prüfstand: ESLint (MDN-Regeln), Stylelint, Prettier und W3C-Validator ohne Fehler; 146 Selbsttests grün.
+- Editor: Strg/Cmd+Z/Y in Eingabefeldern wieder normales Text-Rückgängig; `editor.js` aufgeteilt in `editor-save.js`, `editor-validation.js`, `editor-shortcuts.js`; Warnung beim Verlassen über Dirty-Flag.
+- Editor-Mitte: `page-canvas.js` aufgeteilt in `canvas-elements.js`, `canvas-fields.js`, `canvas-dnd.js`; JSDoc in allen Editor-Dateien ergänzt.
+- Selbsttests: `js/pages/tests.js` ist nur noch Runner, Tests liegen nach Bereichen in `js/tests/`.
+- Reihenfolge: Ziehen als wiederverwendbare Hilfsfunktion `enablePointerReorder()` (block-utils.js); Fokus bleibt nach dem Ziehen erhalten.
+- Sprachschalter: Beobachter wird beim Ausschalten getrennt, entfernte Knoten werden freigegeben, Cache begrenzt, keine Doppel-Übersetzungen, Fehler werden protokolliert.
+- Benannte Konstanten statt fester Zahlen (Startampel, PDF-Nachweis, Editor-Timer, Live-Region), Begründungen an allen leeren `catch`-Blöcken, Sektor-Links mit `aria-label`.

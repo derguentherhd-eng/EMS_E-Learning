@@ -101,12 +101,13 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/course/safety-record.js` | PDF-Nachweis Sicherheitsunterweisung (Name, Datum, Anläufe, Prüfcode) |
 | `js/views/safety-record-view.js` | Abschnitt „Dein Nachweis" mit Namensfeld (Quiz-Ergebnis und Seite 1) |
 | `js/course/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
-| `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Symbole, Statusbar (`statusbar.js`) |
+| `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Sprachschalter (`language.js`), Symbole, Statusbar (`statusbar.js`) |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
 | `js/pages/pruefen.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
-| `js/pages/tests.js` | Selbsttests für `tests.html` |
+| `js/pages/tests.js` | Test-Runner für `tests.html` (sammelt, führt aus, zeigt an) |
+| `js/tests/*.js` | Selbsttests nach Bereichen: `test-utils.js` (Helfer), `tests-markdown.js`, `tests-blocks.js`, `tests-course.js`, `tests-editor.js`, `tests-content.js` |
 | `js/pages/designsystem.js` | Logik von `designsystem.html` (Übersicht aller Bedienelemente) |
-| `js/pages/editor.js` | Einstieg und Steuerzentrale des Editors (Zustand, `commit()`, Laden, Speichern) |
+| `js/pages/editor.js` | Einstieg und Steuerzentrale des Editors (Zustand, `commit()`, Laden); Speichern, Prüfung und Tastenkürzel in `js/editor/editor-*.js` |
 | `js/editor/github.js` | GitHub-Modus: Repository lesen, Änderungen als ein Commit speichern |
 | `js/editor/*` | Teile des Editors (siehe Abschnitt 6) |
 
@@ -206,16 +207,18 @@ Beispiel: ein Baustein `merksatz` (ein hervorgehobener Satz mit Quelle).
 5. **Symbol:** `assets/icons/merksatz.svg` als Kachel im Designsystem-Stil: 32×32, lila Fläche
    `#534495` mit `rx="6"` und gelbem Rand, darin das Symbol in Gelb `#ffed00` mit runden Enden
    (Vorlage: eine der vorhandenen Dateien kopieren).
-6. **Tests:** in `js/pages/tests.js` unter `BLOCK_SAMPLES` ein gültiges und ggf. ungültiges Beispiel.
+6. **Tests:** in `js/tests/tests-blocks.js` unter `BLOCK_SAMPLES` ein gültiges und ggf. ungültiges Beispiel.
    `tests.html` erzeugt daraus Parser-, Round-Trip- und Schema-Tests.
 7. **Doku:** Abschnitt in `docs/BAUSTEINE.md` (Zweck, Didaktik, Editorname, Kopiervorlage, Fehler)
    und Eintrag in der Übersichtstabelle.
 
 ## 6. Editor
 
-**Dateien:** `js/pages/editor.js` (Zustand, `commit()`, Laden, Speichern, Kapitel-Operationen,
-Tastenkürzel), `workspace.js` (Dateizugriff), `course-tree.js` (links), `page-canvas.js` (Mitte und
-Eigenschaften), `field-renderers.js` (Formulare aus Schemas), `quiz-editor.js`, `hotspot-editor.js`,
+**Dateien:** `js/pages/editor.js` (Zustand, `commit()`, Laden, Kapitel-Operationen),
+`editor-save.js` (Änderungen sammeln, drei Speichermodi), `editor-validation.js` (Live-Prüfung),
+`editor-shortcuts.js` (Tastenkürzel, Warnung beim Verlassen), `workspace.js` (Dateizugriff),
+`course-tree.js` (links), `page-canvas.js` (Mitte und Eigenschaften, Einstieg) mit `canvas-elements.js`
+(Karten, Palette), `canvas-fields.js` (Eigenschaften-Felder), `canvas-dnd.js` (Verschieben, Duplizieren), `field-renderers.js` (Formulare aus Schemas), `quiz-editor.js`, `hotspot-editor.js`,
 `glossary-editor.js`, `image-import.js`, `preview.js`, `history.js`, `dialogs.js`, `names.js`.
 
 **Zustand:** `state.doc = { course, glossary, chapters[] }`. Jedes Kapitel ist
