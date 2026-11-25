@@ -24,7 +24,7 @@ Ab Mai | Testing | Testtage fahren, Daten auswerten, das Setup abstimmen und Feh
 Ab August | Events | Mit dem AL27 bei den Formula-Student-Events in den statischen und dynamischen Disziplinen antreten.
 :::
 
-**So funktioniert die Übung:** Bring die sieben Phasen in die richtige Reihenfolge – die erste nach oben. Verschiebe die Einträge mit den Pfeil-Knöpfen und prüfe dann deine Lösung. Erst wenn alles stimmt, geht es weiter.
+**So funktioniert die Übung:** Bring die sieben Phasen in die richtige Reihenfolge – die erste nach oben. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung. Erst wenn alles stimmt, geht es weiter.
 
 :::reihenfolge Die Phasen einer Saison
 Konzept

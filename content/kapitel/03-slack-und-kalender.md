@@ -79,7 +79,7 @@ Klicke auf **Home** → **Verzeichnisse** → Registerkarte **Channels** (so hei
 
 ![Vereinfachte Darstellung von Slack: 1 Home, 2 Verzeichnisse, 3 Registerkarte Channels, 4 Knopf zum Beitreten neben #01_allgemein](assets/bilder/onboarding/slack/channels.svg "Vereinfachte Darstellung: Home → Verzeichnisse → Channels → beitreten")
 
-**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Verschiebe die Einträge mit den Pfeil-Knöpfen und prüfe dann deine Lösung.
+**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung.
 
 :::reihenfolge Slack einrichten
 Einladungslink öffnen
@@ -132,7 +132,7 @@ So richtest du deinen Kalender ein:
 2. **Details prüfen:** Schau bei jedem Termin auf **Uhrzeit, Treffpunkt, Beschreibung** und den **Online-Zugang**.
 3. **Teilnahme bestätigen:** Nimm Einladungen an oder sag ab. Schau regelmäßig in den Kalender – Termine können sich ändern.
 
-**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Verschiebe die Einträge mit den Pfeil-Knöpfen und prüfe dann deine Lösung.
+**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung.
 
 :::reihenfolge Kalender einrichten
 In #01_allgemein den Canvas „Generelle Links" öffnen

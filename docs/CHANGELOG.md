@@ -148,3 +148,4 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Gesperrtes „Weiter“: Enter setzt den Fokus direkt auf die offene Übung.
 - Sprachschalter: Fortschritt beim Laden des Sprachmodells wird für Screenreader angesagt; Hinweis am Schalter, wenn die gespeicherte Sprache nicht automatisch geladen werden kann.
 - Schrift kompakter für Laptop und PC: Fließtext fest 16 px, Überschriften kleiner (Skala ca. 1,18), kein Mitwachsen der Schrift auf großen Monitoren mehr; dafür Inhaltsbreite ab 2240 px 96rem. Grafiken wieder höchstens 800 px breit.
+- Reihenfolge-Übungen: Schritte lassen sich jetzt zusätzlich mit der Maus ziehen (per Touch über die Platznummer); Pfeilknöpfe bleiben für Tastatur.
