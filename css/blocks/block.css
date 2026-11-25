@@ -6,12 +6,12 @@
  */
 
 @layer components {
-  /* Gemeinsamer Rahmen aller Bausteine: abgerundete Fläche ohne Schatten. */
+  /* Gemeinsamer Rahmen aller Bausteine: flache Fläche, kein Rahmen, kaum Rundung.
+   * Gruppierung leistet der Flächenton; Rahmen plus große Rundung wirkte wie Template-Karte. */
   .block {
     padding: var(--space-s);
     background-color: var(--color-surface);
-    border: var(--border-thin) solid var(--color-line);
-    border-radius: var(--radius-l);
+    border-radius: var(--radius-s);
   }
 
   /* ── Gemeinsame Teile interaktiver Bausteine ── */

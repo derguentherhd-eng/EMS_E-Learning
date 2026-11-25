@@ -15,11 +15,11 @@ lernziele:
 
 ## Sicherheit geht vor
 
-In unserer Werkstatt stehen Maschinen, die in Sekunden schwer verletzen können. Es gibt Stoffe, die krank machen, und ein Auto mit 600 Volt. Das soll dir keine Angst machen – aber Respekt.
+In unserer Werkstatt stehen Maschinen, die in Sekunden schwer verletzen können. Es gibt Stoffe, die krank machen, und ein Auto mit 600 Volt. Das soll dir keine Angst machen, aber Respekt.
 
 Die gute Nachricht: Fast alle Unfälle lassen sich mit ein paar klaren Regeln vermeiden. Dieses Kapitel erklärt sie dir Schritt für Schritt.
 
-**Du kannst dieses Kapitel jederzeit bearbeiten** – unabhängig von anderen Kapiteln. Auf jeder Seite kommst du erst weiter, wenn du die Übungen richtig gelöst hast. Am Ende steht ein Quiz; danach kannst du deinen Nachweis als PDF herunterladen.
+Du kannst dieses Kapitel jederzeit bearbeiten, unabhängig von anderen Kapiteln. Auf jeder Seite kommst du erst weiter, wenn du die Übungen richtig gelöst hast. Am Ende steht ein Quiz; danach kannst du deinen Nachweis als PDF herunterladen.
 
 ### Die Grundregeln
 
@@ -48,7 +48,7 @@ In der Werkstatt hängen viele Schilder. Du musst nicht jedes einzelne auswendig
 
 Auf älteren Dosen findest du manchmal noch **orange Quadrate mit schwarzem Symbol**. Das ist die alte Kennzeichnung für Gefahrstoffe. Nimm sie genauso ernst.
 
-**So funktioniert die Übung:** Die Zeichen kommen in vier Reihen. Unter jedem Zeichen steht eine Nummer – tippe sie an, dann erscheint die Erklärung. Dieselben Erklärungen stehen direkt unter jeder Reihe als Liste.
+Die Zeichen kommen in vier Reihen. Unter jedem Zeichen steht eine Nummer: Tippe sie an, dann erscheint die Erklärung. Dieselben Erklärungen stehen direkt unter jeder Reihe als Liste.
 
 **Reihe 1 – Gebotszeichen:** blau und rund. Sie sagen dir, welche Schutzausrüstung du tragen musst.
 
@@ -84,7 +84,7 @@ Auf älteren Dosen findest du manchmal noch **orange Quadrate mit schwarzem Symb
 75% 84% | Altes Symbol: gesundheitsschädlich | Die alte orange Kennzeichnung (Xn). Sie wurde durch die GHS-Symbole ersetzt, steht aber noch auf älteren Dosen. Bedeutet: gesundheitsschädlich – genauso ernst nehmen.
 :::
 
-Jetzt prüfst du, ob du die Arten sicher erkennst. **So funktioniert die Übung:** Ordne jede Beschreibung der richtigen Art zu. Danach bekommst du zu jeder Zuordnung eine Erklärung.
+Jetzt prüfst du, ob du die Arten sicher erkennst. Ordne jede Beschreibung der richtigen Art zu. Danach bekommst du zu jeder Zuordnung eine Erklärung.
 
 :::zuordnen Welche Art von Zeichen ist das?
 Blauer Kreis mit weißer Schutzbrille => Gebotszeichen | Blau und rund heißt: Das musst du tun.
@@ -129,7 +129,7 @@ An drehenden Maschinen wird alles gefährlich, was locker ist:
 - bei Funkenflug (Flex, Schleifen) **Kleidung aus Baumwolle oder feuerfestem Material** – Kunstfasern fangen Feuer oder schmelzen auf der Haut
 - **lange Haare zusammenbinden** oder unter eine Mütze stecken
 
-**So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Rückmeldung – auch zu den falschen.
+Was tust du in dieser Situation? Zu jeder Antwort bekommst du eine Rückmeldung, auch zu den falschen.
 
 :::szenario Vom Laminieren an die Bohrmaschine
 Du hast gerade Harz angemischt und trägst noch deine Nitrilhandschuhe. Jetzt willst du schnell an der Ständerbohrmaschine ein Loch bohren.
@@ -161,7 +161,7 @@ Das Formula-Student-Regelwerk verlangt, dass für die Arbeit am Hochvoltsystem e
 
 **Wer ist zuständig?** Die ESOs werden im Team benannt und sind bekannt. Weißt du nicht, wen du fragen sollst, meldest du dich bei der **Projektleitung**.
 
-**So funktioniert die Übung:** Lies die Situation und entscheide dich. Du bekommst zu jeder Antwort eine Erklärung.
+Wie entscheidest du dich? Zu jeder Antwort gibt es eine Erklärung.
 
 :::szenario Ein loser Stecker
 Du hilfst beim Aufräumen neben dem Auto. Da fällt dir auf, dass ein orangefarbener Stecker nur halb eingesteckt aussieht. Das Auto ist gerade nicht in Betrieb.
@@ -193,7 +193,7 @@ Ist das Hochvoltsystem aktiv, gilt außerdem: **niemals vor, hinter oder neben d
 - **Die Abschaltknöpfe:** Das Auto hat drei Not-Aus-Knöpfe: je einen links und rechts hinter dem Kopf der fahrenden Person und einen im Cockpit. Ein Druck schaltet das Hochvoltsystem ab. Sie sind für Notfälle da.
 - **Absperrband und Schild:** Arbeitet Team HV am Hochvoltsystem, wird das Auto mit Absperrband abgesperrt. Ein Schild zeigt an, welcher ESO zuständig ist. **Nur dieser ESO** darf Band und Schild wieder entfernen.
 
-**So funktioniert die Übung:** Ordne jede Beobachtung der richtigen Reaktion zu. Danach siehst du, ob es stimmt, und warum.
+Welche Beobachtung verlangt welche Reaktion? Ordne sie zu, danach siehst du, ob es stimmt, und warum.
 
 :::zuordnen Was tust du, wenn …
 das TSAL rot blinkt => Finger weg – gilt als aktiv | Rot blinkend heißt: Hochvolt ist aktiv. Nicht anfassen, Abstand halten.
@@ -226,7 +226,7 @@ Neben dem Hochvoltsystem hat das Auto ein zweites Bordnetz: das [[Low Voltage|Ni
 
 Ein besonderer Fall sind **beschädigte Lithium-Akkus**. Sie können in [[Thermisches Durchgehen]] geraten: Dann heizen sie sich immer weiter auf, brennen heftig und lassen sich kaum löschen. Ein Warnzeichen ist ein **aufgeblähter** Akku.
 
-**So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Erklärung.
+Was machst du? Zu jeder Antwort bekommst du eine Erklärung.
 
 :::szenario Ein aufgeblähter Akku
 Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er ist aufgebläht und riecht leicht süßlich.
@@ -253,7 +253,7 @@ Unsicher, ob du eine Maschine benutzen darfst? Dann darfst du es nicht – frag 
 
 Was genau tust du mit einem beschädigten Gerät? Es sind vier Schritte. Der erste ist immer: Strom weg. Dann kommt das Gerät aus dem Weg, damit niemand darüber stolpert oder es aus Versehen benutzt. Danach sorgst du dafür, dass es nicht wieder eingeschaltet wird – zum Beispiel mit einem Zettel „Defekt – nicht benutzen" am Stecker. Zum Schluss meldest du den Schaden – und sagst dazu, **wo das Gerät jetzt liegt**. Sonst sucht die nächste Person danach oder findet es nicht wieder.
 
-**So funktioniert die Übung:** Bring die vier Schritte in die richtige Reihenfolge. Verschiebe die Einträge und prüfe dann deine Lösung.
+Sortiere die vier Schritte in die richtige Reihenfolge und prüfe dann deine Lösung.
 
 :::reihenfolge Ein Gerät ist beschädigt – was tust du?
 Ausschalten und den Stecker ziehen
@@ -287,7 +287,7 @@ Ein Werkstück, das sich losreißt, dreht mit voller Kraft mit und kann wie ein 
 - **Späne nie mit der Hand entfernen.** Sie sind scharf und heiß. Maschine ausschalten, Stillstand abwarten, dann mit Pinsel oder Spänehaken entfernen.
 - Die Maschine **nie mit der Hand abbremsen.** Warte, bis sie von selbst steht.
 
-**So funktioniert die Übung:** Lies die Situation und entscheide dich. Zu jeder Antwort bekommst du eine Rückmeldung.
+Was tust du? Zu jeder Antwort bekommst du eine Rückmeldung.
 
 :::szenario Schnell ein Loch bohren
 Du willst an der Ständerbohrmaschine ein Loch in ein kleines Aluteil bohren. Das Teil ist scharfkantig, deshalb hast du noch deine Arbeitshandschuhe an.
@@ -326,7 +326,7 @@ Am Bandschleifer läuft ein Schleifband schnell über zwei Rollen. Damit entgrat
 - Schleifstaub mit Besen oder Sauger entfernen, nicht mit der Hand oder durch Pusten.
 - Abgenutzte oder beschädigte Bänder melden.
 
-**So funktioniert die Übung:** Bring die Schritte in die Reihenfolge, in der du am Bandschleifer arbeitest. Verschiebe die Einträge und prüfe dann deine Lösung.
+In welcher Reihenfolge arbeitest du am Bandschleifer? Verschiebe die Schritte an die richtige Stelle und prüfe dann deine Lösung.
 
 :::reihenfolge So benutzt du den Bandschleifer
 Schutzbrille aufsetzen, Handschuhe aus, Haare zusammenbinden
@@ -383,7 +383,7 @@ Die Funken einer Flex fliegen mehrere Meter weit und sind heiß genug, um Lappen
 - Einen **Feuerlöscher** in Reichweite haben. Feuerlöscher stehen **in der Werkstatt** und **an der Push Pull Bar** – vor dem Flexen nachsehen, welcher näher ist.
 - Nach dem Flexen: Den Platz noch einige Minuten **auf Glutnester kontrollieren.**
 
-**So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Erklärung.
+Wie gehst du vor? Zu jeder Antwort bekommst du eine Erklärung.
 
 :::szenario Kurz etwas abflexen
 Es regnet. Du sollst ein Stück Stahlrohr kürzen und denkst dir: Das geht doch schnell drinnen an der Werkbank. Auf der Nachbarbank liegen Lappen von der letzten Harzarbeit.
@@ -414,7 +414,7 @@ Schleifen, Bohren und Sägen von Carbon und Aramid passiert **draußen vor der W
 - Den **Anzug vorsichtig ausziehen** (von innen nach außen rollen) und **wegwerfen** – er wird nicht wiederverwendet. Die Maske nimmst du erst danach ab.
 - **Hände und Gesicht waschen.** Nicht in der Nähe von Carbonstaub essen oder trinken.
 
-**So funktioniert die Übung:** Auf jeder Karte steht eine Frage. Überleg dir die Antwort und dreh die Karte dann um.
+Jede Karte hat eine Frage. Überleg kurz und dreh sie dann um.
 
 :::karten Carbonstaub – weißt du es noch?
 Warum ist Carbonstaub so gefährlich? || Er ist hochgiftig und kann Krebs auslösen. Die feinen Fasern gelangen tief in die Lunge.
@@ -458,7 +458,7 @@ Gefahrstoffe bleiben **in der Originalverpackung** oder in einem Behälter, der 
 
 ![Plakat: Eine Gestalt füllt eine Flüssigkeit aus einem Kanister mit Gefahrstoff-Symbolen in eine Getränkeflasche, darüber die Überschrift „Gefährliche Stoffe niemals in Getränkeflaschen!"](assets/bilder/sicherheit/plakat-getraenkeflaschen.webp "Gefahrstoffe gehören nie in Getränkeflaschen. (Plakat: Suva)")
 
-**So funktioniert die Übung:** Lies die Situation und wähle, was du tust. Zu jeder Antwort bekommst du eine Rückmeldung.
+Wie gehst du damit um? Zu jeder Antwort bekommst du eine Rückmeldung.
 
 :::szenario Die Handschuhe sind alle
 Du willst Harz anmischen. Die Nitrilhandschuhe sind leer, aber im Regal liegen noch Stoffhandschuhe und eine Packung Latexhandschuhe.
@@ -492,7 +492,7 @@ Jede Arbeit beginnt mit einer sauberen Vorbereitung und endet mit dem Aufräumen
 - **Boden frei:** keine Kabel, Teile oder Späne, über die jemand stolpern kann.
 - **Schäden melden**, die dir aufgefallen sind.
 
-**So funktioniert die Checkliste:** Hake ab, was du verstanden hast. Deine Haken bleiben in diesem Browser gespeichert – so kannst du die Liste in der Werkstatt als Erinnerung nutzen.
+Hake ab, was du verstanden hast. Deine Haken bleiben in diesem Browser gespeichert, so kannst du die Liste in der Werkstatt als Erinnerung nutzen.
 
 :::checkliste Vor und nach jeder Arbeit
 - [ ] Vorher: Schritte überlegt und geprüft, ob ich eingewiesen bin
@@ -544,7 +544,7 @@ Jetzt kennst du die Grundlagen. Die [[Unterweisung|Sicherheitsunterweisung]] bei
 Ohne Nachweis und ohne Einweisung an der Maschine keine Arbeit in der Werkstatt – auch nicht „nur kurz". Das Onboarding-Zertifikat am Ende des gesamten Kurses ist **kein** Nachweis der Sicherheitsunterweisung.
 :::
 
-## Das nimmst du mit
+## Kurz zusammengefasst
 
 - Diese Online-Unterweisung ist **Teil deiner Sicherheitsunterweisung**. Nachweis-PDF bei der Projektleitung abgeben; **maschinenbezogene Einweisungen** gibt es zusätzlich vor Ort.
 - **Sicherheitszeichen:** blau = Gebot, rot durchgestrichen = Verbot, gelb = Warnung, rote Raute = Gefahrstoff.

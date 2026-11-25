@@ -144,7 +144,7 @@
         next.removeAttribute("aria-describedby");
       }
       hint.textContent = locked
-        ? `Löse zuerst ${open === 1 ? "die Übung" : `die ${open} Übungen`} auf dieser Seite richtig – dann geht es weiter.`
+        ? `Löse zuerst ${open === 1 ? "die Übung" : `die ${open} Übungen`} auf dieser Seite, dann geht es weiter.`
         : "";
     }
 

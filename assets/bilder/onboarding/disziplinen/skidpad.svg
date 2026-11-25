@@ -13,7 +13,7 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
 <marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
   <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
-<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<rect width="800" height="400" rx="4" fill="#1E1E1E"/>
 <g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
 <path d="M440,385 L440,200" stroke="#8A8A8A" stroke-width="3" stroke-dasharray="8 8"/>
 <path d="M440,200 L440,15" stroke="#8A8A8A" stroke-width="3" stroke-dasharray="8 8"/>

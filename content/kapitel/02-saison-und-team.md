@@ -12,11 +12,11 @@ lernziele:
 
 ## Die Saison im Überblick
 
-Eine Saison läuft bei uns in **sieben Phasen** ab. Jede baut auf der vorherigen auf. Zum Onboarding 2026/27 läuft gerade die **Designphase** – hier steigst du ein.
+Eine Saison läuft bei uns in sieben Phasen ab, jede baut auf der vorherigen auf. Zum Onboarding 2026/27 läuft gerade die Designphase. Hier steigst du ein.
 
 :::zeitstrahl Unsere Saison 2026/27
 Bis Anfang November | Konzept | Ziele für den AL27 festlegen, das Regelwerk lesen, Konzeptvarianten vergleichen und entscheiden.
-Bis Anfang Dezember | Design | Bauteile im CAD konstruieren, auslegen und simulieren und in Design-Reviews prüfen lassen – auch mit Alumni.
+Bis Anfang Dezember | Design | Bauteile im CAD konstruieren, auslegen und simulieren und in Design-Reviews prüfen lassen, auch mit Alumni.
 13. Dezember 2026 | Design Freeze | Ab hier wird nichts mehr grundlegend geändert. Zeichnungen fertig machen, Teile und Material bestellen.
 Nach Weihnachten | Fertigung | Bauteile in unserer Werkstatt und bei Sponsoren herstellen, zum Beispiel Carbon-Teile laminieren.
 Februar bis Mai | Assembly | Das Fahrzeug zusammenbauen, den Kabelbaum verlegen und die Systeme in Betrieb nehmen.
@@ -24,7 +24,7 @@ Ab Mai | Testing | Testtage fahren, Daten auswerten, das Setup abstimmen und Feh
 Ab August | Events | Mit dem AL27 bei den Formula-Student-Events in den statischen und dynamischen Disziplinen antreten.
 :::
 
-**So funktioniert die Übung:** Bring die sieben Phasen in die richtige Reihenfolge – die erste nach oben. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung. Erst wenn alles stimmt, geht es weiter.
+Sortiere die sieben Phasen, die erste steht oben. Verschieben geht mit der Maus oder mit den Pfeil-Knöpfen, danach prüfst du deine Lösung. Weiter geht es erst, wenn die Reihenfolge stimmt.
 
 :::reihenfolge Die Phasen einer Saison
 Konzept
@@ -34,7 +34,7 @@ Fertigung
 Assembly
 Testing
 Events
-> Erst Ideen und Ziele (Konzept), dann konstruieren (Design) und festlegen (Design Freeze). Danach wird gefertigt, zusammengebaut, getestet – und ab August geht es zu den Events.
+> Erst Ideen und Ziele (Konzept), dann konstruieren (Design) und festlegen (Design Freeze). Danach wird gefertigt, zusammengebaut, getestet, und ab August geht es zu den Events.
 :::
 
 ## Unsere Saisonziele
@@ -49,7 +49,7 @@ Für die Saison 2026/27 haben wir uns drei Ziele gesetzt:
 
 ## Unsere Subteams
 
-Das Team ist in **Subteams** aufgeteilt. Jedes hat sein eigenes Fachgebiet:
+Das Team ist in Subteams aufgeteilt, jedes mit eigenem Fachgebiet:
 
 | Subteam | Aufgaben |
 |---|---|
@@ -65,7 +65,7 @@ Das Team ist in **Subteams** aufgeteilt. Jedes hat sein eigenes Fachgebiet:
 | **Cost Report** | Kosten, Prozesse und CO₂-Bewertung |
 | **Business Plan** | Marktanalyse und Geschäftskonzept |
 
-**So funktioniert die Übung:** Ordne jede Aufgabe dem Subteam zu, das dafür zuständig ist. Danach siehst du, ob es stimmt. Erst wenn alles richtig ist, geht es weiter.
+Welches Subteam macht was? Ordne jede Aufgabe dem zuständigen Subteam zu. Danach siehst du, ob es stimmt. Weiter geht es erst, wenn alles richtig ist.
 
 :::zuordnen Wer macht was?
 Bremsen und Lenkung => Suspension | Suspension kümmert sich um Radaufhängung, Lenkung und Bremsen.
@@ -78,20 +78,20 @@ Sponsoring => Management & Media | Management & Media kümmert sich um Sponsorin
 
 ## Unsere Projektleitung
 
-An der Spitze des Teams steht die **Projektleitung**:
+Das Team leitet die Projektleitung:
 
 ![Porträts der Projektleitung, von links: Carla Vogel, Yannic Staudinger, Paul Krause, Sven Zeppenfeld](assets/bilder/onboarding/projektleitung.webp "Die Projektleitung 2026/27")
 
 | Von links | Rolle |
 |---|---|
 | **Carla Vogel** | CEO / Team Captain |
-| **Yannic Staudinger** | CTO-E – in Slack „Torx" |
+| **Yannic Staudinger** | CTO-E, in Slack „Torx" |
 | **Paul Krause** | CTO-M |
 | **Sven Zeppenfeld** | CFO |
 
 ## Regelmäßige Treffen
 
-**Für alle Mitglieder:**
+Für alle Mitglieder:
 
 | Treffen | Worum es geht | Wann |
 |---|---|---|
@@ -99,7 +99,7 @@ An der Spitze des Teams steht die **Projektleitung**:
 | **Subteam-Meeting** | Aufgaben und Fortschritt im Subteam | legt deine Teamleitung fest |
 | **Mitgliederversammlung** | Vereinsangelegenheiten und Saisonrückblick | einmal im Jahr |
 
-**Für Projekt- und Teamleitungen:**
+Für Projekt- und Teamleitungen:
 
 | Treffen | Wann |
 |---|---|
@@ -108,7 +108,7 @@ An der Spitze des Teams steht die **Projektleitung**:
 
 Die aktuellen Termine stehen im **Google Kalender** und in **#01_allgemein** in Slack.
 
-**So funktioniert die Übung:** Ordne jedem Treffen zu, wie oft bzw. wann es stattfindet. Danach siehst du, ob es stimmt.
+Ordne jedem Treffen den passenden Rhythmus zu. Danach siehst du, ob es stimmt.
 
 :::zuordnen Wann ist welches Treffen?
 Teamsitzung => Alle zwei Wochen | Bei der Teamsitzung berichten die Subteams von Fortschritt und Herausforderungen.
@@ -119,13 +119,13 @@ Teamleitungssitzung (TLS) => Montags, 20–22 Uhr | Die TLS ist für Projekt- un
 
 ## Wo wir arbeiten
 
-Wir arbeiten am **Campus Prittwitzstraße**:
+Wir arbeiten am Campus Prittwitzstraße:
 
-- Das **AC** und der **Prüfstand** sind in **Gebäude F**. Die **Klingel** ist am AC.
-- Die **Werkstatt** ist in **Gebäude H**.
-- Unsere **früheren Autos** stehen in **Gebäude D**.
+- Das AC und der Prüfstand sind in Gebäude F. Die Klingel ist am AC.
+- Die Werkstatt ist in Gebäude H.
+- Unsere früheren Autos stehen in Gebäude D.
 
-**So funktioniert die Übung:** Auf der Karte sind nummerierte Punkte. Tippe einen an, dann erfährst du, was dort ist. Die gleichen Infos stehen als Liste unter der Karte.
+Auf der Karte siehst du nummerierte Punkte. Tippe einen an, dann erfährst du, was dort ist. Dieselben Infos stehen auch als Liste unter der Karte.
 
 :::hotspot Einstein Motorsport am Campus Prittwitzstraße bild="assets/bilder/onboarding/campus-karte.webp" alt="Lageplan des Campus Prittwitzstraße mit den markierten Orten AC und Klingel, Prüfstand in Gebäude F, alte Fahrzeuge in Gebäude D und Werkstatt in Gebäude H"
 11% 44% | AC mit Klingel | Das AC in Gebäude F. Die Klingel ist hier am AC.
@@ -134,14 +134,14 @@ Wir arbeiten am **Campus Prittwitzstraße**:
 82% 42% | Werkstatt | Unsere Werkstatt ist in Gebäude H.
 :::
 
-## Das nimmst du mit
+## Kurzfassung
 
-- **Die Saison:** Konzept → Design → Design Freeze (13. Dezember 2026) → Fertigung → Assembly → Testing → Events ab August. Gerade läuft die **Designphase**.
-- **Unsere Ziele:** mindestens 95 % erfolgreiche Läufe, Top 10 bei der FSG 2027, mindestens 245 von 325 Punkten in den statischen Disziplinen.
-- **Elf Subteams** von Aero bis Business Plan – jedes mit eigenem Fachgebiet.
-- **Projektleitung:** Carla Vogel (CEO / Team Captain), Yannic Staudinger (CTO-E, „Torx"), Paul Krause (CTO-M), Sven Zeppenfeld (CFO).
-- **Treffen:** Teamsitzung alle zwei Wochen, Subteam-Meeting nach Absprache, Mitgliederversammlung einmal im Jahr. Termine im Google Kalender und in #01_allgemein.
-- **Wo:** Campus Prittwitzstraße – AC und Prüfstand in Gebäude F (Klingel am AC), Werkstatt in Gebäude H, frühere Autos in Gebäude D.
+- Saison: Konzept → Design → Design Freeze (13. Dezember 2026) → Fertigung → Assembly → Testing → Events ab August. Gerade läuft die Designphase.
+- Ziele: mindestens 95 % erfolgreiche Läufe, Top 10 bei der FSG 2027, mindestens 245 von 325 Punkten in den statischen Disziplinen.
+- Elf Subteams von Aero bis Business Plan, jedes mit eigenem Fachgebiet.
+- Projektleitung: Carla Vogel (CEO / Team Captain), Yannic Staudinger (CTO-E, „Torx"), Paul Krause (CTO-M), Sven Zeppenfeld (CFO).
+- Treffen: Teamsitzung alle zwei Wochen, Subteam-Meeting nach Absprache, Mitgliederversammlung einmal im Jahr. Termine im Google Kalender und in #01_allgemein.
+- Ort: Campus Prittwitzstraße. AC und Prüfstand in Gebäude F (Klingel am AC), Werkstatt in Gebäude H, frühere Autos in Gebäude D.
 
 :::quiz anzahl=6
 ? Welche Phase kommt direkt nach dem Design?
@@ -176,7 +176,7 @@ Wir arbeiten am **Campus Prittwitzstraße**:
 - [x] Top 10
 - [ ] Top 3
 - [ ] Top 35
-> Ziel sind die Top 10 – mit mindestens 413 Punkten dynamisch und 658 Punkten insgesamt.
+> Ziel sind die Top 10, mit mindestens 413 Punkten dynamisch und 658 Punkten insgesamt.
 ~ Unsere Saisonziele
 
 ? Welches Subteam ist für Kabelbaum und Akku zuständig?

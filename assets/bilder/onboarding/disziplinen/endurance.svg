@@ -13,7 +13,7 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
 <marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
   <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
-<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<rect width="800" height="400" rx="4" fill="#1E1E1E"/>
 <g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
 <path d="M200,290 C120,290 110,170 190,150 C260,132 300,190 360,170 C430,146 420,90 520,90 C620,90 660,160 640,220 C620,290 560,300 480,300 Z" fill="none" stroke="#2B2B2B" stroke-width="40" stroke-linejoin="round"/>
 <path d="M200,290 C120,290 110,170 190,150 C260,132 300,190 360,170 C430,146 420,90 520,90 C620,90 660,160 640,220 C620,290 560,300 480,300 Z" fill="none" stroke="#FFED00" stroke-width="3" stroke-dasharray="10 9"/>
@@ -22,7 +22,5 @@
 <use href="#car" transform="translate(330 297) rotate(180) scale(0.5)"/>
 <text x="700" y="330" font-size="44" fill="#FFED00" text-anchor="end" font-weight="700">22 km</text>
 <text x="700" y="360" font-size="18" fill="#C9C9C9" text-anchor="end" font-weight="400">2 Fahrer, je ca. 11 km</text>
-<text x="40" y="52" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Dauerlauf</text>
-<text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Das Auto muss vor allem eins: durchhalten.</text>
 </g>
 </svg>

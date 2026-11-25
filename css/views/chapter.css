@@ -14,7 +14,6 @@
     padding: var(--space-s);
     background-color: var(--color-surface);
     border-inline-start: 4px solid var(--color-accent-line);
-    border-radius: var(--radius-l);
   }
 
   .goals__title {

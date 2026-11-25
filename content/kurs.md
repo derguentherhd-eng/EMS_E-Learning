@@ -17,6 +17,6 @@ kapitel:
 
 Willkommen bei Einstein Motorsport! Dieser Kurs führt dich in kurzen Sektoren durch das, was du für die Arbeit im Team wissen musst. Welche Sektoren dazugehören, siehst du unten.
 
-Jeder Sektor endet mit einem kurzen Quiz. Du kannst die Sektoren in beliebiger Reihenfolge bearbeiten und jederzeit pausieren – dein Fortschritt bleibt in diesem Browser gespeichert.
+Jeder Sektor endet mit einem kurzen Quiz. Du kannst die Sektoren in beliebiger Reihenfolge bearbeiten und jederzeit pausieren. Dein Fortschritt bleibt in diesem Browser gespeichert.
 
-**Arbeitssicherheit:** Bevor du in der Werkstatt arbeitest, bearbeitest du den Sektor Arbeitssicherheit. Er funktioniert auch für sich allein; nach bestandenem Quiz erhältst du dort deinen Nachweis als PDF.
+Bevor du in der Werkstatt arbeitest, bearbeitest du den Sektor Arbeitssicherheit. Er funktioniert auch für sich allein, und nach bestandenem Quiz bekommst du dort deinen Nachweis als PDF.

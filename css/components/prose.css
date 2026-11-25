@@ -28,7 +28,7 @@
 
   .figure img {
     border: var(--border-thin) solid var(--color-line);
-    border-radius: var(--radius-m);
+    border-radius: var(--radius-s);
   }
 
   /* Bildreihe: mehrere Bilder direkt hintereinander stehen nebeneinander (gleich breite Spalten),

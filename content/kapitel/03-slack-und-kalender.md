@@ -17,16 +17,16 @@ Für die Arbeit im Team brauchst du ein paar Konten. So kommst du an sie heran:
 
 | Konto | So geht's |
 |---|---|
-| **Einstein-E-Mail** | Einrichtung oder Hilfe: **Yannic** – in Slack **@torx**. |
-| **Slack** | Mit deiner **privaten E-Mail** registrieren. Verwende deinen **vollen Namen** und ein **Profilfoto**. |
-| **Jira** | Zugang bei **Torx** anfragen. Den Link findest du im Canvas **„Generelle Links"**. |
-| **Discord** | Die App installieren und über den Canvas **„Generelle Links"** unserem Server beitreten. |
+| **Einstein-E-Mail** | Einrichtung oder Hilfe: Yannic (in Slack @torx). |
+| **Slack** | Mit deiner privaten E-Mail registrieren, mit vollem Namen und Profilfoto. |
+| **Jira** | Zugang bei Torx anfragen. Den Link findest du im Canvas „Generelle Links". |
+| **Discord** | Die App installieren und über den Canvas „Generelle Links" unserem Server beitreten. |
 
-**Wie komme ich in Slack?** Den **Einladungslink** zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Wie du Slack Schritt für Schritt einrichtest, zeigen dir die nächsten zwei Seiten.
+Den Einladungslink zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Wie du Slack einrichtest, zeigen dir die nächsten zwei Seiten.
 
-Den Canvas **„Generelle Links"** findest du in Slack im Kanal **#01_allgemein**.
+Den Canvas „Generelle Links" findest du in Slack im Kanal #01_allgemein.
 
-**So funktioniert die Übung:** Ordne jedem Schritt zu, was du dafür tun musst. Danach siehst du, ob es stimmt. Erst wenn alles richtig ist, geht es weiter.
+Wie kommst du an welches Konto? Ordne jedem Schritt zu, was du dafür tun musst. Danach siehst du, ob es stimmt. Weiter geht es erst, wenn alles richtig ist.
 
 :::zuordnen Wie komme ich an meine Konten?
 Bei Slack registrieren => Mit deiner privaten E-Mail | Für Slack verwendest du deine private E-Mail-Adresse.
@@ -37,7 +37,7 @@ Discord-Server beitreten => Über den Canvas „Generelle Links" | App installie
 
 ## Slack einrichten: dein Konto
 
-Den **Einladungslink** zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Am einfachsten richtest du Slack **am Laptop** ein. So geht's:
+Den Einladungslink zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Am einfachsten richtest du Slack am Laptop ein.
 
 ### Schritt 1: Einladungslink öffnen
 
@@ -45,31 +45,31 @@ Klicke auf den Einladungslink. Slack öffnet sich im Browser.
 
 ### Schritt 2: E-Mail-Adresse eingeben
 
-Gib deine **private E-Mail-Adresse** ein und klicke auf den Knopf darunter. Alternativ kannst du dich auch mit einem Google-, Microsoft- oder Apple-Konto anmelden.
+Gib deine private E-Mail-Adresse ein und klicke auf den Knopf darunter. Alternativ kannst du dich auch mit einem Google-, Microsoft- oder Apple-Konto anmelden.
 
 ![Bildschirmfoto der Slack-Anmeldeseite: oben „Gib deine E-Mail-Adresse ein“, darunter ein Eingabefeld, ein lila Knopf und die Knöpfe Google, Microsoft und Apple](assets/bilder/onboarding/slack/slack-anmelden.webp "So ähnlich sieht die Anmeldeseite von Slack aus.")
 
 ### Schritt 3: Bestätigungscode eingeben
 
-Slack schickt dir eine **E-Mail mit einem Bestätigungscode**. Tipp den Code auf der Slack-Seite ein. Keine E-Mail da? Schau im Spam-Ordner nach.
+Slack schickt dir eine E-Mail mit einem Bestätigungscode. Tipp den Code auf der Slack-Seite ein. Keine E-Mail da? Schau im Spam-Ordner nach.
 
 ![Vereinfachte Darstellung: Links ein Briefumschlag für die E-Mail von Slack, rechts ein Fenster „Code eingeben“ mit sechs Kästchen](assets/bilder/onboarding/slack/bestaetigungscode.svg "Vereinfachte Darstellung: Code aus der E-Mail eingeben")
 
 ### Schritt 4: Vollen Namen eingeben
 
-Gib deinen **vollen Namen** ein – Vor- und Nachname – und klicke auf **Fortfahren**. Damit bist du in unserem Slack.
+Gib deinen vollen Namen (Vor- und Nachname) ein und klicke auf **Fortfahren**. Damit bist du in unserem Slack.
 
 ## Slack einrichten: Profil, App und Kanäle
 
 ### Schritt 5: Profilfoto hochladen
 
-Mit **Foto** erkennen dich alle im Team. Klicke in der Seitenleiste auf **dein Profilbild** → **Profil** → **Bearbeiten**. Lade ein Foto hoch und klicke auf **Änderungen speichern**.
+Mit Foto erkennt dich das ganze Team. Klicke in der Seitenleiste auf dein Profilbild → Profil → Bearbeiten. Lade ein Foto hoch und klicke auf **Änderungen speichern**.
 
 ![Vereinfachte Darstellung von Slack: 1 Profilbild in der Seitenleiste, 2 Menüpunkt „Profil“, 3 Knopf „Bearbeiten“, 4 Knopf „Foto hochladen“](assets/bilder/onboarding/slack/profil.svg "Vereinfachte Darstellung: Profilbild → Profil → Bearbeiten → Foto hochladen")
 
 ### Schritt 6: App installieren
 
-Installiere die **Slack-App** auf deinem Laptop (Windows, Mac oder Linux) und auf deinem **Handy**. Melde dich dort mit **derselben E-Mail-Adresse** an.
+Installiere die Slack-App auf deinem Laptop (Windows, Mac oder Linux) und auf deinem Handy. Melde dich dort mit derselben E-Mail-Adresse an.
 
 ![Bildschirmfoto der Download-Seite von Slack mit dem Knopf „Download“ und einer Vorschau der Slack-App](assets/bilder/onboarding/slack/slack-app-herunterladen.webp "Die Download-Seite von Slack")
 
@@ -79,7 +79,7 @@ Klicke auf **Home** → **Verzeichnisse** → Registerkarte **Channels** (so hei
 
 ![Vereinfachte Darstellung von Slack: 1 Home, 2 Verzeichnisse, 3 Registerkarte Channels, 4 Knopf zum Beitreten neben #01_allgemein](assets/bilder/onboarding/slack/channels.svg "Vereinfachte Darstellung: Home → Verzeichnisse → Channels → beitreten")
 
-**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung.
+Bringe die sieben Schritte in die richtige Reihenfolge, per Maus oder mit den Pfeil-Knöpfen, und prüfe dann deine Lösung.
 
 :::reihenfolge Slack einrichten
 Einladungslink öffnen
@@ -89,7 +89,7 @@ Vollen Namen eingeben
 Profilfoto hochladen
 App auf Laptop und Handy installieren
 #01_allgemein und dem Subteam-Kanal beitreten
-> Erst das Konto (Link, E-Mail, Code, Name), dann Profilfoto und App – und zum Schluss die Kanäle.
+> Erst das Konto (Link, E-Mail, Code, Name), dann Profilfoto und App, zum Schluss die Kanäle.
 :::
 
 ## Slack: Was gehört wohin?
@@ -106,9 +106,9 @@ In Slack gibt es für jedes Thema einen eigenen Kanal:
 | **x_essen** / **x_hoosierball** | Gemeinsames Essen und Teamsport |
 | **x_memes** / **x_prüfungen** / **x_spam** | Teamleben, Unterstützung bei Prüfungen und alles andere |
 
-**Zwei Regeln:** Einstein-Themen besprichst du **in Kanälen**. Und auf Nachrichten antwortest du **im Thread**.
+Zwei Regeln: Einstein-Themen besprichst du in Kanälen, und auf Nachrichten antwortest du im Thread.
 
-**So funktioniert die Übung:** Ordne jede Nachricht dem passenden Kanal zu. Danach bekommst du zu jeder Zuordnung eine Erklärung.
+In welchen Kanal würdest du diese Nachrichten schreiben? Ordne sie zu, danach gibt es zu jeder Zuordnung eine Erklärung.
 
 :::zuordnen Welcher Kanal passt?
 „Wie legen wir die Bremsscheibe aus?" => Subteam- oder Projektkanal | Fragen, Aufgaben und Entscheidungen zu deinem Projekt gehören in den Subteam- oder Projektkanal.
@@ -120,7 +120,7 @@ In Slack gibt es für jedes Thema einen eigenen Kanal:
 
 ## Google Kalender einrichten
 
-Alle Termine des Teams – Teamsitzungen, Subteam-Meetings, Testtage – stehen im **Google Kalender**.
+Alle Termine des Teams (Teamsitzungen, Subteam-Meetings, Testtage) stehen im Google Kalender.
 
 Die Links findest du in Slack: Kanal **#01_allgemein** → Canvas **„Generelle Links"**. Dort gibt es Links zu **Kalender, Wiki, Splitwise, Jira und Discord**.
 
@@ -128,31 +128,31 @@ Die Links findest du in Slack: Kanal **#01_allgemein** → Canvas **„Generelle
 
 So richtest du deinen Kalender ein:
 
-1. **Abonnieren:** Über die Links abonnierst du den **Team-Kalender** und den Kalender **deines Subteams** und lässt sie anzeigen.
-2. **Details prüfen:** Schau bei jedem Termin auf **Uhrzeit, Treffpunkt, Beschreibung** und den **Online-Zugang**.
-3. **Teilnahme bestätigen:** Nimm Einladungen an oder sag ab. Schau regelmäßig in den Kalender – Termine können sich ändern.
+1. Abonniere über die Links den Team-Kalender und den Kalender deines Subteams und lass sie anzeigen.
+2. Schau bei jedem Termin auf Uhrzeit, Treffpunkt, Beschreibung und Online-Zugang.
+3. Nimm Einladungen an oder sag ab. Schau regelmäßig in den Kalender, Termine können sich ändern.
 
-**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Zieh die Einträge mit der Maus an die richtige Stelle oder nutze die Pfeil-Knöpfe und prüfe dann deine Lösung.
+Noch einmal sortieren: Bring die vier Schritte in die richtige Reihenfolge, per Maus oder mit den Pfeil-Knöpfen, und prüfe dann deine Lösung.
 
 :::reihenfolge Kalender einrichten
 In #01_allgemein den Canvas „Generelle Links" öffnen
 Team- und Subteam-Kalender abonnieren
 Bei Terminen Uhrzeit, Treffpunkt, Beschreibung und Online-Zugang prüfen
 Einladungen annehmen oder absagen und auf Änderungen achten
-> Erst die Links finden, dann abonnieren, dann die Details prüfen – und auf Einladungen antworten.
+> Erst die Links finden, dann abonnieren, dann die Details prüfen, zum Schluss auf Einladungen antworten.
 :::
 
 ## Dateien und Werkzeuge
 
-**Dateien und Wissen:**
+Dateien und Wissen:
 
-| Ablage | Wofür | Gut zu wissen |
+| Ablage | Wofür | Hinweis |
 |---|---|---|
 | **Google Drive** | Dateien des Teams | Mit deiner **Einstein-E-Mail** anmelden. Nach der Ordnerstruktur fragst du deine Teamleitung. |
 | **OneDrive** | vor allem die **NX-Ordnerstruktur** | Wo du Dateien speicherst, fragst du deine Teamleitung. |
-| **Einstein-Wiki** | Anleitungen, Dokumentation und Erfahrungen aus früheren Saisons | Hast du eine Frage, schau **zuerst ins Wiki**. Den Link findest du im Canvas „Generelle Links" in #01_allgemein. |
+| **Einstein-Wiki** | Anleitungen, Dokumentation und Erfahrungen aus früheren Saisons | Hast du eine Frage, schau zuerst ins Wiki. Den Link findest du im Canvas „Generelle Links" in #01_allgemein. |
 
-**Werkzeuge für deine Aufgabe:**
+Werkzeuge für deine Aufgabe:
 
 | Werkzeug | Was du brauchst |
 |---|---|
@@ -160,9 +160,9 @@ Einladungen annehmen oder absagen und auf Änderungen achten
 | **Altium** | Lizenz, Vorlagen und Projektdateien |
 | **NX oder Fusion** | Welches CAD-Programm und welche Version, stimmst du mit deiner Teamleitung ab. |
 
-Richte deine Werkzeuge ein und geh den Ablauf deines Projekts mit deiner **technischen Teamleitung** durch.
+Richte deine Werkzeuge ein und geh den Ablauf deines Projekts mit deiner technischen Teamleitung durch.
 
-**So funktioniert die Übung:** Lies die Situation und entscheide dich. Zu jeder Antwort bekommst du eine Rückmeldung.
+Was machst du in dieser Situation? Zu jeder Antwort bekommst du eine Rückmeldung.
 
 :::szenario Eine Frage zum Projekt
 Du sollst ein Bauteil konstruieren und fragst dich, wie das Team so etwas in früheren Saisons gelöst hat.
@@ -173,9 +173,7 @@ Du sollst ein Bauteil konstruieren und fragst dich, wie das Team so etwas in fr�
 
 ## Deine Starter-Checkliste
 
-Mit dieser Liste hast du alles beisammen, um loszulegen.
-
-**So funktioniert die Checkliste:** Hake ab, was du schon erledigt hast. Deine Haken bleiben in diesem Browser gespeichert – du kannst also später weitermachen.
+Mit dieser Liste kannst du loslegen. Hake ab, was du schon erledigt hast. Die Haken bleiben in diesem Browser gespeichert, du kannst also später weitermachen.
 
 :::checkliste Deine Starter-Checkliste
 - [ ] Mitgliedsantrag unterschrieben und alle Unterlagen abgegeben
@@ -186,28 +184,28 @@ Mit dieser Liste hast du alles beisammen, um loszulegen.
 - [ ] Google Drive: Die nötigen Ordner sind für dich freigegeben
 - [ ] OneDrive: Zugriff auf den nötigen Arbeitsbereich bestätigt
 - [ ] Google Kalender: Team- und Subteam-Kalender abonniert
-- [ ] Technische Werkzeuge angefragt (Git, Altium, NX oder Fusion – je nach Bedarf)
+- [ ] Technische Werkzeuge angefragt (Git, Altium, NX oder Fusion, je nach Bedarf)
 :::
 
 ## Los geht's in deinem Subteam
 
-Jetzt ist es Zeit, **deine Teamleitungen kennenzulernen**. Kläre mit ihnen drei Fragen:
+Lern als Nächstes deine Teamleitungen kennen und kläre mit ihnen drei Fragen:
 
-1. **Wer ist deine Ansprechperson?**
-2. **Wann ist dein nächstes Meeting?**
-3. **Was ist deine erste Aufgabe?**
+1. Wer ist deine Ansprechperson?
+2. Wann ist dein nächstes Meeting?
+3. Was ist deine erste Aufgabe?
 
 ![Teammitglieder arbeiten gemeinsam am Rennwagen mit der Startnummer E44](assets/bilder/onboarding/subteam-start.webp "Willkommen in deinem Subteam")
 
-## Das nimmst du mit
+## Das Wichtigste in Kürze
 
-- **Konten:** Einstein-E-Mail (Hilfe: Yannic, @torx), Slack mit privater E-Mail, vollem Namen und Profilfoto, Jira-Zugang bei Torx, Discord über den Canvas.
-- Den **Slack-Einladungslink** bekommst du zusammen mit dem Link zu diesem Onboarding.
-- **Slack einrichten:** Link öffnen, private E-Mail eingeben, Bestätigungscode eingeben, vollen Namen eingeben, Profilfoto hochladen, App installieren, Kanälen beitreten.
-- In **#01_allgemein** stehen Ankündigungen und der Canvas **„Generelle Links"** (Kalender, Wiki, Splitwise, Jira, Discord).
-- Einstein-Themen **in Kanälen** besprechen und **im Thread** antworten.
-- **Kalender:** Team- und Subteam-Kalender abonnieren, Details prüfen, Einladungen beantworten.
-- **Dateien:** Google Drive mit der Einstein-E-Mail, OneDrive vor allem für NX. Bei Fragen **zuerst ins Wiki**.
+- Konten: Einstein-E-Mail (Hilfe: Yannic, @torx), Slack mit privater E-Mail, vollem Namen und Profilfoto, Jira-Zugang bei Torx, Discord über den Canvas.
+- Den Slack-Einladungslink bekommst du zusammen mit dem Link zu diesem Onboarding.
+- Slack einrichten: Link öffnen, private E-Mail eingeben, Bestätigungscode eingeben, vollen Namen eingeben, Profilfoto hochladen, App installieren, Kanälen beitreten.
+- In #01_allgemein stehen Ankündigungen und der Canvas „Generelle Links" (Kalender, Wiki, Splitwise, Jira, Discord).
+- Einstein-Themen in Kanälen besprechen und im Thread antworten.
+- Kalender: Team- und Subteam-Kalender abonnieren, Details prüfen, Einladungen beantworten.
+- Dateien: Google Drive mit der Einstein-E-Mail, OneDrive vor allem für NX. Bei Fragen zuerst ins Wiki.
 - Im Subteam klären: Ansprechperson, nächstes Meeting, erste Aufgabe.
 
 :::quiz anzahl=6
@@ -215,14 +213,14 @@ Jetzt ist es Zeit, **deine Teamleitungen kennenzulernen**. Kläre mit ihnen drei
 - [x] Mit meiner privaten E-Mail
 - [ ] Mit der E-Mail meiner Teamleitung
 - [ ] Ohne E-Mail
-> Für Slack registrierst du dich mit deiner privaten E-Mail – mit vollem Namen und Profilfoto.
+> Für Slack registrierst du dich mit deiner privaten E-Mail, mit vollem Namen und Profilfoto.
 ~ Deine Konten
 
 ? Wer hilft dir bei der Einstein-E-Mail?
 - [x] Yannic (@torx)
 - [ ] Carla Vogel
 - [ ] Die Mitgliederversammlung
-> Bei Einrichtung und Problemen mit der Einstein-E-Mail hilft Yannic – in Slack @torx.
+> Bei Einrichtung und Problemen mit der Einstein-E-Mail hilft Yannic (in Slack @torx).
 ~ Deine Konten
 
 ? Wo findest du den Canvas „Generelle Links"?
@@ -278,7 +276,7 @@ Jetzt ist es Zeit, **deine Teamleitungen kennenzulernen**. Kläre mit ihnen drei
 - [x] Uhrzeit und Treffpunkt
 - [x] Beschreibung und Online-Zugang
 - [ ] Wer den Termin angelegt hat
-> Uhrzeit, Treffpunkt, Beschreibung und Online-Zugang – und dann sagst du zu oder ab.
+> Uhrzeit, Treffpunkt, Beschreibung und Online-Zugang, danach sagst du zu oder ab.
 ~ Google Kalender einrichten
 
 ? Du hast eine Frage zu deinem Projekt. Wo schaust du zuerst nach?

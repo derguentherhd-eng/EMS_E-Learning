@@ -13,7 +13,7 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
 <marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
   <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
-<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<rect width="800" height="400" rx="4" fill="#1E1E1E"/>
 <g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
 <path d="M150,300 C90,300 80,220 130,200 C190,175 170,120 230,100 C300,80 330,160 390,150 C450,140 440,80 520,80 C610,80 650,150 610,200 C575,245 680,250 660,310 C640,360 560,330 500,320 C430,308 400,350 330,340 C260,330 230,300 150,300 Z" fill="none" stroke="#2B2B2B" stroke-width="44" stroke-linejoin="round"/>
 <path d="M150,300 C90,300 80,220 130,200 C190,175 170,120 230,100 C300,80 330,160 390,150 C450,140 440,80 520,80 C610,80 650,150 610,200 C575,245 680,250 660,310 C640,360 560,330 500,320 C430,308 400,350 330,340 C260,330 230,300 150,300 Z" fill="none" stroke="#FFED00" stroke-width="3" stroke-dasharray="10 9"/>
@@ -34,7 +34,5 @@
 <rect x="146" y="278" width="6" height="44" fill="#FFFFFF"/>
 <use href="#car" transform="translate(210 300) rotate(180) scale(0.5)"/>
 <text x="150" y="362" font-size="17" fill="#C9C9C9" text-anchor="middle" font-weight="400">Start / Ziel</text>
-<text x="40" y="52" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Eine Runde auf Zeit</text>
-<text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">auf einem engen, kurvigen Kurs (unter 1,5 km)</text>
 </g>
 </svg>

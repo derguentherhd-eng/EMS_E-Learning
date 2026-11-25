@@ -13,35 +13,35 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
 <marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
   <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
-<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<rect width="800" height="400" rx="4" fill="#1E1E1E"/>
 <g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
-<rect x="40" y="110" width="420" height="250" rx="10" fill="#22305A" stroke="#534495" stroke-width="2"/>
-<path d="M60,112 L60,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M85,112 L85,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M110,112 L110,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M135,112 L135,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M160,112 L160,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M185,112 L185,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M210,112 L210,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M235,112 L235,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M260,112 L260,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M285,112 L285,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M310,112 L310,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M335,112 L335,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M360,112 L360,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M385,112 L385,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M410,112 L410,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M435,112 L435,358" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,130 L458,130" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,155 L458,155" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,180 L458,180" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,205 L458,205" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,230 L458,230" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,255 L458,255" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,280 L458,280" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,305 L458,305" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,330 L458,330" stroke="#2E3F72" stroke-width="1"/>
-<path d="M42,355 L458,355" stroke="#2E3F72" stroke-width="1"/>
+<rect x="40" y="110" width="420" height="250" rx="10" fill="#262626" stroke="#534495" stroke-width="2"/>
+<path d="M60,112 L60,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M85,112 L85,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M110,112 L110,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M135,112 L135,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M160,112 L160,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M185,112 L185,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M210,112 L210,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M235,112 L235,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M260,112 L260,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M285,112 L285,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M310,112 L310,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M335,112 L335,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M360,112 L360,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M385,112 L385,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M410,112 L410,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M435,112 L435,358" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,130 L458,130" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,155 L458,155" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,180 L458,180" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,205 L458,205" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,230 L458,230" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,255 L458,255" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,280 L458,280" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,305 L458,305" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,330 L458,330" stroke="#3A3360" stroke-width="1"/>
+<path d="M42,355 L458,355" stroke="#3A3360" stroke-width="1"/>
 <use href="#car" transform="translate(250 235) scale(1.9)"/>
 <path d="M160,330 L340,330" stroke="#FFED00" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
 <path d="M420,190 L420,280" stroke="#FFED00" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
@@ -51,7 +51,5 @@
 <path d="M500,175 C500,150 520,140 545,140 L700,140 C725,140 740,150 740,175 C740,200 725,210 700,210 L600,210 L585,232 L585,210 L545,210 C520,210 500,200 500,175 Z" fill="#534495"/>
 <text x="620" y="182" font-size="19" fill="#FFFFFF" text-anchor="middle" font-weight="700">Warum so gelöst?</text>
 <text x="650" y="345" font-size="18" fill="#C9C9C9" text-anchor="middle" font-weight="400">Jury</text>
-<text x="40" y="52" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Konzept und Technik erklären</text>
-<text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Eine Jury prüft, wie gut das Auto durchdacht ist.</text>
 </g>
 </svg>

@@ -158,3 +158,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Reihenfolge: Ziehen als wiederverwendbare Hilfsfunktion `enablePointerReorder()` (block-utils.js); Fokus bleibt nach dem Ziehen erhalten.
 - Sprachschalter: Beobachter wird beim Ausschalten getrennt, entfernte Knoten werden freigegeben, Cache begrenzt, keine Doppel-Übersetzungen, Fehler werden protokolliert.
 - Benannte Konstanten statt fester Zahlen (Startampel, PDF-Nachweis, Editor-Timer, Live-Region), Begründungen an allen leeren `catch`-Blöcken, Sektor-Links mit `aria-label`.
+
+### Weniger KI-Anmutung in Design und Texten (2026-11-25)
+- Texte: weniger Gedankenstriche und Fettdruck, keine Floskeln, abwechslungsreiche Übungseinleitungen statt „So funktioniert die Übung:“, Abschlussseiten unterschiedlich benannt. Fakten, Quiz und Sicherheitsregeln unverändert.
+- Design: Bausteine ohne Rahmen und mit kleiner Rundung, Hinweis- und Lernziel-Kästen mit scharfer Akzentkante, Bilder mit kleiner Rundung.
+- Grafiken: keine doppelten Überschriften im Bild, Konstruktionszeichnung in Graphit statt Fremd-Blau, keine macOS-Fensterpunkte in den Slack-Skizzen.

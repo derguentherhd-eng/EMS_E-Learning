@@ -13,7 +13,7 @@
   <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
 <marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
   <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
-<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<rect width="800" height="400" rx="4" fill="#1E1E1E"/>
 <g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
 <rect x="60" y="140" width="680" height="120" rx="8" fill="#2B2B2B"/>
 <circle cx="80.0" cy="140.0" r="4" fill="#FFED00"/>
@@ -81,8 +81,6 @@
 <text x="405" y="345" font-size="26" fill="#FFED00" text-anchor="middle" font-weight="700">75 Meter</text>
 <text x="131" y="120" font-size="18" fill="#C9C9C9" text-anchor="middle" font-weight="400">Start</text>
 <text x="684" y="120" font-size="18" fill="#C9C9C9" text-anchor="middle" font-weight="400">Ziel</text>
-<text x="40" y="60" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Aus dem Stand</text>
-<text x="40" y="88" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Gemessen wird die Zeit bis ins Ziel.</text>
 <circle cx="700" cy="62" r="30" fill="none" stroke="#FFED00" stroke-width="4"/><rect x="693" y="22" width="14" height="8" rx="2" fill="#FFED00"/><path d="M700,62 L700,44" stroke="#FFED00" stroke-width="4" stroke-linecap="round"/><path d="M700,62 L714,70" stroke="#FFED00" stroke-width="4" stroke-linecap="round"/>
 </g>
 </svg>
