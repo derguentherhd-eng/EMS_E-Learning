@@ -26,19 +26,6 @@
     scroll-padding-block-start: calc(var(--masthead-height) + var(--space-m));
   }
 
-  /* Große Monitore: alles (Schrift, Abstände, Spaltenbreite – alles in rem) wächst mit, damit der
-   * Inhalt den Bildschirm besser nutzt. Prozentwerte bauen auf der Browser-Schriftgröße auf. */
-  @media (width >= 100rem) {
-    html {
-      font-size: 112.5%;
-    }
-  }
-
-  @media (width >= 140rem) {
-    html {
-      font-size: 125%;
-    }
-  }
 
   body {
     background-color: var(--color-bg);

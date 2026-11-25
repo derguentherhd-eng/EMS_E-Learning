@@ -147,3 +147,4 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Design-Team-Review (Swiss/Rams/Raster 8, PC-first): Inhaltsbreite ab 1600 px auf 84rem, neue Tokens für Primär-Hover und Startampel, einheitliche Fokusringe (Skip-Link, Ordner-Baustein), Abstände aufs 8er-Raster.
 - Gesperrtes „Weiter“: Enter setzt den Fokus direkt auf die offene Übung.
 - Sprachschalter: Fortschritt beim Laden des Sprachmodells wird für Screenreader angesagt; Hinweis am Schalter, wenn die gespeicherte Sprache nicht automatisch geladen werden kann.
+- Schrift kompakter für Laptop und PC: Fließtext fest 16 px, Überschriften kleiner (Skala ca. 1,18), kein Mitwachsen der Schrift auf großen Monitoren mehr; dafür Inhaltsbreite ab 2240 px 96rem. Grafiken wieder höchstens 800 px breit.

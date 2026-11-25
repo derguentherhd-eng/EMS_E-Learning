@@ -118,13 +118,13 @@
     --font-weight-medium: 500;
     --font-weight-bold: 700;
 
-    /* Typoskala im Verhältnis 1,25. Fließtext wächst auf großen Bildschirmen leicht mit. */
-    --step--1: 0.875rem; /* nur Metadaten, nie Fließtext */
-    --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-    --step-1: clamp(1.25rem, 1.2rem + 0.25vw, 1.4rem);
-    --step-2: clamp(1.45rem, 1.35rem + 0.5vw, 1.75rem);
-    --step-3: clamp(1.75rem, 1.55rem + 1vw, 2.2rem);
-    --step-4: clamp(2.1rem, 1.8rem + 1.5vw, 2.75rem);
+    /* Typoskala etwa 1,18 – kompakt für Laptop und PC (PC-first), feste Größen. */
+    --step--1: 0.8125rem; /* nur Metadaten, nie Fließtext */
+    --step-0: 1rem; /* Fließtext: 16 px – für Laptop und PC ausgelegt */
+    --step-1: 1.1875rem;
+    --step-2: 1.4rem;
+    --step-3: 1.6rem;
+    --step-4: 1.9rem;
     --line-height-body: 1.6;
     --line-height-tight: 1.15;
     --measure: 85ch; /* maximale Zeilenlänge für Fließtext (Absätze, Listen) */
@@ -170,6 +170,12 @@
   @media (width >= 100rem) {
     :root {
       --layout-max: 84rem;
+    }
+  }
+
+  @media (width >= 140rem) {
+    :root {
+      --layout-max: 96rem;
     }
   }
 
