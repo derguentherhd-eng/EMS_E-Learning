@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="1200" height="600" role="img" aria-label="Acceleration: 75 Meter Beschleunigung aus dem Stand">
+<title>Acceleration: 75 Meter Beschleunigung aus dem Stand</title>
+<defs><g id="car">
+  <rect x="-48" y="-23" width="9" height="46" rx="2" fill="#FFED00"/>
+  <rect x="-36" y="-27" width="20" height="11" rx="3" fill="#000000" stroke="#8A8A8A"/>
+  <rect x="-36" y="16" width="20" height="11" rx="3" fill="#000000" stroke="#8A8A8A"/>
+  <rect x="16" y="-26" width="18" height="10" rx="3" fill="#000000" stroke="#8A8A8A"/>
+  <rect x="16" y="16" width="18" height="10" rx="3" fill="#000000" stroke="#8A8A8A"/>
+  <path d="M-40,-10 L18,-8 L46,-3 L46,3 L18,8 L-40,10 Z" fill="#534495" stroke="#FFED00" stroke-width="2"/>
+  <ellipse cx="-8" cy="0" rx="10" ry="5" fill="#000000"/>
+  <rect x="42" y="-25" width="7" height="50" rx="2" fill="#FFED00"/>
+</g><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#FFED00"/></marker>
+<marker id="arrow-light" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#C9C9C9"/></marker></defs>
+<rect width="800" height="400" rx="16" fill="#1E1E1E"/>
+<g font-family="Lato, 'Helvetica Neue', Arial, sans-serif" fill="#FFFFFF">
+<rect x="60" y="140" width="680" height="120" rx="8" fill="#2B2B2B"/>
+<circle cx="80.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="80.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="110.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="110.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="140.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="140.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="170.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="170.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="200.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="200.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="230.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="230.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="260.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="260.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="290.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="290.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="320.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="320.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="350.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="350.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="380.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="380.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="410.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="410.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="440.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="440.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="470.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="470.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="500.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="500.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="530.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="530.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="560.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="560.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="590.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="590.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="620.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="620.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="650.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="650.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="680.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="680.0" cy="260.0" r="4" fill="#FFED00"/>
+<circle cx="710.0" cy="140.0" r="4" fill="#FFED00"/>
+<circle cx="710.0" cy="260.0" r="4" fill="#FFED00"/>
+<rect x="128" y="140" width="6" height="120" fill="#FFFFFF"/>
+<rect x="676" y="140" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="150" width="8" height="10" fill="#FFFFFF"/>
+<rect x="676" y="160" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="170" width="8" height="10" fill="#FFFFFF"/>
+<rect x="676" y="180" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="190" width="8" height="10" fill="#FFFFFF"/>
+<rect x="676" y="200" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="210" width="8" height="10" fill="#FFFFFF"/>
+<rect x="676" y="220" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="230" width="8" height="10" fill="#FFFFFF"/>
+<rect x="676" y="240" width="8" height="10" fill="#FFFFFF"/>
+<rect x="684" y="250" width="8" height="10" fill="#FFFFFF"/>
+<use href="#car" transform="translate(185 200) scale(0.8)"/>
+<path d="M70,185 L135,185" stroke="#8A8A8A" stroke-width="3" stroke-linecap="round"/>
+<path d="M76,200 L131,200" stroke="#8A8A8A" stroke-width="3" stroke-linecap="round"/>
+<path d="M82,215 L127,215" stroke="#8A8A8A" stroke-width="3" stroke-linecap="round"/>
+<path d="M140,310 L670,310" stroke="#FFED00" stroke-width="4" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="405" y="345" font-size="26" fill="#FFED00" text-anchor="middle" font-weight="700">75 Meter</text>
+<text x="131" y="120" font-size="18" fill="#C9C9C9" text-anchor="middle" font-weight="400">Start</text>
+<text x="684" y="120" font-size="18" fill="#C9C9C9" text-anchor="middle" font-weight="400">Ziel</text>
+<text x="40" y="60" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Aus dem Stand</text>
+<text x="40" y="88" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Gemessen wird die Zeit bis ins Ziel.</text>
+<circle cx="700" cy="62" r="30" fill="none" stroke="#FFED00" stroke-width="4"/><rect x="693" y="22" width="14" height="8" rx="2" fill="#FFED00"/><path d="M700,62 L700,44" stroke="#FFED00" stroke-width="4" stroke-linecap="round"/><path d="M700,62 L714,70" stroke="#FFED00" stroke-width="4" stroke-linecap="round"/>
+</g>
+</svg>

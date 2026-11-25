@@ -35,7 +35,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2xs) var(--space-s);
-    max-inline-size: 72rem;
+    max-inline-size: var(--layout-max);
     margin-inline: auto;
     padding-inline: var(--gutter);
     min-block-size: var(--masthead-height);
@@ -69,7 +69,7 @@
 
   /* Breitere Ansichten (Glossar, Prüfseite) dürfen mehr Platz nutzen. */
   .page--wide {
-    max-inline-size: calc(64rem + 2 * var(--gutter));
+    max-inline-size: calc(var(--layout-max) + 2 * var(--gutter));
   }
 
   /* Gibt es eine fixierte Weiter-Leiste, braucht der Inhalt unten Platz, damit nichts
@@ -159,7 +159,7 @@
   }
 
   .site-footer__inner {
-    max-inline-size: 72rem;
+    max-inline-size: var(--layout-max);
     margin-inline: auto;
   }
 

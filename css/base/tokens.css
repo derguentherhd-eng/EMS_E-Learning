@@ -123,7 +123,7 @@
     --step-4: clamp(2.1rem, 1.8rem + 1.5vw, 2.75rem);
     --line-height-body: 1.6;
     --line-height-tight: 1.15;
-    --measure: 68ch; /* maximale Zeilenlänge für Fließtext */
+    --measure: 85ch; /* maximale Zeilenlänge für Fließtext (Absätze, Listen) */
 
     /* ── Abstände ── */
     --space-3xs: 0.25rem;
@@ -156,7 +156,8 @@
     --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
     /* ── Layout ── */
-    --content-max: 46rem;
+    --layout-max: 72rem; /* Breite von Kopfleiste, Sektoranzeige, Inhalt und Fußzeile */
+    --content-max: var(--layout-max); /* Breite der Inhaltsspalte (Tabellen, Bilder, Bausteine) */
     --masthead-height: 3.5rem;
     --pager-height: 4.5rem;
   }

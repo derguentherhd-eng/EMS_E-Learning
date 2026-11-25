@@ -1,10 +1,11 @@
 ---
 titel: Slack, Kalender und deine ersten Schritte
 kurztitel: Slack & Kalender
-dauer: 10
-version: 1
+dauer: 15
+version: 2
 lernziele:
   - Du weißt, welche Konten du brauchst und wer dir dabei hilft.
+  - Du kannst Slack Schritt für Schritt einrichten: Konto, Profil, App und Kanäle.
   - Du weißt, welche Themen in welchen Slack-Kanal gehören.
   - Du kannst die Team- und Subteam-Kalender in deinem Google Kalender einrichten.
   - Du weißt, wo Dateien liegen und welche Tools du für deine Aufgabe brauchst.
@@ -21,7 +22,7 @@ Für die Arbeit im Team brauchst du ein paar Konten. So kommst du an sie heran:
 | **Jira** | Zugang bei **Torx** anfragen. Den Link findest du im Canvas **„Generelle Links"**. |
 | **Discord** | Die App installieren und über den Canvas **„Generelle Links"** unserem Server beitreten. |
 
-**Wie komme ich in Slack?** Den **Einladungslink** zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding.
+**Wie komme ich in Slack?** Den **Einladungslink** zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Wie du Slack Schritt für Schritt einrichtest, zeigen dir die nächsten zwei Seiten.
 
 Den Canvas **„Generelle Links"** findest du in Slack im Kanal **#01_allgemein**.
 
@@ -32,6 +33,63 @@ Bei Slack registrieren => Mit deiner privaten E-Mail | Für Slack verwendest du 
 Slack-Profil anlegen => Voller Name und Profilfoto | Verwende deinen vollen Namen und ein Profilfoto, damit dich alle erkennen.
 Jira-Zugang bekommen => Bei Torx anfragen | Den Zugang gibt Torx, den Link findest du im Canvas „Generelle Links".
 Discord-Server beitreten => Über den Canvas „Generelle Links" | App installieren, dann über den Canvas dem Server beitreten.
+:::
+
+## Slack einrichten: dein Konto
+
+Den **Einladungslink** zu unserem Slack bekommst du zusammen mit dem Link zu diesem Onboarding. Am einfachsten richtest du Slack **am Laptop** ein. So geht's:
+
+### Schritt 1: Einladungslink öffnen
+
+Klicke auf den Einladungslink. Slack öffnet sich im Browser.
+
+### Schritt 2: E-Mail-Adresse eingeben
+
+Gib deine **private E-Mail-Adresse** ein und klicke auf den Knopf darunter. Alternativ kannst du dich auch mit einem Google-, Microsoft- oder Apple-Konto anmelden.
+
+![Bildschirmfoto der Slack-Anmeldeseite: oben „Gib deine E-Mail-Adresse ein“, darunter ein Eingabefeld, ein lila Knopf und die Knöpfe Google, Microsoft und Apple](assets/bilder/onboarding/slack/slack-anmelden.webp "So ähnlich sieht die Anmeldeseite von Slack aus.")
+
+### Schritt 3: Bestätigungscode eingeben
+
+Slack schickt dir eine **E-Mail mit einem Bestätigungscode**. Tipp den Code auf der Slack-Seite ein. Keine E-Mail da? Schau im Spam-Ordner nach.
+
+![Vereinfachte Darstellung: Links ein Briefumschlag für die E-Mail von Slack, rechts ein Fenster „Code eingeben“ mit sechs Kästchen](assets/bilder/onboarding/slack/bestaetigungscode.svg "Vereinfachte Darstellung: Code aus der E-Mail eingeben")
+
+### Schritt 4: Vollen Namen eingeben
+
+Gib deinen **vollen Namen** ein – Vor- und Nachname – und klicke auf **Fortfahren**. Damit bist du in unserem Slack.
+
+## Slack einrichten: Profil, App und Kanäle
+
+### Schritt 5: Profilfoto hochladen
+
+Mit **Foto** erkennen dich alle im Team. Klicke in der Seitenleiste auf **dein Profilbild** → **Profil** → **Bearbeiten**. Lade ein Foto hoch und klicke auf **Änderungen speichern**.
+
+![Vereinfachte Darstellung von Slack: 1 Profilbild in der Seitenleiste, 2 Menüpunkt „Profil“, 3 Knopf „Bearbeiten“, 4 Knopf „Foto hochladen“](assets/bilder/onboarding/slack/profil.svg "Vereinfachte Darstellung: Profilbild → Profil → Bearbeiten → Foto hochladen")
+
+### Schritt 6: App installieren
+
+Installiere die **Slack-App** auf deinem Laptop (Windows, Mac oder Linux) und auf deinem **Handy**. Melde dich dort mit **derselben E-Mail-Adresse** an.
+
+![Bildschirmfoto der Download-Seite von Slack mit dem Knopf „Download“ und einer Vorschau der Slack-App](assets/bilder/onboarding/slack/slack-app-herunterladen.webp "Die Download-Seite von Slack")
+
+### Schritt 7: Kanälen beitreten
+
+Klicke auf **Home** → **Verzeichnisse** → Registerkarte **Channels** (so heißen Kanäle in Slack). Wähle einen Kanal und klicke auf **Channel beitreten**. Tritt mindestens **#01_allgemein** und dem **Kanal deines Subteams** bei. In einen geschlossenen Kanal muss dich ein Mitglied hinzufügen.
+
+![Vereinfachte Darstellung von Slack: 1 Home, 2 Verzeichnisse, 3 Registerkarte Channels, 4 Knopf zum Beitreten neben #01_allgemein](assets/bilder/onboarding/slack/channels.svg "Vereinfachte Darstellung: Home → Verzeichnisse → Channels → beitreten")
+
+**So funktioniert die Übung:** Bring die Schritte in die richtige Reihenfolge. Verschiebe die Einträge mit den Pfeil-Knöpfen und prüfe dann deine Lösung.
+
+:::reihenfolge Slack einrichten
+Einladungslink öffnen
+Private E-Mail-Adresse eingeben
+Bestätigungscode aus der E-Mail eingeben
+Vollen Namen eingeben
+Profilfoto hochladen
+App auf Laptop und Handy installieren
+#01_allgemein und dem Subteam-Kanal beitreten
+> Erst das Konto (Link, E-Mail, Code, Name), dann Profilfoto und App – und zum Schluss die Kanäle.
 :::
 
 ## Slack: Was gehört wohin?
@@ -145,6 +203,7 @@ Jetzt ist es Zeit, **deine Teamleitungen kennenzulernen**. Kläre mit ihnen drei
 
 - **Konten:** Einstein-E-Mail (Hilfe: Yannic, @torx), Slack mit privater E-Mail, vollem Namen und Profilfoto, Jira-Zugang bei Torx, Discord über den Canvas.
 - Den **Slack-Einladungslink** bekommst du zusammen mit dem Link zu diesem Onboarding.
+- **Slack einrichten:** Link öffnen, private E-Mail eingeben, Bestätigungscode eingeben, vollen Namen eingeben, Profilfoto hochladen, App installieren, Kanälen beitreten.
 - In **#01_allgemein** stehen Ankündigungen und der Canvas **„Generelle Links"** (Kalender, Wiki, Splitwise, Jira, Discord).
 - Einstein-Themen **in Kanälen** besprechen und **im Thread** antworten.
 - **Kalender:** Team- und Subteam-Kalender abonnieren, Details prüfen, Einladungen beantworten.
@@ -179,6 +238,20 @@ Jetzt ist es Zeit, **deine Teamleitungen kennenzulernen**. Kläre mit ihnen drei
 - [ ] Über den Discord-Server
 > Den Slack-Einladungslink bekommst du zusammen mit dem Link zu diesem Onboarding.
 ~ Deine Konten
+
+? Was schickt dir Slack, nachdem du deine E-Mail-Adresse eingegeben hast?
+- [x] Eine E-Mail mit einem Bestätigungscode
+- [ ] Einen Brief mit einem Passwort
+- [ ] Eine SMS von der Projektleitung
+> Slack schickt dir eine E-Mail mit einem Bestätigungscode. Den tippst du auf der Slack-Seite ein.
+~ Slack einrichten: dein Konto
+
+? Wie trittst du in Slack einem Kanal bei?
+- [x] Home → Verzeichnisse → Channels → Channel beitreten
+- [ ] Profilbild → Profil → Bearbeiten
+- [ ] Gar nicht – Kanäle werden automatisch zugewiesen
+> Über Home → Verzeichnisse → Channels findest du alle offenen Kanäle. In geschlossene Kanäle muss dich ein Mitglied hinzufügen.
+~ Slack einrichten: Profil, App und Kanäle
 
 ? Wo antwortest du auf eine Nachricht in einem Slack-Kanal?
 - [x] Im Thread der Nachricht

@@ -1,11 +1,11 @@
 ---
 titel: Wer ist Einstein Motorsport?
 kurztitel: Einstein Motorsport
-dauer: 12
-version: 1
+dauer: 18
+version: 2
 lernziele:
   - Du weißt, wer bei Einstein Motorsport mitmacht und woran wir arbeiten.
-  - Du weißt, was Formula Student ist und welche Disziplinen es gibt.
+  - Du weißt, was Formula Student ist, und kannst jede Disziplin kurz erklären.
   - Du kennst die wichtigsten Meilensteine unserer Autos seit 2006.
   - Du kennst die Eckdaten unseres Rennwagens, die Erfolge des AL26 und was beim AL27 neu ist.
 ---
@@ -27,46 +27,93 @@ Gemeinsam konstruieren und bauen wir **elektrische, autonome Rennwagen**.
 
 Formula Student ist ein **internationaler Konstruktionswettbewerb**. Über **1000 Studierendenteams** weltweit konstruieren, bauen und fahren dort ihre eigenen Rennwagen im Formelstil.
 
-Gewertet wird in **zwei Arten von Disziplinen**:
+Gewonnen wird aber nicht nur auf der Strecke. Gewertet wird in **zwei Arten von Disziplinen**:
 
-**Dynamische Disziplinen** – hier fährt das Auto:
-
-| Disziplin | Worum es geht |
-|---|---|
-| **Skidpad** | Eine liegende Acht mit maximaler Kurvengeschwindigkeit |
-| **Acceleration** | Beschleunigung aus dem Stand über 75 Meter |
-| **Autocross** | Eine gezeitete Runde auf einem engen Handling-Kurs |
-| **Endurance** | 22 Kilometer Dauerlauf auf einem geschlossenen Kurs |
-| **Efficiency** | Energieeffizienz während der Endurance |
-
-**Statische Disziplinen** – hier überzeugt das Team, ohne zu fahren:
-
-| Disziplin | Worum es geht |
-|---|---|
-| **Engineering Design** | Eine internationale Jury bewertet Konzept und Technik |
-| **Cost & Manufacturing** | Detaillierte Kostenaufstellung und Emissionsberechnung der Bauteile |
-| **Business Plan** | Pitch eines Geschäftsmodells rund um den Rennwagen |
+| Art | Was passiert | Disziplinen |
+|---|---|---|
+| **Statisch** | Das Team überzeugt **ohne zu fahren** – mit Präsentationen vor einer Jury. | Engineering Design, Cost & Manufacturing, Business Plan |
+| **Dynamisch** | Das **Auto fährt** auf der Strecke. | Skidpad, Acceleration, Autocross, Endurance, Efficiency |
 
 ![Unser Rennwagen fährt zwischen Pylonen über die Strecke](assets/bilder/onboarding/auto-strecke.webp "Dynamische Disziplinen: Hier fährt das Auto.")
 
 ![Zwei Teammitglieder präsentieren vor einem Bildschirm](assets/bilder/onboarding/statics.webp "Statische Disziplinen: Hier überzeugt das Team mit Präsentationen.")
 
-### So viele Punkte gibt es
+Auf den nächsten Seiten lernst du jede Disziplin kurz kennen.
+
+## Die statischen Disziplinen
+
+Bei den statischen Disziplinen **steht das Auto still**. Hier zählt, wie gut das Team sein Auto erklären, berechnen und verkaufen kann.
+
+### Engineering Design
+
+Eine **internationale Jury** bewertet **Konzept und Technik** des Autos. Das Team erklärt, warum es jedes Bauteil so gelöst hat.
+
+![Grafik: Ein Rennwagen als Konstruktionszeichnung, daneben eine dreiköpfige Jury mit der Frage „Warum so gelöst?“](assets/bilder/onboarding/disziplinen/engineering-design.svg "Engineering Design: Konzept und Technik erklären")
+
+### Cost & Manufacturing
+
+Das Team erstellt eine **detaillierte Kostenaufstellung** und eine **Emissionsberechnung** für die Bauteile des Autos.
+
+![Grafik: Eine Liste von Bauteilen mit den Spalten Bauteil, Euro und CO₂](assets/bilder/onboarding/disziplinen/cost-manufacturing.svg "Cost & Manufacturing: Kosten und Emissionen jedes Bauteils")
+
+### Business Plan
+
+Das Team **pitcht ein Geschäftsmodell** rund um den Rennwagen – wie bei einer Präsentation vor Investoren.
+
+![Grafik: Eine Person präsentiert vor einem Bildschirm mit einem steigenden Balkendiagramm](assets/bilder/onboarding/disziplinen/business-plan.svg "Business Plan: eine Geschäftsidee pitchen")
+
+## Die dynamischen Disziplinen: Skidpad und Acceleration
+
+Bei den dynamischen Disziplinen **fährt das Auto**. Jede Disziplin prüft etwas anderes.
+
+### Skidpad
+
+Das Auto fährt eine **liegende Acht** – mit **maximaler Kurvengeschwindigkeit**. Hier zeigt sich, wie schnell das Auto durch Kurven kommt.
+
+![Grafik: Zwei aneinanderliegende Kreise aus Pylonen bilden eine liegende Acht, das Auto fährt von unten ein](assets/bilder/onboarding/disziplinen/skidpad.svg "Skidpad: eine liegende Acht")
+
+### Acceleration
+
+**Beschleunigung aus dem Stand über 75 Meter.** Gemessen wird die Zeit vom Start bis ins Ziel. Unser AL26 hat das fahrerlos in **3,507 Sekunden** geschafft.
+
+![Grafik: Eine gerade Strecke mit Start- und Ziellinie, dazwischen ein Pfeil mit der Beschriftung 75 Meter](assets/bilder/onboarding/disziplinen/acceleration.svg "Acceleration: 75 Meter aus dem Stand")
+
+## Die dynamischen Disziplinen: Autocross, Endurance und Efficiency
+
+### Autocross
+
+**Eine gezeitete Runde** auf einem **engen Handling-Kurs**. Hier zählen Kurven, Bremsen und Beschleunigen im Wechsel.
+
+![Grafik: Ein enger, kurviger Rundkurs mit Pylonen und einer Start- und Ziellinie](assets/bilder/onboarding/disziplinen/autocross.svg "Autocross: eine Runde auf Zeit")
+
+### Endurance
+
+**22 Kilometer Dauerlauf** auf einem geschlossenen Kurs. Die Endurance bringt die meisten Punkte – dort muss das Auto vor allem eins: **durchhalten**.
+
+![Grafik: Ein Rundkurs mit dem Hinweis „Runde um Runde“ und der Angabe 22 km am Stück](assets/bilder/onboarding/disziplinen/endurance.svg "Endurance: 22 Kilometer am Stück")
+
+### Efficiency
+
+Gewertet wird die **Energieeffizienz während der Endurance**: Wie wenig Energie braucht das Auto für die 22 Kilometer?
+
+![Grafik: Ein voller Akku vor der Endurance und ein teilweise leerer Akku danach, der Unterschied ist als „verbraucht“ markiert](assets/bilder/onboarding/disziplinen/efficiency.svg "Efficiency: Energie sparen während der Endurance")
+
+## So viele Punkte gibt es
 
 Insgesamt sind **1000 Punkte** zu holen. So waren sie bei Formula Student France 2026 verteilt:
 
-| Disziplin | Punkte |
-|---|---|
-| Engineering Design | 150 |
-| Cost & Manufacturing | 100 |
-| Business Plan | 75 |
-| Acceleration | 75 |
-| Skidpad | 75 |
-| Autocross | 100 |
-| Endurance | 325 |
-| Efficiency | 100 |
+| Disziplin | Art | Punkte |
+|---|---|---|
+| Engineering Design | statisch | 150 |
+| Cost & Manufacturing | statisch | 100 |
+| Business Plan | statisch | 75 |
+| Acceleration | dynamisch | 75 |
+| Skidpad | dynamisch | 75 |
+| Autocross | dynamisch | 100 |
+| Endurance | dynamisch | 325 |
+| Efficiency | dynamisch | 100 |
 
-Die meisten Punkte bringt die **Endurance** – dort muss das Auto vor allem eins: durchhalten.
+Die meisten Punkte bringt die **Endurance**. Aber auch die statischen Disziplinen zählen: Zusammen sind sie **325 Punkte** wert – so viel wie die Endurance.
 
 **So funktioniert die Übung:** Ordne jede Disziplin zu: Fährt das Auto (dynamisch) oder nicht (statisch)? Danach bekommst du zu jeder Zuordnung eine Erklärung. Erst wenn alles stimmt, geht es weiter.
 
@@ -88,30 +135,16 @@ Unsere Autos heißen **AL** und tragen eine Nummer: Der AL06 war unser erstes Re
 
 ![Das Logo „20 Jahre Einstein Motorsport“ in Gelb](assets/bilder/onboarding/20-jahre.webp "20 Jahre Einstein Motorsport")
 
-**So funktioniert die Übung:** Jeder Umriss steht für ein Auto mit einem besonderen Meilenstein. Tippe auf die Nummer unter einem Auto, dann erfährst du, welches es ist und was es besonders gemacht hat. Die gleichen Infos stehen als Liste unter dem Bild.
-
-:::hotspot Unsere Autos bild="assets/bilder/onboarding/meilensteine.webp" alt="Neun gelbe Umrisse von Rennwagen auf dunklem Grund, von links oben nach rechts unten vom AL06 bis zum AL27. Der letzte Umriss ist nur blass angedeutet."
-16.7% 26.7% | AL06 | Unser erstes Rennauto.
-50% 26.7% | AL07 | Unser erstes fahrendes Rennauto.
-83.3% 26.7% | AL09 | Die ersten Räder aus Carbon.
-16.7% 60% | AL12 | Das erste Chassis aus Carbon.
-50% 60% | AL15 | Das erste Aerodynamik-Paket.
-83.3% 60% | AL19 | Unser letzter und erfolgreichster Verbrenner.
-16.7% 93.3% | AL21 | Unser erstes elektrisches und autonomes Rennauto.
-50% 93.3% | AL25 | Unser erstes Rennauto mit Allradantrieb.
-83.3% 93.3% | AL27 | Das Auto dieser Saison – noch blass, denn es entsteht gerade: mit deiner Unterstützung.
-:::
-
-Jetzt prüfst du, ob du dir die Meilensteine gemerkt hast. **So funktioniert die Übung:** Bring die Meilensteine in die richtige zeitliche Reihenfolge – das älteste nach oben. Verschiebe die Einträge mit den Pfeil-Knöpfen und prüfe dann deine Lösung.
-
-:::reihenfolge Vom ersten Rennauto bis zum Allradantrieb
-Erstes Rennauto
-Erstes Chassis aus Carbon
-Erstes Aerodynamik-Paket
-Letzter Verbrenner
-Erstes elektrisches und autonomes Rennauto
-Erstes Rennauto mit Allradantrieb
-> AL06: erstes Rennauto · AL12: erstes Carbon-Chassis · AL15: erstes Aeropaket · AL19: letzter Verbrenner · AL21: erstes Elektro- und autonomes Auto · AL25: erster Allradantrieb.
+:::zeitstrahl Unsere Autos
+AL06 | Erstes Rennauto | Unser erstes Rennauto.
+AL07 | Erstes fahrendes Rennauto | Unser erstes Rennauto, das gefahren ist.
+AL09 | Erste Carbon-Räder | Die ersten Räder aus Carbon.
+AL12 | Erstes Carbon-Chassis | Das erste Chassis aus Carbon.
+AL15 | Erstes Aerodynamik-Paket | Das erste Aerodynamik-Paket.
+AL19 | Letzter Verbrenner | Unser letzter und erfolgreichster Verbrenner.
+AL21 | Erstes Elektro- und autonomes Rennauto | Unser erstes elektrisches und autonomes Rennauto.
+AL25 | Erster Allradantrieb | Unser erstes Rennauto mit Allradantrieb.
+AL27 | Das Auto dieser Saison | Es entsteht gerade – mit deiner Unterstützung.
 :::
 
 ## Unser Rennwagen
@@ -121,9 +154,12 @@ Das sind die Eckdaten unseres Rennwagens:
 | Eckdaten | Wert |
 |---|---|
 | **Akku** | 7,79 kWh |
-| **Leistung** | 4 × 32 kW (174 PS) – vier Motoren |
+| **Motoren** | 4 × 32 kW (174 PS) – vier Motoren |
+| **Antriebsleistung im Rennen** | höchstens 80 kW – so schreibt es das Reglement vor |
 | **0–100 km/h** | 2,56 Sekunden (autonom) |
 | **Höchstgeschwindigkeit** | 125 km/h |
+
+**Wichtig zur Leistung:** Unsere vier Motoren könnten zusammen 128 kW (174 PS) leisten. Das **Reglement** der Formula Student erlaubt aber höchstens **80 kW Antriebsleistung**. Deshalb ist unser Auto auf **80 kW gedrosselt**.
 
 ![Unser Rennwagen mit der Startnummer E44, umringt vom Team](assets/bilder/onboarding/rennwagen.webp "Unser Rennwagen")
 
@@ -132,6 +168,7 @@ Das sind die Eckdaten unseres Rennwagens:
 :::karten Weißt du es noch?
 Wie viel Energie speichert der Akku? || 7,79 kWh.
 Wie viele Motoren hat das Auto, und wie stark sind sie? || Vier Motoren mit je 32 kW – zusammen 174 PS.
+Wie viel Antriebsleistung darf das Auto im Rennen nutzen? || Höchstens 80 kW – so schreibt es das Reglement vor. Deshalb ist unser Auto gedrosselt.
 Wie schnell geht es von 0 auf 100 km/h? || In 2,56 Sekunden (autonom).
 Wie schnell fährt das Auto höchstens? || 125 km/h.
 :::
@@ -140,9 +177,9 @@ Wie schnell fährt das Auto höchstens? || 125 km/h.
 
 Der **AL26** war das Auto der letzten Saison – und er war erfolgreich:
 
-- **Platz 35** in der Weltrangliste
-- **Platz 3** bei Formula Student France – mit **5 Pokalen**
-- **3,507 Sekunden** in der DV Acceleration (Driverless) – **französischer Streckenrekord**
+- **Platz 35 von 523** Teams in der Weltrangliste der Elektro-Rennwagen (Stand: September 2026)
+- **Platz 3 von 40** Teams in der Elektro-Gesamtwertung bei **Formula Student France 2026** – mit **5 Pokalen**
+- **3,507 Sekunden für 75 Meter** in der DV Acceleration (Driverless, also ohne Fahrer) – **französischer Streckenrekord**
 - **192,5 kg** Gesamtgewicht
 - **Eigene Motoren:** von unserem Team konstruiert und von einem Sponsor gefertigt
 
@@ -164,10 +201,10 @@ Der AL27 entsteht gerade – **mit deiner Unterstützung**.
 ## Das nimmst du mit
 
 - Einstein Motorsport: **68 aktive Mitglieder** von THU, Universität Ulm und HNU, **über 90 Alumni**. Wir bauen **elektrische, autonome Rennwagen**.
-- **Formula Student:** internationaler Konstruktionswettbewerb mit über 1000 Teams. **Dynamische** Disziplinen (Skidpad, Acceleration, Autocross, Endurance, Efficiency) und **statische** (Engineering Design, Cost & Manufacturing, Business Plan). Insgesamt 1000 Punkte, die meisten in der Endurance.
+- **Formula Student:** internationaler Konstruktionswettbewerb mit über 1000 Teams. **Statische** Disziplinen ohne Fahren (Engineering Design, Cost & Manufacturing, Business Plan) und **dynamische** auf der Strecke (Skidpad = liegende Acht, Acceleration = 75 m aus dem Stand, Autocross = eine Runde auf engem Kurs, Endurance = 22 km, Efficiency = Energieverbrauch in der Endurance). Insgesamt 1000 Punkte, die meisten in der Endurance.
 - **Seit 2006** gibt es uns, **seit 2021** fahren wir elektrisch und autonom.
-- **Unser Auto:** 7,79 kWh Akku, 4 × 32 kW, 0–100 km/h in 2,56 s (autonom), bis 125 km/h.
-- **AL26:** Platz 35 weltweit, Platz 3 bei FS France, französischer Streckenrekord in der DV Acceleration.
+- **Unser Auto:** 7,79 kWh Akku, 4 × 32 kW, laut Reglement auf **80 kW** gedrosselt, 0–100 km/h in 2,56 s (autonom), bis 125 km/h.
+- **AL26:** Platz 35 von 523 in der Weltrangliste, Platz 3 von 40 bei FS France 2026, französischer Streckenrekord in der DV Acceleration (3,507 s für 75 m).
 - **AL27:** Weiterentwicklung des AL26 mit neuer Aerodynamik und neuem Akku.
 
 :::quiz anzahl=6
@@ -197,21 +234,21 @@ Der AL27 entsteht gerade – **mit deiner Unterstützung**.
 - [x] Business Plan
 - [ ] Skidpad
 > Bei statischen Disziplinen fährt das Auto nicht. Skidpad ist dynamisch.
-~ Was ist Formula Student?
+~ Die statischen Disziplinen
 
 ? Welche Disziplin bringt die meisten Punkte?
 - [ ] Acceleration
 - [x] Endurance
 - [ ] Business Plan
 > Die Endurance bringt 325 von 1000 Punkten.
-~ Was ist Formula Student?
+~ So viele Punkte gibt es
 
 ? Wie lang ist die Strecke bei der Acceleration?
 - [x] 75 Meter
 - [ ] 22 Kilometer
 - [ ] 500 Meter
 > Acceleration ist die Beschleunigung aus dem Stand über 75 Meter. 22 Kilometer ist die Endurance.
-~ Was ist Formula Student?
+~ Die dynamischen Disziplinen: Skidpad und Acceleration
 
 ? Welches Auto war unser erstes mit Allradantrieb?
 - [ ] AL19
@@ -227,11 +264,32 @@ Der AL27 entsteht gerade – **mit deiner Unterstützung**.
 > Vier Motoren mit je 32 kW – zusammen 174 PS.
 ~ Unser Rennwagen
 
+? Was ist das Skidpad?
+- [x] Eine liegende Acht mit maximaler Kurvengeschwindigkeit
+- [ ] Ein Dauerlauf über 22 Kilometer
+- [ ] Ein Pitch vor Investoren
+> Beim Skidpad fährt das Auto eine liegende Acht – so schnell wie möglich durch die Kurven.
+~ Die dynamischen Disziplinen: Skidpad und Acceleration
+
+? Was wird in der Efficiency bewertet?
+- [ ] Wie schnell das Team die Bauteile fertigt
+- [x] Die Energieeffizienz während der Endurance
+- [ ] Die Kosten des Autos
+> Efficiency bewertet, wie wenig Energie das Auto während der Endurance braucht.
+~ Die dynamischen Disziplinen: Autocross, Endurance und Efficiency
+
+? Wie viel Antriebsleistung darf unser Auto laut Reglement nutzen?
+- [ ] 128 kW
+- [x] 80 kW
+- [ ] 174 kW
+> Die vier Motoren könnten zusammen 128 kW (174 PS) leisten. Das Reglement erlaubt aber höchstens 80 kW – deshalb ist unser Auto gedrosselt.
+~ Unser Rennwagen
+
 ? Welchen Platz hat der AL26 bei Formula Student France erreicht?
 - [x] Platz 3
 - [ ] Platz 10
 - [ ] Platz 35
-> Platz 3 bei Formula Student France mit 5 Pokalen. Platz 35 war die Weltrangliste.
+> Platz 3 von 40 Teams bei Formula Student France 2026 – mit 5 Pokalen. Platz 35 von 523 ist unser Platz in der Weltrangliste.
 ~ Der AL26: unsere letzte Saison
 
 ? Was ist beim AL27 neu?

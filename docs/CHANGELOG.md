@@ -126,3 +126,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Neu, ausschließlich mit Inhalten aus der Präsentation „Einstein Onboarding AL27": **Wer ist Einstein Motorsport?** (Mitglieder, Formula Student, Meilensteine AL06–AL27, Rennwagen, AL26, AL27), **Die Saison und unser Team** (Saisonphasen, Saisonziele, Subteams, Projektleitung, Treffen, Campus-Karte) und **Slack, Kalender und deine ersten Schritte** (Konten, Slack-Kanäle, Google Kalender, Dateien und Werkzeuge, Starter-Checkliste).
 - Der Slack-Einladungslink steht bewusst nicht im Kurs – er wird zusammen mit dem Onboarding-Link verschickt.
 - Die früheren Platzhalter-Kapitel 01–04 und 06 liegen im Archiv (`content/_archiv/`).
+- Seite „Unsere Meilensteine“ ist jetzt eine reine Infoseite: Zeitstrahl AL06–AL27 statt Bild mit Markierungen und Reihenfolge-Übung.
+
+### Disziplinen, Slack-Anleitung, breiteres Layout (2026-11-25)
+- Kapitel 1: „Was ist Formula Student?“ auf fünf Seiten aufgeteilt (Überblick, statische Disziplinen, zwei Seiten dynamische Disziplinen, Punkte mit Übung). Jede Disziplin hat eine eigene Vektorgrafik (`assets/bilder/onboarding/disziplinen/*.svg`).
+- Kapitel 1: Leistung präzisiert – vier Motoren mit 4 × 32 kW, laut Reglement auf 80 kW Antriebsleistung gedrosselt.
+- Kapitel 1: AL26-Ergebnisse im Verhältnis – Platz 35 von 523 (FS World Ranking EV, nach FSAE Italy, 6. September 2026), Platz 3 von 40 (Elektro-Gesamtwertung FS France 2026, offizielle Ergebnisliste v1.2), 3,507 s für 75 m.
+- Kapitel 3: zwei neue Seiten „Slack einrichten“ – sieben Schritte nach der offiziellen Slack-Hilfe, mit Bildschirmfotos der Slack-Anmelde- und Download-Seite und vereinfachten Darstellungen (`assets/bilder/onboarding/slack/`), plus Reihenfolge-Übung.
+- Layout: Inhaltsspalte so breit wie die Kopfleiste (72rem); auf großen Monitoren wächst alles mit (112,5 % ab 1600 px, 125 % ab 2240 px).
+- Bilder werden nie beschnitten: volle Breite höchstens bis zur Spalte, Höhe höchstens 80 % des Fensters, Seitenverhältnis bleibt erhalten (auch bei Bildern mit Markierungen).
