@@ -46,19 +46,19 @@ Bei den statischen Disziplinen **steht das Auto still**. Hier zählt, wie gut da
 
 ### Engineering Design
 
-Eine **internationale Jury** bewertet **Konzept und Technik** des Autos. Das Team erklärt, warum es jedes Bauteil so gelöst hat.
+Eine **internationale Jury** bewertet, wie durchdacht die **Konstruktion** ist: Das Team erklärt, warum es die Bauteile so gelöst hat. Auch die Systeme fürs **autonome Fahren** – Hardware und Software – werden geprüft.
 
 ![Grafik: Ein Rennwagen als Konstruktionszeichnung, daneben eine dreiköpfige Jury mit der Frage „Warum so gelöst?“](assets/bilder/onboarding/disziplinen/engineering-design.svg "Engineering Design: Konzept und Technik erklären")
 
 ### Cost & Manufacturing
 
-Das Team erstellt eine **detaillierte Kostenaufstellung** und eine **Emissionsberechnung** für die Bauteile des Autos.
+Vor dem Event reicht das Team eine **Stückliste** des ganzen Autos ein – mit **Kosten und CO₂-Emissionen** der Bauteile. Am Event diskutiert die Jury direkt am Auto: Stimmen die Zahlen, und ließe sich das Auto so fertigen?
 
 ![Grafik: Eine Liste von Bauteilen mit den Spalten Bauteil, Euro und CO₂](assets/bilder/onboarding/disziplinen/cost-manufacturing.svg "Cost & Manufacturing: Kosten und Emissionen jedes Bauteils")
 
 ### Business Plan
 
-Das Team **pitcht ein Geschäftsmodell** rund um den Rennwagen – wie bei einer Präsentation vor Investoren.
+Das Team **pitcht in höchstens 10 Minuten ein Geschäftsmodell**, das auf unserem Auto oder einem Bauteil davon aufbaut. Die Jury spielt dabei **mögliche Investoren**.
 
 ![Grafik: Eine Person präsentiert vor einem Bildschirm mit einem steigenden Balkendiagramm](assets/bilder/onboarding/disziplinen/business-plan.svg "Business Plan: eine Geschäftsidee pitchen")
 
@@ -68,13 +68,13 @@ Bei den dynamischen Disziplinen **fährt das Auto**. Jede Disziplin prüft etwas
 
 ### Skidpad
 
-Das Auto fährt eine **liegende Acht** – mit **maximaler Kurvengeschwindigkeit**. Hier zeigt sich, wie schnell das Auto durch Kurven kommt.
+Das Auto fährt eine **liegende Acht** aus zwei Kreisen – mit **maximaler Kurvengeschwindigkeit**. Erst **zwei Runden rechts im Uhrzeigersinn**, dann **zwei Runden links gegen den Uhrzeigersinn**. Gewertet wird jeweils die zweite Runde, das Ergebnis ist der Durchschnitt.
 
 ![Grafik: Zwei aneinanderliegende Kreise aus Pylonen bilden eine liegende Acht, das Auto fährt von unten ein](assets/bilder/onboarding/disziplinen/skidpad.svg "Skidpad: eine liegende Acht")
 
 ### Acceleration
 
-**Beschleunigung aus dem Stand über 75 Meter.** Gemessen wird die Zeit vom Start bis ins Ziel. Unser AL26 hat das fahrerlos in **3,507 Sekunden** geschafft.
+**Beschleunigung aus dem Stand** auf einer **75 Meter** langen Geraden. Gemessen wird die Zeit von der Start- bis zur Ziellinie. Unser AL26 hat das fahrerlos in **3,507 Sekunden** geschafft.
 
 ![Grafik: Eine gerade Strecke mit Start- und Ziellinie, dazwischen ein Pfeil mit der Beschriftung 75 Meter](assets/bilder/onboarding/disziplinen/acceleration.svg "Acceleration: 75 Meter aus dem Stand")
 
@@ -82,19 +82,19 @@ Das Auto fährt eine **liegende Acht** – mit **maximaler Kurvengeschwindigkeit
 
 ### Autocross
 
-**Eine gezeitete Runde** auf einem **engen Handling-Kurs**. Hier zählen Kurven, Bremsen und Beschleunigen im Wechsel.
+**Eine Runde auf Zeit** auf einem **engen Handling-Kurs** – kürzer als 1,5 km, mit Slaloms, Schikanen und Haarnadelkurven. Hier zählen Kurven, Bremsen und Beschleunigen im Wechsel.
 
 ![Grafik: Ein enger, kurviger Rundkurs mit Pylonen und einer Start- und Ziellinie](assets/bilder/onboarding/disziplinen/autocross.svg "Autocross: eine Runde auf Zeit")
 
 ### Endurance
 
-**22 Kilometer Dauerlauf** auf einem geschlossenen Kurs. Die Endurance bringt die meisten Punkte – dort muss das Auto vor allem eins: **durchhalten**.
+**Rund 22 Kilometer** auf einem Rundkurs mit etwa 1 km pro Runde. **Zwei Fahrer** fahren je etwa 11 km, dazwischen ist ein **Fahrerwechsel** (höchstens 3 Minuten). Die Endurance bringt die meisten Punkte – das Auto muss vor allem eins: **durchhalten**.
 
 ![Grafik: Ein Rundkurs mit dem Hinweis „Runde um Runde“ und der Angabe 22 km am Stück](assets/bilder/onboarding/disziplinen/endurance.svg "Endurance: 22 Kilometer am Stück")
 
 ### Efficiency
 
-Gewertet wird die **Energieeffizienz während der Endurance**: Wie wenig Energie braucht das Auto für die 22 Kilometer?
+Gemessen wird **während der Endurance**: Wie viel **Energie aus dem Akku** braucht das Auto für die 22 Kilometer? Zurückgewonnene Bremsenergie wird zum Teil gutgeschrieben.
 
 ![Grafik: Ein voller Akku vor der Endurance und ein teilweise leerer Akku danach, der Unterschied ist als „verbraucht“ markiert](assets/bilder/onboarding/disziplinen/efficiency.svg "Efficiency: Energie sparen während der Endurance")
 
@@ -118,13 +118,13 @@ Die meisten Punkte bringt die **Endurance**. Aber auch die statischen Diszipline
 **So funktioniert die Übung:** Ordne jede Disziplin zu: Fährt das Auto (dynamisch) oder nicht (statisch)? Danach bekommst du zu jeder Zuordnung eine Erklärung. Erst wenn alles stimmt, geht es weiter.
 
 :::zuordnen Statisch oder dynamisch?
-Skidpad => Dynamisch | Das Auto fährt eine liegende Acht.
+Skidpad => Dynamisch | Das Auto fährt eine liegende Acht – zweimal rechts, zweimal links.
 Acceleration => Dynamisch | Beschleunigung aus dem Stand über 75 Meter.
 Endurance => Dynamisch | 22 Kilometer auf einem geschlossenen Kurs.
 Efficiency => Dynamisch | Gewertet wird die Energieeffizienz während der Endurance.
 Engineering Design => Statisch | Eine Jury bewertet Konzept und Technik.
-Cost & Manufacturing => Statisch | Bewertet wird die Kostenaufstellung.
-Business Plan => Statisch | Das Team pitcht ein Geschäftsmodell.
+Cost & Manufacturing => Statisch | Bewertet werden Stückliste, Kosten und Emissionen.
+Business Plan => Statisch | Das Team pitcht in 10 Minuten ein Geschäftsmodell.
 :::
 
 ## Unsere Meilensteine
@@ -159,7 +159,7 @@ Das sind die Eckdaten unseres Rennwagens:
 | **0–100 km/h** | 2,56 Sekunden (autonom) |
 | **Höchstgeschwindigkeit** | 125 km/h |
 
-**Wichtig zur Leistung:** Unsere vier Motoren könnten zusammen 128 kW (174 PS) leisten. Das **Reglement** der Formula Student erlaubt aber höchstens **80 kW Antriebsleistung**. Deshalb ist unser Auto auf **80 kW gedrosselt**.
+**Wichtig zur Leistung:** Unsere vier Motoren könnten zusammen 128 kW (174 PS) leisten. Das **Reglement** der Formula Student erlaubt aber höchstens **80 kW**, die aus dem Akku abgerufen werden dürfen. Deshalb ist unser Auto auf **80 kW gedrosselt**.
 
 ![Unser Rennwagen mit der Startnummer E44, umringt vom Team](assets/bilder/onboarding/rennwagen.webp "Unser Rennwagen")
 
@@ -268,7 +268,14 @@ Der AL27 entsteht gerade – **mit deiner Unterstützung**.
 - [x] Eine liegende Acht mit maximaler Kurvengeschwindigkeit
 - [ ] Ein Dauerlauf über 22 Kilometer
 - [ ] Ein Pitch vor Investoren
-> Beim Skidpad fährt das Auto eine liegende Acht – so schnell wie möglich durch die Kurven.
+> Beim Skidpad fährt das Auto eine liegende Acht: zwei Runden rechts im Uhrzeigersinn, dann zwei Runden links gegen den Uhrzeigersinn.
+~ Die dynamischen Disziplinen: Skidpad und Acceleration
+
+? In welcher Reihenfolge fährt das Auto beim Skidpad?
+- [x] Zwei Runden rechts im Uhrzeigersinn, dann zwei Runden links gegen den Uhrzeigersinn
+- [ ] Zwei Runden links, dann zwei Runden rechts
+- [ ] Eine einzige Runde um beide Kreise
+> Erst zweimal den rechten Kreis im Uhrzeigersinn, dann zweimal den linken gegen den Uhrzeigersinn. Gewertet wird jeweils die zweite Runde.
 ~ Die dynamischen Disziplinen: Skidpad und Acceleration
 
 ? Was wird in der Efficiency bewertet?

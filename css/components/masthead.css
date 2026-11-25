@@ -95,7 +95,8 @@
   }
 
   /* Theme-Umschalter in der Kopfleiste: Schalter + Text. */
-  .theme-toggle {
+  .theme-toggle,
+  .language-toggle {
     cursor: pointer;
   }
 

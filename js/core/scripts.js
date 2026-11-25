@@ -30,6 +30,7 @@
       "js/core/router.js",
       "js/core/store.js",
       "js/ui/theme.js",
+      "js/ui/language.js",
       "js/blocks/block-utils.js",
       "js/blocks/callouts.js",
       "js/blocks/details.js",

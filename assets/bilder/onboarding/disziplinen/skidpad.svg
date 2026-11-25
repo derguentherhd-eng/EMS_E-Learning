@@ -23,16 +23,22 @@
 <circle cx="550" cy="200" r="110" fill="none" stroke="#FFED00" stroke-width="4"/>
 <circle cx="632.0" cy="200.0" r="3.5" fill="#FFED00"/><circle cx="628.0" cy="225.3" r="3.5" fill="#FFED00"/><circle cx="616.3" cy="248.2" r="3.5" fill="#FFED00"/><circle cx="598.2" cy="266.3" r="3.5" fill="#FFED00"/><circle cx="575.3" cy="278.0" r="3.5" fill="#FFED00"/><circle cx="550.0" cy="282.0" r="3.5" fill="#FFED00"/><circle cx="524.7" cy="278.0" r="3.5" fill="#FFED00"/><circle cx="501.8" cy="266.3" r="3.5" fill="#FFED00"/><circle cx="483.7" cy="248.2" r="3.5" fill="#FFED00"/><circle cx="472.0" cy="225.3" r="3.5" fill="#FFED00"/><circle cx="468.0" cy="200.0" r="3.5" fill="#FFED00"/><circle cx="472.0" cy="174.7" r="3.5" fill="#FFED00"/><circle cx="483.7" cy="151.8" r="3.5" fill="#FFED00"/><circle cx="501.8" cy="133.7" r="3.5" fill="#FFED00"/><circle cx="524.7" cy="122.0" r="3.5" fill="#FFED00"/><circle cx="550.0" cy="118.0" r="3.5" fill="#FFED00"/><circle cx="575.3" cy="122.0" r="3.5" fill="#FFED00"/><circle cx="598.2" cy="133.7" r="3.5" fill="#FFED00"/><circle cx="616.3" cy="151.8" r="3.5" fill="#FFED00"/><circle cx="628.0" cy="174.7" r="3.5" fill="#FFED00"/>
 <circle cx="690.0" cy="200.0" r="3.5" fill="#FFED00"/><circle cx="686.5" cy="231.2" r="3.5" fill="#FFED00"/><circle cx="676.1" cy="260.7" r="3.5" fill="#FFED00"/><circle cx="659.5" cy="287.3" r="3.5" fill="#FFED00"/><circle cx="637.3" cy="309.5" r="3.5" fill="#FFED00"/><circle cx="610.7" cy="326.1" r="3.5" fill="#FFED00"/><circle cx="581.2" cy="336.5" r="3.5" fill="#FFED00"/><circle cx="550.0" cy="340.0" r="3.5" fill="#FFED00"/><circle cx="518.8" cy="336.5" r="3.5" fill="#FFED00"/><circle cx="518.8" cy="63.5" r="3.5" fill="#FFED00"/><circle cx="550.0" cy="60.0" r="3.5" fill="#FFED00"/><circle cx="581.2" cy="63.5" r="3.5" fill="#FFED00"/><circle cx="610.7" cy="73.9" r="3.5" fill="#FFED00"/><circle cx="637.3" cy="90.5" r="3.5" fill="#FFED00"/><circle cx="659.5" cy="112.7" r="3.5" fill="#FFED00"/><circle cx="676.1" cy="139.3" r="3.5" fill="#FFED00"/><circle cx="686.5" cy="168.8" r="3.5" fill="#FFED00"/>
-<path d="M348,310 L312,310" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
-<path d="M312,90 L348,90" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
-<path d="M532,310 L568,310" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
-<path d="M568,90 L532,90" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M312,310 L348,310" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M348,90 L312,90" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M568,310 L532,310" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
+<path d="M532,90 L568,90" stroke="#FFED00" stroke-width="4" marker-end="url(#arrow)"/>
 <use href="#car" transform="translate(440 330) rotate(-90) scale(0.55)"/>
 <text x="460" y="380" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Einfahrt</text>
 <text x="460" y="34" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Ausfahrt</text>
+<text x="550" y="196" font-size="18" fill="#FFED00" text-anchor="middle" font-weight="700">Runde 1 + 2</text>
+<text x="550" y="218" font-size="15" fill="#C9C9C9" text-anchor="middle" font-weight="400">im</text>
+<text x="550" y="236" font-size="15" fill="#C9C9C9" text-anchor="middle" font-weight="400">Uhrzeigersinn</text>
+<text x="330" y="196" font-size="18" fill="#FFED00" text-anchor="middle" font-weight="700">Runde 3 + 4</text>
+<text x="330" y="218" font-size="15" fill="#C9C9C9" text-anchor="middle" font-weight="400">gegen den</text>
+<text x="330" y="236" font-size="15" fill="#C9C9C9" text-anchor="middle" font-weight="400">Uhrzeigersinn</text>
 <text x="40" y="318" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Liegende Acht</text>
-<text x="40" y="346" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">so schnell wie möglich</text>
-<text x="40" y="370" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">durch die Kurven</text>
+<text x="40" y="346" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">erst zweimal rechts,</text>
+<text x="40" y="370" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">dann zweimal links</text>
 <text x="760" y="380" font-size="15" fill="#8A8A8A" text-anchor="end" font-weight="400">Gelbe Punkte = Pylonen</text>
 </g>
 </svg>

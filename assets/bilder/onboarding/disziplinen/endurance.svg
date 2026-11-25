@@ -21,7 +21,7 @@
 <text x="480" y="278" font-size="16" fill="#C9C9C9" text-anchor="middle" font-weight="400">Runde um Runde</text>
 <use href="#car" transform="translate(330 297) rotate(180) scale(0.5)"/>
 <text x="700" y="330" font-size="44" fill="#FFED00" text-anchor="end" font-weight="700">22 km</text>
-<text x="700" y="360" font-size="18" fill="#C9C9C9" text-anchor="end" font-weight="400">am Stück</text>
+<text x="700" y="360" font-size="18" fill="#C9C9C9" text-anchor="end" font-weight="400">2 Fahrer, je ca. 11 km</text>
 <text x="40" y="52" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Dauerlauf</text>
 <text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">Das Auto muss vor allem eins: durchhalten.</text>
 </g>

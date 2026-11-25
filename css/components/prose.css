@@ -31,6 +31,27 @@
     border-radius: var(--radius-m);
   }
 
+  /* Bildreihe: mehrere Bilder direkt hintereinander stehen nebeneinander (gleich breite Spalten),
+   * auf schmalen Bildschirmen untereinander. Die Bilder füllen ihre Spalte, werden aber nie
+   * beschnitten – das Seitenverhältnis bleibt erhalten. Erzeugt von renderElements() in
+   * js/core/render.js. */
+  .figure-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-s);
+    align-items: start;
+  }
+
+  .figure-row > .figure {
+    margin: 0;
+  }
+
+  /* Volle Spaltenbreite, Höhe ergibt sich aus dem Seitenverhältnis (keine Ränder, kein Beschnitt). */
+  .figure-row img {
+    inline-size: 100%;
+    max-block-size: none;
+  }
+
   .inline-image {
     display: inline-block;
     block-size: 1.4em;

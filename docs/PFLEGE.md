@@ -199,6 +199,10 @@ keine Umlaute oder Leerzeichen). Dann **Alternativtext** eintragen – er ist Pf
 **Von Hand:** Bild in `assets/bilder/` legen (Name nur aus Kleinbuchstaben, Ziffern und Bindestrichen)
 und im Text schreiben: `![Was auf dem Bild zu sehen ist](assets/bilder/name.webp "Bildunterschrift")`.
 
+**Bilder nebeneinander:** Stehen zwei oder mehr Bilder direkt hintereinander (ohne Text dazwischen),
+zeigt der Kurs sie nebeneinander in einer Bildreihe – auf dem Handy untereinander. Bilder werden nie
+beschnitten. Fotos sollten dafür mindestens etwa 800 Pixel breit sein, sonst wirken sie unscharf.
+
 **Alternativtext:** Beschreibe in einem Satz, was zu sehen ist – so, als würdest du es jemandem am
 Telefon erklären. Menschen mit Screenreader hören diesen Text.
 
@@ -209,6 +213,15 @@ Telefon erklären. Menschen mit Screenreader hören diesen Text.
 **Platzhalterbilder** (`fahrzeug-platzhalter.svg`, `werkstatt-platzhalter.svg`): durch echte Bilder
 ersetzen. Bei Bildern mit Punkten („Bild mit Punkten") danach die Punkte neu setzen – im Editor
 einfach ins Bild klicken.
+
+## 6a. Sprachschalter „English“
+
+Der Kurs ist nur auf Deutsch gepflegt. Der Schalter **English** in der Kopfleiste lässt die Seite vom
+Browser selbst übersetzen (in Chrome ab Version 138 automatisch, nach einem einmaligen Download des
+Sprachmodells). In Browsern ohne diese Funktion (Safari, Firefox, Edge) erscheint eine kurze
+Anleitung, wie man die eingebaute Übersetzung des Browsers startet. Es gibt also **keine englische
+Fassung zu pflegen** – die Übersetzung ist maschinell. Fachbegriffe und Sicherheitsregeln deshalb
+immer klar und einfach auf Deutsch formulieren.
 
 ## 7. Kapitel anlegen, umsortieren, deaktivieren, archivieren, wiederherstellen
 

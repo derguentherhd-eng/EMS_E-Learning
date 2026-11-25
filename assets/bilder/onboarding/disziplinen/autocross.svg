@@ -35,6 +35,6 @@
 <use href="#car" transform="translate(210 300) rotate(180) scale(0.5)"/>
 <text x="150" y="362" font-size="17" fill="#C9C9C9" text-anchor="middle" font-weight="400">Start / Ziel</text>
 <text x="40" y="52" font-size="24" fill="#FFED00" text-anchor="start" font-weight="700">Eine Runde auf Zeit</text>
-<text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">auf einem engen, kurvigen Kurs</text>
+<text x="40" y="80" font-size="18" fill="#C9C9C9" text-anchor="start" font-weight="400">auf einem engen, kurvigen Kurs (unter 1,5 km)</text>
 </g>
 </svg>

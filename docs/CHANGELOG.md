@@ -135,3 +135,10 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Kapitel 3: zwei neue Seiten „Slack einrichten“ – sieben Schritte nach der offiziellen Slack-Hilfe, mit Bildschirmfotos der Slack-Anmelde- und Download-Seite und vereinfachten Darstellungen (`assets/bilder/onboarding/slack/`), plus Reihenfolge-Übung.
 - Layout: Inhaltsspalte so breit wie die Kopfleiste (72rem); auf großen Monitoren wächst alles mit (112,5 % ab 1600 px, 125 % ab 2240 px).
 - Bilder werden nie beschnitten: volle Breite höchstens bis zur Spalte, Höhe höchstens 80 % des Fensters, Seitenverhältnis bleibt erhalten (auch bei Bildern mit Markierungen).
+
+### Skidpad-Richtung, Bildreihen, Sprachschalter (2026-11-25)
+- Skidpad-Grafik und -Text: zwei Runden rechts im Uhrzeigersinn, dann zwei Runden links gegen den Uhrzeigersinn (FS Rules 2026, D 4.2.1).
+- Disziplin-Texte mit dem Regelwerk FS Rules 2026 abgeglichen und kurz präzisiert (Acceleration D 5, Autocross D 6, Endurance/Efficiency D 7, Business Plan S 2, Cost & Manufacturing S 3, Engineering Design S 4, 80 kW aus EV 2.2.1).
+- Bildreihen: Bilder direkt hintereinander stehen nebeneinander (`renderElements()` in js/core/render.js, `.figure-row`).
+- Fotos: hochauflösendes Streckenfoto für „Dynamisch“, Teamfoto ohne leeren Asphalt zugeschnitten.
+- Neuer Sprachschalter „English“ in der Kopfleiste (js/ui/language.js): Übersetzung über die eingebaute Übersetzung des Browsers (Translator-API), sonst Anleitung für die Browser-Übersetzung.

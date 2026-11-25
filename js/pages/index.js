@@ -20,6 +20,7 @@
   const { startRouter } = EM.require("js/core/router.js");
   const { createStore } = EM.require("js/core/store.js");
   const { setupThemeToggle } = EM.require("js/ui/theme.js");
+  const { setupLanguageToggle } = EM.require("js/ui/language.js");
   const { icon } = EM.require("js/ui/icons.js");
   const { createSectorBar } = EM.require("js/ui/sector-bar.js");
   const { el } = EM.require("js/core/dom.js");
@@ -171,6 +172,13 @@
     );
     themeButton.prepend(el("span", { class: "switch", "aria-hidden": "true" }));
     setupThemeToggle(themeButton, store);
+    const languageButton = /** @type {HTMLButtonElement} */ (
+      document.querySelector(".language-toggle")
+    );
+    languageButton.prepend(
+      el("span", { class: "switch", "aria-hidden": "true" }),
+    );
+    setupLanguageToggle(languageButton);
     setupMenu();
     if (!store.isPersistent()) {
       document

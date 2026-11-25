@@ -350,6 +350,38 @@
     }
   }
 
+  /**
+   * Stellt alle Elemente einer Seite dar. Mehrere Bilder direkt hintereinander kommen in eine
+   * Bildreihe (nebeneinander, auf schmalen Bildschirmen untereinander – css/components/prose.css).
+   *
+   * @param {import('../content/documents.js').Element[]} elements
+   * @param {import('../blocks/block-utils.js').BlockContext} context
+   * @returns {Node[]}
+   */
+  function renderElements(elements, context) {
+    const nodes = [];
+    let row = null;
+    elements.forEach((element, index) => {
+      const isImage = element.type === "image" && Boolean(element.src);
+      const next = elements[index + 1];
+      const nextIsImage = next?.type === "image" && Boolean(next.src);
+      const node = renderElement(element, context);
+      if (isImage && (row || nextIsImage)) {
+        if (!row) {
+          row = el("div", { class: "figure-row" });
+          nodes.push(row);
+        }
+        row.append(node);
+        if (!nextIsImage) {
+          row = null;
+        }
+        return;
+      }
+      nodes.push(node);
+    });
+    return nodes;
+  }
+
   /** Neutraler Kasten für Abschnitte, die nicht angezeigt werden können. */
   function renderUnreadable() {
     return el(
@@ -370,5 +402,6 @@
     renderTodo,
     createBlockContext,
     renderElement,
+    renderElements,
   });
 })();

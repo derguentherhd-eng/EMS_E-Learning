@@ -20,7 +20,7 @@
   "use strict";
 
   const { el } = EM.require("js/core/dom.js");
-  const { createBlockContext, renderElement } = EM.require("js/core/render.js");
+  const { createBlockContext, renderElements } = EM.require("js/core/render.js");
   const { chapterHash } = EM.require("js/core/router.js");
   const { markVisited } = EM.require("js/core/store.js");
   const { statusBar } = EM.require("js/ui/statusbar.js");
@@ -91,7 +91,7 @@
       ),
       pageNumber === 1 ? renderFirstPageIntro(chapter) : null,
       pageNumber === 1 ? renderSafetyRecord({ course, chapter, store }) : null,
-      elements.map((element) => renderElement(element, context)),
+      renderElements(elements, context),
     );
 
     const pager = renderPager(chapter, pageNumber, total);
