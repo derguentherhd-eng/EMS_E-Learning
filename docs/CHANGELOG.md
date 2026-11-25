@@ -121,3 +121,8 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 - Willkommenstext neutral für reine Sicherheitsunterweisung und ganzes Onboarding.
 - Klarstellung: Die Online-Unterweisung ist Teil der Sicherheitsunterweisung; maschinenbezogene Einweisungen erfolgen zusätzlich vor Ort. Ansprechpersonen (Teamleitung, Projektleitung) eingetragen; Hinweis, dass es im Verein keine festen Ersthelfer gibt. Kapitelversion 4.
 - Feuerlöscher (Werkstatt, Push Pull Bar) eingetragen; Zertifikat wird wie der Nachweis von der Projektleitung von Hand unterschrieben (Name leer, Rolle Projektleitung). Keine offenen Platzhalter mehr.
+
+### Drei neue Onboarding-Kapitel (2026-11-25)
+- Neu, ausschließlich mit Inhalten aus der Präsentation „Einstein Onboarding AL27": **Wer ist Einstein Motorsport?** (Mitglieder, Formula Student, Meilensteine AL06–AL27, Rennwagen, AL26, AL27), **Die Saison und unser Team** (Saisonphasen, Saisonziele, Subteams, Projektleitung, Treffen, Campus-Karte) und **Slack, Kalender und deine ersten Schritte** (Konten, Slack-Kanäle, Google Kalender, Dateien und Werkzeuge, Starter-Checkliste).
+- Der Slack-Einladungslink steht bewusst nicht im Kurs – er wird zusammen mit dem Onboarding-Link verschickt.
+- Die früheren Platzhalter-Kapitel 01–04 und 06 liegen im Archiv (`content/_archiv/`).

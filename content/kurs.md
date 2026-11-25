@@ -9,6 +9,9 @@ zertifikat-unterschrift-name:
 zertifikat-unterschrift-rolle: Projektleitung
 logo: assets/logo/logo.svg
 kapitel:
+  - 01-einstein-motorsport.md
+  - 02-saison-und-team.md
+  - 03-slack-und-kalender.md
   - 05-arbeitssicherheit.md
 ---
 
