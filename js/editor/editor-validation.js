@@ -19,6 +19,9 @@
 
   const { el } = EM.require("js/core/dom.js");
   const { validateCourse } = EM.require("js/content/validate.js");
+  const { serializeChapter } = EM.require("js/content/serialize.js");
+  const { TRANSLATION_LANGUAGES, needsHumanTranslation, translationIssues } =
+    EM.require("js/content/translations.js");
 
   /**
    * Wartezeit (ms) nach der letzten Änderung, bevor die Prüfung läuft. Die Prüfung geht über
@@ -72,6 +75,32 @@
         courseModel(selectedEntry?.model ? selectedEntry : null),
         { didactic: true },
       );
+      // Handübersetzungen der Sicherheitsunterweisung gegen das Original prüfen.
+      for (const entry of state.doc.chapters) {
+        if (
+          entry.location !== "kapitel" ||
+          !entry.model ||
+          !needsHumanTranslation(entry.model)
+        ) {
+          continue;
+        }
+        const germanText = serializeChapter(entry.model);
+        for (const language of TRANSLATION_LANGUAGES) {
+          const translation = state.doc.translations?.find(
+            (item) =>
+              item.chapterFile === entry.file &&
+              item.language === language.code,
+          );
+          state.validation.push(
+            ...translationIssues(
+              entry.model,
+              germanText,
+              translation?.model ?? null,
+              language,
+            ),
+          );
+        }
+      }
       const currentPath = selectedEntry
         ? chapterPath(selectedEntry)
         : state.selection.kind === "glossary"

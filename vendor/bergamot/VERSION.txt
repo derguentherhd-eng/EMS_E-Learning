@@ -5,8 +5,14 @@ Lizenz: Mozilla Public License 2.0 (siehe LICENSE)
 Enthalten: translator.js (ES-Modul), worker/translator-worker.js, worker/bergamot-translator-worker.js,
 worker/bergamot-translator-worker.wasm (kompilierte Fassung des C++-Quelltexts im obigen Repository).
 
-Die Sprachmodelle liegen NICHT hier, sie werden beim ersten Umschalten von Mozillas Server geladen:
-https://bergamot.s3.amazonaws.com/models/index.json
+Die Sprachmodelle liegen NICHT hier, sie werden beim ersten Umschalten von Mozillas Servern geladen.
+registry.json (hier) listet sie mit Adresse, Größe und SHA-256-Prüfsumme:
+  – Paare aus https://bergamot.s3.amazonaws.com/models/index.json (Stand 2026-11-26)
+  – enfi (Finnisch) aus Firefox Remote Settings, Sammlung translations-models, Version 1.0 –
+    liegt in models/enfi/, weil Mozillas Firefox-Server Anfragen aus Chrome ablehnt (HTTP 406)
+    (https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/translations-models/records)
+Neue Sprache: Eintrag „en<code>“ ergänzen (nur Modelle der Architektur „tiny“ bzw. Version 1.x
+passen zu dieser Programmversion), dann in js/ui/language.js unter LANGUAGES eintragen.
 
 Aktualisieren: npm pack @browsermt/bergamot-translator@<version>, Dateien aus package/ hierher kopieren,
 Sprachauswahl im Kurs testen, Version oben eintragen.

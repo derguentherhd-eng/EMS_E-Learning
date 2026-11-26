@@ -12,7 +12,8 @@
  * Auf einem Webserver liest der Kurs direkt die .md-Dateien; dort wird die Datei nicht benutzt.
  *
  * Inhalt der Datei: kurs.md, glossar.md, die Kapitelvorlage, alle Dateien aus content/kapitel/
- * (auch nicht eingetragene, damit die Prüfseite sie findet) und das Logo als SVG-Text (für das
+ * (auch nicht eingetragene, damit die Prüfseite sie findet), die Handübersetzungen aus
+ * content/uebersetzungen/ und das Logo als SVG-Text (für das
  * PDF-Zertifikat, weil ein Bild von der Festplatte dort sonst nicht verwendet werden darf).
  *
  * Wenn du hier etwas ändern willst …
@@ -33,9 +34,14 @@
    * Welche Dateien gehören in die Offline-Datei?
    * @param {string[]} chapterFiles  Dateinamen in content/kapitel/
    * @param {string} [logoPath]      Pfad des Logos aus kurs.md
+   * @param {string[]} [translationFiles]  Dateinamen in content/uebersetzungen/
    * @returns {string[]}
    */
-  function collectMirrorPaths(chapterFiles, logoPath = "") {
+  function collectMirrorPaths(
+    chapterFiles,
+    logoPath = "",
+    translationFiles = [],
+  ) {
     const paths = [
       "content/kurs.md",
       "content/glossar.md",
@@ -43,6 +49,9 @@
     ];
     for (const file of chapterFiles) {
       paths.push(`content/kapitel/${file}`);
+    }
+    for (const file of [...translationFiles].sort()) {
+      paths.push(`content/uebersetzungen/${file}`);
     }
     if (/\.svg$/i.test(logoPath)) {
       paths.push(logoPath);

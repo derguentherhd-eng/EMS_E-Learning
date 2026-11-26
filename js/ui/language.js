@@ -5,8 +5,9 @@
  * Browser die Seite selbst in eine andere Sprache. Dafür läuft Bergamot (Mozilla, dieselbe Technik
  * wie die eingebaute Übersetzung von Firefox) als WebAssembly direkt auf dem Gerät:
  *   – Programm: vendor/bergamot/ (liegt im Kurs, MPL-2.0).
- *   – Sprachmodelle: werden beim ersten Umschalten einmalig von Mozillas Server geladen
- *     (REGISTRY_URL, etwa 20–25 MB je Richtung) und danach vom Browser-Cache genommen.
+ *   – Sprachmodelle: werden beim ersten Umschalten einmalig von Mozillas Servern geladen
+ *     (Verzeichnis: REGISTRY_PATH, etwa 20–25 MB je Richtung) und danach vom Browser-Cache
+ *     genommen.
  *     Die Texte selbst verlassen das Gerät nicht.
  *   – Für Deutsch gibt es nur das Modell Deutsch → Englisch. Alle anderen Sprachen laufen über
  *     Englisch als Zwischenschritt (Deutsch → Englisch → Zielsprache, doppelter Download).
@@ -19,6 +20,11 @@
  *   – Was später neu erscheint (Seitenwechsel, Rückmeldungen, Quiz), übersetzt ein
  *     MutationObserver automatisch. „Deutsch“ stellt alle Originaltexte wieder her.
  *   – Elemente mit translate="no" werden nie übersetzt (z. B. die Sprachauswahl selbst).
+ *   – Handübersetzte Inhalte (Sicherheitsunterweisung, js/content/translations.js) markiert die
+ *     Kursansicht mit data-human-translation und meldet ihren Text über protectHumanTranslation().
+ *     Texte daraus bleiben unangetastet; übersetzt werden dort nur Bedienelemente.
+ *   – Bei jedem Sprachwechsel meldet das Ereignis „em-language-change“ (am document) die neue
+ *     Sprache, damit die Kursansicht die passende Handübersetzung zeigen kann.
  *   – Die Wahl wird nur in diesem Browser gespeichert (localStorage, Schlüssel em-sprache).
  *   – Per Doppelklick geöffnet (file://) blockiert der Browser Module und Worker: Dann erklärt ein
  *     Hinweis, dass die Übersetzung nur über einen Webserver (GitHub Pages, Startskript) läuft.
@@ -27,7 +33,7 @@
  *
  * Wenn du hier etwas ändern willst …
  *   – Sprachen ergänzen oder entfernen: LANGUAGES (nur Sprachen, für die es ein Modell
- *     „en→xx“ in REGISTRY_URL gibt).
+ *     „en→xx“ in vendor/bergamot/registry.json gibt; siehe vendor/bergamot/VERSION.txt).
  *   – Welche Attribute mitübersetzt werden: ATTRIBUTES.
  *   – Was als Ganzes übersetzt wird: BLOCK_TAGS und INLINE_TAGS.
  */
@@ -40,8 +46,11 @@
   const STORAGE_KEY = "em-sprache";
   const SOURCE_LANGUAGE = "de";
 
-  /** Verzeichnis der Sprachmodelle (Mozilla, mit CORS-Freigabe für alle Webseiten). */
-  const REGISTRY_URL = "https://bergamot.s3.amazonaws.com/models/index.json";
+  /**
+   * Verzeichnis der Sprachmodelle: Liste mit Download-Adressen bei Mozilla (CORS-Freigabe für alle
+   * Webseiten) und Prüfsummen. Liegt im Kurs, damit auch Sprachen aus Firefox dazukommen können.
+   */
+  const REGISTRY_PATH = "vendor/bergamot/registry.json";
   /** Übersetzungsprogramm im Kurs (ES-Modul, startet seinen Worker selbst). */
   const TRANSLATOR_PATH = "vendor/bergamot/translator.js";
   /** Längste Wartezeit für den Download eines Sprachmodells. */
@@ -62,6 +71,7 @@
     { code: "et", name: "Eesti" },
     { code: "ru", name: "Русский" },
     { code: "uk", name: "Українська" },
+    { code: "fi", name: "Suomi" },
   ];
 
   /** Elemente, deren Inhalt nie übersetzt wird (Großschreibung wie in nodeName). */
@@ -142,6 +152,54 @@
   let engine = null;
   /** @type {MutationObserver|null} */
   let observer = null;
+  /** Handübersetzte Bereiche → ihr Text (Leerraum vereinheitlicht), siehe protectHumanTranslation(). */
+  const humanSources = new WeakMap();
+
+  /** @param {string} text */
+  function squash(text) {
+    return text.replace(/\s+/g, " ").trim();
+  }
+
+  /**
+   * Meldet einen handübersetzten Bereich. Texte, die wörtlich in sourceText stehen, übersetzt die
+   * automatische Übersetzung dort nicht – nur das, was das Programm selbst dazuschreibt (Knöpfe,
+   * Rückmeldungen wie „Richtig.“).
+   * @param {Element} container   trägt das Attribut data-human-translation
+   * @param {string} sourceText   Inhalt der Übersetzungsdatei
+   */
+  function protectHumanTranslation(container, sourceText) {
+    humanSources.set(container, squash(sourceText));
+  }
+
+  /**
+   * Stammt dieser Text aus einer Handübersetzung?
+   * @param {string} text
+   * @param {Element|null} element  Ort des Textes
+   * @returns {boolean}
+   */
+  function isHumanText(text, element) {
+    const host = element?.closest("[data-human-translation]");
+    const source = host ? humanSources.get(host) : undefined;
+    const value = squash(text);
+    return Boolean(source && value && source.includes(value));
+  }
+
+  /**
+   * Aktuelle Sprache der Seite ('de' = Original).
+   * @returns {string}
+   */
+  function currentLanguage() {
+    return target ?? SOURCE_LANGUAGE;
+  }
+
+  /** Meldet den Sprachwechsel an die Kursansicht. */
+  function announceLanguage() {
+    document.dispatchEvent(
+      new CustomEvent("em-language-change", {
+        detail: { language: currentLanguage() },
+      }),
+    );
+  }
 
   /** Deutscher Originaltext je Textknoten. */
   const originalText = new Map();
@@ -197,7 +255,7 @@
         .then(
           (module) =>
             new module.BatchTranslator({
-              registryUrl: REGISTRY_URL,
+              registryUrl: new URL(REGISTRY_PATH, document.baseURI).href,
               workers: 1,
               downloadTimeout: DOWNLOAD_TIMEOUT_MS,
             }),
@@ -286,7 +344,11 @@
     }
     // Liegt der Startpunkt in einem einfachen Block, wird der ganze Block übersetzt.
     const block = start.closest(BLOCK_SELECTOR);
-    if (block && isSimpleBlock(block)) {
+    if (
+      block &&
+      isSimpleBlock(block) &&
+      !block.closest("[data-human-translation]")
+    ) {
       blocks.push(block);
       return { blocks, texts, elements };
     }
@@ -307,7 +369,10 @@
             if (isExcluded(node)) {
               return NodeFilter.FILTER_REJECT;
             }
-            if (isSimpleBlock(node)) {
+            if (
+              isSimpleBlock(node) &&
+              !node.closest("[data-human-translation]")
+            ) {
               blocks.push(node);
               return NodeFilter.FILTER_REJECT;
             }
@@ -369,7 +434,11 @@
    * @returns {Promise<void>|null}
    */
   function translateText(node) {
-    if (translatedText.get(node) === node.data || pending.has(node)) {
+    if (
+      translatedText.get(node) === node.data ||
+      pending.has(node) ||
+      isHumanText(node.data, node.parentElement)
+    ) {
       return null;
     }
     const german = node.data;
@@ -399,7 +468,11 @@
       for (const name of ATTRIBUTES) {
         const german = element.getAttribute(name);
         const saved = originalAttributes.get(element);
-        if (!german || saved?.[name]?.translated === german) {
+        if (
+          !german ||
+          saved?.[name]?.translated === german ||
+          isHumanText(german, element)
+        ) {
           continue;
         }
         jobs.push(
@@ -559,6 +632,7 @@
       }
       if (code === SOURCE_LANGUAGE) {
         target = null;
+        announceLanguage();
         observer?.disconnect();
         observer = null;
         document.documentElement.lang = SOURCE_LANGUAGE;
@@ -574,6 +648,7 @@
         return;
       }
       target = code;
+      announceLanguage();
       select.value = code;
       document.documentElement.lang = code;
       select.setAttribute("aria-busy", "true");
@@ -604,5 +679,10 @@
     }
   }
 
-  EM.define("js/ui/language.js", { setupLanguageSelect, LANGUAGES });
+  EM.define("js/ui/language.js", {
+    setupLanguageSelect,
+    currentLanguage,
+    protectHumanTranslation,
+    LANGUAGES,
+  });
 })();

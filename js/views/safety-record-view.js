@@ -13,6 +13,7 @@
   "use strict";
 
   const { el } = EM.require("js/core/dom.js");
+  const { currentLanguage } = EM.require("js/ui/language.js");
   const { isSafetyChapter } = EM.require("js/content/documents.js");
   const { downloadSafetyRecord } = EM.require("js/course/safety-record.js");
 
@@ -110,6 +111,9 @@
             chapterTitle: chapter.meta.titel,
             chapterVersion: chapter.meta.version,
             team: course.meta.team ?? "",
+            // Sprache der Unterweisung: Der Nachweis bleibt deutsch, Unterschriftsfelder
+            // bekommen zusätzlich eine Beschriftung in dieser Sprache.
+            language: currentLanguage(),
           },
           course.meta.logo ?? "",
         );

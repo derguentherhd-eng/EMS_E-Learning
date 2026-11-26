@@ -29,6 +29,12 @@
   const { renderNotFound } = EM.require("js/views/not-found.js");
   const { isSafetyChapter } = EM.require("js/content/documents.js");
   const { renderSafetyRecord } = EM.require("js/views/safety-record-view.js");
+  const { localized, markLocalized, localizedNotice } = EM.require(
+    "js/views/chapter.js",
+  );
+  const { isUsable, needsHumanTranslation } = EM.require(
+    "js/content/translations.js",
+  );
 
   /**
    * @param {import("./view-types.js").ViewContext} context
@@ -105,14 +111,20 @@
 
     const threshold = passThreshold(course, chapter);
     const container = el("div", { class: "quiz-view" });
+    // Sicherheitsunterweisung: Fragen aus der geprüften Handübersetzung (siehe chapter.js).
+    const human = localized(course, chapter);
+    const shown = human && isUsable(human) ? human.chapter : chapter;
+    if (human) {
+      markLocalized(container, human);
+    }
     let lastAsked = new Set();
 
     function start(focus) {
       const questions = drawQuestions(
-        chapter.quiz.data,
+        shown.quiz.data,
         Math.random,
         lastAsked,
-      ).map((question) => ({ question, chapter, chapterIndex: index }));
+      ).map((question) => ({ question, chapter: shown, chapterIndex: index }));
       lastAsked = new Set(questions.map((entry) => entry.question.text));
       runQuiz(container, {
         questions,
@@ -155,14 +167,14 @@
     return {
       title: `Quiz · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
       chapterId: chapter.id,
-      node: reviewMode
-        ? el(
-            "div",
-            { class: "stack" },
-            renderSkipNotice(course, index),
-            container,
-          )
-        : container,
+      node: el(
+        "div",
+        { class: "stack" },
+        human && !isUsable(human) ? localizedNotice(human) : null,
+        reviewMode ? renderSkipNotice(course, index) : null,
+        container,
+      ),
+      languageDependent: needsHumanTranslation(chapter),
     };
   }
 

@@ -28,6 +28,11 @@
   const { isReleased, isSafetyChapter } = EM.require("js/content/documents.js");
   const { renderNotFound } = EM.require("js/views/not-found.js");
   const { renderSafetyRecord } = EM.require("js/views/safety-record-view.js");
+  const { currentLanguage, protectHumanTranslation } =
+    EM.require("js/ui/language.js");
+  const { humanTranslation, isUsable, needsHumanTranslation } = EM.require(
+    "js/content/translations.js",
+  );
 
   /**
    * Pause (ms), in der der Hinweis unter „Weiter" leer bleibt, bevor er neu gesetzt wird.
@@ -51,12 +56,17 @@
       );
     }
     const pageNumber = Number(route.params.page);
-    const page = chapter.pages[pageNumber - 1];
-    if (!page) {
+    if (!chapter.pages[pageNumber - 1]) {
       return renderNotFound(
         `Das Kapitel „${chapter.meta.titel}" hat keine Seite ${pageNumber}.`,
       );
     }
+    // Sicherheitsunterweisung in einer anderen Sprache: geprüfte Handübersetzung statt
+    // maschineller Übersetzung (js/content/translations.js). Fortschritt und Links laufen weiter
+    // über das deutsche Kapitel (gleiche ID und Seitenzahl).
+    const human = localized(course, chapter);
+    const shown = human && isUsable(human) ? human.chapter : chapter;
+    const page = shown.pages[pageNumber - 1];
 
     const reviewMode = store.get().reviewMode;
     store.update((state) => {
@@ -71,9 +81,7 @@
     });
     const total = chapter.pages.length;
     const elements =
-      pageNumber === 1
-        ? [...chapter.preamble, ...page.elements]
-        : page.elements;
+      pageNumber === 1 ? [...shown.preamble, ...page.elements] : page.elements;
 
     const article = el(
       "article",
@@ -87,22 +95,26 @@
           el(
             "p",
             {},
-            `Sektor ${index + 1} · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
+            `Sektor ${index + 1} · ${shown.meta.kurztitel ?? shown.meta.titel}`,
           ),
           el(
             "p",
             {},
-            `Seite ${pageNumber} von ${total} · ca. ${chapter.meta.dauer} min`,
+            `Seite ${pageNumber} von ${total} · ca. ${shown.meta.dauer} min`,
           ),
         ),
         statusBar(pageNumber, total),
         el("h1", { class: "view-title" }, page.title),
       ),
       reviewMode ? reviewNotice() : null,
-      pageNumber === 1 ? renderFirstPageIntro(chapter, reviewMode) : null,
+      pageNumber === 1 ? renderFirstPageIntro(shown, reviewMode) : null,
       pageNumber === 1 ? renderSafetyRecord({ course, chapter, store }) : null,
       renderElements(elements, context),
     );
+
+    if (human) {
+      markLocalized(article, human);
+    }
 
     const pager = renderPager(chapter, pageNumber, total);
     // Prüfmodus (Einstellungen): „Weiter" nie sperren, damit die Redaktion schnell durchklicken kann.
@@ -111,10 +123,63 @@
     }
 
     return {
-      title: `${page.title} · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
+      title: `${page.title} · ${shown.meta.kurztitel ?? shown.meta.titel}`,
       chapterId: chapter.id,
-      node: el("div", {}, article, pager),
+      node: el(
+        "div",
+        {},
+        human && !isUsable(human) ? localizedNotice(human) : null,
+        article,
+        pager,
+      ),
+      languageDependent: needsHumanTranslation(chapter),
     };
+  }
+
+  /**
+   * Handübersetzung für die gewählte Sprache – nur bei Kapiteln, die eine brauchen
+   * (Sicherheitsunterweisung), und nur, wenn nicht Deutsch gewählt ist.
+   * @param {Object} course
+   * @param {Object} chapter  deutsches Kapitel
+   * @returns {ReturnType<typeof humanTranslation>|null}
+   */
+  function localized(course, chapter) {
+    const language = currentLanguage();
+    return needsHumanTranslation(chapter) && language !== "de"
+      ? humanTranslation(course, chapter, language)
+      : null;
+  }
+
+  /**
+   * Kennzeichnet den Inhalt für die automatische Übersetzung: Handübersetzung schützen bzw.
+   * das deutsche Original ganz von der maschinellen Übersetzung ausnehmen.
+   * @param {HTMLElement} article
+   * @param {Object} human  Eintrag aus humanTranslation()
+   */
+  function markLocalized(article, human) {
+    if (isUsable(human)) {
+      article.setAttribute("data-human-translation", human.chapter.language);
+      article.lang = human.chapter.language;
+      protectHumanTranslation(article, human.text);
+    } else {
+      article.setAttribute("translate", "no");
+      article.lang = "de";
+    }
+  }
+
+  /**
+   * Hinweis, solange keine passende Handübersetzung da ist (wird selbst maschinell übersetzt).
+   * @param {{state: string}} human
+   * @returns {HTMLElement}
+   */
+  function localizedNotice(human) {
+    return el(
+      "p",
+      { class: "notice", role: "status" },
+      human.state === "laden"
+        ? "Die geprüfte Übersetzung der Sicherheitsunterweisung wird geladen …"
+        : "Für diese Sprache gibt es noch keine geprüfte Übersetzung der Sicherheitsunterweisung. Sie wird deshalb auf Deutsch angezeigt – Sicherheitsregeln werden nicht maschinell übersetzt.",
+    );
   }
 
   /**
@@ -296,5 +361,10 @@
     );
   }
 
-  EM.define("js/views/chapter.js", { renderChapter });
+  EM.define("js/views/chapter.js", {
+    renderChapter,
+    localized,
+    markLocalized,
+    localizedNotice,
+  });
 })();

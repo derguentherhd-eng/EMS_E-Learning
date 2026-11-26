@@ -22,6 +22,7 @@
   const { CHAPTER_DIR, createFileListReader, loadCourse } = EM.require(
     "js/content/loader.js",
   );
+  const { checkTranslations } = EM.require("js/content/translations.js");
   const { collectImages, summarize, validateCourse } = EM.require(
     "js/content/validate.js",
   );
@@ -76,11 +77,12 @@
       return;
     }
     const errors = validateCourse(course, { sources: course.sources });
-    const [imageErrors, listErrors] = await Promise.all([
+    const [imageErrors, listErrors, translationErrors] = await Promise.all([
       checkImages(course),
       checkUnlistedChapters(course),
+      checkTranslations(course, course.read),
     ]);
-    errors.push(...imageErrors, ...listErrors);
+    errors.push(...imageErrors, ...listErrors, ...translationErrors);
     showSummary(summarize(errors));
     showResults(errors, course);
   }

@@ -6,6 +6,16 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Sicherheitsunterweisung handübersetzt in 11 Sprachen, Finnisch (2026-11-26)
+
+- Die Sicherheitsunterweisung wird nicht mehr maschinell übersetzt. Neu: geprüfte Übersetzungen in `content/uebersetzungen/05-arbeitssicherheit.<code>.md` für en, fr, es, it, pt, cs, bg, et, ru, uk, fi – gleicher Aufbau wie das Original, geprüft mit `compareStructure()` (`js/content/translations.js`), Prüfsumme `quellstand`.
+- Kurs: Bei gewählter Sprache zeigt die Sicherheitsunterweisung (Seiten und Quiz) die Handübersetzung; die automatische Übersetzung übersetzt dort nur Bedienelemente (`protectHumanTranslation()` in `js/ui/language.js`). Fehlt oder veraltet eine Übersetzung, erscheint das deutsche Original mit Hinweis.
+- Editor: „Übersetzungen“ unter dem Sicherheitskapitel, Bearbeitung Teil für Teil neben dem Original (`js/editor/translation-editor.js`), Prüfung und Speichern in allen drei Modi, Offline-Datei enthält die Übersetzungen.
+- Prüfseite und Selbsttests melden fehlende, veraltete oder unpassende Übersetzungen.
+- PDF-Nachweis bleibt deutsch, nennt die Sprache der Unterweisung und beschriftet Unterschriften und Abgabe zusätzlich in dieser Sprache (kyrillische Sprachen: Englisch).
+- Sprachauswahl um Finnisch erweitert (Modell in `vendor/bergamot/models/enfi/`, Verzeichnis `vendor/bergamot/registry.json`).
+- Zuordnungsübung: Rückmeldung „richtig ist: …“ ohne Anführungszeichen, Kategorie als eigener Textknoten.
+
 ### Sprachauswahl mit Übersetzung im Browser (2026-11-26)
 
 - Der Schalter „English“ (Chrome-Translator-API bzw. Browser-Anleitung) ist durch eine Sprachauswahl mit 11 Sprachen ersetzt. Übersetzt wird mit Bergamot 0.4.9 (Mozilla, MPL-2.0, `vendor/bergamot/`) als WebAssembly im Browser, in allen gängigen Browsern. Sprachmodelle kommen beim ersten Umschalten von Mozillas Server.

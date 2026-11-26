@@ -42,6 +42,9 @@
     "js/editor/quiz-editor.js",
   );
   const { renderGlossaryEditor } = EM.require("js/editor/glossary-editor.js");
+  const { renderTranslationEditor } = EM.require(
+    "js/editor/translation-editor.js",
+  );
   const { addDrag, movePage, movePageTo, duplicatePage } = EM.require(
     "js/editor/canvas-dnd.js",
   );
@@ -80,6 +83,9 @@
     }
     if (selection.kind === "glossary") {
       return renderGlossaryEditor(editor);
+    }
+    if (selection.kind === "translation") {
+      return renderTranslationEditor(editor);
     }
     const entry = editor.entryByFile(selection.file);
     if (!entry) {

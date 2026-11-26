@@ -23,6 +23,15 @@
     font-size: var(--step--1);
   }
 
+  /* Zwischenüberschrift im Baum, z. B. „Übersetzungen“ beim Sicherheitskapitel */
+  .tree__label {
+    display: block;
+    padding: var(--space-3xs) var(--space-2xs);
+    color: var(--color-text-muted, var(--color-text));
+    font-size: var(--step--1);
+    font-weight: var(--font-weight-medium);
+  }
+
   .tree__link {
     border-radius: var(--radius-s);
     display: block;

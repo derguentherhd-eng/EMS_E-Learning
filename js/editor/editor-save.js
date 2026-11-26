@@ -25,6 +25,7 @@
   const { serializeChapter, serializeCourse, serializeGlossary } = EM.require(
     "js/content/serialize.js",
   );
+  const { TRANSLATION_DIR } = EM.require("js/content/translations.js");
   const { downloadBlob } = EM.require("js/editor/workspace.js");
   const { buildMirrorScript, collectMirrorPaths, parseMirrorScript } =
     EM.require("js/content/mirror.js");
@@ -102,6 +103,18 @@
           });
         }
       }
+      // Handübersetzungen der Sicherheitsunterweisung
+      for (const entry of state.doc.translations ?? []) {
+        const path = `${TRANSLATION_DIR}/${entry.file}`;
+        const text = serializeChapter(entry.model);
+        if (text !== baselineText(path)) {
+          changes.push({
+            path,
+            text,
+            label: `Übersetzung ${entry.file}`,
+          });
+        }
+      }
       for (const [path, asset] of state.pendingAssets) {
         changes.push({ path, label: "Bild", blob: asset.blob });
       }
@@ -141,9 +154,13 @@
         .map((entry) => entry.file)
         .sort();
       const files = {};
+      const translationFiles = (state.doc.translations ?? [])
+        .map((entry) => entry.file)
+        .sort();
       for (const path of collectMirrorPaths(
         chapterFiles,
         String(state.doc.course.meta.logo ?? ""),
+        translationFiles,
       )) {
         let text = changed.get(path);
         if (text === undefined && path === paths.template) {
@@ -289,8 +306,15 @@
         .filter((name) => name.endsWith(".md"))
         .sort();
       const logoPath = String(state.doc.course.meta.logo ?? "");
+      const translationFiles = (
+        await workspace.list(TRANSLATION_DIR).catch(() => [])
+      ).filter((name) => name.endsWith(".md"));
       const files = {};
-      for (const path of collectMirrorPaths(chapterFiles, logoPath)) {
+      for (const path of collectMirrorPaths(
+        chapterFiles,
+        logoPath,
+        translationFiles,
+      )) {
         const file = await workspace.readFile(path);
         if (file) {
           files[path] = normalizeText(file.text);

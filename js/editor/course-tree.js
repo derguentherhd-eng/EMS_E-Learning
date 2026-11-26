@@ -14,6 +14,9 @@
 (function () {
   "use strict";
 
+  const { TRANSLATION_LANGUAGES, needsHumanTranslation } = EM.require(
+    "js/content/translations.js",
+  );
   const { el } = EM.require("js/core/dom.js");
 
   /**
@@ -44,6 +47,49 @@
           ...extra,
         },
         text,
+      );
+    }
+
+    /**
+     * Sicherheitsunterweisung: Liste der Handübersetzungen (js/editor/translation-editor.js).
+     * @returns {HTMLElement|null}
+     */
+    function translationItems(entry, model) {
+      if (!needsHumanTranslation(model)) {
+        return null;
+      }
+      return el(
+        "li",
+        {},
+        el("span", { class: "tree__label" }, "Übersetzungen"),
+        el(
+          "ul",
+          { class: "tree__pages" },
+          TRANSLATION_LANGUAGES.map((language) => {
+            const present = state.doc.translations.some(
+              (item) =>
+                item.chapterFile === entry.file &&
+                item.language === language.code,
+            );
+            return el(
+              "li",
+              {},
+              link(
+                `${language.name}${present ? "" : " (fehlt)"}`,
+                selection.kind === "translation" &&
+                  selection.file === entry.file &&
+                  selection.language === language.code,
+                () =>
+                  editor.select({
+                    kind: "translation",
+                    file: entry.file,
+                    language: language.code,
+                  }),
+                { lang: language.code },
+              ),
+            );
+          }),
+        ),
       );
     }
 
@@ -162,6 +208,7 @@
                   ),
                 ),
               ),
+              translationItems(entry, model),
               el(
                 "li",
                 {},

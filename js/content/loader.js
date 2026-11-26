@@ -258,6 +258,8 @@
       glossary,
       errors,
       sources,
+      // Zum späteren Nachladen (z. B. Handübersetzungen der Sicherheitsunterweisung).
+      read: readText,
     };
   }
 

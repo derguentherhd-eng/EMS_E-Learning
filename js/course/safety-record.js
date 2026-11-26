@@ -44,6 +44,9 @@
     // Angaben (Liste aus Beschriftung und Wert)
     factsY: 136,
     factsStep: 13,
+    factsStepTight: 12,
+    // Bis zu so vielen Angaben gilt der normale Abstand
+    factsRegular: 5,
     factsValueOffset: 5.5,
     // Hinweis zur Abgabe (gelbe Box)
     boxY: 207,
@@ -56,6 +59,8 @@
     signY: 262,
     signGap: 10,
     signLabelOffset: 5,
+    // Zusatzzeile in der Sprache der Unterweisung unter der Unterschriftsbeschriftung
+    signSecondOffset: 9,
   };
 
   const {
@@ -67,6 +72,72 @@
     safeFileName,
     setupFonts,
   } = EM.require("js/course/certificate.js");
+
+  /**
+   * Zweite Sprache auf dem Nachweis: Der Nachweis ist immer deutsch. Hat jemand die Unterweisung
+   * in einer anderen Sprache gemacht, stehen bei den auszufüllenden Feldern (Unterschriften,
+   * Abgabe) zusätzlich Beschriftungen in dieser Sprache.
+   *   german  Name der Sprache auf Deutsch (für „Sprache der Unterweisung“)
+   *   pdf     Sprache der Zusatzzeilen. Die PDF-Schrift (Lato) hat keine kyrillischen Zeichen –
+   *           für Bulgarisch, Russisch und Ukrainisch stehen die Zusatzzeilen deshalb auf Englisch.
+   */
+  const SECOND_LANGUAGE = {
+    en: { german: "Englisch", pdf: "en" },
+    fr: { german: "Französisch", pdf: "fr" },
+    es: { german: "Spanisch", pdf: "es" },
+    it: { german: "Italienisch", pdf: "it" },
+    pt: { german: "Portugiesisch", pdf: "pt" },
+    cs: { german: "Tschechisch", pdf: "cs" },
+    bg: { german: "Bulgarisch", pdf: "en" },
+    et: { german: "Estnisch", pdf: "et" },
+    ru: { german: "Russisch", pdf: "en" },
+    uk: { german: "Ukrainisch", pdf: "en" },
+    fi: { german: "Finnisch", pdf: "fi" },
+  };
+
+  /** Zusatzbeschriftungen je Sprache: Unterschrift Teilnehmende, Unterschrift Projektleitung, Abgabe. */
+  const SECOND_LABELS = {
+    en: [
+      "Date, signature of participant",
+      "Date, signature of project lead",
+      "Hand in to the project lead",
+    ],
+    fr: [
+      "Date, signature du ou de la participant(e)",
+      "Date, signature de la direction du projet",
+      "À remettre à la direction du projet",
+    ],
+    es: [
+      "Fecha, firma del o de la participante",
+      "Fecha, firma de la dirección del proyecto",
+      "Entregar a la dirección del proyecto",
+    ],
+    it: [
+      "Data, firma del/della partecipante",
+      "Data, firma della direzione del progetto",
+      "Da consegnare alla direzione del progetto",
+    ],
+    pt: [
+      "Data, assinatura do/da participante",
+      "Data, assinatura da direção do projeto",
+      "Entregar à direção do projeto",
+    ],
+    cs: [
+      "Datum, podpis účastníka/účastnice",
+      "Datum, podpis vedení projektu",
+      "Odevzdej vedení projektu",
+    ],
+    et: [
+      "Kuupäev, osaleja allkiri",
+      "Kuupäev, projektijuhtkonna allkiri",
+      "Anna üle projektijuhtkonnale",
+    ],
+    fi: [
+      "Päivämäärä, osallistujan allekirjoitus",
+      "Päivämäärä, projektinjohdon allekirjoitus",
+      "Palauta projektinjohdolle",
+    ],
+  };
 
   /** Hinweis auf jedem Nachweis: wohin damit. */
   const HANDOVER_NOTE =
@@ -81,6 +152,7 @@
    * @property {string} chapterTitle   z. B. „Arbeitssicherheit"
    * @property {number} chapterVersion Version des Kapitels
    * @property {string} team           z. B. „Einstein Motorsport"
+   * @property {string} [language]     Sprache, in der die Unterweisung gemacht wurde ('de' oder fehlt = Deutsch)
    */
 
   /**
@@ -163,6 +235,9 @@
       { maxWidth: W - 2 * M },
     );
 
+    const second = SECOND_LANGUAGE[data.language ?? "de"] ?? null;
+    const labels = second ? SECOND_LABELS[second.pdf] : null;
+
     // ── Angaben ──
     const facts = [
       ["Abgeschlossen am", formatGermanDate(data.date)],
@@ -172,6 +247,7 @@
       ],
       ["Bestes Ergebnis", `${data.percent} %`],
       ["Version der Unterweisung", String(data.chapterVersion)],
+      ...(second ? [["Sprache der Unterweisung", second.german]] : []),
       [
         "Prüfcode",
         createVerificationCode(
@@ -181,8 +257,13 @@
         ),
       ],
     ];
+    // Mit Sprachzeile ist die Liste länger – dann etwas enger, damit sie über der Box bleibt.
+    const factsStep =
+      facts.length > LAYOUT.factsRegular
+        ? LAYOUT.factsStepTight
+        : LAYOUT.factsStep;
     facts.forEach(([label, value], index) => {
-      const y = LAYOUT.factsY + index * LAYOUT.factsStep;
+      const y = LAYOUT.factsY + index * factsStep;
       font("medium");
       doc.setFontSize(9);
       doc.setTextColor(...GREY);
@@ -209,9 +290,11 @@
     );
     doc.setTextColor(...DARK);
     font("bold");
-    doc.setFontSize(12);
+    doc.setFontSize(labels ? 11 : 12);
     doc.text(
-      "Bei der Projektleitung abgeben",
+      labels
+        ? `Bei der Projektleitung abgeben / ${labels[2]}`
+        : "Bei der Projektleitung abgeben",
       M + LAYOUT.boxPadding,
       boxY + LAYOUT.boxTitleOffset,
     );
@@ -244,6 +327,15 @@
       W - M - half,
       signY + LAYOUT.signLabelOffset,
     );
+    if (labels) {
+      doc.setFontSize(8);
+      doc.text(labels[0], M, signY + LAYOUT.signSecondOffset, {
+        maxWidth: half,
+      });
+      doc.text(labels[1], W - M - half, signY + LAYOUT.signSecondOffset, {
+        maxWidth: half,
+      });
+    }
 
     // ── Fuß ──
     doc.setFontSize(8);

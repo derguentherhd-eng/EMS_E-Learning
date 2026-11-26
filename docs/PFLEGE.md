@@ -232,6 +232,30 @@ Sprachen zu pflegen**.
   Umgangssprache** schreiben. Texte in Grafiken (SVG-Bilder) werden nicht übersetzt.
 - Sprachen ergänzen oder entfernen: Liste `LANGUAGES` in `js/ui/language.js`.
 
+## 6b. Sicherheitsunterweisung in anderen Sprachen (Handübersetzungen)
+
+Sicherheitsregeln werden **nicht maschinell übersetzt**. Für das Sicherheitskapitel gibt es deshalb
+für jede Sprache der Auswahl eine geprüfte Übersetzung:
+
+- Ablage: `content/uebersetzungen/05-arbeitssicherheit.<code>.md` (z. B. `.en.md`, `.fr.md`).
+- Aufbau: genau wie das deutsche Kapitel – gleiche Seiten, Bausteine, Antworten (`- [x]`),
+  Steuerzeichen (`=>`, `|`, `>`, `~`). Im Kopfbereich zusätzlich `sprache`, `quelle` und
+  `quellstand` (Prüfsumme des deutschen Textes, aus dem übersetzt wurde).
+- Im Kurs: Wer eine Sprache wählt, sieht die Sicherheitsunterweisung in dieser Fassung. Knöpfe und
+  Rückmeldungen („Antworten prüfen“, „Richtig.“) übersetzt weiterhin die automatische Übersetzung.
+- **Passt eine Übersetzung nicht** (andere `version`, anderer Aufbau) oder fehlt sie, zeigt der Kurs
+  das deutsche Original – nie eine maschinelle Übersetzung.
+- **Ändert sich das deutsche Kapitel**, müssen alle Übersetzungen nachgezogen werden. Die Prüfseite
+  und der Editor melden das („deutscher Text wurde seit dieser Übersetzung geändert“). Bei einer
+  neuen `version` gilt die alte Übersetzung nicht mehr.
+- **Im Editor:** Sicherheitskapitel aufklappen → „Übersetzungen“ → Sprache wählen. Links steht das
+  deutsche Original, rechts die Übersetzung, Teil für Teil (Kopfbereich, Seiten, Quiz). Oben steht,
+  ob sie zum Original passt. Nach dem Nachziehen „als aktuell markieren“.
+- **PDF-Nachweis:** bleibt immer deutsch. Wurde die Unterweisung in einer anderen Sprache gemacht,
+  steht das auf dem Nachweis, und Unterschriftsfelder und Abgabehinweis haben eine zweite Zeile in
+  dieser Sprache (bei Bulgarisch, Russisch, Ukrainisch auf Englisch – die PDF-Schrift hat keine
+  kyrillischen Zeichen).
+
 ## 7. Kapitel anlegen, umsortieren, deaktivieren, archivieren, wiederherstellen
 
 | Aufgabe | Im Editor | Von Hand |

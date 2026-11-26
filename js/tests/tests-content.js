@@ -21,6 +21,13 @@
   const { createDefaultReader, loadCourse } = EM.require(
     "js/content/loader.js",
   );
+  const {
+    TRANSLATION_LANGUAGES,
+    needsHumanTranslation,
+    parseTranslation,
+    translationPath,
+    translationStatus,
+  } = EM.require("js/content/translations.js");
   const { assertEqual, assertChapterRoundTrip, group, stripVolatile, test } =
     EM.require("js/tests/test-utils.js");
 
@@ -65,6 +72,34 @@
           continue;
         }
         test(path, () => assertChapterRoundTrip(text, path.split("/").pop()));
+      }
+
+      // Handübersetzungen der Sicherheitsunterweisung: vorhanden, gleicher Aufbau, aktuell.
+      group("Handübersetzungen (content/uebersetzungen/)");
+      for (const chapter of course.chapters.filter(needsHumanTranslation)) {
+        for (const language of TRANSLATION_LANGUAGES) {
+          const path = translationPath(chapter.file, language.code);
+          const text = await read(path).catch(() => null);
+          test(`${path} passt zum Original`, () => {
+            const translation =
+              text === null
+                ? null
+                : parseTranslation(text, chapter.file, language.code);
+            const status = translationStatus(
+              chapter,
+              course.sources[chapter.path],
+              translation,
+            );
+            assertEqual(
+              { state: status.state, problems: status.problems },
+              { state: "aktuell", problems: [] },
+            );
+          });
+          if (text !== null) {
+            test(`${path} Round-Trip`, () =>
+              assertChapterRoundTrip(text, chapter.file));
+          }
+        }
       }
     })();
   }

@@ -91,6 +91,7 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/content/documents.js` | Kapitel, Kurs, Glossar zerlegen; Bausteinkopf; Sicherheitskapitel-Erkennung |
 | `js/content/serialize.js` | Modell → kanonisches Kursdown |
 | `js/content/loader.js` | Alle Inhaltsdateien laden (`createDefaultReader`, `createFetchReader`, `createFileListReader`), Bestehensgrenze |
+| `js/content/translations.js` | Handübersetzungen der Sicherheitsunterweisung (`content/uebersetzungen/`): laden, Aufbau mit dem Original vergleichen (`compareStructure`), Prüfsumme `quellstand`, Meldungen für Prüfseite/Editor |
 | `js/content/mirror.js` | `content/inhalte.js` erzeugen (`buildMirrorScript`) und lesen |
 | `js/content/validate.js` | Alle Prüfregeln, Bildsammlung, Zusammenfassung |
 | `js/blocks/registry.js` | Liste aller Bausteine (Palette in dieser Reihenfolge) |

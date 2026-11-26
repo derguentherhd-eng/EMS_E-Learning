@@ -56,6 +56,8 @@
   let course = null;
   let sectorBar = null;
   let currentView = null;
+  /** @type {import('../core/router.js').Route|null} */
+  let currentRoute = null;
   let courseTitle = "Rookie-Onboarding";
 
   /**
@@ -63,6 +65,7 @@
    * @param {import('../core/router.js').Route} route
    */
   function showRoute(route) {
+    currentRoute = route;
     currentView?.destroy?.();
     currentView = VIEWS[route.name]({ route, course, store });
     main.classList.toggle("page--wide", Boolean(currentView.wide));
@@ -164,6 +167,32 @@
     event.preventDefault();
     focusHeading();
   });
+
+  /**
+   * Sprachwechsel bzw. nachgeladene Handübersetzung: Ansichten, deren Inhalt von der Sprache
+   * abhängt (Sicherheitsunterweisung, js/content/translations.js), neu zeichnen. Die Leseposition
+   * bleibt dabei erhalten.
+   */
+  function refreshLanguageDependentView() {
+    if (!course || !currentRoute || !currentView?.languageDependent) {
+      return;
+    }
+    const scroll = window.scrollY;
+    currentView?.destroy?.();
+    currentView = VIEWS[currentRoute.name]({
+      route: currentRoute,
+      course,
+      store,
+    });
+    main.replaceChildren(currentView.node);
+    document.title = `${currentView.title} – ${courseTitle}`;
+    window.scrollTo({ top: scroll });
+  }
+  document.addEventListener("em-language-change", refreshLanguageDependentView);
+  document.addEventListener(
+    "em-translation-loaded",
+    refreshLanguageDependentView,
+  );
 
   // ── Start ──
   async function init() {

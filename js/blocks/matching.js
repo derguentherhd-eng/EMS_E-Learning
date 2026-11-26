@@ -197,11 +197,17 @@
               el(
                 "strong",
                 {},
-                ok
-                  ? "Richtig. "
-                  : select.value
-                    ? `Nicht ganz – richtig ist „${item.category}". `
-                    : `Noch offen – richtig ist „${item.category}". `,
+                // Kategorie als eigener Textknoten: So erkennt die automatische Übersetzung sie
+                // als Kursinhalt (Handübersetzung bleibt unangetastet, siehe js/ui/language.js).
+                ...(ok
+                  ? ["Richtig. "]
+                  : [
+                      select.value
+                        ? "Nicht ganz – richtig ist: "
+                        : "Noch offen – richtig ist: ",
+                      item.category,
+                      ". ",
+                    ]),
               ),
               item.explanation ? context.renderInline(item.explanation) : null,
             ),

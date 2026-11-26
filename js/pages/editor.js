@@ -44,6 +44,13 @@
     isSafetyChapter,
   } = EM.require("js/content/documents.js");
   const {
+    TRANSLATION_LANGUAGES,
+    needsHumanTranslation,
+    parseTranslation,
+    translationFileName,
+    translationPath,
+  } = EM.require("js/content/translations.js");
+  const {
     serializeChapter,
     serializeCourse,
     serializeElement,
@@ -548,10 +555,38 @@
       await load(file, "archiv");
     }
 
+    // Handübersetzungen der Sicherheitsunterweisung (js/editor/translation-editor.js).
+    const translations = [];
+    for (const entry of chapters) {
+      if (
+        entry.location !== "kapitel" ||
+        !entry.model ||
+        !needsHumanTranslation(entry.model)
+      ) {
+        continue;
+      }
+      for (const language of TRANSLATION_LANGUAGES) {
+        const path = translationPath(entry.file, language.code);
+        const text = await read(path).catch(() => null);
+        if (text === null) {
+          continue;
+        }
+        const model = parseTranslation(text, entry.file, language.code);
+        state.files[path].canonical = serializeChapter(model);
+        translations.push({
+          chapterFile: entry.file,
+          language: language.code,
+          file: translationFileName(entry.file, language.code),
+          model,
+        });
+      }
+    }
+
     state.doc = {
       course: { meta: course.meta, welcome: course.welcome },
       glossary: parseGlossary(glossaryText).entries,
       chapters,
+      translations,
     };
     state.history = createHistory();
     state.selection = { kind: "course" };
