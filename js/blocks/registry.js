@@ -37,6 +37,7 @@
   const timeline = EM.require("js/blocks/timeline.js").default;
   const checklist = EM.require("js/blocks/checklist.js").default;
   const quiz = EM.require("js/blocks/quiz-block.js").default;
+  const pictogram = EM.require("js/blocks/pictogram-block.js").default;
 
   /**
    * @typedef {Object} FieldSchema
@@ -94,6 +95,7 @@
     teams,
     timeline,
     checklist,
+    pictogram,
     quiz,
   ];
 

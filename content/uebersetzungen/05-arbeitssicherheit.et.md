@@ -14,7 +14,7 @@ lernziele:
   - Sa valmistad oma töökoha ette, koristad selle pärast tööd ja tead, mida hädaolukorras teha.
 sprache: et
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## Ohutus ennekõike
@@ -154,8 +154,8 @@ Eelmise lehe reeglid tunduvad ranged. Siin näed, miks. Iga näide on töökodad
 
 **Tagajärg:** sõrmed rebitakse käest välja, sageli **koos kõõlusega**, mis tõmmatakse küünarvarrest välja. Selliseid rebimisvigastusi ei saa enamasti tagasi õmmelda. Lisaks tulevad luumurrud ja ärarebitud nahk.
 
-![Vasakul: pöörlev puurpink kerib kinda peale ja tõmbab käe sisse. Paremal punases ringis: käsi, millest on sõrm koos kõõlusega välja rebitud](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Kinnas puurpingi juures võib sulle maksma minna sõrme.")
-
+:::piktogramm Kinnas puurpingi juures võib sulle maksma minna sõrme. motiv=handschuh-bohrer groesse=gross
+:::
 ### Sall, nöör või kett
 
 **Viga:** kannad masina juures salli, nööridega kapuutsiga pusa või kaelaketti.
@@ -164,8 +164,8 @@ Eelmise lehe reeglid tunduvad ranged. Siin näed, miks. Iga näide on töökodad
 
 **Tagajärg:** **kägistamine.** Teadvusekaotus mõne sekundiga, kaelalülide vigastused, **surm**. Keegi sinu kõrval ei ole piisavalt kiire, et seda peatada.
 
-![Vasakul: pöörlev puurpink kerib salli peale ja tõmbab inimese kaelast masina poole. Paremal punases ringis: pealuu](assets/bilder/sicherheit/folgen/schal-maschine.svg "Sall masina juures on eluohtlik.")
-
+:::piktogramm Sall masina juures on eluohtlik. motiv=schal-maschine groesse=gross
+:::
 ### Lahtised pikad juuksed
 
 **Viga:** kummardud lahtiste juustega töötava masina kohale.
@@ -174,8 +174,8 @@ Eelmise lehe reeglid tunduvad ranged. Siin näed, miks. Iga näide on töökodad
 
 **Tagajärg:** **peanahk rebitakse maha** (skalpeerimine). See tähendab palju operatsioone, sageli jäävad kiilased laigud ja armid igaveseks.
 
-![Vasakul: pöörlev puurpink haarab pikad juuksed. Paremal punases ringis: pea, mille peanahk on ülalt punaselt märgitud](assets/bilder/sicherheit/folgen/haare-maschine.svg "Juuksed keritakse peale sekundi murdosaga.")
-
+:::piktogramm Juuksed keritakse peale sekundi murdosaga. motiv=haare-maschine groesse=gross
+:::
 ### Sõrmused ja sünteeskiud
 
 **Sõrmus** võib jääda serva või tööriista taha kinni. Siis rebib see sõrmelt naha ja koed maha, kuni luuni. **Sünteeskiust riided** süttivad sädemetest või sulavad nahale kinni. Sellised põletused on sügavad ja paranevad halvasti.
@@ -242,8 +242,8 @@ Voolu ei näe, ei kuule ega haista. 600 voldi juures ei ole hoiatuseks „väike
 
 **Tagajärg:** süda läheb rütmist välja (**vatsakeste virvendus**). See on südameseiskus: ilma elustamiseta oled mõne minutiga surnud. Voolu teel põlevad koed **seestpoolt**, isegi kui väljast on vaevu midagi näha. Südame rütmihäired võivad tekkida veel **tunde hiljem**. Seetõttu peab pärast iga elektriõnnetust arst läbi vaatama.
 
-![Vasakul: inimene puudutab oranži kõrgepingekaablit, välk näitab voolu teed läbi keha maasse. Paremal punases ringis: süda ebaregulaarse südamejoonega](assets/bilder/sicherheit/folgen/hv-koerper.svg "Vool läbi rindkere viib südame rütmist välja.")
-
+:::piktogramm Vool läbi rindkere viib südame rütmist välja. motiv=hv-koerper groesse=gross
+:::
 ### Elektrikaar
 
 **Viga:** mutrivõti või mõni muu metallese puudutab korraga kahte kõrgepingepoolust, näiteks akul.
@@ -252,8 +252,8 @@ Voolu ei näe, ei kuule ega haista. 600 voldi juures ei ole hoiatuseks „väike
 
 **Tagajärg:** **rasked põletused** kätel ja näol, isegi ilma et vool sinust läbi läheks. Ere valgus võib silmi kahjustada.
 
-![Vasakul: mutrivõti on üle aku pluss- ja miinuspooluse, puutekohas sähvib elektrikaar. Paremal punases ringis: leek](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Elektrikaar põletab sind ka ilma, et sa kaablit puudutaksid.")
-
+:::piktogramm Elektrikaar põletab sind ka ilma, et sa kaablit puudutaksid. motiv=hv-lichtbogen groesse=gross
+:::
 ### Auto hakkab liikuma
 
 Kui auto on pinge all, võib see hoiatamata liikuma hakata, vähem kui 2,5 sekundiga 100 km/h-ni. Kes seisab ees või taga, jääb **alla või kiilub kinni**. Seetõttu kehtib: mitte kunagi pinge all oleva auto ees, taga ega kõrval.
@@ -352,8 +352,8 @@ Koristades leiad katseseadmest pärit väikese liitiumaku. See on paisunud ja l�
 
 **Tagajärg:** **põletused kuni luuni**, ümber kogu sõrme. Seetõttu kehtib: ehted ära, enne kui elektriga töötad.
 
-![Vasakul: sõrmusega sõrm on üle aku pluss- ja miinuspooluse, sõrmus hõõgub. Paremal punases ringis: hõõguva sõrmuse ja punase põletusega sõrm](assets/bilder/sicherheit/folgen/lv-ring.svg "Mõlemat poolust puudutav sõrmus muutub sekunditega hõõguvalt kuumaks.")
-
+:::piktogramm Mõlemat poolust puudutav sõrmus muutub sekunditega hõõguvalt kuumaks. motiv=lv-ring groesse=gross
+:::
 ### Kahjustatud aku
 
 **Viga:** paisunud või maha kukkunud liitiumakut kasutatakse edasi või isegi laetakse.
@@ -362,8 +362,8 @@ Koristades leiad katseseadmest pärit väikese liitiumaku. See on paisunud ja l�
 
 **Tagajärg:** **tulekahju** töökojas ja **mürgised gaasid**, nende hulgas vesinikfluoriid, mis söövitab hingamisteid ja kopse.
 
-![Vasakul: paisunud aku, millest tõusevad leegid ja suits. Paremal punases ringis: suitsupilv pealuuga](assets/bilder/sicherheit/folgen/akku-brand.svg "Põlev liitiumaku eraldab mürgiseid gaase.")
-
+:::piktogramm Põlev liitiumaku eraldab mürgiseid gaase. motiv=akku-brand groesse=gross
+:::
 Mis järgneb millisest veast? Seosta.
 
 :::zuordnen Milline tagajärg ähvardab?
@@ -454,8 +454,8 @@ Sammaspuurpink ei andesta otseteid. Kolm viga, mis juhtuvad kiiresti, kui taheta
 
 **Tagajärg:** **sügavad lõikehaavad** kuni kõõluste ja luudeni, **murtud sõrmed**. Suur detail võib sind tabada ka kehasse.
 
-![Vasakul: plekk pöörleb puuri all nagu propeller, kõrval käsi. Paremal punases ringis: punaste lõikehaavadega käsi](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Lahti rebenenud toorikust saab propeller.")
-
+:::piktogramm Lahti rebenenud toorikust saab propeller. motiv=bohr-werkstueck groesse=gross
+:::
 ### Pikk varras kindlustamata
 
 **Viga:** puurid pikka varrast, toru või profiili ja kinnitad selle vaid lühidalt või hoiad pikka otsa käega.
@@ -464,8 +464,8 @@ Sammaspuurpink ei andesta otseteid. Kolm viga, mis juhtuvad kiiresti, kui taheta
 
 **Tagajärg:** varda ots võib **kõhuõõne lõhki rebida**. Sellised siseorganite vigastused on **surmavad**, kui kohe ei opereerita. Seetõttu kindlustatakse pikad toorikud lisaks kaasapöörlemise vastu, näiteks piirikuga samba juures, ja sa ei seisa kunagi pöördealas.
 
-![Vasakul: pikk varras rebeneb puurpingi juures lahti ja lööb kõhu kõrgusel ringiratast inimese poole. Paremal punases ringis: ülakeha punase lõikehaavaga risti üle kõhu](assets/bilder/sicherheit/folgen/bohr-stange.svg "Lahti rebenenud varras lööb kõhu kõrgusel.")
-
+:::piktogramm Lahti rebenenud varras lööb kõhu kõrgusel. motiv=bohr-stange groesse=gross
+:::
 ### Padrunivõti on veel sees
 
 **Viga:** kinnitad puuri, jätad võtme padrunisse ja lülitad sisse.
@@ -474,8 +474,8 @@ Sammaspuurpink ei andesta otseteid. Kolm viga, mis juhtuvad kiiresti, kui taheta
 
 **Tagajärg:** **mürsk näkku**: lõhkised haavad, väljalöödud hambad, halvimal juhul **hävinud silm**.
 
-![Vasakul: padrunivõti lendab sisselülitatud puurpingist inimese pea poole. Paremal punases ringis: vigastatud silm](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Unustatud võtmest saab mürsk.")
-
+:::piktogramm Unustatud võtmest saab mürsk. motiv=bohrfutterschluessel groesse=gross
+:::
 Seosta iga vea juurde selle tagajärg.
 
 :::zuordnen Milline tagajärg ähvardab?
@@ -547,8 +547,8 @@ Lihvlint on tehtud metalli eemaldamiseks. Nahk on palju pehmem.
 
 **Tagajärg:** nahk, küüs ja koed on **sekunditega kuni luuni maha lihvitud**. Sellised haavad paranevad aeglaselt ja jätavad sageli lühenenud või tundetu sõrme.
 
-![Vasakul: sõrm satub töötava lihvlindi ja toe vahelise pilu lähedale. Paremal punases ringis: sõrm, mille ots on punaseks maha lihvitud](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Lint lihvib nahka kiiremini kui metalli.")
-
+:::piktogramm Lint lihvib nahka kiiremini kui metalli. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Muud vead lintlihvija juures
 
 - **Alumiinium ja teras samal lindil:** peen alumiiniumitolm ja terasesädemed võivad omavahel ägedalt reageerida ja **põlema** minna. Seadmes olev tolm võib süttida.
@@ -639,8 +639,8 @@ Nurklihvija on üks töökoja ohtlikumaid tööriistu. Lõikeketta serv liigub k
 
 **Tagajärg:** **kaotatud silmad**, sügavad lõikehaavad näos ja **kaelal**. Kild unearteris on **surmav**.
 
-![Vasakul: ilma kaitsekatteta nurklihvija, ketas puruneb, tükid lendavad inimese pea poole. Paremal punases ringis: vigastatud silm ja punased lõikehaavad](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Lõikeketta tükid lendavad peaaegu 300 km/h.")
-
+:::piktogramm Lõikeketta tükid lendavad peaaegu 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### Nurklihvija lööb tagasi
 
 **Viga:** hoiad nurklihvijat ühe käega ja ketas kiilub lõikesse kinni.
@@ -657,8 +657,8 @@ Nurklihvija on üks töökoja ohtlikumaid tööriistu. Lõikeketta serv liigub k
 
 **Tagajärg:** **töökoja tulekahju**: auto, tööriistad ja terve hooaja töö on kadunud ning kes on sees, on eluohtlikus olukorras.
 
-![Vasakul: töökojas lendavad nurklihvija sädemed lapihunnikule, mis hakkab põlema. Paremal punases ringis: põlev maja](assets/bilder/sicherheit/folgen/flex-funken.svg "Sädemed töökojas võivad hävitada terve hooaja töö.")
-
+:::piktogramm Sädemed töökojas võivad hävitada terve hooaja töö. motiv=flex-funken groesse=gross
+:::
 Seosta iga vea juurde selle tagajärg.
 
 :::zuordnen Milline tagajärg ähvardab?
@@ -718,8 +718,8 @@ Lihvimisel, puurimisel ja saagimisel kiud murduvad. Seejuures tekivad nii väike
 
 Süsinikkiudu keha **peaaegu ei lagunda**. Mis kopsu jõuab, jääb sinna võib-olla igaveseks.
 
-![Vasakul: inimene ilma hingamisteede kaitseta seisab süsinikkiust detaili lihvides tolmupilves. Paremal punases ringis: kops täis musti kiutäppe](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Kiutükid jõuavad kopsualveoolidesse.")
-
+:::piktogramm Kiutükid jõuavad kopsualveoolidesse. motiv=carbon-lunge groesse=gross
+:::
 ### Vähikahtlus
 
 - Selliseid süsinikkiu tükke **kahtlustatakse vähki tekitavat**. Saksamaa kohustusliku õnnetusjuhtumikindlustuse ühendus (DGUV) liigitab need **2. kategooriasse**: kahtlustatav kantserogeenne toime.
@@ -737,8 +737,8 @@ Süsinikkiudu keha **peaaegu ei lagunda**. Mis kopsu jõuab, jääb sinna võib-
 - **Tolm juhib elektrit:** süsinikkiutolm elektroonikas põhjustab **lühiseid**, ka autos.
 - **Tolm põleb:** üles keerutatud süsinikkiutolm on põlev ja võib isegi plahvatada.
 
-![Vasakul: ilma kaitseülikonnata inimene on tolmu täis, nool näitab majale, kus on samuti tolm. Paremal punases ringis: käsi punaste sügelevate nahalaikudega](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Ilma ülikonnata viid tolmu endaga koju.")
-
+:::piktogramm Ilma ülikonnata viid tolmu endaga koju. motiv=carbon-zuhause groesse=gross
+:::
 Mis on õige, mis mitte? Seosta iga väide.
 
 :::zuordnen Kas see on õige?
@@ -813,8 +813,8 @@ Vaik lõhnab ohutult ja tundub nagu mesi. Tagajärjed on sellest hoolimata tõsi
 
 **Tagajärg:** **kogu eluks jääv allergia**: punane, märguv, sügelev nahk, juba väikseimate koguste korral või isegi õhus olevatest aurudest. Kellel on kord allergia tekkinud, ei tohi sageli **enam kunagi vaiguga töötada**, ka mitte hiljem oma elukutses.
 
-![Vasakul: kindata käsi vaigutilkadega vaigutopsi kõrval, kohal läbikriipsutatud kinnas. Paremal punases ringis: punaste ekseemilaikudega käsi](assets/bilder/sicherheit/folgen/harz-haut.svg "Vaiguallergia jääb kogu eluks.")
-
+:::piktogramm Vaiguallergia jääb kogu eluks. motiv=harz-haut groesse=gross
+:::
 ### Liiga palju vaiku korraga
 
 **Viga:** segad suure topsitäie vaiku, et kõigeks jätkuks, ja jätad selle seisma.
@@ -823,8 +823,8 @@ Vaik lõhnab ohutult ja tundub nagu mesi. Tagajärjed on sellest hoolimata tõsi
 
 **Tagajärg:** põletused, suitsust tingitud hingamisteede ärritus ja tulekahju keset töökoda.
 
-![Vasakul: suur segatud vaiguga tops suitseb ja põleb, kõrval „100 °C+“. Paremal punases ringis: leek](assets/bilder/sicherheit/folgen/harz-hitze.svg "Liiga palju segatud vaiku võib ise süttida.")
-
+:::piktogramm Liiga palju segatud vaiku võib ise süttida. motiv=harz-hitze groesse=gross
+:::
 ### Ohtlik aine joogipudelis
 
 **Viga:** valad veidi lahustit või kõvendit tühja veepudelisse, sest midagi muud parajasti ei ole.
@@ -833,8 +833,8 @@ Vaik lõhnab ohutult ja tundub nagu mesi. Tagajärjed on sellest hoolimata tõsi
 
 **Tagajärg:** **mürgistus**, söövitatud suu ja söövitatud söögitoru. Mõned ained kahjustavad siseorganeid jäädavalt.
 
-![Vasakul: pealuu märgiga kanistrist valatakse vedelikku joogipudelisse. Paremal punases ringis: pealuu](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Ohtlikud ained ei kuulu kunagi joogipudelitesse.")
-
+:::piktogramm Ohtlikud ained ei kuulu kunagi joogipudelitesse. motiv=getraenkeflasche groesse=gross
+:::
 Seosta iga vea juurde selle tagajärg.
 
 :::zuordnen Milline tagajärg ähvardab?

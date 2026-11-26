@@ -6,6 +6,18 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Sicherheitsunterweisung: animierte Unfall-Piktogramme (2026-11-26)
+
+- Die 18 statischen Folgen-Grafiken (`assets/bilder/sicherheit/folgen/`, entfernt) sind durch animierte Piktogramme ersetzt (`js/ui/pictograms-safety.js`): Phase 1 Handlung, Phase 2 Unfallmoment (stehende Fassung bei „Bewegung reduzieren“), Phase 3 Folge in Rot. Alle 12 Fassungen (Deutsch + 11 Übersetzungen) nutzen jetzt `:::piktogramm … motiv=… groesse=gross`; Bildunterschriften bleiben übersetzt.
+- Bewegungs-Engine: Motive beschreiben ihre Bewegung als Daten, `installMotion()` erzeugt die CSS-@keyframes. `--hold` wird nicht mehr an Untergruppen vererbt (behebt doppelte Drehungen), innere Gruppen mit eigenem `transform` bleiben unangetastet.
+- Text-Bild-Spalten (`.media-split`) gelten auch für Piktogramme.
+
+### Animierte Sicherheits-Piktogramme (2026-11-26)
+
+- Neue Komponente `js/ui/pictograms.js` + `css/components/pictogram.css`: Figuren aus geometrischen Grundformen (Kreis, Kapseln, currentColor), jedes Körperteil eine eigene Gruppe mit Drehpunkt im Gelenk. Drei Phasen je Durchlauf (Auftritt 0,6 s mit cubic-bezier(0.22, 1, 0.36, 1), Pose 1,8 s, Abgang 0,6 s), reine CSS-Animation ohne Bibliothek. Grundzustand ist die Pose, bei „Bewegung reduzieren“ bleibt es dabei.
+- Vier Motive: Schutzbrille aufsetzen, Stolpergefahr, Schwer heben, Fluchtweg.
+- Neuer Kursdown-Baustein `:::piktogramm` (Motiv, Schleife oder einmal beim Sichtbarwerden, Größe, Farbe), auch im Editor.
+
 ### Sicherheitsunterweisung handübersetzt in 11 Sprachen, Finnisch (2026-11-26)
 
 - Die Sicherheitsunterweisung wird nicht mehr maschinell übersetzt. Neu: geprüfte Übersetzungen in `content/uebersetzungen/05-arbeitssicherheit.<code>.md` für en, fr, es, it, pt, cs, bg, et, ru, uk, fi – gleicher Aufbau wie das Original, geprüft mit `compareStructure()` (`js/content/translations.js`), Prüfsumme `quellstand`.

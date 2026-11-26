@@ -14,7 +14,7 @@ lernziele:
   - Tu prépares ton poste de travail, tu le ranges ensuite et tu sais quoi faire en cas d’urgence.
 sprache: fr
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## La sécurité d’abord
@@ -154,8 +154,8 @@ Les règles de la page précédente paraissent strictes. Ici, tu vois pourquoi. 
 
 **La conséquence :** des doigts sont arrachés de la main, souvent **avec le tendon**, qui est extrait jusque depuis l’avant-bras. Ces blessures par arrachement ne peuvent généralement pas être recousues. S’y ajoutent des fractures et de la peau arrachée.
 
-![À gauche : un gant est enroulé par la perceuse en rotation et entraîne le bras. À droite, dans le cercle rouge : une main dont un doigt a été arraché avec son tendon](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Un gant à la perceuse peut te coûter un doigt.")
-
+:::piktogramm Un gant à la perceuse peut te coûter un doigt. motiv=handschuh-bohrer groesse=gross
+:::
 ### Écharpe, cordon ou chaîne
 
 **L’erreur :** tu portes une écharpe, un sweat à capuche avec cordons ou un collier à la machine.
@@ -164,8 +164,8 @@ Les règles de la page précédente paraissent strictes. Ici, tu vois pourquoi. 
 
 **La conséquence :** **strangulation.** Perte de connaissance en quelques secondes, blessures à la nuque, **mort**. Personne à côté de toi n’est assez rapide pour arrêter cela.
 
-![À gauche : une écharpe est enroulée par la perceuse en rotation et tire la personne par le cou vers la machine. À droite, dans le cercle rouge : une tête de mort](assets/bilder/sicherheit/folgen/schal-maschine.svg "Une écharpe à la machine met ta vie en danger.")
-
+:::piktogramm Une écharpe à la machine met ta vie en danger. motiv=schal-maschine groesse=gross
+:::
 ### Cheveux longs détachés
 
 **L’erreur :** tu te penches, cheveux détachés, au-dessus de la machine en marche.
@@ -174,8 +174,8 @@ Les règles de la page précédente paraissent strictes. Ici, tu vois pourquoi. 
 
 **La conséquence :** le **cuir chevelu est arraché** (scalp). Cela signifie de nombreuses opérations ; souvent, des zones chauves et des cicatrices restent pour toujours.
 
-![À gauche : des cheveux longs sont happés par la perceuse en rotation. À droite, dans le cercle rouge : une tête dont le cuir chevelu est marqué en rouge sur le dessus](assets/bilder/sicherheit/folgen/haare-maschine.svg "Les cheveux sont enroulés en une fraction de seconde.")
-
+:::piktogramm Les cheveux sont enroulés en une fraction de seconde. motiv=haare-maschine groesse=gross
+:::
 ### Bagues et fibres synthétiques
 
 **Une bague** peut rester accrochée à une arête ou à l’outil. Elle arrache alors la peau et les tissus du doigt, jusqu’à l’os. **Les vêtements en fibres synthétiques** prennent feu au contact des étincelles ou fondent et collent à la peau. Ces brûlures sont profondes et guérissent mal.
@@ -242,8 +242,8 @@ Le courant, on ne le voit pas, on ne l’entend pas et on ne le sent pas. À 600
 
 **La conséquence :** le cœur se dérègle (**fibrillation ventriculaire**). C’est un arrêt cardiaque : sans réanimation, tu es mort au bout de quelques minutes. Le long du trajet du courant, les tissus brûlent **à l’intérieur**, même si on ne voit presque rien à l’extérieur. Des troubles du rythme cardiaque peuvent encore apparaître **des heures plus tard**. C’est pourquoi un médecin doit examiner la personne après chaque accident électrique.
 
-![À gauche : une personne touche un câble haute tension orange, un éclair montre le trajet du courant à travers le corps jusqu’au sol. À droite, dans le cercle rouge : un cœur avec un tracé cardiaque irrégulier](assets/bilder/sicherheit/folgen/hv-koerper.svg "Le courant à travers la poitrine dérègle le cœur.")
-
+:::piktogramm Le courant à travers la poitrine dérègle le cœur. motiv=hv-koerper groesse=gross
+:::
 ### Arc électrique
 
 **L’erreur :** une clé plate ou une autre pièce métallique touche en même temps deux pôles haute tension, par exemple sur la batterie.
@@ -252,8 +252,8 @@ Le courant, on ne le voit pas, on ne l’entend pas et on ne le sent pas. À 600
 
 **La conséquence :** de **graves brûlures** aux mains et au visage, même sans que le courant ne te traverse. La lumière aveuglante peut abîmer les yeux.
 
-![À gauche : une clé plate repose sur le pôle plus et le pôle moins d’une batterie, un arc électrique jaillit au point de contact. À droite, dans le cercle rouge : une flamme](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Un arc électrique te brûle sans que tu touches le câble.")
-
+:::piktogramm Un arc électrique te brûle sans que tu touches le câble. motiv=hv-lichtbogen groesse=gross
+:::
 ### La voiture démarre
 
 Quand la voiture est sous tension, elle peut démarrer sans prévenir, et atteindre 100 km/h en moins de 2,5 secondes. Celui qui se trouve devant ou derrière est **écrasé ou coincé**. C’est pourquoi la règle est : jamais devant, derrière ou à côté d’une voiture sous tension.
@@ -352,8 +352,8 @@ En rangeant, tu trouves une petite batterie au lithium provenant d’un montage 
 
 **La conséquence :** des **brûlures jusqu’à l’os**, tout autour du doigt. C’est pourquoi la règle est : bijoux enlevés avant de travailler sur l’électrique.
 
-![À gauche : un doigt portant une bague repose sur le pôle plus et le pôle moins d’une batterie, la bague rougeoie. À droite, dans le cercle rouge : un doigt avec une bague incandescente et une brûlure rouge](assets/bilder/sicherheit/folgen/lv-ring.svg "Une bague qui touche les deux pôles devient incandescente en quelques secondes.")
-
+:::piktogramm Une bague qui touche les deux pôles devient incandescente en quelques secondes. motiv=lv-ring groesse=gross
+:::
 ### Une batterie endommagée
 
 **L’erreur :** une batterie au lithium gonflée ou tombée continue d’être utilisée, voire est chargée.
@@ -362,8 +362,8 @@ En rangeant, tu trouves une petite batterie au lithium provenant d’un montage 
 
 **La conséquence :** un **incendie** à l’atelier et des **gaz toxiques**, dont le fluorure d’hydrogène, qui brûle les voies respiratoires et les poumons.
 
-![À gauche : une batterie gonflée d’où s’échappent des flammes et de la fumée. À droite, dans le cercle rouge : un nuage de fumée avec une tête de mort](assets/bilder/sicherheit/folgen/akku-brand.svg "Une batterie au lithium en feu libère des gaz toxiques.")
-
+:::piktogramm Une batterie au lithium en feu libère des gaz toxiques. motiv=akku-brand groesse=gross
+:::
 Quelle conséquence découle de quelle erreur ? Associe.
 
 :::zuordnen Quelle conséquence menace ?
@@ -454,8 +454,8 @@ La perceuse à colonne ne pardonne aucun raccourci. Trois erreurs qui arrivent v
 
 **La conséquence :** des **coupures profondes** jusqu’aux tendons et aux os, des **doigts cassés**. Une grande pièce peut aussi te toucher au corps.
 
-![À gauche : une tôle tourne sous le foret comme une hélice, à côté une main. À droite, dans le cercle rouge : une main avec des coupures rouges](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Une pièce arrachée devient une hélice.")
-
+:::piktogramm Une pièce arrachée devient une hélice. motiv=bohr-werkstueck groesse=gross
+:::
 ### Barre longue non bloquée
 
 **L’erreur :** tu perces une barre longue, un tube ou un profilé et tu ne la serres que sur une courte longueur, ou tu tiens l’extrémité longue à la main.
@@ -464,8 +464,8 @@ La perceuse à colonne ne pardonne aucun raccourci. Trois erreurs qui arrivent v
 
 **La conséquence :** l’extrémité de la barre peut **ouvrir l’abdomen**. De telles blessures des organes internes sont **mortelles** si l’on n’opère pas immédiatement. C’est pourquoi les pièces longues sont en plus bloquées contre la rotation, par exemple avec une butée contre la colonne, et tu ne te places jamais dans la zone de rotation.
 
-![À gauche : une barre longue s’arrache de la perceuse et tourne en cercle à hauteur du ventre en direction d’une personne. À droite, dans le cercle rouge : un torse avec une plaie rouge en travers du ventre](assets/bilder/sicherheit/folgen/bohr-stange.svg "Une barre arrachée frappe à hauteur du ventre.")
-
+:::piktogramm Une barre arrachée frappe à hauteur du ventre. motiv=bohr-stange groesse=gross
+:::
 ### La clé de mandrin est restée en place
 
 **L’erreur :** tu serres le foret, tu laisses la clé dans le mandrin et tu mets en marche.
@@ -474,8 +474,8 @@ La perceuse à colonne ne pardonne aucun raccourci. Trois erreurs qui arrivent v
 
 **La conséquence :** un **projectile en plein visage** : plaies ouvertes, dents cassées, dans le pire des cas un **œil perdu**.
 
-![À gauche : une clé de mandrin est projetée hors de la perceuse en marche vers la tête d’une personne. À droite, dans le cercle rouge : un œil blessé](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Une clé oubliée devient un projectile.")
-
+:::piktogramm Une clé oubliée devient un projectile. motiv=bohrfutterschluessel groesse=gross
+:::
 Associe à chaque erreur sa conséquence.
 
 :::zuordnen Quelle conséquence menace ?
@@ -547,8 +547,8 @@ La bande abrasive est faite pour enlever du métal. La peau est beaucoup plus te
 
 **La conséquence :** la peau, l’ongle et les tissus sont **arrachés par abrasion jusqu’à l’os en quelques secondes**. Ces plaies guérissent lentement et laissent souvent un doigt raccourci ou insensible.
 
-![À gauche : un doigt s’approche trop de la bande abrasive en marche, au niveau de l’espace avec le support. À droite, dans le cercle rouge : un doigt dont le bout est abrasé et rouge](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "La bande abrase la peau plus vite que le métal.")
-
+:::piktogramm La bande abrase la peau plus vite que le métal. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Autres erreurs à la ponceuse à bande
 
 - **Aluminium et acier sur la même bande :** la fine poussière d’aluminium et les étincelles d’acier peuvent réagir violemment entre elles et **brûler**. La poussière dans l’appareil peut s’enflammer.
@@ -639,8 +639,8 @@ La meuleuse fait partie des outils les plus dangereux de l’atelier. Le bord d�
 
 **La conséquence :** des **yeux perdus**, des coupures profondes au visage et au **cou**. Un éclat dans l’artère carotide est **mortel**.
 
-![À gauche : une meuleuse sans carter de protection, le disque éclate, des éclats volent vers la tête d’une personne. À droite, dans le cercle rouge : un œil blessé et des coupures rouges](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Les éclats d’un disque à tronçonner volent à presque 300 km/h.")
-
+:::piktogramm Les éclats d’un disque à tronçonner volent à presque 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### La meuleuse rebondit
 
 **L’erreur :** tu tiens la meuleuse d’une seule main, et le disque se coince dans la coupe.
@@ -657,8 +657,8 @@ La meuleuse fait partie des outils les plus dangereux de l’atelier. Le bord d�
 
 **La conséquence :** **incendie de l’atelier** : la voiture, les outils et le travail de toute une saison sont perdus, et la vie de ceux qui sont à l’intérieur est en danger.
 
-![À gauche : dans l’atelier, des étincelles de meuleuse volent sur un tas de chiffons qui commence à brûler. À droite, dans le cercle rouge : une maison en feu](assets/bilder/sicherheit/folgen/flex-funken.svg "Des étincelles dans l’atelier peuvent anéantir le travail de toute une saison.")
-
+:::piktogramm Des étincelles dans l’atelier peuvent anéantir le travail de toute une saison. motiv=flex-funken groesse=gross
+:::
 Associe à chaque erreur sa conséquence.
 
 :::zuordnen Quelle conséquence menace ?
@@ -718,8 +718,8 @@ Lors du ponçage, du perçage et du sciage, les fibres se cassent. Il en résult
 
 Le carbone, le corps ne le dégrade **presque pas**. Ce qui arrive dans les poumons y reste peut-être pour toujours.
 
-![À gauche : une personne sans protection respiratoire se tient dans un nuage de poussière en ponçant une pièce en carbone. À droite, dans le cercle rouge : un poumon rempli de points de fibres noirs](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Les fragments de fibres pénètrent jusque dans les alvéoles pulmonaires.")
-
+:::piktogramm Les fragments de fibres pénètrent jusque dans les alvéoles pulmonaires. motiv=carbon-lunge groesse=gross
+:::
 ### La suspicion de cancer
 
 - Ces fragments de fibres de carbone sont **suspectés d’être cancérogènes**. L’assurance sociale allemande des accidents du travail (DGUV) les classe dans la **catégorie 2** : effet cancérogène suspecté.
@@ -737,8 +737,8 @@ Le carbone, le corps ne le dégrade **presque pas**. Ce qui arrive dans les poum
 - **La poussière conduit le courant :** la poussière de carbone dans l’électronique provoque des **courts-circuits**, y compris dans la voiture.
 - **La poussière brûle :** la poussière de carbone en suspension est inflammable et peut même exploser.
 
-![À gauche : une personne sans combinaison de protection est couverte de poussière, une flèche montre une maison où il y a aussi de la poussière. À droite, dans le cercle rouge : une main avec des zones de peau rouges qui démangent](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Sans combinaison, tu ramènes la poussière jusque chez toi.")
-
+:::piktogramm Sans combinaison, tu ramènes la poussière jusque chez toi. motiv=carbon-zuhause groesse=gross
+:::
 Qu’est-ce qui est vrai, qu’est-ce qui ne l’est pas ? Associe chaque affirmation.
 
 :::zuordnen Est-ce vrai ?
@@ -813,8 +813,8 @@ La résine a une odeur inoffensive et la texture du miel. Les conséquences sont
 
 **La conséquence :** une **allergie qui dure toute la vie** : peau rouge, suintante et qui démange, dès les plus infimes quantités ou même à cause des vapeurs dans l’air. Celui qui est devenu allergique ne peut souvent **plus jamais travailler avec de la résine**, pas même plus tard dans sa vie professionnelle.
 
-![À gauche : une main sans gant avec des gouttes de résine à côté d’un gobelet de résine, au-dessus un gant barré. À droite, dans le cercle rouge : une main avec des plaques d’eczéma rouges](assets/bilder/sicherheit/folgen/harz-haut.svg "Une allergie à la résine dure toute la vie.")
-
+:::piktogramm Une allergie à la résine dure toute la vie. motiv=harz-haut groesse=gross
+:::
 ### Trop de résine à la fois
 
 **L’erreur :** tu mélanges un grand gobelet de résine pour en avoir assez pour tout, et tu le laisses reposer.
@@ -823,8 +823,8 @@ La résine a une odeur inoffensive et la texture du miel. Les conséquences sont
 
 **La conséquence :** des brûlures, des irritations des voies respiratoires dues à la fumée et un incendie en plein atelier.
 
-![À gauche : un grand gobelet de résine mélangée fume et brûle, à côté « 100 °C+ ». À droite, dans le cercle rouge : une flamme](assets/bilder/sicherheit/folgen/harz-hitze.svg "Trop de résine mélangée peut s’enflammer d’elle-même.")
-
+:::piktogramm Trop de résine mélangée peut s’enflammer d’elle-même. motiv=harz-hitze groesse=gross
+:::
 ### Un produit dangereux dans une bouteille de boisson
 
 **L’erreur :** tu verses un peu de solvant ou de durcisseur dans une bouteille d’eau vide, parce qu’il n’y a rien d’autre sous la main.
@@ -833,8 +833,8 @@ La résine a une odeur inoffensive et la texture du miel. Les conséquences sont
 
 **La conséquence :** **intoxication**, brûlures chimiques de la bouche et de l’œsophage. Certains produits endommagent durablement les organes internes.
 
-![À gauche : un liquide est versé d’un bidon portant une tête de mort dans une bouteille de boisson. À droite, dans le cercle rouge : une tête de mort](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Les produits dangereux ne vont jamais dans des bouteilles de boisson.")
-
+:::piktogramm Les produits dangereux ne vont jamais dans des bouteilles de boisson. motiv=getraenkeflasche groesse=gross
+:::
 Associe à chaque erreur sa conséquence.
 
 :::zuordnen Quelle conséquence menace ?

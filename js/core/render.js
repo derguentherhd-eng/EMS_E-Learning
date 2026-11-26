@@ -378,10 +378,13 @@
         }
         return;
       }
-      // Einzelnes Bild direkt nach Text: letzter Abschnitt des Textes links, Bild rechts.
+      // Einzelnes Bild (oder animiertes Piktogramm) direkt nach Text: letzter Abschnitt des
+      // Textes links, Bild rechts.
+      const isPictogram =
+        element.type === "block" && element.name === "piktogramm";
       const prose = nodes[nodes.length - 1];
       if (
-        isImage &&
+        (isImage || isPictogram) &&
         previous?.type === "text" &&
         prose?.classList?.contains("prose")
       ) {

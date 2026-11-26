@@ -68,6 +68,11 @@
     margin: 0;
   }
 
+  /* Animiertes Piktogramm statt Bild: mittig in seiner Spalte. */
+  .media-split > .pictogram-block {
+    justify-self: center;
+  }
+
   @media (width >= 64rem) {
     .media-split {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

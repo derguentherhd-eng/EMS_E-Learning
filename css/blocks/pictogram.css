@@ -1,0 +1,20 @@
+/*
+ * blocks/pictogram.css – Baustein „piktogramm“ (js/blocks/pictogram-block.js)
+ *
+ * Das Piktogramm selbst gestaltet css/components/pictogram.css; hier nur Rahmen und Unterschrift.
+ */
+
+@layer components {
+  .pictogram-block {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-2xs);
+    margin: 0;
+  }
+
+  .pictogram-block__caption {
+    color: var(--color-text-muted);
+    font-size: var(--step--1);
+    text-align: center;
+  }
+}

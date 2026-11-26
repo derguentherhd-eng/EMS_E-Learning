@@ -151,8 +151,8 @@ Die Regeln auf der letzten Seite klingen streng. Hier siehst du, warum. Jedes Be
 
 **Die Folge:** Finger werden aus der Hand gerissen, oft **samt Sehne**, die bis aus dem Unterarm herausgezogen wird. Solche Ausrissverletzungen lassen sich meist nicht wieder annähen. Dazu kommen Brüche und abgerissene Haut.
 
-![Links: Ein Handschuh wird von der drehenden Bohrmaschine aufgewickelt und zieht den Arm hinein. Rechts im roten Kreis: eine Hand, der ein Finger mitsamt Sehne ausgerissen wurde](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Ein Handschuh an der Bohrmaschine kann dich einen Finger kosten.")
-
+:::piktogramm Ein Handschuh an der Bohrmaschine kann dich einen Finger kosten. motiv=handschuh-bohrer groesse=gross
+:::
 ### Schal, Kordel oder Kette
 
 **Der Fehler:** Du trägst einen Schal, einen Hoodie mit Kordeln oder eine Halskette an der Maschine.
@@ -161,8 +161,8 @@ Die Regeln auf der letzten Seite klingen streng. Hier siehst du, warum. Jedes Be
 
 **Die Folge:** **Strangulation.** Bewusstlosigkeit nach Sekunden, Genickverletzungen, **Tod**. Niemand neben dir ist schnell genug, um das zu stoppen.
 
-![Links: Ein Schal wird von der drehenden Bohrmaschine aufgewickelt und zieht die Person am Hals zur Maschine. Rechts im roten Kreis: ein Totenkopf](assets/bilder/sicherheit/folgen/schal-maschine.svg "Ein Schal an der Maschine ist lebensgefährlich.")
-
+:::piktogramm Ein Schal an der Maschine ist lebensgefährlich. motiv=schal-maschine groesse=gross
+:::
 ### Offene lange Haare
 
 **Der Fehler:** Du beugst dich mit offenen Haaren über die laufende Maschine.
@@ -171,8 +171,8 @@ Die Regeln auf der letzten Seite klingen streng. Hier siehst du, warum. Jedes Be
 
 **Die Folge:** Die **Kopfhaut wird abgerissen** (Skalpierung). Das bedeutet viele Operationen, oft bleiben kahle Stellen und Narben für immer.
 
-![Links: Lange Haare werden von der drehenden Bohrmaschine erfasst. Rechts im roten Kreis: ein Kopf, dessen Kopfhaut oben rot markiert ist](assets/bilder/sicherheit/folgen/haare-maschine.svg "Haare werden in Sekundenbruchteilen aufgewickelt.")
-
+:::piktogramm Haare werden in Sekundenbruchteilen aufgewickelt. motiv=haare-maschine groesse=gross
+:::
 ### Ringe und Kunstfaser
 
 **Ein Ring** kann an einer Kante oder am Werkzeug hängen bleiben. Dann reißt er Haut und Gewebe vom Finger ab, bis auf den Knochen. **Kleidung aus Kunstfaser** fängt durch Funken Feuer oder schmilzt auf der Haut fest. Solche Verbrennungen sind tief und heilen schlecht.
@@ -239,8 +239,8 @@ Strom sieht man nicht, hört man nicht und riecht man nicht. Bei 600 Volt gibt e
 
 **Die Folge:** Das Herz gerät aus dem Takt (**Herzkammerflimmern**). Das ist ein Herzstillstand: Ohne Wiederbelebung bist du nach wenigen Minuten tot. Entlang des Stromwegs verbrennt Gewebe **innen**, auch wenn man außen kaum etwas sieht. Herzrhythmusstörungen können noch **Stunden später** auftreten. Deshalb muss nach jedem Stromunfall ein Arzt untersuchen.
 
-![Links: Eine Person fasst ein orangefarbenes Hochvolt-Kabel an, ein Blitz zeigt den Stromweg durch den Körper zum Boden. Rechts im roten Kreis: ein Herz mit unregelmäßiger Herzlinie](assets/bilder/sicherheit/folgen/hv-koerper.svg "Strom durch die Brust bringt das Herz aus dem Takt.")
-
+:::piktogramm Strom durch die Brust bringt das Herz aus dem Takt. motiv=hv-koerper groesse=gross
+:::
 ### Lichtbogen
 
 **Der Fehler:** Ein Schraubenschlüssel oder ein anderes Metallteil berührt zwei Hochvolt-Pole gleichzeitig, zum Beispiel am Akku.
@@ -249,8 +249,8 @@ Strom sieht man nicht, hört man nicht und riecht man nicht. Bei 600 Volt gibt e
 
 **Die Folge:** **Schwere Verbrennungen** an Händen und Gesicht, auch ohne dass Strom durch dich fließt. Das grelle Licht kann die Augen schädigen.
 
-![Links: Ein Schraubenschlüssel liegt über Plus- und Minuspol eines Akkus, an der Berührungsstelle blitzt ein Lichtbogen. Rechts im roten Kreis: eine Flamme](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Ein Lichtbogen verbrennt dich, ohne dass du das Kabel berührst.")
-
+:::piktogramm Ein Lichtbogen verbrennt dich, ohne dass du das Kabel berührst. motiv=hv-lichtbogen groesse=gross
+:::
 ### Das Auto fährt los
 
 Steht das Auto unter Spannung, kann es ohne Vorwarnung anfahren, in weniger als 2,5 Sekunden auf 100 km/h. Wer davor oder dahinter steht, wird **überfahren oder eingeklemmt**. Deshalb gilt: nie vor, hinter oder neben einem Auto unter Spannung.
@@ -349,8 +349,8 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 
 **Die Folge:** **Verbrennungen bis auf den Knochen**, rund um den Finger. Deshalb gilt: Schmuck ab, bevor du an Elektrik arbeitest.
 
-![Links: Ein Finger mit Ring liegt über Plus- und Minuspol eines Akkus, der Ring glüht. Rechts im roten Kreis: ein Finger mit glühendem Ring und roter Brandstelle](assets/bilder/sicherheit/folgen/lv-ring.svg "Ein Ring, der beide Pole berührt, wird in Sekunden glühend heiß.")
-
+:::piktogramm Ein Ring, der beide Pole berührt, wird in Sekunden glühend heiß. motiv=lv-ring groesse=gross
+:::
 ### Ein beschädigter Akku
 
 **Der Fehler:** Ein aufgeblähter oder heruntergefallener Lithium-Akku wird weiter benutzt oder sogar geladen.
@@ -359,8 +359,8 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 
 **Die Folge:** **Brand** in der Werkstatt und **giftige Gase**, darunter Fluorwasserstoff, der Atemwege und Lunge verätzt.
 
-![Links: Ein aufgeblähter Akku, aus dem Flammen und Rauch aufsteigen. Rechts im roten Kreis: eine Rauchwolke mit Totenkopf](assets/bilder/sicherheit/folgen/akku-brand.svg "Ein brennender Lithium-Akku setzt giftige Gase frei.")
-
+:::piktogramm Ein brennender Lithium-Akku setzt giftige Gase frei. motiv=akku-brand groesse=gross
+:::
 Was folgt aus welchem Fehler? Ordne zu.
 
 :::zuordnen Welche Folge droht?
@@ -451,8 +451,8 @@ Die Ständerbohrmaschine verzeiht keine Abkürzung. Drei Fehler, die schnell pas
 
 **Die Folge:** **Tiefe Schnitte** bis auf Sehnen und Knochen, **gebrochene Finger**. Ein großes Teil kann dich auch am Körper treffen.
 
-![Links: Ein Blech dreht sich unter dem Bohrer wie ein Propeller, daneben eine Hand. Rechts im roten Kreis: eine Hand mit roten Schnittwunden](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Ein losgerissenes Werkstück wird zum Propeller.")
-
+:::piktogramm Ein losgerissenes Werkstück wird zum Propeller. motiv=bohr-werkstueck groesse=gross
+:::
 ### Lange Stange nicht gesichert
 
 **Der Fehler:** Du bohrst in eine lange Stange, ein Rohr oder ein Profil und spannst es nur kurz ein oder hältst das lange Ende mit der Hand.
@@ -461,8 +461,8 @@ Die Ständerbohrmaschine verzeiht keine Abkürzung. Drei Fehler, die schnell pas
 
 **Die Folge:** Das Stangenende kann den **Bauchraum aufschlitzen**. Solche Verletzungen der inneren Organe sind **tödlich**, wenn nicht sofort operiert wird. Deshalb werden lange Werkstücke zusätzlich gegen Mitdrehen gesichert, zum Beispiel mit einem Anschlag an der Säule, und du stellst dich nie in den Schwenkbereich.
 
-![Links: Eine lange Stange reißt sich an der Bohrmaschine los und schlägt in Bauchhöhe im Kreis auf eine Person zu. Rechts im roten Kreis: ein Oberkörper mit einer roten Schnittwunde quer über den Bauch](assets/bilder/sicherheit/folgen/bohr-stange.svg "Eine losgerissene Stange schlägt in Bauchhöhe.")
-
+:::piktogramm Eine losgerissene Stange schlägt in Bauchhöhe. motiv=bohr-stange groesse=gross
+:::
 ### Bohrfutterschlüssel steckt noch
 
 **Der Fehler:** Du spannst den Bohrer, lässt den Schlüssel im Bohrfutter stecken und schaltest ein.
@@ -471,8 +471,8 @@ Die Ständerbohrmaschine verzeiht keine Abkürzung. Drei Fehler, die schnell pas
 
 **Die Folge:** Ein **Geschoss ins Gesicht**: Platzwunden, ausgeschlagene Zähne, im schlimmsten Fall ein **zerstörtes Auge**.
 
-![Links: Ein Bohrfutterschlüssel fliegt aus der eingeschalteten Bohrmaschine auf den Kopf einer Person zu. Rechts im roten Kreis: ein verletztes Auge](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Ein vergessener Schlüssel wird zum Geschoss.")
-
+:::piktogramm Ein vergessener Schlüssel wird zum Geschoss. motiv=bohrfutterschluessel groesse=gross
+:::
 Ordne jedem Fehler seine Folge zu.
 
 :::zuordnen Welche Folge droht?
@@ -544,8 +544,8 @@ Das Schleifband ist dafür gemacht, Metall abzutragen. Haut ist viel weicher.
 
 **Die Folge:** Haut, Fingernagel und Gewebe sind in **Sekunden bis auf den Knochen abgeschliffen**. Solche Wunden heilen langsam und hinterlassen oft einen verkürzten oder tauben Finger.
 
-![Links: Ein Finger kommt dem laufenden Schleifband am Spalt zur Auflage zu nah. Rechts im roten Kreis: ein Finger, dessen Spitze rot abgeschliffen ist](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Das Band schleift Haut schneller ab als Metall.")
-
+:::piktogramm Das Band schleift Haut schneller ab als Metall. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Weitere Fehler am Bandschleifer
 
 - **Aluminium und Stahl auf demselben Band:** Feiner Aluminiumstaub und Stahlfunken können heftig miteinander reagieren und **brennen**. Der Staub im Gerät kann sich entzünden.
@@ -636,8 +636,8 @@ Die Flex gehört zu den gefährlichsten Werkzeugen in der Werkstatt. Der Rand ei
 
 **Die Folge:** **Verlorene Augen**, tiefe Schnitte im Gesicht und am **Hals**. Ein Splitter an der Halsschlagader ist **tödlich**.
 
-![Links: Eine Flex ohne Schutzhaube, die Scheibe zerplatzt, Bruchstücke fliegen auf den Kopf einer Person zu. Rechts im roten Kreis: ein verletztes Auge und rote Schnitte](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Bruchstücke einer Trennscheibe fliegen fast 300 km/h schnell.")
-
+:::piktogramm Bruchstücke einer Trennscheibe fliegen fast 300 km/h schnell. motiv=flex-scheibe groesse=gross
+:::
 ### Die Flex schlägt zurück
 
 **Der Fehler:** Du hältst die Flex mit einer Hand, und die Scheibe verkantet im Schnitt.
@@ -654,8 +654,8 @@ Die Flex gehört zu den gefährlichsten Werkzeugen in der Werkstatt. Der Rand ei
 
 **Die Folge:** **Werkstattbrand**: das Auto, die Werkzeuge und die Arbeit einer ganzen Saison sind verloren, und wer drinnen ist, ist in Lebensgefahr.
 
-![Links: In der Werkstatt fliegen Funken einer Flex auf einen Haufen Lappen, der zu brennen beginnt. Rechts im roten Kreis: ein brennendes Haus](assets/bilder/sicherheit/folgen/flex-funken.svg "Funken in der Werkstatt können die Arbeit einer ganzen Saison vernichten.")
-
+:::piktogramm Funken in der Werkstatt können die Arbeit einer ganzen Saison vernichten. motiv=flex-funken groesse=gross
+:::
 Ordne jedem Fehler seine Folge zu.
 
 :::zuordnen Welche Folge droht?
@@ -715,8 +715,8 @@ Beim Schleifen, Bohren und Sägen brechen die Fasern. Dabei entstehen Bruchstüc
 
 Carbon baut der Körper **kaum ab**. Was in der Lunge ankommt, bleibt dort womöglich für immer.
 
-![Links: Eine Person ohne Atemschutz steht in einer Staubwolke beim Schleifen eines Carbonteils. Rechts im roten Kreis: eine Lunge voller schwarzer Faserpunkte](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Faserbruchstücke gelangen bis in die Lungenbläschen.")
-
+:::piktogramm Faserbruchstücke gelangen bis in die Lungenbläschen. motiv=carbon-lunge groesse=gross
+:::
 ### Der Krebsverdacht
 
 - Solche Faserbruchstücke aus Carbon stehen **im Verdacht, Krebs zu erzeugen**. Die Deutsche Gesetzliche Unfallversicherung (DGUV) ordnet sie in die **Kategorie 2** ein: Verdacht auf krebserzeugende Wirkung.
@@ -734,8 +734,8 @@ Carbon baut der Körper **kaum ab**. Was in der Lunge ankommt, bleibt dort womö
 - **Staub leitet Strom:** Carbonstaub in Elektronik verursacht **Kurzschlüsse**, auch im Auto.
 - **Staub brennt:** Aufgewirbelter Carbonstaub ist brennbar und kann sogar explodieren.
 
-![Links: Eine Person ohne Schutzanzug ist mit Staub übersät, ein Pfeil zeigt zu einem Haus, in dem ebenfalls Staub liegt. Rechts im roten Kreis: eine Hand mit roten, juckenden Hautstellen](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Ohne Anzug trägst du den Staub bis nach Hause.")
-
+:::piktogramm Ohne Anzug trägst du den Staub bis nach Hause. motiv=carbon-zuhause groesse=gross
+:::
 Was stimmt, was nicht? Ordne jede Aussage zu.
 
 :::zuordnen Stimmt das?
@@ -810,8 +810,8 @@ Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst
 
 **Die Folge:** Eine **Allergie, die ein Leben lang bleibt**: rote, nässende, juckende Haut, schon bei kleinsten Mengen oder sogar durch Dämpfe in der Luft. Wer einmal allergisch ist, darf oft **nie wieder mit Harz arbeiten**, auch nicht später im Beruf.
 
-![Links: Eine Hand ohne Handschuh mit Harztropfen neben einem Becher Harz, darüber ein durchgestrichener Handschuh. Rechts im roten Kreis: eine Hand mit roten Ekzemstellen](assets/bilder/sicherheit/folgen/harz-haut.svg "Eine Harzallergie bleibt ein Leben lang.")
-
+:::piktogramm Eine Harzallergie bleibt ein Leben lang. motiv=harz-haut groesse=gross
+:::
 ### Zu viel Harz auf einmal
 
 **Der Fehler:** Du mischst einen großen Becher Harz an, damit es für alles reicht, und lässt ihn stehen.
@@ -820,8 +820,8 @@ Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst
 
 **Die Folge:** Verbrennungen, Atemwegsreizungen durch den Qualm und ein Brand mitten in der Werkstatt.
 
-![Links: Ein großer Becher mit angemischtem Harz qualmt und brennt, daneben „100 °C+“. Rechts im roten Kreis: eine Flamme](assets/bilder/sicherheit/folgen/harz-hitze.svg "Zu viel angemischtes Harz kann sich selbst entzünden.")
-
+:::piktogramm Zu viel angemischtes Harz kann sich selbst entzünden. motiv=harz-hitze groesse=gross
+:::
 ### Gefahrstoff in der Getränkeflasche
 
 **Der Fehler:** Du füllst etwas Lösungsmittel oder Härter in eine leere Wasserflasche, weil gerade nichts anderes da ist.
@@ -830,8 +830,8 @@ Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst
 
 **Die Folge:** **Vergiftung**, verätzter Mund und verätzte Speiseröhre. Manche Stoffe schädigen innere Organe dauerhaft.
 
-![Links: Aus einem Kanister mit Totenkopf-Symbol wird Flüssigkeit in eine Getränkeflasche gefüllt. Rechts im roten Kreis: ein Totenkopf](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Gefahrstoffe gehören nie in Getränkeflaschen.")
-
+:::piktogramm Gefahrstoffe gehören nie in Getränkeflaschen. motiv=getraenkeflasche groesse=gross
+:::
 Ordne jedem Fehler seine Folge zu.
 
 :::zuordnen Welche Folge droht?

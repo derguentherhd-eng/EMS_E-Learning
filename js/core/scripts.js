@@ -26,6 +26,8 @@
     kern: [
       "js/core/dom.js",
       "js/ui/icons.js",
+      "js/ui/pictograms.js",
+      "js/ui/pictograms-safety.js",
       "js/ui/statusbar.js",
       "js/core/router.js",
       "js/core/store.js",
@@ -44,6 +46,7 @@
       "js/blocks/timeline.js",
       "js/blocks/checklist.js",
       "js/blocks/quiz-block.js",
+      "js/blocks/pictogram-block.js",
       "js/blocks/registry.js",
       "js/content/frontmatter.js",
       "js/content/markdown.js",

@@ -14,7 +14,7 @@ lernziele:
   - Připravíš si pracoviště, po práci ho uklidíš a víš, co dělat v případě nouze.
 sprache: cs
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## Bezpečnost na prvním místě
@@ -154,8 +154,8 @@ Pravidla na minulé stránce zní přísně. Tady uvidíš proč. Každý přík
 
 **Následek:** Prsty jsou vytrženy z ruky, často **i se šlachou**, která je vytažena až z předloktí. Taková vytržená poranění se většinou nedají znovu přišít. K tomu zlomeniny a stržená kůže.
 
-![Vlevo: Rukavici navíjí rotující vrtačka a vtahuje paži dovnitř. Vpravo v červeném kruhu: ruka, ze které byl vytržen prst i se šlachou](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Rukavice u vrtačky tě může stát prst.")
-
+:::piktogramm Rukavice u vrtačky tě může stát prst. motiv=handschuh-bohrer groesse=gross
+:::
 ### Šála, šňůrka nebo řetízek
 
 **Chyba:** U stroje máš na sobě šálu, mikinu se šňůrkami nebo řetízek na krku.
@@ -164,8 +164,8 @@ Pravidla na minulé stránce zní přísně. Tady uvidíš proč. Každý přík
 
 **Následek:** **Uškrcení.** Bezvědomí během několika sekund, zranění krční páteře, **smrt**. Nikdo vedle tebe není dost rychlý, aby to zastavil.
 
-![Vlevo: Šálu navíjí rotující vrtačka a táhne člověka za krk ke stroji. Vpravo v červeném kruhu: lebka](assets/bilder/sicherheit/folgen/schal-maschine.svg "Šála u stroje je životu nebezpečná.")
-
+:::piktogramm Šála u stroje je životu nebezpečná. motiv=schal-maschine groesse=gross
+:::
 ### Rozpuštěné dlouhé vlasy
 
 **Chyba:** Skláníš se s rozpuštěnými vlasy nad běžícím strojem.
@@ -174,8 +174,8 @@ Pravidla na minulé stránce zní přísně. Tady uvidíš proč. Každý přík
 
 **Následek:** **Kůže hlavy je stržena** (skalpace). To znamená mnoho operací, často zůstanou lysá místa a jizvy navždy.
 
-![Vlevo: Dlouhé vlasy zachytí rotující vrtačka. Vpravo v červeném kruhu: hlava, jejíž kůže je nahoře označena červeně](assets/bilder/sicherheit/folgen/haare-maschine.svg "Vlasy se navinou během zlomku sekundy.")
-
+:::piktogramm Vlasy se navinou během zlomku sekundy. motiv=haare-maschine groesse=gross
+:::
 ### Prsteny a syntetická vlákna
 
 **Prsten** se může zachytit o hranu nebo o nástroj. Pak strhne kůži a tkáň z prstu, až na kost. **Oblečení ze syntetických vláken** od jisker chytne nebo se na kůži přitaví. Takové popáleniny jsou hluboké a špatně se hojí.
@@ -242,8 +242,8 @@ Elektřinu není vidět, slyšet ani cítit. Při 600 voltech neexistuje žádn�
 
 **Následek:** Srdce se dostane z rytmu (**fibrilace komor**). To je zástava srdce: Bez resuscitace jsi za několik minut mrtvý. Podél dráhy proudu se tkáň spálí **uvnitř**, i když navenek skoro nic není vidět. Poruchy srdečního rytmu se mohou objevit ještě **o hodiny později**. Proto musí po každém úrazu elektrickým proudem vyšetřit lékař.
 
-![Vlevo: Člověk sahá na oranžový vysokonapěťový kabel, blesk ukazuje dráhu proudu tělem do země. Vpravo v červeném kruhu: srdce s nepravidelnou srdeční křivkou](assets/bilder/sicherheit/folgen/hv-koerper.svg "Proud procházející hrudníkem vyvede srdce z rytmu.")
-
+:::piktogramm Proud procházející hrudníkem vyvede srdce z rytmu. motiv=hv-koerper groesse=gross
+:::
 ### Elektrický oblouk
 
 **Chyba:** Klíč nebo jiný kovový předmět se dotkne dvou vysokonapěťových pólů zároveň, například na akumulátoru.
@@ -252,8 +252,8 @@ Elektřinu není vidět, slyšet ani cítit. Při 600 voltech neexistuje žádn�
 
 **Následek:** **Těžké popáleniny** rukou a obličeje, i když tebou neprochází proud. Ostré světlo může poškodit oči.
 
-![Vlevo: Klíč leží přes kladný a záporný pól akumulátoru, v místě dotyku šlehá elektrický oblouk. Vpravo v červeném kruhu: plamen](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Elektrický oblouk tě popálí, aniž by ses dotkl(a) kabelu.")
-
+:::piktogramm Elektrický oblouk tě popálí, aniž by ses dotkl(a) kabelu. motiv=hv-lichtbogen groesse=gross
+:::
 ### Auto se rozjede
 
 Když je auto pod napětím, může se bez varování rozjet, za méně než 2,5 sekundy na 100 km/h. Kdo stojí před ním nebo za ním, bude **přejet nebo přimáčknut**. Proto platí: nikdy před autem pod napětím, za ním ani vedle něj.
@@ -352,8 +352,8 @@ Při úklidu najdeš malý lithiový akumulátor z testovací sestavy. Je nafouk
 
 **Následek:** **Popáleniny až na kost**, kolem dokola prstu. Proto platí: Šperky dolů, než začneš pracovat na elektrice.
 
-![Vlevo: Prst s prstenem leží přes kladný a záporný pól akumulátoru, prsten žhne. Vpravo v červeném kruhu: prst se žhnoucím prstenem a červenou popáleninou](assets/bilder/sicherheit/folgen/lv-ring.svg "Prsten, který se dotkne obou pólů, se během několika sekund rozžhaví.")
-
+:::piktogramm Prsten, který se dotkne obou pólů, se během několika sekund rozžhaví. motiv=lv-ring groesse=gross
+:::
 ### Poškozený akumulátor
 
 **Chyba:** Nafouklý nebo upuštěný lithiový akumulátor se dál používá nebo se dokonce nabíjí.
@@ -362,8 +362,8 @@ Při úklidu najdeš malý lithiový akumulátor z testovací sestavy. Je nafouk
 
 **Následek:** **Požár** v dílně a **jedovaté plyny**, mezi nimi fluorovodík, který poleptá dýchací cesty a plíce.
 
-![Vlevo: Nafouklý akumulátor, ze kterého šlehají plameny a stoupá kouř. Vpravo v červeném kruhu: oblak kouře s lebkou](assets/bilder/sicherheit/folgen/akku-brand.svg "Hořící lithiový akumulátor uvolňuje jedovaté plyny.")
-
+:::piktogramm Hořící lithiový akumulátor uvolňuje jedovaté plyny. motiv=akku-brand groesse=gross
+:::
 Co vyplývá z které chyby? Přiřaď.
 
 :::zuordnen Jaký následek hrozí?
@@ -454,8 +454,8 @@ Sloupová vrtačka neodpouští žádné zkratky. Tři chyby, které se rychle s
 
 **Následek:** **Hluboké řezné rány** až na šlachy a kosti, **zlomené prsty**. Velký díl tě může zasáhnout i do těla.
 
-![Vlevo: Plech se otáčí pod vrtákem jako vrtule, vedle něj ruka. Vpravo v červeném kruhu: ruka s červenými řeznými ranami](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Utržený obrobek se změní ve vrtuli.")
-
+:::piktogramm Utržený obrobek se změní ve vrtuli. motiv=bohr-werkstueck groesse=gross
+:::
 ### Nezajištěná dlouhá tyč
 
 **Chyba:** Vrtáš do dlouhé tyče, trubky nebo profilu a upneš ho jen nakrátko, nebo držíš dlouhý konec rukou.
@@ -464,8 +464,8 @@ Sloupová vrtačka neodpouští žádné zkratky. Tři chyby, které se rychle s
 
 **Následek:** Konec tyče může **rozříznout břišní dutinu**. Taková poranění vnitřních orgánů jsou **smrtelná**, pokud se okamžitě neoperuje. Proto se dlouhé obrobky navíc zajišťují proti protáčení, například dorazem na sloupu, a ty se nikdy nestavíš do prostoru, kterým se tyč otáčí.
 
-![Vlevo: Dlouhá tyč se na vrtačce utrhne a ve výšce břicha se v kruhu řítí na člověka. Vpravo v červeném kruhu: trup s červenou řeznou ranou přes břicho](assets/bilder/sicherheit/folgen/bohr-stange.svg "Utržená tyč udeří ve výšce břicha.")
-
+:::piktogramm Utržená tyč udeří ve výšce břicha. motiv=bohr-stange groesse=gross
+:::
 ### Klíč zůstal ve sklíčidle
 
 **Chyba:** Upneš vrták, necháš klíč ve sklíčidle a zapneš stroj.
@@ -474,8 +474,8 @@ Sloupová vrtačka neodpouští žádné zkratky. Tři chyby, které se rychle s
 
 **Následek:** **Projektil do obličeje**: tržné rány, vyražené zuby, v nejhorším případě **zničené oko**.
 
-![Vlevo: Klíč ke sklíčidlu letí ze zapnuté vrtačky na hlavu člověka. Vpravo v červeném kruhu: zraněné oko](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Zapomenutý klíč se změní v projektil.")
-
+:::piktogramm Zapomenutý klíč se změní v projektil. motiv=bohrfutterschluessel groesse=gross
+:::
 Přiřaď ke každé chybě její následek.
 
 :::zuordnen Jaký následek hrozí?
@@ -547,8 +547,8 @@ Brusný pás je stavěný na to, aby ubíral kov. Kůže je mnohem měkčí.
 
 **Následek:** Kůže, nehet a tkáň jsou během **několika sekund obroušeny až na kost**. Takové rány se hojí pomalu a často zanechají zkrácený nebo necitlivý prst.
 
-![Vlevo: Prst se u mezery k opěrce příliš přiblíží k běžícímu brusnému pásu. Vpravo v červeném kruhu: prst, jehož špička je červeně obroušená](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Pás obrousí kůži rychleji než kov.")
-
+:::piktogramm Pás obrousí kůži rychleji než kov. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Další chyby u pásové brusky
 
 - **Hliník a ocel na stejném pásu:** Jemný hliníkový prach a ocelové jiskry spolu mohou prudce reagovat a **hořet**. Prach v zařízení se může vznítit.
@@ -639,8 +639,8 @@ Flexa patří k nejnebezpečnějším nástrojům v dílně. Okraj řezného kot
 
 **Následek:** **Ztracené oči**, hluboké řezné rány v obličeji a na **krku**. Střep v krční tepně je **smrtelný**.
 
-![Vlevo: Flexa bez ochranného krytu, kotouč se roztrhne, úlomky letí na hlavu člověka. Vpravo v červeném kruhu: zraněné oko a červené řezné rány](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Úlomky řezného kotouče letí rychlostí skoro 300 km/h.")
-
+:::piktogramm Úlomky řezného kotouče letí rychlostí skoro 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### Zpětný ráz flexy
 
 **Chyba:** Držíš flexu jednou rukou a kotouč se v řezu vzpříčí.
@@ -657,8 +657,8 @@ Flexa patří k nejnebezpečnějším nástrojům v dílně. Okraj řezného kot
 
 **Následek:** **Požár dílny**: auto, nástroje a práce celé sezóny jsou ztracené a kdo je uvnitř, je v ohrožení života.
 
-![Vlevo: V dílně létají jiskry z flexy na hromadu hadrů, která začíná hořet. Vpravo v červeném kruhu: hořící dům](assets/bilder/sicherheit/folgen/flex-funken.svg "Jiskry v dílně mohou zničit práci celé sezóny.")
-
+:::piktogramm Jiskry v dílně mohou zničit práci celé sezóny. motiv=flex-funken groesse=gross
+:::
 Přiřaď ke každé chybě její následek.
 
 :::zuordnen Jaký následek hrozí?
@@ -718,8 +718,8 @@ Při broušení, vrtání a řezání se vlákna lámou. Vznikají přitom úlom
 
 Karbon tělo **skoro neodbourá**. Co se dostane do plic, tam možná zůstane navždy.
 
-![Vlevo: Člověk bez ochrany dýchacích cest stojí v oblaku prachu při broušení karbonového dílu. Vpravo v červeném kruhu: plíce plné černých teček vláken](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Úlomky vláken se dostanou až do plicních sklípků.")
-
+:::piktogramm Úlomky vláken se dostanou až do plicních sklípků. motiv=carbon-lunge groesse=gross
+:::
 ### Podezření na rakovinu
 
 - Takové úlomky karbonových vláken jsou **podezřelé z karcinogenity**. Německé zákonné úrazové pojištění (DGUV) je zařazuje do **kategorie 2**: podezření na karcinogenní účinek.
@@ -737,8 +737,8 @@ Karbon tělo **skoro neodbourá**. Co se dostane do plic, tam možná zůstane n
 - **Prach vede proud:** Karbonový prach v elektronice způsobuje **zkraty**, i v autě.
 - **Prach hoří:** Zvířený karbonový prach je hořlavý a může dokonce vybuchnout.
 
-![Vlevo: Člověk bez ochranného obleku je celý pokrytý prachem, šipka ukazuje k domu, ve kterém je také prach. Vpravo v červeném kruhu: ruka s červenými svědivými místy na kůži](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Bez obleku si prach odneseš až domů.")
-
+:::piktogramm Bez obleku si prach odneseš až domů. motiv=carbon-zuhause groesse=gross
+:::
 Co platí a co ne? Přiřaď každé tvrzení.
 
 :::zuordnen Platí to?
@@ -813,8 +813,8 @@ Pryskyřice voní neškodně a na omak je jako med. Následky jsou přesto váž
 
 **Následek:** **Alergie, která zůstane na celý život**: červená, mokvající, svědivá kůže, už při nejmenším množství nebo dokonce od výparů ve vzduchu. Kdo je jednou alergický, často **už nikdy nesmí pracovat s pryskyřicí**, ani později v zaměstnání.
 
-![Vlevo: Ruka bez rukavice s kapkami pryskyřice vedle kelímku s pryskyřicí, nad tím přeškrtnutá rukavice. Vpravo v červeném kruhu: ruka s červenými ekzémy](assets/bilder/sicherheit/folgen/harz-haut.svg "Alergie na pryskyřici zůstane na celý život.")
-
+:::piktogramm Alergie na pryskyřici zůstane na celý život. motiv=harz-haut groesse=gross
+:::
 ### Příliš mnoho pryskyřice najednou
 
 **Chyba:** Namícháš velký kelímek pryskyřice, aby vystačila na všechno, a necháš ho stát.
@@ -823,8 +823,8 @@ Pryskyřice voní neškodně a na omak je jako med. Následky jsou přesto váž
 
 **Následek:** Popáleniny, podráždění dýchacích cest kouřem a požár uprostřed dílny.
 
-![Vlevo: Velký kelímek s namíchanou pryskyřicí kouří a hoří, vedle něj „100 °C+“. Vpravo v červeném kruhu: plamen](assets/bilder/sicherheit/folgen/harz-hitze.svg "Příliš mnoho namíchané pryskyřice se může samo vznítit.")
-
+:::piktogramm Příliš mnoho namíchané pryskyřice se může samo vznítit. motiv=harz-hitze groesse=gross
+:::
 ### Nebezpečná látka v lahvi od nápoje
 
 **Chyba:** Naliješ trochu rozpouštědla nebo tvrdidla do prázdné lahve od vody, protože zrovna nic jiného není po ruce.
@@ -833,8 +833,8 @@ Pryskyřice voní neškodně a na omak je jako med. Následky jsou přesto váž
 
 **Následek:** **Otrava**, poleptaná ústa a poleptaný jícen. Některé látky trvale poškozují vnitřní orgány.
 
-![Vlevo: Z kanystru se symbolem lebky se nalévá kapalina do lahve od nápoje. Vpravo v červeném kruhu: lebka](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Nebezpečné látky nikdy nepatří do lahví od nápojů.")
-
+:::piktogramm Nebezpečné látky nikdy nepatří do lahví od nápojů. motiv=getraenkeflasche groesse=gross
+:::
 Přiřaď ke každé chybě její následek.
 
 :::zuordnen Jaký následek hrozí?

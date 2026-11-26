@@ -18,6 +18,7 @@
   const { parseChapter } = EM.require("js/content/documents.js");
   const { createBlockContext, renderElement } = EM.require("js/core/render.js");
   const { el } = EM.require("js/core/dom.js");
+  const { PICTOGRAMS, createPictogram } = EM.require("js/ui/pictograms.js");
 
   const SAMPLE = `---
 titel: Beispiele
@@ -117,6 +118,28 @@ Frühjahr | Fertigung | Lila Linie.
     demo.replaceChildren(
       ...chapter.pages[0].elements.map((element) =>
         renderElement(element, context),
+      ),
+    );
+  }
+
+  // Animierte Piktogramme: alle Motive, als Schleife (js/ui/pictograms.js).
+  const pictogramDemo = document.querySelector("[data-demo-pictograms]");
+  if (pictogramDemo) {
+    pictogramDemo.replaceChildren(
+      ...Object.entries(PICTOGRAMS).map(([name, pictogram]) =>
+        el(
+          "figure",
+          { class: "pictogram-block" },
+          createPictogram(name, {
+            size: "12rem",
+            color: "var(--color-yellow)",
+          }),
+          el(
+            "figcaption",
+            { class: "pictogram-block__caption" },
+            `${pictogram.label} (motiv=${name})`,
+          ),
+        ),
       ),
     );
   }

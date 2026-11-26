@@ -256,6 +256,32 @@ für jede Sprache der Auswahl eine geprüfte Übersetzung:
   dieser Sprache (bei Bulgarisch, Russisch, Ukrainisch auf Englisch – die PDF-Schrift hat keine
   kyrillischen Zeichen).
 
+## 6c. Animierte Piktogramme
+
+Für Sicherheitsthemen gibt es animierte Piktogramme (Baustein **Piktogramm (animiert)** im
+Editor). Jede Animation läuft in drei Phasen: Auftritt (0,6 s), stehende Pose mit der eigentlichen
+Botschaft (1,8 s), Abgang (0,6 s). Wer in seinem System „Bewegung reduzieren“ eingestellt hat, sieht
+nur die stehende Pose.
+
+```
+:::piktogramm Schutzbrille aufsetzen motiv=schutzbrille schleife=ja groesse=mittel farbe=akzent
+:::
+```
+
+| Angabe | Werte |
+|---|---|
+| Titel | Bildunterschrift, wird auch vorgelesen (optional) |
+| `motiv` | Grundmotive: `schutzbrille`, `stolpern`, `heben`, `fluchtweg`. Unfälle (Sicherheitsunterweisung): `handschuh-bohrer`, `schal-maschine`, `haare-maschine`, `hv-koerper`, `hv-lichtbogen`, `lv-ring`, `akku-brand`, `bohr-werkstueck`, `bohr-stange`, `bohrfutterschluessel`, `bandschleifer-spalt`, `flex-scheibe`, `flex-funken`, `carbon-lunge`, `carbon-zuhause`, `harz-haut`, `harz-hitze`, `getraenkeflasche` |
+| `schleife` | `ja` = läuft endlos, `nein` = einmal, sobald es sichtbar wird (erneut bei Maus darüber) |
+| `groesse` | `klein`, `mittel`, `gross` |
+| `farbe` | `akzent` (Gelb) oder `text` (Schriftfarbe) |
+
+Die Unfall-Motive zeigen in Phase 1 die Handlung, in Phase 2 den Unfall und in Phase 3 die Folge
+(Verletzungen in Rot). Wer „Bewegung reduzieren“ eingestellt hat, sieht den Unfallmoment.
+
+Neue Motive brauchen etwas Programmierung (js/ui/pictograms.js und
+css/components/pictogram.css, siehe docs/ENTWICKLER.md).
+
 ## 7. Kapitel anlegen, umsortieren, deaktivieren, archivieren, wiederherstellen
 
 | Aufgabe | Im Editor | Von Hand |

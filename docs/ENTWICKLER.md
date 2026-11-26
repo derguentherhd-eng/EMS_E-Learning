@@ -103,6 +103,8 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/views/safety-record-view.js` | Abschnitt „Dein Nachweis" mit Namensfeld (Quiz-Ergebnis und Seite 1) |
 | `js/course/certificate.js` | jsPDF und `assets/fonts/pdf/lato-pdf.js` per `<script>` laden, PDF zeichnen, Prüfcode, Dateiname |
 | `js/ui/*.js` | Sektoranzeige, Glossar-Popover, Startampel, Theme, Sprachauswahl mit Bergamot-Übersetzung (`language.js`, Programm in `vendor/bergamot/`), Symbole, Statusbar (`statusbar.js`) |
+| `js/ui/pictograms.js` | Animierte Sicherheits-Piktogramme: Skelett mit Gelenk-Gruppen (`--o` = Drehpunkt), Motive in `PICTOGRAMS`, Abspielen (Schleife/einmal) per IntersectionObserver. Bewegungen in `css/components/pictogram.css` (3 Phasen: 0–20 % Auftritt, 20–80 % Pose = `--hold`, 80–100 % Abgang). Baustein: `js/blocks/pictogram-block.js` |
+| `js/ui/pictograms-safety.js` | 18 Unfall-Motive der Sicherheitsunterweisung. Bewegungen als Daten (`timing`, `motion`), `installMotion()` in pictograms.js erzeugt daraus CSS-@keyframes. Baukasten: `drill`, `sander`, `battery`, `grinder`, `burst`, `skull`, `flame`, `cloud` |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
 | `js/pages/pruefen.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
 | `js/pages/tests.js` | Test-Runner für `tests.html` (sammelt, führt aus, zeigt an) |

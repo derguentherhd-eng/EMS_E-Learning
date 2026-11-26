@@ -14,7 +14,7 @@ lernziele:
   - Prepari la tua postazione di lavoro, la riordini dopo il lavoro e sai cosa fare in caso di emergenza.
 sprache: it
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## La sicurezza prima di tutto
@@ -154,8 +154,8 @@ Le regole della pagina precedente sembrano severe. Qui vedi perché. Ogni esempi
 
 **La conseguenza:** le dita vengono strappate dalla mano, spesso **insieme al tendine**, che viene estratto fin dall'avambraccio. Queste lesioni da strappamento il più delle volte non si possono più reimpiantare. A ciò si aggiungono fratture e pelle strappata.
 
-![A sinistra: un guanto viene avvolto dal trapano in rotazione e trascina dentro il braccio. A destra nel cerchio rosso: una mano a cui è stato strappato un dito insieme al tendine](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Un guanto al trapano può costarti un dito.")
-
+:::piktogramm Un guanto al trapano può costarti un dito. motiv=handschuh-bohrer groesse=gross
+:::
 ### Sciarpa, cordino o catenina
 
 **L'errore:** alla macchina indossi una sciarpa, una felpa con cordini o una catenina.
@@ -164,8 +164,8 @@ Le regole della pagina precedente sembrano severe. Qui vedi perché. Ogni esempi
 
 **La conseguenza:** **strangolamento.** Perdita di coscienza dopo pochi secondi, lesioni alla nuca, **morte**. Nessuno accanto a te è abbastanza veloce da fermarlo.
 
-![A sinistra: una sciarpa viene avvolta dal trapano in rotazione e trascina la persona per il collo verso la macchina. A destra nel cerchio rosso: un teschio](assets/bilder/sicherheit/folgen/schal-maschine.svg "Una sciarpa alla macchina è pericolosa per la vita.")
-
+:::piktogramm Una sciarpa alla macchina è pericolosa per la vita. motiv=schal-maschine groesse=gross
+:::
 ### Capelli lunghi sciolti
 
 **L'errore:** ti chini con i capelli sciolti sulla macchina in funzione.
@@ -174,8 +174,8 @@ Le regole della pagina precedente sembrano severe. Qui vedi perché. Ogni esempi
 
 **La conseguenza:** il **cuoio capelluto viene strappato** (scalpo). Questo significa molti interventi chirurgici, e spesso restano per sempre zone calve e cicatrici.
 
-![A sinistra: capelli lunghi vengono afferrati dal trapano in rotazione. A destra nel cerchio rosso: una testa con il cuoio capelluto evidenziato in rosso in alto](assets/bilder/sicherheit/folgen/haare-maschine.svg "I capelli vengono avvolti in frazioni di secondo.")
-
+:::piktogramm I capelli vengono avvolti in frazioni di secondo. motiv=haare-maschine groesse=gross
+:::
 ### Anelli e fibre sintetiche
 
 **Un anello** può restare impigliato in uno spigolo o nell'utensile. Allora strappa pelle e tessuti dal dito, fino all'osso. **Gli abiti in fibre sintetiche** prendono fuoco a causa delle scintille o si fondono sulla pelle. Queste ustioni sono profonde e guariscono male.
@@ -242,8 +242,8 @@ La corrente non si vede, non si sente e non ha odore. A 600 volt non c'è una «
 
 **La conseguenza:** il cuore perde il ritmo (**fibrillazione ventricolare**). È un arresto cardiaco: senza rianimazione sei morto dopo pochi minuti. Lungo il percorso della corrente i tessuti bruciano **all'interno**, anche se all'esterno si vede appena qualcosa. Le aritmie cardiache possono comparire anche **ore dopo**. Per questo dopo ogni infortunio elettrico deve visitarti un medico.
 
-![A sinistra: una persona tocca un cavo ad alta tensione arancione, un fulmine mostra il percorso della corrente attraverso il corpo fino al suolo. A destra nel cerchio rosso: un cuore con una linea del battito irregolare](assets/bilder/sicherheit/folgen/hv-koerper.svg "La corrente attraverso il torace fa perdere il ritmo al cuore.")
-
+:::piktogramm La corrente attraverso il torace fa perdere il ritmo al cuore. motiv=hv-koerper groesse=gross
+:::
 ### Arco elettrico
 
 **L'errore:** una chiave inglese o un altro pezzo di metallo tocca contemporaneamente due poli ad alta tensione, ad esempio sulla batteria.
@@ -252,8 +252,8 @@ La corrente non si vede, non si sente e non ha odore. A 600 volt non c'è una «
 
 **La conseguenza:** **gravi ustioni** a mani e viso, anche senza che la corrente ti attraversi. La luce abbagliante può danneggiare gli occhi.
 
-![A sinistra: una chiave inglese è appoggiata sul polo positivo e negativo di una batteria, nel punto di contatto lampeggia un arco elettrico. A destra nel cerchio rosso: una fiamma](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Un arco elettrico ti ustiona senza che tu tocchi il cavo.")
-
+:::piktogramm Un arco elettrico ti ustiona senza che tu tocchi il cavo. motiv=hv-lichtbogen groesse=gross
+:::
 ### L'auto parte
 
 Quando l'auto è sotto tensione, può partire senza preavviso, raggiungendo 100 km/h in meno di 2,5 secondi. Chi sta davanti o dietro viene **investito o schiacciato**. Per questo vale: mai davanti, dietro o accanto a un'auto sotto tensione.
@@ -352,8 +352,8 @@ Mentre riordini trovi una piccola batteria al litio di un allestimento di prova.
 
 **La conseguenza:** **ustioni fino all'osso**, tutt'intorno al dito. Per questo vale: togli i gioielli prima di lavorare sull'impianto elettrico.
 
-![A sinistra: un dito con un anello è appoggiato sul polo positivo e negativo di una batteria, l'anello è incandescente. A destra nel cerchio rosso: un dito con anello incandescente e un'ustione rossa](assets/bilder/sicherheit/folgen/lv-ring.svg "Un anello che tocca entrambi i poli diventa rovente in pochi secondi.")
-
+:::piktogramm Un anello che tocca entrambi i poli diventa rovente in pochi secondi. motiv=lv-ring groesse=gross
+:::
 ### Una batteria danneggiata
 
 **L'errore:** una batteria al litio gonfia o caduta continua a essere usata o addirittura caricata.
@@ -362,8 +362,8 @@ Mentre riordini trovi una piccola batteria al litio di un allestimento di prova.
 
 **La conseguenza:** **incendio** in officina e **gas tossici**, tra cui l'acido fluoridrico, che corrode le vie respiratorie e i polmoni.
 
-![A sinistra: una batteria gonfia da cui escono fiamme e fumo. A destra nel cerchio rosso: una nuvola di fumo con un teschio](assets/bilder/sicherheit/folgen/akku-brand.svg "Una batteria al litio in fiamme libera gas tossici.")
-
+:::piktogramm Una batteria al litio in fiamme libera gas tossici. motiv=akku-brand groesse=gross
+:::
 Cosa deriva da quale errore? Associa.
 
 :::zuordnen Quale conseguenza rischi?
@@ -454,8 +454,8 @@ Il trapano a colonna non perdona le scorciatoie. Tre errori che capitano in fret
 
 **La conseguenza:** **tagli profondi** fino a tendini e ossa, **dita rotte**. Un pezzo grande può colpirti anche sul corpo.
 
-![A sinistra: un lamierino gira sotto la punta come un'elica, accanto una mano. A destra nel cerchio rosso: una mano con ferite da taglio rosse](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Un pezzo strappato via diventa un'elica.")
-
+:::piktogramm Un pezzo strappato via diventa un'elica. motiv=bohr-werkstueck groesse=gross
+:::
 ### Barra lunga non bloccata
 
 **L'errore:** fori una barra lunga, un tubo o un profilato e lo serri solo per un tratto corto o tieni l'estremità lunga con la mano.
@@ -464,8 +464,8 @@ Il trapano a colonna non perdona le scorciatoie. Tre errori che capitano in fret
 
 **La conseguenza:** l'estremità della barra può **squarciare l'addome**. Queste lesioni degli organi interni sono **mortali** se non si interviene subito chirurgicamente. Per questo i pezzi lunghi vengono bloccati in aggiunta contro la rotazione, ad esempio con un arresto sulla colonna, e non ti metti mai nel raggio di rotazione.
 
-![A sinistra: una barra lunga si strappa via dal trapano e ruota all'altezza della pancia verso una persona. A destra nel cerchio rosso: un busto con una ferita da taglio rossa trasversale sull'addome](assets/bilder/sicherheit/folgen/bohr-stange.svg "Una barra strappata via colpisce all'altezza della pancia.")
-
+:::piktogramm Una barra strappata via colpisce all'altezza della pancia. motiv=bohr-stange groesse=gross
+:::
 ### Chiave del mandrino ancora inserita
 
 **L'errore:** serri la punta, lasci la chiave inserita nel mandrino e accendi.
@@ -474,8 +474,8 @@ Il trapano a colonna non perdona le scorciatoie. Tre errori che capitano in fret
 
 **La conseguenza:** un **proiettile in faccia**: ferite lacero-contuse, denti spaccati, nel peggiore dei casi un **occhio distrutto**.
 
-![A sinistra: una chiave del mandrino vola via dal trapano acceso verso la testa di una persona. A destra nel cerchio rosso: un occhio ferito](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Una chiave dimenticata diventa un proiettile.")
-
+:::piktogramm Una chiave dimenticata diventa un proiettile. motiv=bohrfutterschluessel groesse=gross
+:::
 Associa a ogni errore la sua conseguenza.
 
 :::zuordnen Quale conseguenza rischi?
@@ -547,8 +547,8 @@ Il nastro abrasivo è fatto per asportare metallo. La pelle è molto più morbid
 
 **La conseguenza:** pelle, unghia e tessuti vengono **abrasi fino all'osso in pochi secondi**. Queste ferite guariscono lentamente e spesso lasciano un dito accorciato o insensibile.
 
-![A sinistra: un dito si avvicina troppo al nastro abrasivo in movimento nella fessura verso il piano di appoggio. A destra nel cerchio rosso: un dito con la punta abrasa in rosso](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Il nastro abrade la pelle più velocemente del metallo.")
-
+:::piktogramm Il nastro abrade la pelle più velocemente del metallo. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Altri errori alla levigatrice a nastro
 
 - **Alluminio e acciaio sullo stesso nastro:** la polvere fine di alluminio e le scintille dell'acciaio possono reagire violentemente tra loro e **bruciare**. La polvere nella macchina può incendiarsi.
@@ -639,8 +639,8 @@ La smerigliatrice angolare è uno degli utensili più pericolosi dell'officina. 
 
 **La conseguenza:** **occhi persi**, tagli profondi al viso e al **collo**. Una scheggia nell'arteria carotide è **mortale**.
 
-![A sinistra: una smerigliatrice angolare senza cuffia di protezione, il disco esplode, i frammenti volano verso la testa di una persona. A destra nel cerchio rosso: un occhio ferito e tagli rossi](assets/bilder/sicherheit/folgen/flex-scheibe.svg "I frammenti di un disco da taglio volano a quasi 300 km/h.")
-
+:::piktogramm I frammenti di un disco da taglio volano a quasi 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### La smerigliatrice angolare contraccolpa
 
 **L'errore:** tieni la smerigliatrice angolare con una mano, e il disco si incastra nel taglio.
@@ -657,8 +657,8 @@ La smerigliatrice angolare è uno degli utensili più pericolosi dell'officina. 
 
 **La conseguenza:** **incendio dell'officina**: l'auto, gli utensili e il lavoro di un'intera stagione sono perduti, e chi si trova dentro è in pericolo di vita.
 
-![A sinistra: in officina le scintille di una smerigliatrice angolare volano su un mucchio di stracci, che comincia a bruciare. A destra nel cerchio rosso: una casa in fiamme](assets/bilder/sicherheit/folgen/flex-funken.svg "Le scintille in officina possono distruggere il lavoro di un'intera stagione.")
-
+:::piktogramm Le scintille in officina possono distruggere il lavoro di un'intera stagione. motiv=flex-funken groesse=gross
+:::
 Associa a ogni errore la sua conseguenza.
 
 :::zuordnen Quale conseguenza rischi?
@@ -718,8 +718,8 @@ Durante la levigatura, la foratura e il taglio con la sega le fibre si spezzano.
 
 Il carbonio il corpo **non lo smaltisce quasi per niente**. Ciò che arriva nei polmoni probabilmente ci resta per sempre.
 
-![A sinistra: una persona senza protezione delle vie respiratorie sta in una nuvola di polvere mentre leviga un componente in carbonio. A destra nel cerchio rosso: un polmone pieno di punti neri di fibre](assets/bilder/sicherheit/folgen/carbon-lunge.svg "I frammenti di fibra arrivano fino agli alveoli polmonari.")
-
+:::piktogramm I frammenti di fibra arrivano fino agli alveoli polmonari. motiv=carbon-lunge groesse=gross
+:::
 ### Il sospetto di cancerogenicità
 
 - Questi frammenti di fibra di carbonio sono **sospettati di essere cancerogeni**. L'assicurazione legale tedesca contro gli infortuni (DGUV) li classifica nella **categoria 2**: sospetto di effetto cancerogeno.
@@ -737,8 +737,8 @@ Il carbonio il corpo **non lo smaltisce quasi per niente**. Ciò che arriva nei 
 - **La polvere conduce corrente:** la polvere di carbonio nell'elettronica provoca **cortocircuiti**, anche nell'auto.
 - **La polvere brucia:** la polvere di carbonio sollevata è combustibile e può perfino esplodere.
 
-![A sinistra: una persona senza tuta di protezione è coperta di polvere, una freccia indica una casa in cui c'è anche polvere. A destra nel cerchio rosso: una mano con zone cutanee rosse e pruriginose](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Senza tuta ti porti la polvere fino a casa.")
-
+:::piktogramm Senza tuta ti porti la polvere fino a casa. motiv=carbon-zuhause groesse=gross
+:::
 Cosa è vero, cosa no? Associa ogni affermazione.
 
 :::zuordnen È vero?
@@ -813,8 +813,8 @@ La resina ha un odore innocuo e al tatto sembra miele. Le conseguenze sono comun
 
 **La conseguenza:** un'**allergia che resta per tutta la vita**: pelle arrossata, essudante e pruriginosa, già con quantità minime o perfino a causa dei vapori nell'aria. Chi è diventato allergico spesso **non può mai più lavorare con la resina**, nemmeno più avanti nella professione.
 
-![A sinistra: una mano senza guanto con gocce di resina accanto a un bicchiere di resina, sopra un guanto barrato. A destra nel cerchio rosso: una mano con zone di eczema rosse](assets/bilder/sicherheit/folgen/harz-haut.svg "Un'allergia alla resina resta per tutta la vita.")
-
+:::piktogramm Un'allergia alla resina resta per tutta la vita. motiv=harz-haut groesse=gross
+:::
 ### Troppa resina in una volta
 
 **L'errore:** miscoli un grande bicchiere di resina, così basta per tutto, e lo lasci lì.
@@ -823,8 +823,8 @@ La resina ha un odore innocuo e al tatto sembra miele. Le conseguenze sono comun
 
 **La conseguenza:** ustioni, irritazioni delle vie respiratorie a causa del fumo e un incendio in mezzo all'officina.
 
-![A sinistra: un grande bicchiere con resina miscelata fuma e brucia, accanto «100 °C+». A destra nel cerchio rosso: una fiamma](assets/bilder/sicherheit/folgen/harz-hitze.svg "Troppa resina miscelata può incendiarsi da sola.")
-
+:::piktogramm Troppa resina miscelata può incendiarsi da sola. motiv=harz-hitze groesse=gross
+:::
 ### Sostanza pericolosa nella bottiglia per bevande
 
 **L'errore:** versi un po' di solvente o di indurente in una bottiglia d'acqua vuota, perché al momento non c'è nient'altro.
@@ -833,8 +833,8 @@ La resina ha un odore innocuo e al tatto sembra miele. Le conseguenze sono comun
 
 **La conseguenza:** **avvelenamento**, ustioni chimiche alla bocca e all'esofago. Alcune sostanze danneggiano in modo permanente gli organi interni.
 
-![A sinistra: da una tanica con il simbolo del teschio viene versato un liquido in una bottiglia per bevande. A destra nel cerchio rosso: un teschio](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Le sostanze pericolose non vanno mai nelle bottiglie per bevande.")
-
+:::piktogramm Le sostanze pericolose non vanno mai nelle bottiglie per bevande. motiv=getraenkeflasche groesse=gross
+:::
 Associa a ogni errore la sua conseguenza.
 
 :::zuordnen Quale conseguenza rischi?

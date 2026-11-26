@@ -18,6 +18,13 @@
     vertical-align: 0.1em;
   }
 
+  /* Animierte Piktogramme nebeneinander */
+  .ds-pictograms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: var(--space-m);
+  }
+
   .ds-swatches {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));

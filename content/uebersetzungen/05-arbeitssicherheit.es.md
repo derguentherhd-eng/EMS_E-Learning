@@ -14,7 +14,7 @@ lernziele:
   - Preparas tu puesto de trabajo, lo recoges después y sabes qué hacer en caso de emergencia.
 sprache: es
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## La seguridad es lo primero
@@ -154,8 +154,8 @@ Las normas de la página anterior suenan estrictas. Aquí ves por qué. Cada eje
 
 **La consecuencia:** los dedos se arrancan de la mano, a menudo **junto con el tendón**, que sale arrancado desde el antebrazo. Este tipo de lesiones por arrancamiento casi nunca se pueden volver a coser. A esto se suman fracturas y piel arrancada.
 
-![Izquierda: un guante es enrollado por el taladro en rotación y arrastra el brazo hacia dentro. Derecha, en el círculo rojo: una mano a la que se le ha arrancado un dedo junto con el tendón](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Un guante en el taladro puede costarte un dedo.")
-
+:::piktogramm Un guante en el taladro puede costarte un dedo. motiv=handschuh-bohrer groesse=gross
+:::
 ### Bufanda, cordón o cadena
 
 **El error:** llevas una bufanda, una sudadera con cordones o un collar en la máquina.
@@ -164,8 +164,8 @@ Las normas de la página anterior suenan estrictas. Aquí ves por qué. Cada eje
 
 **La consecuencia:** **estrangulamiento.** Pérdida del conocimiento en segundos, lesiones en la nuca, **muerte**. Nadie a tu lado es lo bastante rápido para detenerlo.
 
-![Izquierda: una bufanda es enrollada por el taladro en rotación y arrastra a la persona por el cuello hacia la máquina. Derecha, en el círculo rojo: una calavera](assets/bilder/sicherheit/folgen/schal-maschine.svg "Una bufanda en la máquina supone peligro de muerte.")
-
+:::piktogramm Una bufanda en la máquina supone peligro de muerte. motiv=schal-maschine groesse=gross
+:::
 ### Pelo largo suelto
 
 **El error:** te inclinas con el pelo suelto sobre la máquina en marcha.
@@ -174,8 +174,8 @@ Las normas de la página anterior suenan estrictas. Aquí ves por qué. Cada eje
 
 **La consecuencia:** el **cuero cabelludo se arranca** (escalpe). Eso significa muchas operaciones, y a menudo quedan calvas y cicatrices para siempre.
 
-![Izquierda: el pelo largo es atrapado por el taladro en rotación. Derecha, en el círculo rojo: una cabeza con el cuero cabelludo marcado en rojo en la parte superior](assets/bilder/sicherheit/folgen/haare-maschine.svg "El pelo se enrolla en fracciones de segundo.")
-
+:::piktogramm El pelo se enrolla en fracciones de segundo. motiv=haare-maschine groesse=gross
+:::
 ### Anillos y fibras sintéticas
 
 **Un anillo** puede engancharse en una arista o en la herramienta. Entonces arranca la piel y el tejido del dedo, hasta el hueso. **La ropa de fibras sintéticas** se incendia con las chispas o se funde y se pega a la piel. Esas quemaduras son profundas y cicatrizan mal.
@@ -242,8 +242,8 @@ La corriente no se ve, no se oye y no se huele. Con 600 voltios no hay ninguna �
 
 **La consecuencia:** el corazón pierde el ritmo (**fibrilación ventricular**). Es una parada cardíaca: sin reanimación mueres en pocos minutos. A lo largo del recorrido de la corriente se quema tejido **por dentro**, aunque por fuera apenas se vea nada. Las arritmias cardíacas pueden aparecer incluso **horas después**. Por eso, tras cualquier accidente eléctrico tiene que examinarte un médico.
 
-![Izquierda: una persona toca un cable de alta tensión naranja; un rayo muestra el recorrido de la corriente a través del cuerpo hasta el suelo. Derecha, en el círculo rojo: un corazón con una línea cardíaca irregular](assets/bilder/sicherheit/folgen/hv-koerper.svg "La corriente a través del pecho hace perder el ritmo al corazón.")
-
+:::piktogramm La corriente a través del pecho hace perder el ritmo al corazón. motiv=hv-koerper groesse=gross
+:::
 ### Arco eléctrico
 
 **El error:** una llave u otra pieza metálica toca dos polos de alta tensión a la vez, por ejemplo en la batería.
@@ -252,8 +252,8 @@ La corriente no se ve, no se oye y no se huele. Con 600 voltios no hay ninguna �
 
 **La consecuencia:** **quemaduras graves** en manos y cara, incluso sin que la corriente pase por ti. La luz intensa puede dañar los ojos.
 
-![Izquierda: una llave está apoyada sobre el polo positivo y el negativo de una batería; en el punto de contacto destella un arco eléctrico. Derecha, en el círculo rojo: una llama](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Un arco eléctrico te quema sin que toques el cable.")
-
+:::piktogramm Un arco eléctrico te quema sin que toques el cable. motiv=hv-lichtbogen groesse=gross
+:::
 ### El coche arranca
 
 Cuando el coche está bajo tensión, puede arrancar sin previo aviso y alcanzar 100 km/h en menos de 2,5 segundos. Quien esté delante o detrás es **atropellado o aplastado**. Por eso: nunca delante, detrás ni al lado de un coche bajo tensión.
@@ -352,8 +352,8 @@ Mientras recoges, encuentras una pequeña batería de litio de un montaje de pru
 
 **La consecuencia:** **quemaduras hasta el hueso**, alrededor de todo el dedo. Por eso: fuera joyas antes de trabajar en la parte eléctrica.
 
-![Izquierda: un dedo con un anillo está apoyado sobre el polo positivo y el negativo de una batería; el anillo está al rojo vivo. Derecha, en el círculo rojo: un dedo con un anillo al rojo vivo y una quemadura roja](assets/bilder/sicherheit/folgen/lv-ring.svg "Un anillo que toca los dos polos se pone al rojo vivo en segundos.")
-
+:::piktogramm Un anillo que toca los dos polos se pone al rojo vivo en segundos. motiv=lv-ring groesse=gross
+:::
 ### Una batería dañada
 
 **El error:** se sigue usando, o incluso se carga, una batería de litio hinchada o que se ha caído.
@@ -362,8 +362,8 @@ Mientras recoges, encuentras una pequeña batería de litio de un montaje de pru
 
 **La consecuencia:** **incendio** en el taller y **gases tóxicos**, entre ellos fluoruro de hidrógeno, que quema por corrosión las vías respiratorias y los pulmones.
 
-![Izquierda: una batería hinchada de la que salen llamas y humo. Derecha, en el círculo rojo: una nube de humo con una calavera](assets/bilder/sicherheit/folgen/akku-brand.svg "Una batería de litio en llamas libera gases tóxicos.")
-
+:::piktogramm Una batería de litio en llamas libera gases tóxicos. motiv=akku-brand groesse=gross
+:::
 ¿Qué resulta de cada error? Asigna.
 
 :::zuordnen ¿Qué consecuencia te amenaza?
@@ -454,8 +454,8 @@ El taladro de columna no perdona los atajos. Tres errores que se cometen rápido
 
 **La consecuencia:** **cortes profundos** hasta los tendones y los huesos, **dedos rotos**. Una pieza grande también puede golpearte en el cuerpo.
 
-![Izquierda: una chapa gira bajo la broca como una hélice, al lado hay una mano. Derecha, en el círculo rojo: una mano con cortes rojos](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Una pieza que se suelta se convierte en una hélice.")
-
+:::piktogramm Una pieza que se suelta se convierte en una hélice. motiv=bohr-werkstueck groesse=gross
+:::
 ### Barra larga sin asegurar
 
 **El error:** taladras una barra larga, un tubo o un perfil y solo lo sujetas por un tramo corto o sostienes el extremo largo con la mano.
@@ -464,8 +464,8 @@ El taladro de columna no perdona los atajos. Tres errores que se cometen rápido
 
 **La consecuencia:** el extremo de la barra puede **abrirte el abdomen**. Estas lesiones de los órganos internos son **mortales** si no se opera de inmediato. Por eso, las piezas largas se aseguran además contra el giro, por ejemplo con un tope en la columna, y nunca te colocas en la zona de giro.
 
-![Izquierda: una barra larga se suelta en el taladro y barre en círculo a la altura del abdomen hacia una persona. Derecha, en el círculo rojo: un torso con un corte rojo a lo ancho del abdomen](assets/bilder/sicherheit/folgen/bohr-stange.svg "Una barra que se suelta golpea a la altura del abdomen.")
-
+:::piktogramm Una barra que se suelta golpea a la altura del abdomen. motiv=bohr-stange groesse=gross
+:::
 ### La llave del portabrocas sigue puesta
 
 **El error:** sujetas la broca, dejas la llave puesta en el portabrocas y enciendes.
@@ -474,8 +474,8 @@ El taladro de columna no perdona los atajos. Tres errores que se cometen rápido
 
 **La consecuencia:** un **proyectil a la cara**: heridas abiertas, dientes rotos y, en el peor de los casos, un **ojo destruido**.
 
-![Izquierda: una llave de portabrocas sale volando del taladro encendido hacia la cabeza de una persona. Derecha, en el círculo rojo: un ojo herido](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Una llave olvidada se convierte en un proyectil.")
-
+:::piktogramm Una llave olvidada se convierte en un proyectil. motiv=bohrfutterschluessel groesse=gross
+:::
 Asigna a cada error su consecuencia.
 
 :::zuordnen ¿Qué consecuencia te amenaza?
@@ -547,8 +547,8 @@ La banda de lija está hecha para desbastar metal. La piel es mucho más blanda.
 
 **La consecuencia:** la piel, la uña y el tejido quedan **lijados hasta el hueso en segundos**. Estas heridas curan despacio y a menudo dejan un dedo más corto o insensible.
 
-![Izquierda: un dedo se acerca demasiado a la banda de lija en marcha, en la holgura con el apoyo. Derecha, en el círculo rojo: un dedo con la punta lijada en rojo](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "La banda lija la piel más rápido que el metal.")
-
+:::piktogramm La banda lija la piel más rápido que el metal. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Otros errores en la lijadora de banda
 
 - **Aluminio y acero en la misma banda:** el polvo fino de aluminio y las chispas de acero pueden reaccionar violentamente entre sí y **arder**. El polvo acumulado en la máquina puede inflamarse.
@@ -639,8 +639,8 @@ La amoladora angular es una de las herramientas más peligrosas del taller. El b
 
 **La consecuencia:** **ojos perdidos**, cortes profundos en la cara y en el **cuello**. Una astilla en la arteria carótida es **mortal**.
 
-![Izquierda: una amoladora angular sin carcasa de protección; el disco revienta y los fragmentos vuelan hacia la cabeza de una persona. Derecha, en el círculo rojo: un ojo herido y cortes rojos](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Los fragmentos de un disco de corte vuelan a casi 300 km/h.")
-
+:::piktogramm Los fragmentos de un disco de corte vuelan a casi 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### La amoladora angular rebota
 
 **El error:** sostienes la amoladora angular con una sola mano y el disco se atasca en el corte.
@@ -657,8 +657,8 @@ La amoladora angular es una de las herramientas más peligrosas del taller. El b
 
 **La consecuencia:** **incendio en el taller**: el coche, las herramientas y el trabajo de toda una temporada se pierden, y quien esté dentro corre peligro de muerte.
 
-![Izquierda: en el taller, las chispas de una amoladora angular caen sobre un montón de trapos que empieza a arder. Derecha, en el círculo rojo: una casa en llamas](assets/bilder/sicherheit/folgen/flex-funken.svg "Las chispas en el taller pueden destruir el trabajo de toda una temporada.")
-
+:::piktogramm Las chispas en el taller pueden destruir el trabajo de toda una temporada. motiv=flex-funken groesse=gross
+:::
 Asigna a cada error su consecuencia.
 
 :::zuordnen ¿Qué consecuencia te amenaza?
@@ -718,8 +718,8 @@ Al lijar, taladrar y serrar, las fibras se rompen. Así se producen fragmentos t
 
 El cuerpo **apenas descompone** el carbono. Lo que llega a los pulmones puede quedarse allí para siempre.
 
-![Izquierda: una persona sin protección respiratoria está en una nube de polvo mientras lija una pieza de carbono. Derecha, en el círculo rojo: un pulmón lleno de puntos negros de fibras](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Los fragmentos de fibra llegan hasta los alvéolos pulmonares.")
-
+:::piktogramm Los fragmentos de fibra llegan hasta los alvéolos pulmonares. motiv=carbon-lunge groesse=gross
+:::
 ### La sospecha de cáncer
 
 - Estos fragmentos de fibra de carbono son **sospechosos de ser cancerígenos**. El Seguro Social Alemán de Accidentes (DGUV) los clasifica en la **categoría 2**: sospecha de efecto cancerígeno.
@@ -737,8 +737,8 @@ El cuerpo **apenas descompone** el carbono. Lo que llega a los pulmones puede qu
 - **El polvo conduce la electricidad:** el polvo de carbono en la electrónica provoca **cortocircuitos**, también en el coche.
 - **El polvo arde:** el polvo de carbono en suspensión es combustible e incluso puede explotar.
 
-![Izquierda: una persona sin mono de protección está cubierta de polvo; una flecha señala una casa en la que también hay polvo. Derecha, en el círculo rojo: una mano con zonas de piel rojas y con picor](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Sin mono te llevas el polvo hasta casa.")
-
+:::piktogramm Sin mono te llevas el polvo hasta casa. motiv=carbon-zuhause groesse=gross
+:::
 ¿Qué es cierto y qué no? Asigna cada afirmación.
 
 :::zuordnen ¿Es cierto?
@@ -813,8 +813,8 @@ La resina huele de forma inofensiva y al tacto parece miel. Aun así, las consec
 
 **La consecuencia:** una **alergia que dura toda la vida**: piel roja, que supura y pica, incluso con cantidades mínimas o hasta por los vapores en el aire. Quien se vuelve alérgico, a menudo **no puede volver a trabajar nunca con resina**, tampoco más adelante en su profesión.
 
-![Izquierda: una mano sin guante con gotas de resina junto a un vaso de resina; encima, un guante tachado. Derecha, en el círculo rojo: una mano con zonas rojas de eccema](assets/bilder/sicherheit/folgen/harz-haut.svg "Una alergia a la resina dura toda la vida.")
-
+:::piktogramm Una alergia a la resina dura toda la vida. motiv=harz-haut groesse=gross
+:::
 ### Demasiada resina de una vez
 
 **El error:** mezclas un vaso grande de resina para que llegue para todo y lo dejas ahí.
@@ -823,8 +823,8 @@ La resina huele de forma inofensiva y al tacto parece miel. Aun así, las consec
 
 **La consecuencia:** quemaduras, irritación de las vías respiratorias por el humo y un incendio en medio del taller.
 
-![Izquierda: un vaso grande con resina mezclada echa humo y arde; al lado, «100 °C+». Derecha, en el círculo rojo: una llama](assets/bilder/sicherheit/folgen/harz-hitze.svg "Demasiada resina mezclada puede inflamarse sola.")
-
+:::piktogramm Demasiada resina mezclada puede inflamarse sola. motiv=harz-hitze groesse=gross
+:::
 ### Sustancia peligrosa en una botella de bebida
 
 **El error:** trasvasas un poco de disolvente o de endurecedor a una botella de agua vacía porque en ese momento no hay otra cosa.
@@ -833,8 +833,8 @@ La resina huele de forma inofensiva y al tacto parece miel. Aun así, las consec
 
 **La consecuencia:** **intoxicación**, quemaduras químicas en la boca y en el esófago. Algunas sustancias dañan los órganos internos de forma permanente.
 
-![Izquierda: desde un bidón con el símbolo de la calavera se trasvasa líquido a una botella de bebida. Derecha, en el círculo rojo: una calavera](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Las sustancias peligrosas nunca van en botellas de bebida.")
-
+:::piktogramm Las sustancias peligrosas nunca van en botellas de bebida. motiv=getraenkeflasche groesse=gross
+:::
 Asigna a cada error su consecuencia.
 
 :::zuordnen ¿Qué consecuencia te amenaza?

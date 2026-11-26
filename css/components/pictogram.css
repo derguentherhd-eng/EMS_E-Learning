@@ -1,0 +1,1265 @@
+/*
+ * components/pictogram.css – animierte Sicherheits-Piktogramme (js/ui/pictograms.js)
+ *
+ * Drei Phasen je Durchlauf (Summe = --pg-total):
+ *   0–20 %   Auftritt  (--pg-entry, 0,6 s)   Teile fliegen herein, Easing --pg-ease-in
+ *   20–80 %  Pose      (--pg-hold, 1,8 s)    Stillstand in der Piktogramm-Pose
+ *   80–100 % Abgang    (--pg-exit, 0,6 s)    Handlung zu Ende, Figur verlässt das Bild
+ * Die Prozentwerte in den @keyframes setzen dieses Verhältnis (0,6 : 1,8 : 0,6) voraus. Andere
+ * Gesamtdauer: nur --pg-total ändern; anderes Verhältnis: die Prozentwerte unten anpassen.
+ *
+ * Grundzustand = Pose (Phase 2): Jedes bewegte Teil hat seine Pose in --hold, die Animation
+ * startet erst mit .is-playing. Ohne Animation (prefers-reduced-motion, vor dem Abspielen) steht
+ * deshalb immer das klare, stehende Piktogramm da.
+ *
+ * Drehpunkte: Jede Gruppe trägt ihr Gelenk in --o (Koordinaten der viewBox).
+ */
+
+@layer components {
+  .pictogram {
+    --pg-size: 12rem;
+    --pg-bg: var(--color-bg);
+    --pg-entry: 0.6s;
+    --pg-hold: 1.8s;
+    --pg-exit: 0.6s;
+    --pg-total: calc(var(--pg-entry) + var(--pg-hold) + var(--pg-exit));
+    --pg-iter: 1;
+    --pg-ease-in: cubic-bezier(0.22, 1, 0.36, 1);
+    --pg-ease-out: cubic-bezier(0.64, 0, 0.78, 0);
+
+    /* Verletzungen, Brand, Gift: in beiden Farbschemata gut sichtbares Rot. */
+    --pg-danger: #e5332a;
+
+    display: inline-block;
+    inline-size: var(--pg-size);
+    max-inline-size: 100%;
+    vertical-align: middle;
+  }
+
+  .pictogram[data-loop="true"] {
+    --pg-iter: infinite;
+  }
+
+  .pictogram svg {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  /* Drehpunkt jeder Gruppe im Gelenk; --hold ist die Pose (Phase 2).
+   * --hold wird für jede Gruppe zurückgesetzt, sonst erbte ein Unterarm die Drehung des Oberarms
+   * ein zweites Mal. Nur Gruppen mit Drehpunkt (--o) bekommen eine CSS-Transformation – innere
+   * Gruppen mit eigenem transform-Attribut (Totenkopf, Flamme …) bleiben unangetastet. */
+  .pictogram g {
+    --hold: none;
+  }
+
+  .pictogram [style*="--o"] {
+    transform-box: view-box;
+    transform-origin: var(--o, 0 0);
+    transform: var(--hold, none);
+  }
+
+  .pictogram.is-playing g {
+    animation-duration: var(--pg-total);
+    animation-iteration-count: var(--pg-iter);
+    animation-fill-mode: both;
+    animation-delay: var(--pg-delay, 0s);
+    animation-play-state: var(--pg-state, running);
+  }
+
+  /* ── Formen ── */
+  .pg-line,
+  .pg-gap {
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .pg-line {
+    stroke: currentcolor;
+  }
+
+  /* Schmaler Rand in Hintergrundfarbe trennt überlappende Teile. */
+  .pg-gap {
+    stroke: var(--pg-bg);
+  }
+
+  .pg-limb.pg-line {
+    stroke-width: 15;
+  }
+
+  .pg-limb.pg-gap {
+    stroke-width: 21;
+  }
+
+  .pg-torso.pg-line {
+    stroke-width: 26;
+  }
+
+  .pg-torso.pg-gap {
+    stroke-width: 26;
+  }
+
+  .pg-fill {
+    fill: currentcolor;
+  }
+
+  .pg-danger,
+  .pg-ring-fill {
+    fill: var(--pg-danger);
+  }
+
+  .pg-danger-line {
+    fill: none;
+    stroke: var(--pg-danger);
+  }
+
+  .pg-scarf.pg-line,
+  .pg-hairtail.pg-line {
+    stroke-width: 9;
+  }
+
+  .pg-scarf.pg-gap,
+  .pg-hairtail.pg-gap {
+    stroke-width: 14;
+  }
+
+  .pg-gap-fill {
+    fill: var(--pg-bg);
+  }
+
+  /* ─────────────────────── 1. Schutzbrille aufsetzen ─────────────────────── */
+
+  /* Auftritt: Figur gleitet herein, Brille fliegt von oben rechts auf die Augen, Arm hebt sie an.
+   * Pose: Hand hält die Brille vor den Augen. Abgang: Arm sinkt, Kopf nickt, Figur geht nach rechts. */
+
+  [data-pictogram="schutzbrille"] .pg-arm--front {
+    --hold: rotate(-72deg);
+  }
+
+  [data-pictogram="schutzbrille"] .pg-forearm--front {
+    --hold: rotate(-113deg);
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-figure {
+    animation-name: pg-schutzbrille-figure;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-goggles {
+    animation-name: pg-schutzbrille-goggles;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-arm--front {
+    animation-name: pg-schutzbrille-arm;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-forearm--front {
+    animation-name: pg-schutzbrille-forearm;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-arm--back {
+    animation-name: pg-schutzbrille-backarm;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-head {
+    animation-name: pg-schutzbrille-head;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-body {
+    animation-name: pg-schutzbrille-body;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-leg--front {
+    animation-name: pg-step-front;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-leg--back {
+    animation-name: pg-step-back;
+  }
+
+  .is-playing[data-pictogram="schutzbrille"] .pg-floor {
+    animation-name: pg-floor;
+  }
+
+  @keyframes pg-schutzbrille-figure {
+    0% {
+      opacity: 0;
+      transform: translateX(-46px);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    14% {
+      opacity: 1;
+    }
+
+    20%,
+    86% {
+      opacity: 1;
+      transform: none;
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(110px);
+    }
+  }
+
+  @keyframes pg-schutzbrille-goggles {
+    0% {
+      opacity: 0;
+      transform: translate(64px, -80px) rotate(-50deg) scale(0.3);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    6% {
+      opacity: 1;
+    }
+
+    20%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes pg-schutzbrille-arm {
+    0%,
+    4% {
+      transform: rotate(0deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: rotate(-12deg);
+    }
+  }
+
+  @keyframes pg-schutzbrille-forearm {
+    0%,
+    4% {
+      transform: rotate(0deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: rotate(-20deg);
+    }
+  }
+
+  @keyframes pg-schutzbrille-backarm {
+    0% {
+      transform: rotate(24deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    86% {
+      transform: none;
+    }
+
+    94% {
+      transform: rotate(22deg);
+    }
+
+    100% {
+      transform: rotate(-10deg);
+    }
+  }
+
+  /* Nicken: Kopf kippt kurz nach vorn (zur Arbeit) und richtet sich wieder auf. */
+  @keyframes pg-schutzbrille-head {
+    0%,
+    82% {
+      transform: none;
+    }
+
+    87% {
+      transform: rotate(18deg);
+    }
+
+    92%,
+    100% {
+      transform: rotate(4deg);
+    }
+  }
+
+  @keyframes pg-schutzbrille-body {
+    0%,
+    86% {
+      transform: none;
+    }
+
+    100% {
+      transform: rotate(8deg);
+    }
+  }
+
+  /* Gemeinsame Schrittbewegung beim Abgang (von mehreren Piktogrammen genutzt). */
+  @keyframes pg-step-front {
+    0%,
+    86% {
+      transform: var(--hold);
+    }
+
+    93% {
+      transform: rotate(-30deg);
+    }
+
+    100% {
+      transform: rotate(10deg);
+    }
+  }
+
+  @keyframes pg-step-back {
+    0%,
+    86% {
+      transform: var(--hold);
+    }
+
+    93% {
+      transform: rotate(26deg);
+    }
+
+    100% {
+      transform: rotate(-12deg);
+    }
+  }
+
+  /* Boden wächst beim Auftritt aus der Mitte und schrumpft beim Abgang. */
+  @keyframes pg-floor {
+    0% {
+      transform: scaleX(0);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    86% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    100% {
+      transform: scaleX(0);
+    }
+  }
+
+  /* ─────────────────────── 2. Stolpergefahr ─────────────────────── */
+
+  /* Auftritt: Figur rennt herein und bleibt an der Stufe hängen. Pose: nach vorn gekippt, Arme
+   * zum Abfangen nach vorn, Warndreieck. Abgang: hebt den Fuß bewusst und steigt über die Stufe. */
+
+  [data-pictogram="stolpern"] .pg-figure {
+    --hold: translateX(-14px);
+  }
+
+  [data-pictogram="stolpern"] .pg-body {
+    --hold: rotate(28deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-leg--front {
+    --hold: rotate(-25deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-shin--front {
+    --hold: rotate(10deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-leg--back {
+    --hold: rotate(40deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-shin--back {
+    --hold: rotate(35deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-arm--front {
+    --hold: rotate(-150deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-forearm--front {
+    --hold: rotate(-10deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-arm--back {
+    --hold: rotate(-95deg);
+  }
+
+  [data-pictogram="stolpern"] .pg-forearm--back {
+    --hold: rotate(-30deg);
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-figure {
+    animation-name: pg-stolpern-figure;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-body {
+    animation-name: pg-stolpern-body;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-leg--front {
+    animation-name: pg-stolpern-leg-front;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-shin--front {
+    animation-name: pg-stolpern-shin-front;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-leg--back {
+    animation-name: pg-stolpern-leg-back;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-arm--front {
+    animation-name: pg-stolpern-arm-front;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-arm--back {
+    animation-name: pg-stolpern-arm-back;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-warning {
+    animation-name: pg-pop;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-step {
+    animation-name: pg-grow-up;
+  }
+
+  .is-playing[data-pictogram="stolpern"] .pg-floor {
+    animation-name: pg-floor;
+  }
+
+  @keyframes pg-stolpern-figure {
+    0% {
+      opacity: 0;
+      transform: translateX(-110px);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    8% {
+      opacity: 1;
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88% {
+      transform: translate(14px, -6px);
+    }
+
+    94% {
+      opacity: 1;
+      transform: translate(50px, -18px);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(130px, -18px);
+    }
+  }
+
+  @keyframes pg-stolpern-body {
+    0%,
+    14% {
+      transform: rotate(10deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    86%,
+    100% {
+      transform: rotate(4deg);
+    }
+  }
+
+  @keyframes pg-stolpern-leg-front {
+    0% {
+      transform: rotate(35deg);
+    }
+
+    7% {
+      transform: rotate(-35deg);
+    }
+
+    14% {
+      transform: rotate(30deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    86% {
+      transform: rotate(-75deg);
+    }
+
+    92% {
+      transform: rotate(-20deg);
+    }
+
+    100% {
+      transform: rotate(20deg);
+    }
+  }
+
+  @keyframes pg-stolpern-shin-front {
+    0%,
+    14% {
+      transform: rotate(20deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    86% {
+      transform: rotate(80deg);
+    }
+
+    92%,
+    100% {
+      transform: rotate(10deg);
+    }
+  }
+
+  @keyframes pg-stolpern-leg-back {
+    0% {
+      transform: rotate(-35deg);
+    }
+
+    7% {
+      transform: rotate(35deg);
+    }
+
+    14% {
+      transform: rotate(-30deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    86% {
+      transform: rotate(10deg);
+    }
+
+    92% {
+      transform: rotate(30deg);
+    }
+
+    100% {
+      transform: rotate(-20deg);
+    }
+  }
+
+  @keyframes pg-stolpern-arm-front {
+    0% {
+      transform: rotate(40deg);
+    }
+
+    7% {
+      transform: rotate(-40deg);
+    }
+
+    14% {
+      transform: rotate(40deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    88% {
+      transform: rotate(20deg);
+    }
+
+    100% {
+      transform: rotate(-25deg);
+    }
+  }
+
+  @keyframes pg-stolpern-arm-back {
+    0% {
+      transform: rotate(-40deg);
+    }
+
+    7% {
+      transform: rotate(40deg);
+    }
+
+    14% {
+      transform: rotate(-40deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    88% {
+      transform: rotate(-20deg);
+    }
+
+    100% {
+      transform: rotate(25deg);
+    }
+  }
+
+  @keyframes pg-pop {
+    0%,
+    14% {
+      transform: scale(0);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20% {
+      transform: scale(1.15);
+    }
+
+    24%,
+    86% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    94%,
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  @keyframes pg-grow-up {
+    0% {
+      transform: scaleY(0);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    12%,
+    92% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    100% {
+      transform: scaleY(0);
+    }
+  }
+
+  /* ─────────────────────── 3. Schwer heben ─────────────────────── */
+
+  /* Auftritt: Figur geht zur Kiste und in die Knie. Pose: tiefe Hocke, Rücken gerade, Hände an der
+   * Kiste. Abgang: steht aus den Beinen auf, die Kiste dicht am Körper, und geht weiter. */
+
+  [data-pictogram="heben"] .pg-figure {
+    --hold: translateY(20px);
+  }
+
+  [data-pictogram="heben"] .pg-body {
+    --hold: rotate(8deg);
+  }
+
+  [data-pictogram="heben"] .pg-leg--front {
+    --hold: rotate(-80deg);
+  }
+
+  [data-pictogram="heben"] .pg-leg--back {
+    --hold: rotate(-80deg);
+  }
+
+  [data-pictogram="heben"] .pg-shin--front {
+    --hold: rotate(80deg);
+  }
+
+  [data-pictogram="heben"] .pg-shin--back {
+    --hold: rotate(80deg);
+  }
+
+  [data-pictogram="heben"] .pg-arm--front {
+    --hold: rotate(-25deg);
+  }
+
+  [data-pictogram="heben"] .pg-forearm--front {
+    --hold: rotate(-40deg);
+  }
+
+  [data-pictogram="heben"] .pg-arm--back {
+    --hold: rotate(-25deg);
+  }
+
+  [data-pictogram="heben"] .pg-forearm--back {
+    --hold: rotate(-40deg);
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-figure {
+    animation-name: pg-heben-figure;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-body {
+    animation-name: pg-heben-body;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-leg--front {
+    animation-name: pg-heben-leg-front;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-leg--back {
+    animation-name: pg-heben-leg-back;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-shin--front {
+    animation-name: pg-heben-shin;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-shin--back {
+    animation-name: pg-heben-shin;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-arm--front {
+    animation-name: pg-heben-arm;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-arm--back {
+    animation-name: pg-heben-arm;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-forearm--front {
+    animation-name: pg-heben-forearm;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-forearm--back {
+    animation-name: pg-heben-forearm;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-box {
+    animation-name: pg-heben-box;
+  }
+
+  .is-playing[data-pictogram="heben"] .pg-floor {
+    animation-name: pg-floor;
+  }
+
+  @keyframes pg-heben-figure {
+    0% {
+      opacity: 0;
+      transform: translateX(-80px);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    6% {
+      opacity: 1;
+    }
+
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88% {
+      transform: none;
+    }
+
+    94% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(110px);
+    }
+  }
+
+  @keyframes pg-heben-body {
+    0%,
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: none;
+    }
+  }
+
+  @keyframes pg-heben-leg-front {
+    0% {
+      transform: rotate(25deg);
+    }
+
+    5% {
+      transform: rotate(-25deg);
+    }
+
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88% {
+      transform: none;
+    }
+
+    94% {
+      transform: rotate(-25deg);
+    }
+
+    100% {
+      transform: rotate(20deg);
+    }
+  }
+
+  @keyframes pg-heben-leg-back {
+    0% {
+      transform: rotate(-25deg);
+    }
+
+    5% {
+      transform: rotate(25deg);
+    }
+
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88% {
+      transform: none;
+    }
+
+    94% {
+      transform: rotate(25deg);
+    }
+
+    100% {
+      transform: rotate(-20deg);
+    }
+  }
+
+  @keyframes pg-heben-shin {
+    0%,
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: none;
+    }
+  }
+
+  @keyframes pg-heben-arm {
+    0%,
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: rotate(-40deg);
+    }
+  }
+
+  @keyframes pg-heben-forearm {
+    0%,
+    10% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88%,
+    100% {
+      transform: rotate(-50deg);
+    }
+  }
+
+  @keyframes pg-heben-box {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    12%,
+    80% {
+      opacity: 1;
+      transform: none;
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    88% {
+      transform: translateY(-40px);
+    }
+
+    94% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(110px, -40px);
+    }
+  }
+
+  /* ─────────────────────── 4. Fluchtweg / Notausgang ─────────────────────── */
+
+  /* Auftritt: Figur sprintet herein, die Tür wächst aus dem Boden. Pose: klassische Laufpose vor
+   * der Tür. Abgang: Tür schwingt auf, die Figur sprintet hindurch. */
+
+  [data-pictogram="fluchtweg"] .pg-figure {
+    --hold: translateX(-34px);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-body {
+    --hold: rotate(14deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-leg--front {
+    --hold: rotate(-70deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-shin--front {
+    --hold: rotate(85deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-leg--back {
+    --hold: rotate(45deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-shin--back {
+    --hold: rotate(35deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-arm--front {
+    --hold: rotate(55deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-forearm--front {
+    --hold: rotate(-80deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-arm--back {
+    --hold: rotate(-75deg);
+  }
+
+  [data-pictogram="fluchtweg"] .pg-forearm--back {
+    --hold: rotate(-60deg);
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-figure {
+    animation-name: pg-flucht-figure;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-leg--front {
+    animation-name: pg-flucht-leg-front;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-leg--back {
+    animation-name: pg-flucht-leg-back;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-shin--front {
+    animation-name: pg-flucht-shin;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-shin--back {
+    animation-name: pg-flucht-shin;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-arm--front {
+    animation-name: pg-flucht-arm-front;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-arm--back {
+    animation-name: pg-flucht-arm-back;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-door {
+    animation-name: pg-grow-up;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-door-leaf {
+    animation-name: pg-flucht-leaf;
+  }
+
+  .is-playing[data-pictogram="fluchtweg"] .pg-floor {
+    animation-name: pg-floor;
+  }
+
+  @keyframes pg-flucht-figure {
+    0% {
+      opacity: 0;
+      transform: translateX(-150px);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    6% {
+      opacity: 1;
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+      transform: var(--hold);
+      animation-timing-function: var(--pg-ease-out);
+    }
+
+    92% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+  }
+
+  @keyframes pg-flucht-leg-front {
+    0% {
+      transform: rotate(40deg);
+    }
+
+    7% {
+      transform: rotate(-50deg);
+    }
+
+    14% {
+      transform: rotate(40deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    87% {
+      transform: rotate(40deg);
+    }
+
+    94% {
+      transform: var(--hold);
+    }
+
+    100% {
+      transform: rotate(40deg);
+    }
+  }
+
+  @keyframes pg-flucht-leg-back {
+    0% {
+      transform: rotate(-50deg);
+    }
+
+    7% {
+      transform: rotate(40deg);
+    }
+
+    14% {
+      transform: rotate(-50deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    87% {
+      transform: rotate(-60deg);
+    }
+
+    94% {
+      transform: var(--hold);
+    }
+
+    100% {
+      transform: rotate(-60deg);
+    }
+  }
+
+  @keyframes pg-flucht-shin {
+    0%,
+    14% {
+      transform: rotate(50deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    87% {
+      transform: rotate(60deg);
+    }
+
+    94% {
+      transform: var(--hold);
+    }
+
+    100% {
+      transform: rotate(60deg);
+    }
+  }
+
+  @keyframes pg-flucht-arm-front {
+    0% {
+      transform: rotate(-60deg);
+    }
+
+    7% {
+      transform: rotate(50deg);
+    }
+
+    14% {
+      transform: rotate(-60deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    87% {
+      transform: rotate(-70deg);
+    }
+
+    94% {
+      transform: var(--hold);
+    }
+
+    100% {
+      transform: rotate(-70deg);
+    }
+  }
+
+  @keyframes pg-flucht-arm-back {
+    0% {
+      transform: rotate(50deg);
+    }
+
+    7% {
+      transform: rotate(-70deg);
+    }
+
+    14% {
+      transform: rotate(50deg);
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    20%,
+    80% {
+      transform: var(--hold);
+    }
+
+    87% {
+      transform: rotate(50deg);
+    }
+
+    94% {
+      transform: var(--hold);
+    }
+
+    100% {
+      transform: rotate(50deg);
+    }
+  }
+
+  @keyframes pg-flucht-leaf {
+    0%,
+    80% {
+      transform: none;
+      animation-timing-function: var(--pg-ease-in);
+    }
+
+    86%,
+    100% {
+      transform: scaleX(0.12);
+    }
+  }
+
+  /* Bewegung reduziert: nur die Pose (Phase 2) zeigen. */
+  @media (prefers-reduced-motion: reduce) {
+    .pictogram.is-playing g {
+      animation: none;
+    }
+  }
+}

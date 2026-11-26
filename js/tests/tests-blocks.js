@@ -288,6 +288,11 @@ Hinweis
       valid: ":::checkliste Start\n- [ ] Eins\n- [ ] Zwei\n:::",
       invalid: ":::checkliste\nEins\n:::",
     },
+    piktogramm: {
+      valid:
+        ":::piktogramm Schutzbrille aufsetzen motiv=schutzbrille schleife=nein groesse=klein farbe=text\n:::",
+      invalid: null,
+    },
     quiz: {
       valid:
         ":::quiz anzahl=1\n? Frage | mit Pipe\n- [x] Ja\n- [ ] Nein\n> Erklärung\n> zweite Zeile\n~ Seite\n\n?! Kritisch\n- [ ] A\n- [x] B\n- [x] C\n> Weil\n:::",

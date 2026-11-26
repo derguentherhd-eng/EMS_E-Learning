@@ -14,7 +14,7 @@ lernziele:
   - Valmistelet työpisteesi, siivoat sen työn jälkeen ja tiedät, mitä hätätilanteessa tehdään.
 sprache: fi
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## Turvallisuus ensin
@@ -154,8 +154,8 @@ Edellisen sivun säännöt kuulostavat tiukoilta. Tässä näet, miksi. Jokainen
 
 **Seuraus:** Sormia repeytyy irti kädestä, usein **jänteineen**, joka vetäytyy ulos aina kyynärvarresta asti. Tällaisia repeämävammoja ei yleensä voida ommella takaisin. Lisäksi tulee murtumia ja irti revennyttä ihoa.
 
-![Vasemmalla: Pyörivä porakone kiertää käsineen ympärilleen ja vetää käsivarren sisään. Oikealla punaisessa ympyrässä: käsi, josta on repeytynyt irti sormi jänteineen](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Käsine porakoneella voi maksaa sinulle sormen.")
-
+:::piktogramm Käsine porakoneella voi maksaa sinulle sormen. motiv=handschuh-bohrer groesse=gross
+:::
 ### Huivi, nyöri tai ketju
 
 **Virhe:** Sinulla on koneella huivi, nyörillinen huppari tai kaulaketju.
@@ -164,8 +164,8 @@ Edellisen sivun säännöt kuulostavat tiukoilta. Tässä näet, miksi. Jokainen
 
 **Seuraus:** **Kuristuminen.** Tajuttomuus sekunneissa, niskavammat, **kuolema**. Kukaan vieressäsi ei ehdi pysäyttää sitä.
 
-![Vasemmalla: Pyörivä porakone kiertää huivin ympärilleen ja vetää henkilöä kaulasta konetta kohti. Oikealla punaisessa ympyrässä: pääkallo](assets/bilder/sicherheit/folgen/schal-maschine.svg "Huivi koneella on hengenvaarallinen.")
-
+:::piktogramm Huivi koneella on hengenvaarallinen. motiv=schal-maschine groesse=gross
+:::
 ### Auki olevat pitkät hiukset
 
 **Virhe:** Kumarrut käynnissä olevan koneen ylle hiukset auki.
@@ -174,8 +174,8 @@ Edellisen sivun säännöt kuulostavat tiukoilta. Tässä näet, miksi. Jokainen
 
 **Seuraus:** **Päänahka repeytyy irti** (skalpeeraantuminen). Se tarkoittaa monia leikkauksia, ja usein kaljuja kohtia ja arpia jää pysyvästi.
 
-![Vasemmalla: Pyörivä porakone tarttuu pitkiin hiuksiin. Oikealla punaisessa ympyrässä: pää, jonka päänahka on merkitty ylhäältä punaisella](assets/bilder/sicherheit/folgen/haare-maschine.svg "Hiukset kiertyvät sekunnin murto-osassa.")
-
+:::piktogramm Hiukset kiertyvät sekunnin murto-osassa. motiv=haare-maschine groesse=gross
+:::
 ### Sormukset ja tekokuidut
 
 **Sormus** voi tarttua reunaan tai työkaluun. Silloin se repii ihon ja kudoksen irti sormesta, luuhun asti. **Tekokuituiset vaatteet** syttyvät kipinöistä tai sulavat kiinni ihoon. Tällaiset palovammat ovat syviä ja paranevat huonosti.
@@ -242,8 +242,8 @@ Sähköä ei näe, ei kuule eikä haista. 600 voltissa ei tule mitään ”pient
 
 **Seuraus:** Sydän menee pois tahdista (**kammiovärinä**). Se on sydämenpysähdys: ilman elvytystä olet kuollut muutamassa minuutissa. Virran kulkureitillä kudos palaa **sisältä**, vaikka ulkopuolelta näkyisi tuskin mitään. Sydämen rytmihäiriöitä voi esiintyä vielä **tunteja myöhemmin**. Siksi lääkärin täytyy tutkia jokaisen sähkötapaturman jälkeen.
 
-![Vasemmalla: Henkilö koskee oranssiin suurjännitekaapeliin, salama näyttää virran kulkureitin kehon läpi maahan. Oikealla punaisessa ympyrässä: sydän ja epäsäännöllinen sydänkäyrä](assets/bilder/sicherheit/folgen/hv-koerper.svg "Rintakehän läpi kulkeva virta saa sydämen pois tahdista.")
-
+:::piktogramm Rintakehän läpi kulkeva virta saa sydämen pois tahdista. motiv=hv-koerper groesse=gross
+:::
 ### Valokaari
 
 **Virhe:** Kiintoavain tai muu metalliosa koskettaa kahta suurjännitenapaa samanaikaisesti, esimerkiksi akussa.
@@ -252,8 +252,8 @@ Sähköä ei näe, ei kuule eikä haista. 600 voltissa ei tule mitään ”pient
 
 **Seuraus:** **Vakavia palovammoja** käsiin ja kasvoihin, vaikka virtaa ei kulkisi lainkaan sinun läpisi. Kirkas valo voi vaurioittaa silmiä.
 
-![Vasemmalla: Kiintoavain on akun plus- ja miinusnavan päällä, kosketuskohdassa leimahtaa valokaari. Oikealla punaisessa ympyrässä: liekki](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Valokaari polttaa sinut, vaikka et koske kaapeliin.")
-
+:::piktogramm Valokaari polttaa sinut, vaikka et koske kaapeliin. motiv=hv-lichtbogen groesse=gross
+:::
 ### Auto lähtee liikkeelle
 
 Kun auto on jännitteinen, se voi lähteä liikkeelle ilman varoitusta, alle 2,5 sekunnissa 100 km/h:iin. Joka seisoo edessä tai takana, jää **alle tai puristuksiin**. Siksi pätee: ei koskaan jännitteisen auton eteen, taakse tai viereen.
@@ -352,8 +352,8 @@ Siivotessasi löydät pienen litiumakun eräästä testikokoonpanosta. Se on pul
 
 **Seuraus:** **Palovammoja luuhun asti**, sormen ympäri. Siksi pätee: korut pois, ennen kuin työskentelet sähkön parissa.
 
-![Vasemmalla: Sormuksellinen sormi on akun plus- ja miinusnavan päällä, sormus hehkuu. Oikealla punaisessa ympyrässä: sormi, jossa on hehkuva sormus ja punainen palovamma](assets/bilder/sicherheit/folgen/lv-ring.svg "Molempia napoja koskettava sormus muuttuu sekunneissa hehkuvan kuumaksi.")
-
+:::piktogramm Molempia napoja koskettava sormus muuttuu sekunneissa hehkuvan kuumaksi. motiv=lv-ring groesse=gross
+:::
 ### Vaurioitunut akku
 
 **Virhe:** Pullistunutta tai pudonnutta litiumakkua käytetään edelleen tai sitä jopa ladataan.
@@ -362,8 +362,8 @@ Siivotessasi löydät pienen litiumakun eräästä testikokoonpanosta. Se on pul
 
 **Seuraus:** **Tulipalo** työpajassa ja **myrkyllisiä kaasuja**, muun muassa fluorivetyä, joka syövyttää hengitystiet ja keuhkot.
 
-![Vasemmalla: Pullistunut akku, josta nousee liekkejä ja savua. Oikealla punaisessa ympyrässä: savupilvi ja pääkallo](assets/bilder/sicherheit/folgen/akku-brand.svg "Palava litiumakku vapauttaa myrkyllisiä kaasuja.")
-
+:::piktogramm Palava litiumakku vapauttaa myrkyllisiä kaasuja. motiv=akku-brand groesse=gross
+:::
 Mikä seuraa mistäkin virheestä? Yhdistä.
 
 :::zuordnen Mikä seuraus uhkaa?
@@ -454,8 +454,8 @@ Pylväsporakone ei anna anteeksi oikoteitä. Kolme virhettä, jotka sattuvat hel
 
 **Seuraus:** **Syviä viiltoja** jänteisiin ja luihin asti, **murtuneita sormia**. Iso kappale voi osua myös vartaloosi.
 
-![Vasemmalla: Pelti pyörii poran alla kuin potkuri, vieressä käsi. Oikealla punaisessa ympyrässä: käsi, jossa on punaisia viiltohaavoja](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Irti repeytyneestä työkappaleesta tulee potkuri.")
-
+:::piktogramm Irti repeytyneestä työkappaleesta tulee potkuri. motiv=bohr-werkstueck groesse=gross
+:::
 ### Pitkää tankoa ei ole varmistettu
 
 **Virhe:** Poraat pitkään tankoon, putkeen tai profiiliin ja kiinnität sen vain lyhyeltä matkalta tai pidät pitkää päätä käsin.
@@ -464,8 +464,8 @@ Pylväsporakone ei anna anteeksi oikoteitä. Kolme virhettä, jotka sattuvat hel
 
 **Seuraus:** Tangon pää voi **viiltää vatsaontelon auki**. Tällaiset sisäelinten vammat ovat **kuolettavia**, ellei leikkausta tehdä heti. Siksi pitkät työkappaleet varmistetaan lisäksi pyörimistä vastaan, esimerkiksi pylvääseen asetetulla vasteella, etkä koskaan asetu heilahdusalueelle.
 
-![Vasemmalla: Pitkä tanko repeytyy irti porakoneesta ja iskee vatsan korkeudella ympyrää kohti henkilöä. Oikealla punaisessa ympyrässä: ylävartalo, jonka vatsan poikki kulkee punainen viiltohaava](assets/bilder/sicherheit/folgen/bohr-stange.svg "Irti repeytynyt tanko iskee vatsan korkeudella.")
-
+:::piktogramm Irti repeytynyt tanko iskee vatsan korkeudella. motiv=bohr-stange groesse=gross
+:::
 ### Istukka-avain on yhä paikallaan
 
 **Virhe:** Kiristät poranterän, jätät avaimen poranistukkaan ja käynnistät koneen.
@@ -474,8 +474,8 @@ Pylväsporakone ei anna anteeksi oikoteitä. Kolme virhettä, jotka sattuvat hel
 
 **Seuraus:** **Ammus kasvoihin**: ruhjehaavoja, irronneita hampaita, pahimmassa tapauksessa **tuhoutunut silmä**.
 
-![Vasemmalla: Istukka-avain lentää käynnistetystä porakoneesta kohti henkilön päätä. Oikealla punaisessa ympyrässä: loukkaantunut silmä](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Unohtuneesta avaimesta tulee ammus.")
-
+:::piktogramm Unohtuneesta avaimesta tulee ammus. motiv=bohrfutterschluessel groesse=gross
+:::
 Yhdistä jokaiseen virheeseen sen seuraus.
 
 :::zuordnen Mikä seuraus uhkaa?
@@ -547,8 +547,8 @@ Hiomanauha on tehty poistamaan metallia. Iho on paljon pehmeämpää.
 
 **Seuraus:** Iho, kynsi ja kudos hioutuvat **sekunneissa pois luuhun asti**. Tällaiset haavat paranevat hitaasti, ja niistä jää usein lyhentynyt tai tunnoton sormi.
 
-![Vasemmalla: Sormi tulee liian lähelle käynnissä olevaa hiomanauhaa tuen raon kohdalla. Oikealla punaisessa ympyrässä: sormi, jonka pää on hioutunut punaiseksi](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Nauha hioo ihoa nopeammin kuin metallia.")
-
+:::piktogramm Nauha hioo ihoa nopeammin kuin metallia. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Muut virheet nauhahiomakoneella
 
 - **Alumiinia ja terästä samalla nauhalla:** Hieno alumiinipöly ja teräskipinät voivat reagoida rajusti keskenään ja **palaa**. Laitteessa oleva pöly voi syttyä.
@@ -639,8 +639,8 @@ Kulmahiomakone on työpajan vaarallisimpia työkaluja. Katkaisulaikan reuna liik
 
 **Seuraus:** **Menetettyjä silmiä**, syviä viiltoja kasvoihin ja **kaulaan**. Kaulavaltimoon osuva sirpale on **kuolettava**.
 
-![Vasemmalla: Kulmahiomakone ilman suojusta, laikka halkeaa, sirpaleet lentävät kohti henkilön päätä. Oikealla punaisessa ympyrässä: loukkaantunut silmä ja punaisia viiltoja](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Katkaisulaikan sirpaleet lentävät lähes 300 km/h:n nopeudella.")
-
+:::piktogramm Katkaisulaikan sirpaleet lentävät lähes 300 km/h:n nopeudella. motiv=flex-scheibe groesse=gross
+:::
 ### Kulmahiomakone potkaisee takaisin
 
 **Virhe:** Pidät kulmahiomakonetta yhdellä kädellä, ja laikka juuttuu leikkuuseen.
@@ -657,8 +657,8 @@ Kulmahiomakone on työpajan vaarallisimpia työkaluja. Katkaisulaikan reuna liik
 
 **Seuraus:** **Työpajapalo**: auto, työkalut ja kokonaisen kauden työ menetetään, ja sisällä olevat ovat hengenvaarassa.
 
-![Vasemmalla: Työpajassa kulmahiomakoneen kipinät lentävät riepukasaan, joka alkaa palaa. Oikealla punaisessa ympyrässä: palava talo](assets/bilder/sicherheit/folgen/flex-funken.svg "Kipinät työpajassa voivat tuhota kokonaisen kauden työn.")
-
+:::piktogramm Kipinät työpajassa voivat tuhota kokonaisen kauden työn. motiv=flex-funken groesse=gross
+:::
 Yhdistä jokaiseen virheeseen sen seuraus.
 
 :::zuordnen Mikä seuraus uhkaa?
@@ -718,8 +718,8 @@ Hiottaessa, porattaessa ja sahattaessa kuidut katkeavat. Silloin syntyy kappalei
 
 Hiilikuitua elimistö **tuskin hajottaa**. Mikä keuhkoihin päätyy, jää sinne mahdollisesti pysyvästi.
 
-![Vasemmalla: Henkilö ilman hengityksensuojainta seisoo pölypilvessä hiomassa hiilikuituosaa. Oikealla punaisessa ympyrässä: keuhko täynnä mustia kuitupisteitä](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Kuitujen kappaleet kulkeutuvat keuhkorakkuloihin asti.")
-
+:::piktogramm Kuitujen kappaleet kulkeutuvat keuhkorakkuloihin asti. motiv=carbon-lunge groesse=gross
+:::
 ### Epäily syövästä
 
 - Tällaisten hiilikuidun kappaleiden **epäillään aiheuttavan syöpää**. Saksan lakisääteinen tapaturmavakuutus (DGUV) luokittelee ne **kategoriaan 2**: epäilty syöpää aiheuttava vaikutus.
@@ -737,8 +737,8 @@ Hiilikuitua elimistö **tuskin hajottaa**. Mikä keuhkoihin päätyy, jää sinn
 - **Pöly johtaa sähköä:** Hiilikuitupöly elektroniikassa aiheuttaa **oikosulkuja**, myös autossa.
 - **Pöly palaa:** Ilmaan pöllynnyt hiilikuitupöly on palavaa ja voi jopa räjähtää.
 
-![Vasemmalla: Henkilö ilman suojahaalaria on pölyn peitossa, nuoli osoittaa taloon, jossa on myös pölyä. Oikealla punaisessa ympyrässä: käsi, jossa on punaisia, kutisevia ihokohtia](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Ilman haalaria kannat pölyn kotiin asti.")
-
+:::piktogramm Ilman haalaria kannat pölyn kotiin asti. motiv=carbon-zuhause groesse=gross
+:::
 Mikä pitää paikkansa, mikä ei? Yhdistä jokainen väite.
 
 :::zuordnen Pitääkö tämä paikkansa?
@@ -813,8 +813,8 @@ Hartsi haisee harmittomalta ja tuntuu hunajalta. Seuraukset ovat silti vakavia.
 
 **Seuraus:** **Allergia, joka säilyy koko elämän**: punainen, vetistävä, kutiava iho, jo pienimmistäkin määristä tai jopa ilmassa olevista höyryistä. Joka on kerran allerginen, ei usein saa **enää koskaan työskennellä hartsin kanssa**, ei myöhemmin työelämässäkään.
 
-![Vasemmalla: Paljas käsi, jossa on hartsipisaroita, hartsimukin vieressä, yläpuolella yliviivattu käsine. Oikealla punaisessa ympyrässä: käsi, jossa on punaisia ihottumakohtia](assets/bilder/sicherheit/folgen/harz-haut.svg "Hartsiallergia säilyy koko elämän.")
-
+:::piktogramm Hartsiallergia säilyy koko elämän. motiv=harz-haut groesse=gross
+:::
 ### Liikaa hartsia kerralla
 
 **Virhe:** Sekoitat ison mukillisen hartsia, jotta se riittää kaikkeen, ja jätät sen seisomaan.
@@ -823,8 +823,8 @@ Hartsi haisee harmittomalta ja tuntuu hunajalta. Seuraukset ovat silti vakavia.
 
 **Seuraus:** Palovammoja, savun aiheuttamaa hengitysteiden ärsytystä ja tulipalo keskellä työpajaa.
 
-![Vasemmalla: Iso mukillinen sekoitettua hartsia savuaa ja palaa, vieressä ”100 °C+”. Oikealla punaisessa ympyrässä: liekki](assets/bilder/sicherheit/folgen/harz-hitze.svg "Liian suuri määrä sekoitettua hartsia voi syttyä itsestään.")
-
+:::piktogramm Liian suuri määrä sekoitettua hartsia voi syttyä itsestään. motiv=harz-hitze groesse=gross
+:::
 ### Vaarallinen aine juomapullossa
 
 **Virhe:** Kaadat vähän liuotinta tai kovetetta tyhjään vesipulloon, koska muuta ei juuri nyt ole.
@@ -833,8 +833,8 @@ Hartsi haisee harmittomalta ja tuntuu hunajalta. Seuraukset ovat silti vakavia.
 
 **Seuraus:** **Myrkytys**, syöpynyt suu ja syöpynyt ruokatorvi. Jotkin aineet vaurioittavat sisäelimiä pysyvästi.
 
-![Vasemmalla: Pääkallomerkillä varustetusta kanisterista kaadetaan nestettä juomapulloon. Oikealla punaisessa ympyrässä: pääkallo](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Vaaralliset aineet eivät koskaan kuulu juomapulloihin.")
-
+:::piktogramm Vaaralliset aineet eivät koskaan kuulu juomapulloihin. motiv=getraenkeflasche groesse=gross
+:::
 Yhdistä jokaiseen virheeseen sen seuraus.
 
 :::zuordnen Mikä seuraus uhkaa?

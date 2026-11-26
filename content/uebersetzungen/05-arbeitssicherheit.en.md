@@ -14,7 +14,7 @@ lernziele:
   - You prepare your workplace, tidy it up afterwards and know what to do in an emergency.
 sprache: en
 quelle: 05-arbeitssicherheit.md
-quellstand: 405743ef
+quellstand: 59556ef8
 ---
 
 ## Safety comes first
@@ -154,8 +154,8 @@ The rules on the last page sound strict. Here you see why. Every example has hap
 
 **The consequence:** Fingers are torn out of the hand, often **together with the tendon**, which is pulled out all the way from the forearm. Such avulsion injuries can usually not be reattached. On top of that come fractures and torn-off skin.
 
-![Left: a glove is wound up by the rotating drill and pulls the arm in. Right in the red circle: a hand from which a finger has been torn out together with the tendon](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "A glove at the drill can cost you a finger.")
-
+:::piktogramm A glove at the drill can cost you a finger. motiv=handschuh-bohrer groesse=gross
+:::
 ### Scarf, cord or chain
 
 **The mistake:** You wear a scarf, a hoodie with cords or a necklace at the machine.
@@ -164,8 +164,8 @@ The rules on the last page sound strict. Here you see why. Every example has hap
 
 **The consequence:** **Strangulation.** Unconsciousness within seconds, neck injuries, **death**. Nobody next to you is fast enough to stop it.
 
-![Left: a scarf is wound up by the rotating drill and pulls the person by the neck towards the machine. Right in the red circle: a skull](assets/bilder/sicherheit/folgen/schal-maschine.svg "A scarf at the machine is life-threatening.")
-
+:::piktogramm A scarf at the machine is life-threatening. motiv=schal-maschine groesse=gross
+:::
 ### Loose long hair
 
 **The mistake:** You lean over the running machine with your hair loose.
@@ -174,8 +174,8 @@ The rules on the last page sound strict. Here you see why. Every example has hap
 
 **The consequence:** The **scalp is torn off** (scalping). That means many operations; bald patches and scars often remain forever.
 
-![Left: long hair is caught by the rotating drill. Right in the red circle: a head whose scalp is marked red on top](assets/bilder/sicherheit/folgen/haare-maschine.svg "Hair is wound up in fractions of a second.")
-
+:::piktogramm Hair is wound up in fractions of a second. motiv=haare-maschine groesse=gross
+:::
 ### Rings and synthetic fibres
 
 **A ring** can get caught on an edge or on the tool. It then tears skin and tissue off the finger, down to the bone. **Clothing made of synthetic fibres** catches fire from sparks or melts onto the skin. Such burns are deep and heal poorly.
@@ -242,8 +242,8 @@ You cannot see, hear or smell electricity. At 600 volts there is no “small sho
 
 **The consequence:** The heart loses its rhythm (**ventricular fibrillation**). That is cardiac arrest: without resuscitation you are dead within a few minutes. Along the current path, tissue burns **inside**, even if hardly anything can be seen on the outside. Cardiac arrhythmias can still occur **hours later**. That is why a doctor must examine the person after every electrical accident.
 
-![Left: a person touches an orange high-voltage cable, a lightning bolt shows the current path through the body to the ground. Right in the red circle: a heart with an irregular heart line](assets/bilder/sicherheit/folgen/hv-koerper.svg "Current through the chest throws the heart out of rhythm.")
-
+:::piktogramm Current through the chest throws the heart out of rhythm. motiv=hv-koerper groesse=gross
+:::
 ### Electric arc
 
 **The mistake:** A spanner or another metal part touches two high-voltage poles at the same time, for example on the battery.
@@ -252,8 +252,8 @@ You cannot see, hear or smell electricity. At 600 volts there is no “small sho
 
 **The consequence:** **Severe burns** to hands and face, even without current flowing through you. The glaring light can damage the eyes.
 
-![Left: a spanner lies across the positive and negative poles of a battery, an electric arc flashes at the point of contact. Right in the red circle: a flame](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "An electric arc burns you without you touching the cable.")
-
+:::piktogramm An electric arc burns you without you touching the cable. motiv=hv-lichtbogen groesse=gross
+:::
 ### The car drives off
 
 When the car is live, it can move off without warning, reaching 100 km/h in less than 2.5 seconds. Anyone standing in front of or behind it will be **run over or crushed**. That is why the rule is: never in front of, behind or next to a live car.
@@ -352,8 +352,8 @@ You hardly feel 24 volts on your skin. What is dangerous here is not the voltage
 
 **The consequence:** **Burns down to the bone**, all around the finger. That is why the rule is: jewellery off before you work on electrics.
 
-![Left: a finger with a ring lies across the positive and negative poles of a battery, the ring is glowing. Right in the red circle: a finger with a glowing ring and a red burn](assets/bilder/sicherheit/folgen/lv-ring.svg "A ring that touches both poles becomes red-hot in seconds.")
-
+:::piktogramm A ring that touches both poles becomes red-hot in seconds. motiv=lv-ring groesse=gross
+:::
 ### A damaged battery
 
 **The mistake:** A swollen or dropped lithium battery continues to be used or is even charged.
@@ -362,8 +362,8 @@ You hardly feel 24 volts on your skin. What is dangerous here is not the voltage
 
 **The consequence:** **Fire** in the workshop and **toxic gases**, including hydrogen fluoride, which corrodes the airways and lungs.
 
-![Left: a swollen battery with flames and smoke rising from it. Right in the red circle: a cloud of smoke with a skull](assets/bilder/sicherheit/folgen/akku-brand.svg "A burning lithium battery releases toxic gases.")
-
+:::piktogramm A burning lithium battery releases toxic gases. motiv=akku-brand groesse=gross
+:::
 What results from which mistake? Match them.
 
 :::zuordnen What is the consequence?
@@ -454,8 +454,8 @@ The pillar drill does not forgive shortcuts. Three mistakes that happen quickly 
 
 **The consequence:** **Deep cuts** down to tendons and bones, **broken fingers**. A large part can also hit you on the body.
 
-![Left: a piece of sheet metal spins under the drill bit like a propeller, next to it a hand. Right in the red circle: a hand with red cuts](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "A workpiece that breaks loose becomes a propeller.")
-
+:::piktogramm A workpiece that breaks loose becomes a propeller. motiv=bohr-werkstueck groesse=gross
+:::
 ### Long bar not secured
 
 **The mistake:** You drill into a long bar, a tube or a profile and only clamp it briefly or hold the long end by hand.
@@ -464,8 +464,8 @@ The pillar drill does not forgive shortcuts. Three mistakes that happen quickly 
 
 **The consequence:** The end of the bar can **slash open the abdomen**. Such injuries to the internal organs are **fatal** if not operated on immediately. That is why long workpieces are additionally secured against rotating, for example with a stop on the column, and you never stand in the swing area.
 
-![Left: a long bar breaks loose at the drill and swings in a circle at stomach height towards a person. Right in the red circle: an upper body with a red cut across the abdomen](assets/bilder/sicherheit/folgen/bohr-stange.svg "A bar that breaks loose swings at stomach height.")
-
+:::piktogramm A bar that breaks loose swings at stomach height. motiv=bohr-stange groesse=gross
+:::
 ### Chuck key still inserted
 
 **The mistake:** You tighten the drill bit, leave the key in the drill chuck and switch on.
@@ -474,8 +474,8 @@ The pillar drill does not forgive shortcuts. Three mistakes that happen quickly 
 
 **The consequence:** A **projectile to the face**: lacerations, knocked-out teeth, in the worst case a **destroyed eye**.
 
-![Left: a chuck key flies out of the running drill towards a person’s head. Right in the red circle: an injured eye](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "A forgotten key becomes a projectile.")
-
+:::piktogramm A forgotten key becomes a projectile. motiv=bohrfutterschluessel groesse=gross
+:::
 Match each mistake to its consequence.
 
 :::zuordnen What is the consequence?
@@ -547,8 +547,8 @@ The sanding belt is made to remove metal. Skin is much softer.
 
 **The consequence:** Skin, fingernail and tissue are **ground away down to the bone in seconds**. Such wounds heal slowly and often leave a shortened or numb finger.
 
-![Left: a finger gets too close to the running sanding belt at the gap to the work rest. Right in the red circle: a finger whose tip has been ground away, shown in red](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "The belt grinds away skin faster than metal.")
-
+:::piktogramm The belt grinds away skin faster than metal. motiv=bandschleifer-spalt groesse=gross
+:::
 ### Other mistakes at the belt sander
 
 - **Aluminium and steel on the same belt:** Fine aluminium dust and steel sparks can react violently with each other and **burn**. The dust in the machine can ignite.
@@ -639,8 +639,8 @@ The angle grinder is one of the most dangerous tools in the workshop. The rim of
 
 **The consequence:** **Lost eyes**, deep cuts to the face and **neck**. A splinter in the carotid artery is **fatal**.
 
-![Left: an angle grinder without a guard, the disc bursts, fragments fly towards a person’s head. Right in the red circle: an injured eye and red cuts](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Fragments of a cutting disc fly at almost 300 km/h.")
-
+:::piktogramm Fragments of a cutting disc fly at almost 300 km/h. motiv=flex-scheibe groesse=gross
+:::
 ### The angle grinder kicks back
 
 **The mistake:** You hold the angle grinder with one hand, and the disc jams in the cut.
@@ -657,8 +657,8 @@ The angle grinder is one of the most dangerous tools in the workshop. The rim of
 
 **The consequence:** **Workshop fire**: the car, the tools and the work of an entire season are lost, and anyone inside is in danger of their life.
 
-![Left: in the workshop, sparks from an angle grinder fly onto a pile of rags, which starts to burn. Right in the red circle: a burning house](assets/bilder/sicherheit/folgen/flex-funken.svg "Sparks in the workshop can destroy the work of an entire season.")
-
+:::piktogramm Sparks in the workshop can destroy the work of an entire season. motiv=flex-funken groesse=gross
+:::
 Match each mistake to its consequence.
 
 :::zuordnen What is the consequence?
@@ -718,8 +718,8 @@ When sanding, drilling and sawing, the fibres break. This produces fragments so 
 
 The body **hardly breaks down** carbon. Whatever reaches the lungs may stay there forever.
 
-![Left: a person without respiratory protection stands in a cloud of dust while sanding a carbon part. Right in the red circle: a lung full of black fibre dots](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Fibre fragments get into the alveoli.")
-
+:::piktogramm Fibre fragments get into the alveoli. motiv=carbon-lunge groesse=gross
+:::
 ### The suspicion of cancer
 
 - Such carbon fibre fragments are **suspected of causing cancer**. The German Social Accident Insurance (DGUV) classifies them in **category 2**: suspected of being carcinogenic.
@@ -737,8 +737,8 @@ The body **hardly breaks down** carbon. Whatever reaches the lungs may stay ther
 - **Dust conducts electricity:** Carbon dust in electronics causes **short circuits**, in the car too.
 - **Dust burns:** Carbon dust stirred up in the air is combustible and can even explode.
 
-![Left: a person without a protective suit is covered in dust, an arrow points to a house in which there is also dust. Right in the red circle: a hand with red, itchy patches of skin](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Without a suit, you carry the dust all the way home.")
-
+:::piktogramm Without a suit, you carry the dust all the way home. motiv=carbon-zuhause groesse=gross
+:::
 What is true and what is not? Match each statement.
 
 :::zuordnen Is that true?
@@ -813,8 +813,8 @@ Resin smells harmless and feels like honey. The consequences are serious nonethe
 
 **The consequence:** An **allergy that lasts a lifetime**: red, weeping, itchy skin, even with the smallest amounts or even from vapours in the air. Once you are allergic, you are often **never allowed to work with resin again**, not even later in your job.
 
-![Left: a hand without a glove with drops of resin next to a cup of resin, above it a crossed-out glove. Right in the red circle: a hand with red patches of eczema](assets/bilder/sicherheit/folgen/harz-haut.svg "A resin allergy lasts a lifetime.")
-
+:::piktogramm A resin allergy lasts a lifetime. motiv=harz-haut groesse=gross
+:::
 ### Too much resin at once
 
 **The mistake:** You mix a large cup of resin so that it is enough for everything, and leave it standing.
@@ -823,8 +823,8 @@ Resin smells harmless and feels like honey. The consequences are serious nonethe
 
 **The consequence:** Burns, irritation of the airways from the smoke and a fire in the middle of the workshop.
 
-![Left: a large cup of mixed resin smokes and burns, next to it “100 °C+”. Right in the red circle: a flame](assets/bilder/sicherheit/folgen/harz-hitze.svg "Too much mixed resin can ignite by itself.")
-
+:::piktogramm Too much mixed resin can ignite by itself. motiv=harz-hitze groesse=gross
+:::
 ### Hazardous substance in a drinks bottle
 
 **The mistake:** You pour some solvent or hardener into an empty water bottle because nothing else is available at the moment.
@@ -833,8 +833,8 @@ Resin smells harmless and feels like honey. The consequences are serious nonethe
 
 **The consequence:** **Poisoning**, chemical burns to the mouth and oesophagus. Some substances permanently damage internal organs.
 
-![Left: liquid is poured from a canister with a skull symbol into a drinks bottle. Right in the red circle: a skull](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Hazardous substances never belong in drinks bottles.")
-
+:::piktogramm Hazardous substances never belong in drinks bottles. motiv=getraenkeflasche groesse=gross
+:::
 Match each mistake to its consequence.
 
 :::zuordnen What is the consequence?

@@ -36,6 +36,7 @@
 @import url("components/start-lights.css");
 
 /* Interaktive Bausteine (je eine Datei pro Baustein in js/blocks/) */
+@import url("components/pictogram.css");
 @import url("blocks/block.css");
 @import url("blocks/callouts.css");
 @import url("blocks/details.css");
@@ -48,6 +49,7 @@
 @import url("blocks/teams.css");
 @import url("blocks/timeline.css");
 @import url("blocks/checklist.css");
+@import url("blocks/pictogram.css");
 
 /* Ansichten des Kurses (js/views/) */
 @import url("views/start.css");
