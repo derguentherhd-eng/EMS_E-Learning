@@ -214,14 +214,23 @@ Telefon erklären. Menschen mit Screenreader hören diesen Text.
 ersetzen. Bei Bildern mit Punkten („Bild mit Punkten") danach die Punkte neu setzen – im Editor
 einfach ins Bild klicken.
 
-## 6a. Sprachschalter „English“
+## 6a. Sprachauswahl (automatische Übersetzung)
 
-Der Kurs ist nur auf Deutsch gepflegt. Der Schalter **English** in der Kopfleiste lässt die Seite vom
-Browser selbst übersetzen (in Chrome ab Version 138 automatisch, nach einem einmaligen Download des
-Sprachmodells). In Browsern ohne diese Funktion (Safari, Firefox, Edge) erscheint eine kurze
-Anleitung, wie man die eingebaute Übersetzung des Browsers startet. Es gibt also **keine englische
-Fassung zu pflegen** – die Übersetzung ist maschinell. Fachbegriffe und Sicherheitsregeln deshalb
-immer klar und einfach auf Deutsch formulieren.
+Der Kurs ist nur auf Deutsch gepflegt. Über die **Sprachauswahl** in der Kopfleiste lässt sich die
+Seite in andere Sprachen übersetzen: Englisch, Französisch, Spanisch, Italienisch, Portugiesisch,
+Tschechisch, Bulgarisch, Estnisch, Russisch und Ukrainisch. Es gibt also **keine Fassung in anderen
+Sprachen zu pflegen**.
+
+- Übersetzt wird **direkt im Browser** mit Bergamot (Mozilla, dieselbe Technik wie die Übersetzung
+  in Firefox, Programm in `vendor/bergamot/`). Die Kurstexte verlassen das Gerät nicht.
+- Beim ersten Umschalten lädt der Browser **einmalig ein Sprachmodell von Mozillas Server**
+  (bergamot.s3.amazonaws.com), etwa 20–25 MB für Englisch. Andere Sprachen laufen über Englisch und
+  brauchen ein zweites Modell. Danach kommt das Modell aus dem Browser-Cache.
+- Funktioniert über die Internetadresse (GitHub Pages) und über die Startskripte, **nicht** beim
+  Öffnen per Doppelklick (`file://`) – dann erscheint ein Hinweis.
+- Die Übersetzung ist maschinell und nicht fehlerfrei. Deshalb deutsche Texte **klar, kurz und ohne
+  Umgangssprache** schreiben. Texte in Grafiken (SVG-Bilder) werden nicht übersetzt.
+- Sprachen ergänzen oder entfernen: Liste `LANGUAGES` in `js/ui/language.js`.
 
 ## 7. Kapitel anlegen, umsortieren, deaktivieren, archivieren, wiederherstellen
 

@@ -96,9 +96,45 @@
   }
 
   /* Theme-Umschalter in der Kopfleiste: Schalter + Text. */
-  .theme-toggle,
-  .language-toggle {
+  .theme-toggle {
     cursor: pointer;
+  }
+
+  /* Sprachauswahl (js/ui/language.js): kompaktes Auswahlfeld im Stil der Kopfleiste. */
+  .language-select {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+
+  .language-select__control {
+    padding: var(--space-3xs) var(--space-xs);
+    border: var(--border-thin) solid var(--color-masthead-text);
+    border-radius: var(--radius-s);
+    background: transparent;
+    color: var(--color-masthead-text);
+    font: inherit;
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+  }
+
+  .language-select__control option {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .language-select__control[aria-busy="true"] {
+    cursor: progress;
+  }
+
+  .language-select__status {
+    color: var(--color-masthead-text);
+    font-size: var(--step--1);
+  }
+
+  .language-select__status:empty {
+    display: none;
   }
 
   .masthead__links a:hover,

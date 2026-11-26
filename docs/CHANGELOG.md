@@ -6,6 +6,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Sprachauswahl mit Übersetzung im Browser (2026-11-26)
+
+- Der Schalter „English“ (Chrome-Translator-API bzw. Browser-Anleitung) ist durch eine Sprachauswahl mit 11 Sprachen ersetzt. Übersetzt wird mit Bergamot 0.4.9 (Mozilla, MPL-2.0, `vendor/bergamot/`) als WebAssembly im Browser, in allen gängigen Browsern. Sprachmodelle kommen beim ersten Umschalten von Mozillas Server.
+- Absätze mit einfacher Formatierung werden als Ganzes übersetzt (Satzzusammenhang), Absätze mit Glossar-Knöpfen Stück für Stück. Neu erscheinende Inhalte (Übungen, Rückmeldungen, Quiz) werden automatisch mitübersetzt.
+- Per Doppelklick geöffnet (`file://`) erklärt ein Hinweis, dass die Übersetzung nur über einen Webserver läuft.
+
 ### Sicherheit: Pflichtabfrage auf jeder Folgen-Seite (2026-11-26)
 
 - Piktogramme auf Verständlichkeit überarbeitet: Handschuh an der Bohrmaschine als Hand erkennbar, Person mit Haaren zusammenhängend, Ring sichtbar auf beiden Akkupolen, durchgestrichener Handschuh beim Harz.

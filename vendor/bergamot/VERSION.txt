@@ -1,0 +1,12 @@
+@browsermt/bergamot-translator 0.4.9 (npm), unverändert übernommen.
+Quelle und Quelltext: https://github.com/browsermt/bergamot-translator
+Lizenz: Mozilla Public License 2.0 (siehe LICENSE)
+
+Enthalten: translator.js (ES-Modul), worker/translator-worker.js, worker/bergamot-translator-worker.js,
+worker/bergamot-translator-worker.wasm (kompilierte Fassung des C++-Quelltexts im obigen Repository).
+
+Die Sprachmodelle liegen NICHT hier, sie werden beim ersten Umschalten von Mozillas Server geladen:
+https://bergamot.s3.amazonaws.com/models/index.json
+
+Aktualisieren: npm pack @browsermt/bergamot-translator@<version>, Dateien aus package/ hierher kopieren,
+Sprachauswahl im Kurs testen, Version oben eintragen.

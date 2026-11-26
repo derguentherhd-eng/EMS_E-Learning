@@ -1,26 +1,35 @@
 /*
- * language.js – Sprachschalter Deutsch / Englisch
+ * language.js – Sprachauswahl mit Übersetzung direkt im Browser
  *
- * Der Kurs ist auf Deutsch geschrieben. Der Schalter „English“ in der Kopfleiste lässt die Seite
- * vom Browser selbst ins Englische übersetzen – es gibt keine zweite Inhaltsfassung und keinen
- * fremden Übersetzungsdienst.
+ * Der Kurs wird nur auf Deutsch gepflegt. Über die Sprachauswahl in der Kopfleiste übersetzt der
+ * Browser die Seite selbst in eine andere Sprache. Dafür läuft Bergamot (Mozilla, dieselbe Technik
+ * wie die eingebaute Übersetzung von Firefox) als WebAssembly direkt auf dem Gerät:
+ *   – Programm: vendor/bergamot/ (liegt im Kurs, MPL-2.0).
+ *   – Sprachmodelle: werden beim ersten Umschalten einmalig von Mozillas Server geladen
+ *     (REGISTRY_URL, etwa 20–25 MB je Richtung) und danach vom Browser-Cache genommen.
+ *     Die Texte selbst verlassen das Gerät nicht.
+ *   – Für Deutsch gibt es nur das Modell Deutsch → Englisch. Alle anderen Sprachen laufen über
+ *     Englisch als Zwischenschritt (Deutsch → Englisch → Zielsprache, doppelter Download).
  *
  * Funktionsweise:
- *   – Browser mit eingebauter Übersetzung für Webseiten (Translator-API, z. B. Chrome ab 138):
- *     Beim ersten Einschalten lädt der Browser einmalig sein Sprachmodell herunter. Danach werden
- *     alle Texte der Seite auf dem Gerät übersetzt – auch alles, was später neu erscheint
- *     (Seitenwechsel, Rückmeldungen der Übungen, Glossar). Ausschalten stellt den deutschen Text
- *     wieder her.
- *   – Andere Browser (Safari, Firefox, ältere Versionen): Ein Dialog erklärt, wie man dort die
- *     eingebaute Übersetzung des Browsers startet. Eine Webseite darf diese nicht selbst auslösen.
+ *   – Absätze, Listenpunkte, Überschriften und Tabellenzellen mit einfacher Formatierung (fett,
+ *     kursiv, Links) werden als Ganzes übersetzt, damit der Satzzusammenhang erhalten bleibt.
+ *   – Enthält ein Absatz Bedienelemente (z. B. Glossar-Knöpfe), wird Stück für Stück übersetzt,
+ *     damit deren Funktion erhalten bleibt.
+ *   – Was später neu erscheint (Seitenwechsel, Rückmeldungen, Quiz), übersetzt ein
+ *     MutationObserver automatisch. „Deutsch“ stellt alle Originaltexte wieder her.
+ *   – Elemente mit translate="no" werden nie übersetzt (z. B. die Sprachauswahl selbst).
  *   – Die Wahl wird nur in diesem Browser gespeichert (localStorage, Schlüssel em-sprache).
- *   – Elemente mit translate="no" werden nicht übersetzt (z. B. der Schalter selbst).
+ *   – Per Doppelklick geöffnet (file://) blockiert der Browser Module und Worker: Dann erklärt ein
+ *     Hinweis, dass die Übersetzung nur über einen Webserver (GitHub Pages, Startskript) läuft.
  *
- * Zusammenspiel: js/pages/index.js verbindet den Knopf .language-toggle in der Kopfleiste.
+ * Zusammenspiel: js/pages/index.js verbindet die Auswahl [data-language-select] in der Kopfleiste.
  *
  * Wenn du hier etwas ändern willst …
- *   – Texte des Hinweisdialogs: HELP_TEXTS (oben in der Datei).
+ *   – Sprachen ergänzen oder entfernen: LANGUAGES (nur Sprachen, für die es ein Modell
+ *     „en→xx“ in REGISTRY_URL gibt).
  *   – Welche Attribute mitübersetzt werden: ATTRIBUTES.
+ *   – Was als Ganzes übersetzt wird: BLOCK_TAGS und INLINE_TAGS.
  */
 
 (function () {
@@ -29,43 +38,33 @@
   const { el } = EM.require("js/core/dom.js");
 
   const STORAGE_KEY = "em-sprache";
-  const LANGUAGES = { sourceLanguage: "de", targetLanguage: "en" };
+  const SOURCE_LANGUAGE = "de";
 
-  /**
-   * Wartezeit auf Translator.availability(). Manche Browser kennen die Schnittstelle, antworten
-   * aber nie – dann geben wir nach dieser Zeit auf.
-   */
-  const AVAILABILITY_TIMEOUT_MS = 5000;
-  /** event.loaded ist ein Anteil von 0 bis 1; für die Anzeige rechnen wir in Prozent um. */
-  const PERCENT_FACTOR = 100;
-  /** Fortschritt nur in diesen Prozentschritten vorlesen, damit es nicht ständig spricht. */
-  const PERCENT_ANNOUNCE_STEP = 25;
+  /** Verzeichnis der Sprachmodelle (Mozilla, mit CORS-Freigabe für alle Webseiten). */
+  const REGISTRY_URL = "https://bergamot.s3.amazonaws.com/models/index.json";
+  /** Übersetzungsprogramm im Kurs (ES-Modul, startet seinen Worker selbst). */
+  const TRANSLATOR_PATH = "vendor/bergamot/translator.js";
+  /** Längste Wartezeit für den Download eines Sprachmodells. */
+  const DOWNLOAD_TIMEOUT_MS = 180000;
   /** Obergrenze des Übersetzungs-Caches, damit der Speicher bei langen Sitzungen nicht wächst. */
-  const CACHE_MAX_ENTRIES = 2000;
+  const CACHE_MAX_ENTRIES = 4000;
 
-  /** Texte des Hinweisdialogs für Browser ohne Translator-API (Englisch, mit deutscher Zeile). */
-  const HELP_TEXTS = {
-    title: "Read this course in English",
-    intro:
-      "This browser can’t switch the page automatically. Use its built-in translation instead:",
-    chrome: [
-      "Chrome / Edge: ",
-      "right-click the page → “Translate to English”.",
-    ],
-    safari: [
-      "Safari: ",
-      "click the translate icon in the address bar → “Translate to English”.",
-    ],
-    firefox: [
-      "Firefox: ",
-      "click the translate icon in the address bar → “Translate”.",
-    ],
-    german:
-      "Dein Browser kann die Seite nicht automatisch umstellen. Nutze die Übersetzung deines Browsers wie oben beschrieben.",
-    ok: "OK",
-  };
+  /** Angebotene Sprachen; Namen in der jeweiligen Sprache, damit jede Person ihre findet. */
+  const LANGUAGES = [
+    { code: "de", name: "Deutsch" },
+    { code: "en", name: "English" },
+    { code: "fr", name: "Français" },
+    { code: "es", name: "Español" },
+    { code: "it", name: "Italiano" },
+    { code: "pt", name: "Português" },
+    { code: "cs", name: "Čeština" },
+    { code: "bg", name: "Български" },
+    { code: "et", name: "Eesti" },
+    { code: "ru", name: "Русский" },
+    { code: "uk", name: "Українська" },
+  ];
 
-  /** Elemente, deren Inhalt nie übersetzt wird. */
+  /** Elemente, deren Inhalt nie übersetzt wird (Großschreibung wie in nodeName). */
   const SKIP = new Set([
     "SCRIPT",
     "STYLE",
@@ -73,119 +72,250 @@
     "CODE",
     "PRE",
     "TEXTAREA",
+    "SVG",
+  ]);
+
+  /** Elemente, die als Ganzes übersetzt werden, wenn sie nur einfache Formatierung enthalten. */
+  const BLOCK_TAGS = new Set([
+    "P",
+    "LI",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "TD",
+    "TH",
+    "DT",
+    "DD",
+    "FIGCAPTION",
+    "CAPTION",
+    "LEGEND",
+  ]);
+  const BLOCK_SELECTOR = [...BLOCK_TAGS].join(",");
+
+  /** Formatierung, die innerhalb eines Blocks erlaubt ist (ohne eigene Funktion). */
+  const INLINE_TAGS = new Set([
+    "STRONG",
+    "EM",
+    "B",
+    "I",
+    "A",
+    "ABBR",
+    "SUP",
+    "SUB",
+    "BR",
+    "MARK",
+    "SMALL",
+    "Q",
+    "CITE",
+    "DFN",
+    "S",
+    "U",
   ]);
 
   /** Attribute, die Menschen zu sehen oder zu hören bekommen. */
   const ATTRIBUTES = ["alt", "title", "aria-label", "placeholder"];
 
-  /** @type {any} */
-  let translator = null;
-  let active = false;
+  /** Texte für Status und Hinweise (zweisprachig, weil sie gerade beim Umschalten erscheinen). */
+  const TEXTS = {
+    loading: "Sprachmodell wird geladen … / Loading language model …",
+    translating: "Übersetze … / Translating …",
+    fileTitle:
+      "Übersetzung hier nicht möglich / Translation not available here",
+    fileBody:
+      "Der Kurs ist als Datei geöffnet (Doppelklick). So erlaubt der Browser keine Übersetzung. Öffne den Kurs über seine Internetadresse oder das Startskript.",
+    fileBodyEn:
+      "The course was opened as a local file. Please open it via its web address or the start script to use translation.",
+    errorTitle: "Übersetzung fehlgeschlagen / Translation failed",
+    errorBody:
+      "Das Sprachmodell konnte nicht geladen werden. Prüfe deine Internetverbindung und versuche es noch einmal.",
+    errorBodyEn:
+      "The language model could not be loaded. Check your internet connection and try again.",
+    ok: "OK",
+  };
+
+  /** Zielsprache, solange übersetzt wird; null = Deutsch (Original). */
+  let target = null;
+  /** @type {Promise<any>|null} Bergamot-Übersetzer (wird beim ersten Umschalten geladen). */
+  let engine = null;
   /** @type {MutationObserver|null} */
   let observer = null;
 
-  /** Deutscher Originaltext je Textknoten (zum Zurückstellen). */
+  /** Deutscher Originaltext je Textknoten. */
   const originalText = new Map();
   /** Zuletzt eingesetzte Übersetzung je Textknoten (um eigene Änderungen zu erkennen). */
   const translatedText = new WeakMap();
+  /** Original- und übersetztes HTML je Block. */
+  const originalHtml = new Map();
   /** Deutsche Originalwerte der Attribute je Element. */
   const originalAttributes = new Map();
-  /** Bereits übersetzte Texte (Deutsch → Englisch). */
+  /** Bereits übersetzte Texte, Schlüssel: Zielsprache + Art + Text. */
   const cache = new Map();
-  /** Textknoten, die gerade übersetzt werden (verhindert doppelte Übersetzung bei Überlappung). */
-  const pendingNodes = new WeakSet();
-  /** Attribute, die gerade übersetzt werden, je Element. */
-  const pendingAttributes = new WeakMap();
+  /** Knoten und Blöcke, die gerade übersetzt werden (verhindert Doppelarbeit). */
+  const pending = new WeakSet();
 
   /**
-   * Liest die gespeicherte Wahl. Ohne Speicher (z. B. privates Fenster) gilt Deutsch.
-   * @returns {'de'|'en'}
+   * Liest die gespeicherte Sprache. Ohne Speicher (z. B. privates Fenster) gilt Deutsch.
+   * @returns {string}
    */
   function storedLanguage() {
     try {
-      return window.localStorage.getItem(STORAGE_KEY) === "en" ? "en" : "de";
+      const code = window.localStorage.getItem(STORAGE_KEY);
+      return LANGUAGES.some((language) => language.code === code)
+        ? code
+        : SOURCE_LANGUAGE;
     } catch {
-      return "de";
+      return SOURCE_LANGUAGE;
     }
   }
 
-  /** @param {'de'|'en'} language */
-  function storeLanguage(language) {
+  /** @param {string} code */
+  function storeLanguage(code) {
     try {
-      window.localStorage.setItem(STORAGE_KEY, language);
+      window.localStorage.setItem(STORAGE_KEY, code);
     } catch {
       // Ohne Speicher gilt die Wahl nur bis zum Neuladen.
     }
   }
 
-  /**
-   * @returns {boolean} Hat der Browser eine eingebaute Übersetzung für Webseiten?
-   * Die Translator-API gibt es ab Chrome 138 (Mindestversion); Safari und Firefox fehlen sie.
-   */
-  function hasBuiltInTranslator() {
-    return "Translator" in self;
+  /** @returns {boolean} Als Datei geöffnet? Dann blockiert der Browser Module und Worker. */
+  function isLocalFile() {
+    return window.location.protocol === "file:";
   }
 
   /**
-   * Übersetzt einen Text. Leerraum am Anfang und Ende bleibt erhalten, Texte ohne Buchstaben
-   * (Zahlen, Satzzeichen) bleiben unverändert.
+   * Lädt Bergamot (einmal pro Seitenaufruf). Die Sprachmodelle lädt Bergamot selbst beim ersten
+   * Übersetzen einer Sprache.
+   * @returns {Promise<any>}
+   */
+  function getEngine() {
+    if (!engine) {
+      const url = new URL(TRANSLATOR_PATH, document.baseURI).href;
+      engine = import(url)
+        .then(
+          (module) =>
+            new module.BatchTranslator({
+              registryUrl: REGISTRY_URL,
+              workers: 1,
+              downloadTimeout: DOWNLOAD_TIMEOUT_MS,
+            }),
+        )
+        .catch((error) => {
+          engine = null;
+          throw error;
+        });
+    }
+    return engine;
+  }
+
+  /**
+   * Übersetzt einen Text oder ein HTML-Stück ins aktuelle Ziel. Leerraum am Anfang und Ende bleibt
+   * erhalten, Texte ohne Buchstaben (Zahlen, Satzzeichen) bleiben unverändert.
    * @param {string} text
+   * @param {boolean} html
    * @returns {Promise<string>}
    */
-  async function translate(text) {
+  async function translate(text, html) {
     const [, before, core, after] = /^(\s*)([\s\S]*?)(\s*)$/.exec(text) ?? [];
     if (!core || !/\p{L}/u.test(core)) {
       return text;
     }
-    let result = cache.get(core);
+    const language = target;
+    const key = `${language}|${html ? "h" : "t"}|${core}`;
+    let result = cache.get(key);
     if (result === undefined) {
-      result = await translator.translate(core);
+      const translator = await getEngine();
+      const response = await translator.translate({
+        from: SOURCE_LANGUAGE,
+        to: language,
+        text: core,
+        html,
+      });
+      result = response.target.text;
       if (cache.size >= CACHE_MAX_ENTRIES) {
         cache.clear();
       }
-      cache.set(core, result);
+      cache.set(key, result);
     }
     return before + result + after;
   }
 
   /**
-   * Sammelt alle Textknoten und Elemente unterhalb von root, die übersetzt werden sollen.
+   * Darf dieser Block als Ganzes übersetzt werden? Nur, wenn er außer einfacher Formatierung
+   * nichts enthält – sonst würden beim Ersetzen Knöpfe und ihre Funktionen verloren gehen.
+   * @param {Element} element
+   * @returns {boolean}
+   */
+  function isSimpleBlock(element) {
+    if (!BLOCK_TAGS.has(element.nodeName)) {
+      return false;
+    }
+    for (const child of element.querySelectorAll("*")) {
+      if (
+        !INLINE_TAGS.has(child.nodeName) ||
+        child.getAttribute("translate") === "no"
+      ) {
+        return false;
+      }
+    }
+    return /\p{L}/u.test(element.textContent ?? "");
+  }
+
+  /** @param {Element} element */
+  function isExcluded(element) {
+    return (
+      SKIP.has(element.nodeName.toUpperCase()) ||
+      element.getAttribute("translate") === "no"
+    );
+  }
+
+  /**
+   * Sammelt, was unterhalb von root zu übersetzen ist.
    * @param {Node} root
-   * @returns {{ texts: Text[], elements: Element[] }}
+   * @returns {{ blocks: Element[], texts: Text[], elements: Element[] }}
    */
   function collect(root) {
+    const blocks = [];
     const texts = [];
     const elements = [];
+    const start = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
+    if (!(start instanceof Element) || start.closest('[translate="no"]')) {
+      return { blocks, texts, elements };
+    }
+    // Liegt der Startpunkt in einem einfachen Block, wird der ganze Block übersetzt.
+    const block = start.closest(BLOCK_SELECTOR);
+    if (block && isSimpleBlock(block)) {
+      blocks.push(block);
+      return { blocks, texts, elements };
+    }
+    if (isExcluded(start)) {
+      return { blocks, texts, elements };
+    }
     if (root.nodeType === Node.TEXT_NODE) {
-      const parent = root.parentElement;
-      if (
-        parent &&
-        !parent.closest('[translate="no"]') &&
-        !SKIP.has(parent.nodeName)
-      ) {
-        texts.push(/** @type {Text} */ (root));
-      }
-      return { texts, elements };
+      texts.push(/** @type {Text} */ (root));
+      return { blocks, texts, elements };
     }
-    if (!(root instanceof Element) || root.closest('[translate="no"]')) {
-      return { texts, elements };
-    }
+    elements.push(start);
     const walker = document.createTreeWalker(
-      root,
+      start,
       NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT,
       {
         acceptNode(node) {
           if (node instanceof Element) {
-            return SKIP.has(node.nodeName) ||
-              node.getAttribute("translate") === "no"
-              ? NodeFilter.FILTER_REJECT
-              : NodeFilter.FILTER_ACCEPT;
+            if (isExcluded(node)) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            if (isSimpleBlock(node)) {
+              blocks.push(node);
+              return NodeFilter.FILTER_REJECT;
+            }
           }
           return NodeFilter.FILTER_ACCEPT;
         },
       },
     );
-    elements.push(root);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
       if (node instanceof Element) {
         elements.push(node);
@@ -193,117 +323,151 @@
         texts.push(/** @type {Text} */ (node));
       }
     }
-    return { texts, elements };
+    return { blocks, texts, elements };
   }
 
-  /** Wirft Einträge für Knoten und Elemente weg, die nicht mehr im Dokument stehen. */
+  /** Wirft Einträge für Knoten weg, die nicht mehr im Dokument stehen. */
   function pruneDisconnected() {
-    for (const node of originalText.keys()) {
-      if (!node.isConnected) {
-        originalText.delete(node);
-      }
-    }
-    for (const element of originalAttributes.keys()) {
-      if (!element.isConnected) {
-        originalAttributes.delete(element);
+    for (const store of [originalText, originalHtml, originalAttributes]) {
+      for (const node of store.keys()) {
+        if (!node.isConnected) {
+          store.delete(node);
+        }
       }
     }
   }
 
   /**
-   * Übersetzt alle Texte und Attribute unterhalb von root.
-   * @param {Node} root
-   * @returns {Promise<void>}
+   * Übersetzt einen Block als Ganzes (HTML mit Formatierung).
+   * @param {Element} block
+   * @returns {Promise<void>|null}
    */
-  async function translateTree(root) {
-    const { texts, elements } = collect(root);
-    const jobs = [];
-    for (const node of texts) {
-      // Eigene Übersetzung? Dann ist nichts zu tun. Sonst ist der Text neu (deutsch).
-      if (translatedText.get(node) === node.data || pendingNodes.has(node)) {
-        continue;
-      }
-      const german = node.data;
-      pendingNodes.add(node);
-      jobs.push(
-        translate(german).then((english) => {
-          pendingNodes.delete(node);
-          if (!active || node.data !== german) {
-            return;
-          }
-          originalText.set(node, german);
-          translatedText.set(node, english);
-          node.data = english;
-        }),
-      );
+  function translateBlock(block) {
+    const saved = originalHtml.get(block);
+    if (pending.has(block) || saved?.translated === block.innerHTML) {
+      return null;
     }
+    const german = block.innerHTML;
+    const language = target;
+    pending.add(block);
+    return translate(german, true)
+      .then(async (result) => {
+        if (target !== language || block.innerHTML !== german) {
+          return;
+        }
+        block.innerHTML = result;
+        await translateAttributes([...block.querySelectorAll("*")]);
+        // Erst nach den Attributen merken – sie gehören zum HTML des Blocks.
+        originalHtml.set(block, { german, translated: block.innerHTML });
+      })
+      .finally(() => pending.delete(block));
+  }
+
+  /**
+   * Übersetzt einen einzelnen Textknoten.
+   * @param {Text} node
+   * @returns {Promise<void>|null}
+   */
+  function translateText(node) {
+    if (translatedText.get(node) === node.data || pending.has(node)) {
+      return null;
+    }
+    const german = node.data;
+    const language = target;
+    pending.add(node);
+    return translate(german, false)
+      .then((result) => {
+        if (target !== language || node.data !== german) {
+          return;
+        }
+        originalText.set(node, german);
+        translatedText.set(node, result);
+        node.data = result;
+      })
+      .finally(() => pending.delete(node));
+  }
+
+  /**
+   * Übersetzt die sichtbaren bzw. vorgelesenen Attribute (ATTRIBUTES) der Elemente.
+   * @param {Element[]} elements
+   * @returns {Promise<void[]>}
+   */
+  function translateAttributes(elements) {
+    const jobs = [];
+    const language = target;
     for (const element of elements) {
       for (const name of ATTRIBUTES) {
         const german = element.getAttribute(name);
         const saved = originalAttributes.get(element);
-        let pending = pendingAttributes.get(element);
-        if (
-          !german ||
-          saved?.[name]?.english === german ||
-          pending?.has(name)
-        ) {
+        if (!german || saved?.[name]?.translated === german) {
           continue;
         }
-        if (!pending) {
-          pending = new Set();
-          pendingAttributes.set(element, pending);
-        }
-        pending.add(name);
         jobs.push(
-          translate(german).then((english) => {
-            pending.delete(name);
-            if (!active || element.getAttribute(name) !== german) {
+          translate(german, false).then((result) => {
+            if (target !== language || element.getAttribute(name) !== german) {
               return;
             }
             const entry = originalAttributes.get(element) ?? {};
-            entry[name] = { german, english };
+            entry[name] = { german, translated: result };
             originalAttributes.set(element, entry);
-            element.setAttribute(name, english);
+            element.setAttribute(name, result);
           }),
         );
       }
     }
-    await Promise.all(jobs);
+    return Promise.all(jobs);
+  }
+
+  /**
+   * Übersetzt alles unterhalb von root.
+   * @param {Node} root
+   * @returns {Promise<void>}
+   */
+  async function translateTree(root) {
+    const { blocks, texts, elements } = collect(root);
+    await Promise.all([
+      ...blocks.map(translateBlock),
+      ...texts.map(translateText),
+      translateAttributes(elements),
+    ]);
     pruneDisconnected();
   }
 
   /** Stellt alle deutschen Texte wieder her. */
   function restore() {
+    for (const [block, { german, translated }] of originalHtml) {
+      if (block.isConnected && block.innerHTML === translated) {
+        block.innerHTML = german;
+      }
+    }
     for (const [node, german] of originalText) {
       if (node.isConnected && translatedText.get(node) === node.data) {
         node.data = german;
       }
     }
     for (const [element, entry] of originalAttributes) {
-      for (const [name, { german, english }] of Object.entries(entry)) {
-        if (element.getAttribute(name) === english) {
+      for (const [name, { german, translated }] of Object.entries(entry)) {
+        if (element.getAttribute(name) === translated) {
           element.setAttribute(name, german);
         }
       }
     }
+    originalHtml.clear();
     originalText.clear();
     originalAttributes.clear();
-    cache.clear();
   }
 
-  /** Übersetzt alles, was nach dem Einschalten neu auf der Seite erscheint. */
+  /** Übersetzt alles, was nach dem Umschalten neu auf der Seite erscheint. */
   function observe() {
     observer = new MutationObserver((records) => {
-      if (!active) {
+      if (!target) {
         return;
       }
-      pruneDisconnected();
       const roots = new Set();
       for (const record of records) {
+        roots.add(record.target);
         if (record.type === "childList") {
           record.addedNodes.forEach((node) => roots.add(node));
-        } else {
-          roots.add(record.target);
         }
       }
       for (const root of roots) {
@@ -324,174 +488,121 @@
   }
 
   /**
-   * Erklärt, wie man die eingebaute Übersetzung des Browsers startet (Browser ohne Translator-API).
-   * @param {HTMLElement} [returnFocusTo]  Wird nach dem Schließen fokussiert.
+   * Zeigt einen Hinweis, warum nicht übersetzt werden kann.
+   * @param {'file'|'error'} reason
+   * @param {HTMLElement} returnFocusTo  Wird nach dem Schließen fokussiert.
    */
-  function showBrowserHelp(returnFocusTo) {
+  function showProblem(reason, returnFocusTo) {
+    const isFile = reason === "file";
     const dialog = el(
       "dialog",
       {
         class: "dialog",
-        "aria-labelledby": "language-help-title",
-        lang: "en",
+        "aria-labelledby": "language-problem-title",
         translate: "no",
       },
       el(
         "form",
         { method: "dialog", class: "stack" },
-        el("h2", { id: "language-help-title" }, HELP_TEXTS.title),
-        el("p", {}, HELP_TEXTS.intro),
         el(
-          "ul",
-          {},
-          el(
-            "li",
-            {},
-            el("strong", {}, HELP_TEXTS.chrome[0]),
-            HELP_TEXTS.chrome[1],
-          ),
-          el(
-            "li",
-            {},
-            el("strong", {}, HELP_TEXTS.safari[0]),
-            HELP_TEXTS.safari[1],
-          ),
-          el(
-            "li",
-            {},
-            el("strong", {}, HELP_TEXTS.firefox[0]),
-            HELP_TEXTS.firefox[1],
-          ),
+          "h2",
+          { id: "language-problem-title" },
+          isFile ? TEXTS.fileTitle : TEXTS.errorTitle,
         ),
-        el("p", { lang: "de" }, HELP_TEXTS.german),
+        el("p", {}, isFile ? TEXTS.fileBody : TEXTS.errorBody),
+        el("p", { lang: "en" }, isFile ? TEXTS.fileBodyEn : TEXTS.errorBodyEn),
         el(
           "div",
           { class: "dialog__actions" },
           el(
             "button",
             { class: "button button--primary", value: "ok" },
-            HELP_TEXTS.ok,
+            TEXTS.ok,
           ),
         ),
       ),
     );
     dialog.addEventListener("close", () => {
       dialog.remove();
-      // Fokus zurück zum Sprachknopf, sonst landet er am Seitenanfang.
-      returnFocusTo?.focus();
+      returnFocusTo.focus();
     });
     document.body.append(dialog);
     dialog.showModal();
   }
 
   /**
-   * Verbindet den Schalter „English“ (aria-pressed = Englisch ist an).
-   * @param {HTMLButtonElement} button
+   * Verbindet die Sprachauswahl in der Kopfleiste.
+   * @param {HTMLSelectElement} select
    */
-  function setupLanguageToggle(button) {
-    const label = button.querySelector("[data-language-label]") ?? button;
-    const defaultLabel = label.textContent;
-    const hintText = "Zum Übersetzen klicken";
-    // Unsichtbare Statusmeldung für Screenreader (Ladefortschritt des Modells).
-    const status = document.createElement("span");
-    status.className = "visually-hidden";
-    status.setAttribute("role", "status");
-    button.after(status);
-
-    function update() {
-      button.setAttribute("aria-pressed", String(active));
-      document.documentElement.lang = active ? "en" : "de";
-    }
+  function setupLanguageSelect(select) {
+    select.replaceChildren(
+      ...LANGUAGES.map(({ code, name }) =>
+        el("option", { value: code, lang: code }, name),
+      ),
+    );
+    // Sichtbarer Hinweis beim Laden; role="status" liest ihn auch Screenreadern vor.
+    const status = el("span", {
+      class: "language-select__status",
+      role: "status",
+      translate: "no",
+    });
+    select.after(status);
 
     /**
-     * @param {boolean} userAction  true = Klick (darf das Sprachmodell herunterladen)
+     * @param {string} code  Zielsprache ('de' = Original)
+     * @param {boolean} userAction  true = Auswahl durch die Person (Fehler als Dialog zeigen)
      */
-    async function switchOn(userAction) {
-      if (!hasBuiltInTranslator()) {
+    async function setLanguage(code, userAction) {
+      if (target) {
+        // Erst zurück zum Deutschen, dann in die neue Sprache.
+        restore();
+      }
+      if (code === SOURCE_LANGUAGE) {
+        target = null;
+        observer?.disconnect();
+        observer = null;
+        document.documentElement.lang = SOURCE_LANGUAGE;
+        select.value = SOURCE_LANGUAGE;
+        storeLanguage(SOURCE_LANGUAGE);
+        return;
+      }
+      if (isLocalFile()) {
+        select.value = SOURCE_LANGUAGE;
         if (userAction) {
-          showBrowserHelp(button);
+          showProblem("file", select);
         }
         return;
       }
+      target = code;
+      select.value = code;
+      document.documentElement.lang = code;
+      select.setAttribute("aria-busy", "true");
+      status.textContent = TEXTS.loading;
       try {
-        if (!translator) {
-          const availability = await Promise.race([
-            self.Translator.availability(LANGUAGES),
-            new Promise((resolve) => {
-              setTimeout(() => resolve("unavailable"), AVAILABILITY_TIMEOUT_MS);
-            }),
-          ]);
-          if (availability === "unavailable") {
-            if (userAction) {
-              showBrowserHelp(button);
-            } else {
-              button.title = hintText;
-            }
-            return;
-          }
-          // Ohne Klick darf der Browser nichts herunterladen – dann beim nächsten Klick.
-          if (!userAction && availability !== "available") {
-            button.title = hintText;
-            return;
-          }
-          button.setAttribute("aria-busy", "true");
-          label.textContent = "English …";
-          status.textContent = "Sprachmodell wird geladen.";
-          translator = await self.Translator.create({
-            ...LANGUAGES,
-            monitor(monitor) {
-              monitor.addEventListener("downloadprogress", (event) => {
-                const percent = Math.round(event.loaded * PERCENT_FACTOR);
-                label.textContent = `English … ${percent} %`;
-                if (percent % PERCENT_ANNOUNCE_STEP === 0) {
-                  status.textContent = `Sprachmodell: ${percent} %`;
-                }
-              });
-            },
-          });
-        }
-        active = true;
-        update();
         if (!observer) {
           observe();
         }
         await translateTree(document.documentElement);
-        storeLanguage("en");
-        button.removeAttribute("title");
-      } catch {
-        active = false;
-        update();
+        storeLanguage(code);
+      } catch (error) {
+        console.warn("Übersetzung fehlgeschlagen:", error);
+        await setLanguage(SOURCE_LANGUAGE, false);
         if (userAction) {
-          showBrowserHelp(button);
+          showProblem("error", select);
         }
       } finally {
-        button.removeAttribute("aria-busy");
-        label.textContent = defaultLabel;
+        select.removeAttribute("aria-busy");
         status.textContent = "";
       }
     }
 
-    function switchOff() {
-      active = false;
-      observer?.disconnect();
-      observer = null;
-      restore();
-      update();
-      storeLanguage("de");
-    }
-
-    button.addEventListener("click", () => {
-      if (active) {
-        switchOff();
-      } else {
-        switchOn(true);
-      }
-    });
-    update();
-    if (storedLanguage() === "en") {
-      switchOn(false);
+    select.addEventListener("change", () => setLanguage(select.value, true));
+    select.value = SOURCE_LANGUAGE;
+    const saved = storedLanguage();
+    if (saved !== SOURCE_LANGUAGE) {
+      setLanguage(saved, false);
     }
   }
 
-  EM.define("js/ui/language.js", { setupLanguageToggle, hasBuiltInTranslator });
+  EM.define("js/ui/language.js", { setupLanguageSelect, LANGUAGES });
 })();
