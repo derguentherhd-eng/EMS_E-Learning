@@ -381,6 +381,7 @@ Ein Werkstück, das sich losreißt, dreht mit voller Kraft mit und kann wie ein 
 
 - **Schutzbrille** tragen, **keine Handschuhe**, Haare zusammen, Ärmel eng, kein Schmuck.
 - **Werkstück immer einspannen**, zum Beispiel im Maschinenschraubstock. Nie mit der Hand festhalten – verkantet sich der Bohrer, reißt er das Werkstück mit.
+- **Lange Werkstücke** (Stangen, Rohre, Profile) zusätzlich gegen Mitdrehen sichern, zum Beispiel mit einem Anschlag an der Säule. Stell dich nie in den Bereich, in dem das lange Ende herumschlagen könnte.
 - **Der Schraubstock selbst muss mit einer Schraube am Maschinentisch gesichert sein.** Sonst kann er sich mitsamt Werkstück losreißen, im Arbeitsraum herumschleudern und dich treffen – **Lebensgefahr**.
 - **Bohrfutterschlüssel abziehen**, bevor du einschaltest. Ein vergessener Schlüssel wird beim Einschalten weggeschleudert.
 - Die **Drehzahl** passend zum Bohrer und Material einstellen. Frag, wenn du sie nicht kennst.
@@ -398,7 +399,7 @@ Du willst an der Ständerbohrmaschine ein Loch in ein kleines Aluteil bohren. Da
 
 ## Was passieren kann: an der Ständerbohrmaschine
 
-Die Ständerbohrmaschine verzeiht keine Abkürzung. Zwei Fehler, die schnell passieren, wenn man „nur kurz" ein Loch bohren will:
+Die Ständerbohrmaschine verzeiht keine Abkürzung. Drei Fehler, die schnell passieren, wenn man „nur kurz" ein Loch bohren will:
 
 ### Werkstück mit der Hand gehalten
 
@@ -409,6 +410,16 @@ Die Ständerbohrmaschine verzeiht keine Abkürzung. Zwei Fehler, die schnell pas
 **Die Folge:** **Tiefe Schnitte** bis auf Sehnen und Knochen, **gebrochene Finger**. Ein großes Teil kann dich auch am Körper treffen.
 
 ![Links: Ein Blech dreht sich unter dem Bohrer wie ein Propeller, daneben eine Hand. Rechts im roten Kreis: eine Hand mit roten Schnittwunden](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Ein losgerissenes Werkstück wird zum Propeller.")
+
+### Lange Stange nicht gesichert
+
+**Der Fehler:** Du bohrst in eine lange Stange, ein Rohr oder ein Profil und spannst es nur kurz ein oder hältst das lange Ende mit der Hand.
+
+**Was passiert:** Der Bohrer verhakt sich, die Stange reißt sich los und schlägt mit voller Kraft im Kreis, genau in **Bauchhöhe**. Je länger die Stange, desto schneller und härter trifft ihr Ende.
+
+**Die Folge:** Das Stangenende kann den **Bauchraum aufschlitzen**. Solche Verletzungen der inneren Organe sind **tödlich**, wenn nicht sofort operiert wird. Deshalb werden lange Werkstücke zusätzlich gegen Mitdrehen gesichert, zum Beispiel mit einem Anschlag an der Säule, und du stellst dich nie in den Schwenkbereich.
+
+![Links: Eine lange Stange reißt sich an der Bohrmaschine los und schlägt in Bauchhöhe im Kreis auf eine Person zu. Rechts im roten Kreis: ein Oberkörper mit einer roten Schnittwunde quer über den Bauch](assets/bilder/sicherheit/folgen/bohr-stange.svg "Eine losgerissene Stange schlägt in Bauchhöhe.")
 
 ### Bohrfutterschlüssel steckt noch
 
@@ -572,6 +583,7 @@ Ordne jedem Fehler die Folge zu, die ihm droht.
 
 :::zuordnen Welche Folge droht?
 Werkstück an der Bohrmaschine mit der Hand gehalten => Tiefe Schnitte | Das Werkstück reißt sich los und dreht wie ein Propeller.
+Lange Stange nicht gesichert => Bauch aufgeschlitzt | Die Stange reißt sich los und schlägt in Bauchhöhe im Kreis.
 Bohrfutterschlüssel steckt noch => Geschoss ins Gesicht | Beim Einschalten wird der Schlüssel weggeschleudert.
 Finger am Schleifband => Bis auf den Knochen abgeschliffen | Das Band zieht die Fingerspitze in den Spalt.
 Flex ohne Schutzhaube => Bruchstücke im Gesicht | Zerplatzt die Scheibe, fliegen die Teile fast 300 km/h schnell.
