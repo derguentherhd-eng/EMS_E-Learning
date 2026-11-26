@@ -6,6 +6,10 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Prüfmodus in den Einstellungen (2026-11-26)
+
+- Neuer Schalter „Prüfmodus (für die Redaktion)“: „Weiter“ wird nicht mehr durch offene Übungen gesperrt, das Quiz der Sicherheitsunterweisung öffnet sofort und hat einen Link „Quiz überspringen“. Übersprungene Quizze zählen nicht als bestanden. Gespeichert als `reviewMode` in `js/core/store.js`, wirkt in `js/views/chapter.js` und `js/views/quiz-view.js`.
+
 ### Sicherheitsunterweisung: Negativbeispiele und Folgen (2026-11-26)
 
 - `05-arbeitssicherheit.md` auf Version 5 (Dauer 70 min): acht neue Seiten „Was passieren kann: …“ mit Fehler, Ablauf und Folge, jeweils mit Piktogramm (`assets/bilder/sicherheit/folgen/*.svg`, 16 Grafiken).

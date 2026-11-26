@@ -328,6 +328,10 @@ So läuft das Kapitel Arbeitssicherheit (jedes Kapitel mit dem Feld `freigegeben
 Feld `kapitel`) nur `05-arbeitssicherheit.md` eintragen – oder alle Kapitel für das Onboarding. Der
 Willkommenstext passt für beides.
 
+**Schnell durchsehen:** Unter *Einstellungen → Prüfmodus* lassen sich Übungen und die Quiz-Sperre
+abschalten, um Kapitel beim Prüfen schnell durchzuklicken. Danach wieder ausschalten – der Schalter
+gilt nur in diesem Browser.
+
 > Wird das Kapitel inhaltlich geändert, `version` erhöhen: Dann zählen die Anläufe für den
 > Nachweis neu, und alle müssen das Quiz der neuen Fassung bestehen.
 

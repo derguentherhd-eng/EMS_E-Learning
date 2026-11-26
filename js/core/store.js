@@ -69,6 +69,7 @@
       theme: "system",
       qualifying: null,
       name: "",
+      reviewMode: false,
     };
   }
 
@@ -106,6 +107,9 @@
     }
     if (typeof raw.name === "string") {
       state.name = raw.name;
+    }
+    if (typeof raw.reviewMode === "boolean") {
+      state.reviewMode = raw.reviewMode;
     }
     return state;
   }

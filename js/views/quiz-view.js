@@ -61,8 +61,10 @@
       };
     }
 
-    // Sicherheitskapitel: erst alle Seiten durcharbeiten, dann das Quiz.
-    if (isSafetyChapter(chapter)) {
+    const reviewMode = store.get().reviewMode;
+
+    // Sicherheitskapitel: erst alle Seiten durcharbeiten, dann das Quiz (außer im Prüfmodus).
+    if (isSafetyChapter(chapter) && !reviewMode) {
       const visited = store.get().visited[chapter.id] ?? [];
       const missing = chapter.pages.findIndex(
         (_page, pageIndex) => !visited.includes(pageIndex + 1),
@@ -153,8 +155,38 @@
     return {
       title: `Quiz · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
       chapterId: chapter.id,
-      node: container,
+      node: reviewMode
+        ? el(
+            "div",
+            { class: "stack" },
+            renderSkipNotice(course, index),
+            container,
+          )
+        : container,
     };
+  }
+
+  /**
+   * Prüfmodus: Link am Quiz vorbei zum nächsten Sektor. Das Quiz zählt dabei nicht als bestanden.
+   * @param {Object} course
+   * @param {number} index  Position des aktuellen Kapitels
+   * @returns {HTMLElement}
+   */
+  function renderSkipNotice(course, index) {
+    const nextChapter = course.chapters[index + 1];
+    return el(
+      "p",
+      { class: "notice", role: "note" },
+      "Prüfmodus ist an. ",
+      el(
+        "a",
+        { href: nextChapter ? chapterHash(nextChapter.id, 1) : "#/" },
+        nextChapter
+          ? "Quiz überspringen, weiter zum nächsten Sektor"
+          : "Quiz überspringen, zur Übersicht",
+      ),
+      " (zählt nicht als bestanden).",
+    );
   }
 
   /**

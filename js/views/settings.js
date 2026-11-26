@@ -4,6 +4,7 @@
  * – Darstellung: Wie System / Dunkel / Hell
  * – Fortschritt zurücksetzen (mit Bestätigungsdialog, <dialog>)
  * – Hinweis, wo die Daten liegen (nur in diesem Browser)
+ * – Prüfmodus für die Redaktion: Übungen und Quiz-Sperren aus (state.reviewMode)
  *
  * Wenn du hier etwas ändern willst …
  *   – Neue Einstellung: Feld in js/core/store.js (createEmptyState) ergänzen, hier ein Formularfeld.
@@ -65,6 +66,42 @@
       ),
     );
 
+    // ── Prüfmodus: zum schnellen Durchsehen der Kapitel (wirkt in chapter.js und quiz-view.js) ──
+    const reviewStatus = el("p", { class: "settings__status", role: "status" });
+    const reviewFieldset = el(
+      "fieldset",
+      { class: "choice-group" },
+      el("legend", {}, "Prüfmodus (für die Redaktion)"),
+      el(
+        "label",
+        { class: "choice" },
+        el("input", {
+          type: "checkbox",
+          checked: state.reviewMode,
+          onchange: (event) => {
+            const on = event.currentTarget.checked;
+            store.update((draft) => {
+              draft.reviewMode = on;
+            });
+            reviewStatus.textContent = on
+              ? "Prüfmodus ist an. Übungen und Quiz-Sperren sind ausgeschaltet."
+              : "Prüfmodus ist aus.";
+          },
+        }),
+        el(
+          "span",
+          {},
+          "Übungen und Quiz überspringen",
+          el(
+            "span",
+            { class: "choice__hint" },
+            " – „Weiter“ ist immer frei, das Quiz der Sicherheitsunterweisung öffnet sofort und lässt sich überspringen. Übersprungene Quizze zählen nicht als bestanden.",
+          ),
+        ),
+      ),
+      reviewStatus,
+    );
+
     // ── Zurücksetzen mit Bestätigung ──
     const dialog = el(
       "dialog",
@@ -110,6 +147,7 @@
         { class: "stack stack--loose" },
         el("h1", {}, "Einstellungen"),
         themeFieldset,
+        reviewFieldset,
         el(
           "section",
           { class: "stack", "aria-labelledby": "progress-title" },

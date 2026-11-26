@@ -58,6 +58,7 @@
       );
     }
 
+    const reviewMode = store.get().reviewMode;
     store.update((state) => {
       markVisited(state, chapter.id, pageNumber);
       state.last = route.path;
@@ -97,13 +98,17 @@
         statusBar(pageNumber, total),
         el("h1", { class: "view-title" }, page.title),
       ),
-      pageNumber === 1 ? renderFirstPageIntro(chapter) : null,
+      reviewMode ? reviewNotice() : null,
+      pageNumber === 1 ? renderFirstPageIntro(chapter, reviewMode) : null,
       pageNumber === 1 ? renderSafetyRecord({ course, chapter, store }) : null,
       renderElements(elements, context),
     );
 
     const pager = renderPager(chapter, pageNumber, total);
-    lockUntilSolved(article, pager);
+    // Prüfmodus (Einstellungen): „Weiter" nie sperren, damit die Redaktion schnell durchklicken kann.
+    if (!reviewMode) {
+      lockUntilSolved(article, pager);
+    }
 
     return {
       title: `${page.title} · ${chapter.meta.kurztitel ?? chapter.meta.titel}`,
@@ -168,8 +173,23 @@
     update();
   }
 
-  /** Freigabe-Hinweis, Lernziele und „Direkt zum Quiz" auf Seite 1. */
-  function renderFirstPageIntro(chapter) {
+  /** Hinweis oben auf jeder Seite, solange der Prüfmodus an ist. */
+  function reviewNotice() {
+    return el(
+      "p",
+      { class: "notice", role: "note" },
+      "Prüfmodus ist an: Übungen und Quiz-Sperren sind ausgeschaltet. Ausschalten unter ",
+      el("a", { href: "#/einstellungen" }, "Einstellungen"),
+      ".",
+    );
+  }
+
+  /**
+   * Freigabe-Hinweis, Lernziele und „Direkt zum Quiz" auf Seite 1.
+   * @param {Object} chapter
+   * @param {boolean} reviewMode  Prüfmodus an: „Direkt zum Quiz" auch im Sicherheitskapitel
+   */
+  function renderFirstPageIntro(chapter, reviewMode) {
     const goals = chapter.meta.lernziele ?? [];
     return el(
       "div",
@@ -192,7 +212,7 @@
           )
         : null,
       // Sicherheitskapitel: kein Abkürzen direkt ins Quiz – erst alle Seiten durcharbeiten.
-      chapter.quiz && !isSafetyChapter(chapter)
+      chapter.quiz && (!isSafetyChapter(chapter) || reviewMode)
         ? el(
             "p",
             { class: "chapter__skip" },
