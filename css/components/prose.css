@@ -52,6 +52,32 @@
     max-block-size: none;
   }
 
+  /* Text-Bild-Gruppe: letzter Textabschnitt links, Grafik rechts. Erzeugt von renderElements()
+   * in js/core/render.js, wenn auf Text genau ein Bild folgt. Unter 64rem untereinander. */
+  .media-split {
+    display: grid;
+    gap: var(--space-s) var(--space-l);
+    align-items: start;
+  }
+
+  .media-split__text > :first-child {
+    margin-block-start: 0;
+  }
+
+  .media-split > .figure {
+    margin: 0;
+  }
+
+  @media (width >= 64rem) {
+    .media-split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .media-split img {
+      max-block-size: 60vh;
+    }
+  }
+
   .inline-image {
     display: inline-block;
     block-size: 1.4em;

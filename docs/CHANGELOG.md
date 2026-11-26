@@ -3,7 +3,13 @@
 Alle nennenswerten Änderungen am Kurs und am Code. Neueste oben.
 Format: Datum · Was · Warum (falls nicht offensichtlich).
 
+
 ## Unveröffentlicht
+
+### Text links, Grafik rechts; neues Teamfoto (2026-11-26)
+
+- Folgt auf einen Text genau ein Bild, steht der letzte Textabschnitt (Überschrift + Absätze) ab 64rem Fensterbreite links und das Bild rechts. Darunter wie bisher untereinander. Umsetzung: `renderElements()` / `renderMediaSplit()` in `js/core/render.js`, Stil `.media-split` in `css/components/prose.css`.
+- Neues Teamfoto auf „Willkommen im Team“ (Gruppenfoto vor der Werkstatt, unbeschnitten, 2000 px breit).
 
 ### Phase 1 – Gerüst (2026-10-12)
 - Verzeichnisstruktur, `index.html`, CSS-Ebenen mit Design-Token, Schrift Lato lokal.

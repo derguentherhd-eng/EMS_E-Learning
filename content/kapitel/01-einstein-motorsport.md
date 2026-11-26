@@ -18,7 +18,7 @@ Wir sind Einstein Motorsport: 68 aktive Mitglieder, Studierende der THU, der Uni
 
 Gemeinsam konstruieren und bauen wir elektrische, autonome Rennwagen.
 
-![Das Team von Einstein Motorsport in gelben Teamshirts mit dem Rennwagen auf einer Rennstrecke](assets/bilder/onboarding/team.webp "Das Team von Einstein Motorsport")
+![Gruppenfoto: Das Team von Einstein Motorsport in gelben Poloshirts vor der Werkstatt, vorne der Rennwagen mit der Startnummer 444](assets/bilder/onboarding/team.webp "Das Team von Einstein Motorsport")
 
 ## Was ist Formula Student?
 

@@ -363,6 +363,7 @@
     let row = null;
     elements.forEach((element, index) => {
       const isImage = element.type === "image" && Boolean(element.src);
+      const previous = elements[index - 1];
       const next = elements[index + 1];
       const nextIsImage = next?.type === "image" && Boolean(next.src);
       const node = renderElement(element, context);
@@ -377,9 +378,58 @@
         }
         return;
       }
+      // Einzelnes Bild direkt nach Text: letzter Abschnitt des Textes links, Bild rechts.
+      const prose = nodes[nodes.length - 1];
+      if (
+        isImage &&
+        previous?.type === "text" &&
+        prose?.classList?.contains("prose")
+      ) {
+        const split = renderMediaSplit(prose, node);
+        if (split) {
+          if (!prose.hasChildNodes()) {
+            nodes.pop();
+          }
+          nodes.push(split);
+          return;
+        }
+      }
       nodes.push(node);
     });
     return nodes;
+  }
+
+  /** Elemente, die in der Textspalte neben einem Bild stehen dürfen. */
+  const SPLIT_TEXT_TAGS = new Set(["P", "UL", "OL"]);
+  const SPLIT_HEADING_TAGS = new Set(["H2", "H3", "H4"]);
+
+  /**
+   * Nimmt den letzten Abschnitt eines Textes (Überschrift + Absätze/Listen am Ende) heraus und
+   * stellt ihn neben das Bild: Text links, Bild rechts. Auf schmalen Bildschirmen untereinander
+   * (.media-split in css/components/prose.css).
+   * @param {HTMLElement} prose   gerenderter Text (div.prose); wird verändert
+   * @param {HTMLElement} figure  gerendertes Bild
+   * @returns {HTMLElement|null}  null, wenn der Text nicht mit Absätzen endet (z. B. Tabelle)
+   */
+  function renderMediaSplit(prose, figure) {
+    const moved = [];
+    let node = prose.lastElementChild;
+    while (node && SPLIT_TEXT_TAGS.has(node.tagName)) {
+      moved.unshift(node);
+      node = node.previousElementSibling;
+    }
+    if (moved.length === 0) {
+      return null;
+    }
+    if (node && SPLIT_HEADING_TAGS.has(node.tagName)) {
+      moved.unshift(node);
+    }
+    return el(
+      "div",
+      { class: "media-split" },
+      el("div", { class: "prose media-split__text" }, moved),
+      figure,
+    );
   }
 
   /** Neutraler Kasten für Abschnitte, die nicht angezeigt werden können. */
