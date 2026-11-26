@@ -6,6 +6,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Sicherheitsunterweisung: Negativbeispiele und Folgen (2026-11-26)
+
+- `05-arbeitssicherheit.md` auf Version 5 (Dauer 70 min): acht neue Seiten „Was passieren kann: …“ mit Fehler, Ablauf und Folge, jeweils mit Piktogramm (`assets/bilder/sicherheit/folgen/*.svg`, 16 Grafiken).
+- Carbon- und Aramidstaub fachlich geschärft: lungengängige WHO-Faserbruchstücke, Biopersistenz, Krebsverdacht (DGUV Kategorie 2), Latenzzeit wie bei Asbest, Aramid-Fibrose im Tierversuch. „Hochgiftig“ ersetzt durch die belegbare Aussage „steht im Verdacht, Krebs auszulösen“.
+- Drei neue Zuordnungsübungen, fünf neue Quizfragen. Durch die neue Version zählen die Anläufe für den Nachweis neu.
+
 ### Text links, Grafik rechts; neues Teamfoto (2026-11-26)
 
 - Folgt auf einen Text genau ein Bild, steht der letzte Textabschnitt (Überschrift + Absätze) ab 64rem Fensterbreite links und das Bild rechts. Darunter wie bisher untereinander. Umsetzung: `renderElements()` / `renderMediaSplit()` in `js/core/render.js`, Stil `.media-split` in `css/components/prose.css`.

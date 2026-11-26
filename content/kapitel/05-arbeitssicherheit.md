@@ -1,15 +1,16 @@
 ---
 titel: Arbeitssicherheit
 kurztitel: Sicherheit
-dauer: 50
-version: 4
+dauer: 70
+version: 5
 freigegeben: nein
 lernziele:
   - Du erkennst Sicherheitszeichen und weißt, welche Schutzausrüstung du wann brauchst.
   - Du weißt, dass am 600-Volt-Hochvoltsystem nur Team HV mit Schulung arbeitet, und verstehst das TSAL.
   - Du fasst Low-Voltage-Elektrik nur nach Einweisung durch das Electrics-Team an.
   - Du kennst die Regeln für Ständerbohrmaschine, Bandschleifer und Flex und weißt, warum an rotierenden Werkzeugen keine Handschuhe erlaubt sind.
-  - Du schützt dich vor Carbonstaub und Harzen.
+  - Du weißt, welche schweren Verletzungen und Krankheiten drohen, wenn eine Regel gebrochen wird.
+  - Du schützt dich vor Carbon- und Aramidstaub und Harzen und kennst den Krebsverdacht bei Faserstaub.
   - Du bereitest deinen Arbeitsplatz vor, räumst ihn danach auf und weißt, was im Notfall zu tun ist.
 ---
 
@@ -138,6 +139,53 @@ Du hast gerade Harz angemischt und trägst noch deine Nitrilhandschuhe. Jetzt wi
 - [ ] Nur einen Handschuh ausziehen und mit der anderen Hand das Teil halten > Auch ein Handschuh reicht, um erfasst zu werden. Und Werkstücke werden an der Bohrmaschine eingespannt, nicht mit der Hand gehalten.
 :::
 
+## Was passieren kann: Handschuhe, Schals und Haare
+
+Die Regeln auf der letzten Seite klingen streng. Hier siehst du, warum. Jedes Beispiel ist so schon in Werkstätten passiert. Eine drehende Spindel hält nicht an, weil du erschrickst: Sie wickelt in einer Sekunde mehrere Umdrehungen auf, und ihre Kraft ist viel größer als deine.
+
+### Bohren mit Handschuhen
+
+**Der Fehler:** Du lässt die Handschuhe an, weil das Teil scharfkantig ist.
+
+**Was passiert:** Der Bohrer erfasst den Stoff und wickelt ihn auf. Der Handschuh zieht sich um deine Finger zusammen, die Maschine zieht weiter. Loslassen kannst du nicht mehr.
+
+**Die Folge:** Finger werden aus der Hand gerissen, oft **samt Sehne**, die bis aus dem Unterarm herausgezogen wird. Solche Ausrissverletzungen lassen sich meist nicht wieder annähen. Dazu kommen Brüche und abgerissene Haut.
+
+![Links: Ein Handschuh wird von der drehenden Bohrmaschine aufgewickelt und zieht den Arm hinein. Rechts im roten Kreis: eine Hand, der ein Finger mitsamt Sehne ausgerissen wurde](assets/bilder/sicherheit/folgen/handschuh-bohrer.svg "Ein Handschuh an der Bohrmaschine kann dich einen Finger kosten.")
+
+### Schal, Kordel oder Kette
+
+**Der Fehler:** Du trägst einen Schal, einen Hoodie mit Kordeln oder eine Halskette an der Maschine.
+
+**Was passiert:** Das lose Ende gerät an die Spindel und wird aufgewickelt. Es zieht deinen Hals zur Maschine und schnürt ihn zu.
+
+**Die Folge:** **Strangulation.** Bewusstlosigkeit nach Sekunden, Genickverletzungen, **Tod**. Niemand neben dir ist schnell genug, um das zu stoppen.
+
+![Links: Ein Schal wird von der drehenden Bohrmaschine aufgewickelt und zieht die Person am Hals zur Maschine. Rechts im roten Kreis: ein Totenkopf](assets/bilder/sicherheit/folgen/schal-maschine.svg "Ein Schal an der Maschine ist lebensgefährlich.")
+
+### Offene lange Haare
+
+**Der Fehler:** Du beugst dich mit offenen Haaren über die laufende Maschine.
+
+**Was passiert:** Einzelne Strähnen geraten an Spindel oder Bohrfutter und werden in Sekundenbruchteilen aufgewickelt, mit dem Kopf hinterher.
+
+**Die Folge:** Die **Kopfhaut wird abgerissen** (Skalpierung). Das bedeutet viele Operationen, oft bleiben kahle Stellen und Narben für immer.
+
+![Links: Lange Haare werden von der drehenden Bohrmaschine erfasst. Rechts im roten Kreis: ein Kopf, dessen Kopfhaut oben rot markiert ist](assets/bilder/sicherheit/folgen/haare-maschine.svg "Haare werden in Sekundenbruchteilen aufgewickelt.")
+
+### Ringe und Kunstfaser
+
+**Ein Ring** kann an einer Kante oder am Werkzeug hängen bleiben. Dann reißt er Haut und Gewebe vom Finger ab, bis auf den Knochen. **Kleidung aus Kunstfaser** fängt durch Funken Feuer oder schmilzt auf der Haut fest. Solche Verbrennungen sind tief und heilen schlecht.
+
+Ordne jedem Fehler die Folge zu, die ihm droht.
+
+:::zuordnen Welche Folge droht?
+Bohren mit Handschuhen => Finger samt Sehne ausgerissen | Der Handschuh wird aufgewickelt und zieht die Hand mit.
+Schal an der Maschine => Strangulation | Das Ende wird aufgewickelt und schnürt den Hals zu.
+Offene lange Haare => Kopfhaut abgerissen | Strähnen werden in Sekundenbruchteilen aufgewickelt.
+Kunstfaser beim Flexen => Verbrennungen | Funken setzen Kunstfaser in Brand oder schmelzen sie auf die Haut.
+:::
+
 ## Hochvolt: 600 Volt – Finger weg
 
 Unser Rennwagen fährt elektrisch. Sein [[Hochvolt|Hochvoltsystem]] arbeitet mit **600 Volt**. Zum Vergleich: Eine Steckdose hat 230 Volt. Schon ein einziger Fehler kann **tödlich** sein – und man sieht einem Auto nicht an, ob es unter Spannung steht.
@@ -169,6 +217,34 @@ Du hilfst beim Aufräumen neben dem Auto. Da fällt dir auf, dass ein orangefarb
 - [ ] Ein Foto machen und später im Chat fragen > Melden ist gut, aber ein loser Hochvolt-Stecker ist dringend. Team HV muss sofort Bescheid wissen.
 - [x] Nichts anfassen, Abstand halten und sofort Team HV Bescheid geben > Richtig: Du meldest den Fund sofort und überlässt den Rest den geschulten Leuten.
 :::
+
+## Was passieren kann: 600 Volt
+
+Strom sieht man nicht, hört man nicht und riecht man nicht. Bei 600 Volt gibt es keinen „kleinen Schlag" zur Warnung.
+
+### Strom durch den Körper
+
+**Der Fehler:** Du fasst ein orangefarbenes Kabel oder einen Stecker an, „weil das Auto ja aus ist".
+
+**Was passiert:** Der Strom fließt durch deinen Körper, zum Beispiel von der Hand zu den Füßen, quer durch die Brust.
+
+**Die Folge:** Das Herz gerät aus dem Takt (**Herzkammerflimmern**). Das ist ein Herzstillstand: Ohne Wiederbelebung bist du nach wenigen Minuten tot. Entlang des Stromwegs verbrennt Gewebe **innen**, auch wenn man außen kaum etwas sieht. Herzrhythmusstörungen können noch **Stunden später** auftreten. Deshalb muss nach jedem Stromunfall ein Arzt untersuchen.
+
+![Links: Eine Person fasst ein orangefarbenes Hochvolt-Kabel an, ein Blitz zeigt den Stromweg durch den Körper zum Boden. Rechts im roten Kreis: ein Herz mit unregelmäßiger Herzlinie](assets/bilder/sicherheit/folgen/hv-koerper.svg "Strom durch die Brust bringt das Herz aus dem Takt.")
+
+### Lichtbogen
+
+**Der Fehler:** Ein Schraubenschlüssel oder ein anderes Metallteil berührt zwei Hochvolt-Pole gleichzeitig, zum Beispiel am Akku.
+
+**Was passiert:** Es entsteht ein **Lichtbogen**: ein Blitz mit mehreren tausend Grad. Metall verdampft und spritzt geschmolzen umher.
+
+**Die Folge:** **Schwere Verbrennungen** an Händen und Gesicht, auch ohne dass Strom durch dich fließt. Das grelle Licht kann die Augen schädigen.
+
+![Links: Ein Schraubenschlüssel liegt über Plus- und Minuspol eines Akkus, an der Berührungsstelle blitzt ein Lichtbogen. Rechts im roten Kreis: eine Flamme](assets/bilder/sicherheit/folgen/hv-lichtbogen.svg "Ein Lichtbogen verbrennt dich, ohne dass du das Kabel berührst.")
+
+### Das Auto fährt los
+
+Steht das Auto unter Spannung, kann es ohne Vorwarnung anfahren, in weniger als 2,5 Sekunden auf 100 km/h. Wer davor oder dahinter steht, wird **überfahren oder eingeklemmt**. Deshalb gilt: nie vor, hinter oder neben einem Auto unter Spannung.
 
 ## Das TSAL: Rot heißt Finger weg
 
@@ -235,6 +311,30 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 - [x] Nicht weiter anfassen, Abstand halten und sofort das Electrics-Team informieren > Richtig: Ein aufgeblähter Akku ist beschädigt. Das Electrics-Team bringt ihn in einen sicheren Behälter und lässt ihn richtig entsorgen.
 :::
 
+## Was passieren kann: Kurzschluss und Akkubrand
+
+24 Volt spürst du kaum auf der Haut. Gefährlich ist hier nicht die Spannung, sondern der **Strom**, den ein Akku bei einem Kurzschluss liefert.
+
+### Ring oder Uhr am Akku
+
+**Der Fehler:** Du arbeitest mit Ring, Uhr oder Armband an einem Akku, und das Metall berührt beide Pole.
+
+**Was passiert:** Durch das Metall fließt ein riesiger Strom. Der Ring wird in **wenigen Sekunden glühend heiß**, und du bekommst ihn nicht schnell genug vom Finger.
+
+**Die Folge:** **Verbrennungen bis auf den Knochen**, rund um den Finger. Deshalb gilt: Schmuck ab, bevor du an Elektrik arbeitest.
+
+![Links: Ein Ring an einer Hand liegt über beiden Polen eines Akkus und glüht. Rechts im roten Kreis: ein Finger mit glühendem Ring und roter Brandstelle](assets/bilder/sicherheit/folgen/lv-ring.svg "Ein Ring, der beide Pole berührt, wird in Sekunden glühend heiß.")
+
+### Ein beschädigter Akku
+
+**Der Fehler:** Ein aufgeblähter oder heruntergefallener Lithium-Akku wird weiter benutzt oder sogar geladen.
+
+**Was passiert:** Der Akku gerät ins [[Thermisches Durchgehen|thermische Durchgehen]]: Er heizt sich selbst immer weiter auf, bis er brennt. Wasser löscht ihn kaum, er kann sich auch wieder entzünden.
+
+**Die Folge:** **Brand** in der Werkstatt und **giftige Gase**, darunter Fluorwasserstoff, der Atemwege und Lunge verätzt.
+
+![Links: Ein aufgeblähter Akku, aus dem Flammen und Rauch aufsteigen. Rechts im roten Kreis: eine Rauchwolke mit Totenkopf](assets/bilder/sicherheit/folgen/akku-brand.svg "Ein brennender Lithium-Akku setzt giftige Gase frei.")
+
 ## Regeln in der Werkstatt
 
 Für alle Maschinen in der Werkstatt gelten ein paar Grundregeln – auch für erfahrene Mitglieder:
@@ -296,6 +396,30 @@ Du willst an der Ständerbohrmaschine ein Loch in ein kleines Aluteil bohren. Da
 - [ ] Das Teil mit der Hand festhalten, geht ja schnell > Das Werkstück kann sich verkanten und mitdrehen. Bei einem kleinen Teil ist deine Hand dann direkt am Bohrer. Immer einspannen.
 :::
 
+## Was passieren kann: an der Ständerbohrmaschine
+
+Die Ständerbohrmaschine verzeiht keine Abkürzung. Zwei Fehler, die schnell passieren, wenn man „nur kurz" ein Loch bohren will:
+
+### Werkstück mit der Hand gehalten
+
+**Der Fehler:** Du hältst ein kleines Blech mit der Hand fest, statt es einzuspannen.
+
+**Was passiert:** Der Bohrer verhakt sich beim Durchbrechen. Das Blech reißt sich los und dreht mit voller Kraft mit, wie ein **Propeller mit scharfen Kanten**.
+
+**Die Folge:** **Tiefe Schnitte** bis auf Sehnen und Knochen, **gebrochene Finger**. Ein großes Teil kann dich auch am Körper treffen.
+
+![Links: Ein Blech dreht sich unter dem Bohrer wie ein Propeller, daneben eine Hand. Rechts im roten Kreis: eine Hand mit roten Schnittwunden](assets/bilder/sicherheit/folgen/bohr-werkstueck.svg "Ein losgerissenes Werkstück wird zum Propeller.")
+
+### Bohrfutterschlüssel steckt noch
+
+**Der Fehler:** Du spannst den Bohrer, lässt den Schlüssel im Bohrfutter stecken und schaltest ein.
+
+**Was passiert:** Der Schlüssel wird mit der Drehung weggeschleudert, quer durch den Raum, meist in Kopfhöhe.
+
+**Die Folge:** Ein **Geschoss ins Gesicht**: Platzwunden, ausgeschlagene Zähne, im schlimmsten Fall ein **zerstörtes Auge**.
+
+![Links: Ein Bohrfutterschlüssel fliegt aus der eingeschalteten Bohrmaschine auf den Kopf einer Person zu. Rechts im roten Kreis: ein verletztes Auge](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Ein vergessener Schlüssel wird zum Geschoss.")
+
 ## Bandschleifer sicher benutzen
 
 Am Bandschleifer läuft ein Schleifband schnell über zwei Rollen. Damit entgratest du Kanten oder schleifst kleine Teile in Form. Die Gefahren: Das Band kann **Haut in Sekunden abschleifen**, Funken und Schleifstaub fliegen **ins Gesicht**, und das Werkstück wird **heiß**.
@@ -337,6 +461,26 @@ Ausschalten und warten, bis das Band steht
 Arbeitsplatz von Schleifstaub reinigen
 > Erst schützen und prüfen, dann schleifen – und am Ende abwarten, bis alles steht, bevor du aufräumst.
 :::
+
+## Was passieren kann: am Bandschleifer
+
+Das Schleifband ist dafür gemacht, Metall abzutragen. Haut ist viel weicher.
+
+### Finger am Band
+
+**Der Fehler:** Du schleifst ein kleines Teil freihändig, die Auflage steht zu weit weg.
+
+**Was passiert:** Das Band zieht das Teil und deine Fingerspitze in den Spalt zwischen Band und Auflage.
+
+**Die Folge:** Haut, Fingernagel und Gewebe sind in **Sekunden bis auf den Knochen abgeschliffen**. Solche Wunden heilen langsam und hinterlassen oft einen verkürzten oder tauben Finger.
+
+![Links: Ein Finger kommt dem laufenden Schleifband am Spalt zur Auflage zu nah. Rechts im roten Kreis: ein Finger, dessen Spitze rot abgeschliffen ist](assets/bilder/sicherheit/folgen/bandschleifer-spalt.svg "Das Band schleift Haut schneller ab als Metall.")
+
+### Weitere Fehler am Bandschleifer
+
+- **Aluminium und Stahl auf demselben Band:** Feiner Aluminiumstaub und Stahlfunken können heftig miteinander reagieren und **brennen**. Der Staub im Gerät kann sich entzünden.
+- **Werkstück direkt nach dem Schleifen anfassen:** Metall wird beim Schleifen schnell über 100 °C heiß. Die Folge sind **Brandblasen**.
+- **Mit eingerissenem Band schleifen:** Reißt das Band, peitscht es herum und kann dich an Hand oder Gesicht treffen.
 
 ## Flex: Schutz, Scheibe und Brandschutz
 
@@ -392,11 +536,53 @@ Es regnet. Du sollst ein Stück Stahlrohr kürzen und denkst dir: Das geht doch 
 - [x] Draußen vor der Werkstatt flexen: Schutzausrüstung an, Schutzhaube prüfen, Rohr einspannen, Feuerlöscher bereitstellen > Richtig: Draußen und mit allen Schutzmaßnahmen. Ist es zu nass, wartest du lieber oder fragst, wo du geschützt vor der Werkstatt arbeiten kannst.
 :::
 
+## Was passieren kann: an der Flex
+
+Die Flex gehört zu den gefährlichsten Werkzeugen in der Werkstatt. Der Rand einer Trennscheibe ist mit bis zu **80 Metern pro Sekunde** unterwegs, das sind fast **300 km/h**.
+
+### Die Scheibe zerplatzt
+
+**Der Fehler:** Du flexst ohne Schutzhaube, mit einer abgelaufenen oder beschädigten Scheibe, und stehst in der Ebene der Scheibe.
+
+**Was passiert:** Die Scheibe zerplatzt. Die Bruchstücke fliegen mit fast 300 km/h genau dorthin, wo du stehst.
+
+**Die Folge:** **Verlorene Augen**, tiefe Schnitte im Gesicht und am **Hals**. Ein Splitter an der Halsschlagader ist **tödlich**.
+
+![Links: Eine Flex ohne Schutzhaube, die Scheibe zerplatzt, Bruchstücke fliegen auf den Kopf einer Person zu. Rechts im roten Kreis: ein verletztes Auge und rote Schnitte](assets/bilder/sicherheit/folgen/flex-scheibe.svg "Bruchstücke einer Trennscheibe fliegen fast 300 km/h schnell.")
+
+### Die Flex schlägt zurück
+
+**Der Fehler:** Du hältst die Flex mit einer Hand, und die Scheibe verkantet im Schnitt.
+
+**Was passiert:** Die Flex springt schlagartig aus dem Schnitt **auf dich zu** (Rückschlag). Mit einer Hand kannst du sie nicht halten.
+
+**Die Folge:** Die laufende Scheibe schneidet in **Oberschenkel, Hand oder Gesicht**. Am Oberschenkel liegt eine große Schlagader: Dort verblutet man in wenigen Minuten.
+
+### Funken in der Werkstatt
+
+**Der Fehler:** Du flexst drinnen, „nur kurz", und auf der Nachbarbank liegen Harzlappen.
+
+**Was passiert:** Die Funken fliegen mehrere Meter weit, setzen sich in die Lappen und glimmen dort. Oft brennt es erst, wenn alle schon gegangen sind.
+
+**Die Folge:** **Werkstattbrand**: das Auto, die Werkzeuge und die Arbeit einer ganzen Saison sind verloren, und wer drinnen ist, ist in Lebensgefahr.
+
+![Links: In der Werkstatt fliegen Funken einer Flex auf einen Haufen Lappen, der zu brennen beginnt. Rechts im roten Kreis: ein brennendes Haus](assets/bilder/sicherheit/folgen/flex-funken.svg "Funken in der Werkstatt können die Arbeit einer ganzen Saison vernichten.")
+
+Ordne jedem Fehler die Folge zu, die ihm droht.
+
+:::zuordnen Welche Folge droht?
+Werkstück an der Bohrmaschine mit der Hand gehalten => Tiefe Schnitte | Das Werkstück reißt sich los und dreht wie ein Propeller.
+Bohrfutterschlüssel steckt noch => Geschoss ins Gesicht | Beim Einschalten wird der Schlüssel weggeschleudert.
+Finger am Schleifband => Bis auf den Knochen abgeschliffen | Das Band zieht die Fingerspitze in den Spalt.
+Flex ohne Schutzhaube => Bruchstücke im Gesicht | Zerplatzt die Scheibe, fliegen die Teile fast 300 km/h schnell.
+Flexen in der Werkstatt => Werkstattbrand | Funken entzünden Lappen und Harzreste.
+:::
+
 ## Carbonstaub: Ganzkörperanzug und Atemschutz
 
 Unser Auto besteht zu großen Teilen aus [[Faserverbund]]: Carbon (Kohlefaser) und Aramid. Ein fertiges Bauteil ist harmlos. Gefährlich wird es, wenn du es **schleifst, bohrst, sägst oder fräst**: Dabei entsteht feiner Staub.
 
-**Carbon- und Aramidstäube sind hochgiftig und können Krebs auslösen.** Die Fasern sind so fein, dass sie tief in die Lunge gelangen. Sie reizen außerdem Haut und Augen und jucken stark.
+**Carbon- und Aramidstäube stehen im Verdacht, Krebs auszulösen.** Beim Bearbeiten splittern die Fasern in winzige Bruchstücke, die bis tief in die Lunge gelangen und dort bleiben. Sie reizen außerdem Haut, Augen und Atemwege und jucken stark. Was das genau bedeutet, liest du nach dieser Seite.
 
 :::achtung Carbon und Aramid nur draußen bearbeiten
 Schleifen, Bohren und Sägen von Carbon und Aramid passiert **draußen vor der Werkstatt – niemals in der Werkstatt.** Einzige Ausnahme ist die Fräse: Wird Carbon dort gefräst, dann nur mit Atemschutz und einem Industriestaubsauger, der für Carbonstaub geeignet ist. Und immer gilt: **Atemschutz-Vollmaske und Ganzkörperanzug.**
@@ -417,11 +603,52 @@ Schleifen, Bohren und Sägen von Carbon und Aramid passiert **draußen vor der W
 Jede Karte hat eine Frage. Überleg kurz und dreh sie dann um.
 
 :::karten Carbonstaub – weißt du es noch?
-Warum ist Carbonstaub so gefährlich? || Er ist hochgiftig und kann Krebs auslösen. Die feinen Fasern gelangen tief in die Lunge.
+Warum ist Carbonstaub so gefährlich? || Die Faserbruchstücke gelangen bis in die Lungenbläschen, bleiben dort und stehen im Verdacht, Krebs auszulösen. Dazu reizen sie Haut, Augen und Atemwege.
 Welche zwei Dinge trägst du immer bei Carbonstaub? || Eine Atemschutz-Vollmaske, die das ganze Gesicht abdeckt, und einen Ganzkörperanzug. Eine Schutzbrille allein reicht nicht.
 Wo wird Carbon geschliffen, gebohrt oder gesägt? || Draußen vor der Werkstatt – nie drinnen. Ausnahme: die Fräse, dann mit Atemschutz und geeignetem Industriestaubsauger.
 Wie entfernst du Carbonstaub? || Mit einem geeigneten Industriesauger – nie mit Druckluft oder Besen.
 Was machst du mit dem Anzug nach der Arbeit? || Vorsichtig von innen nach außen ausziehen und wegwerfen. Erst danach die Maske abnehmen.
+:::
+
+## Was Carbon- und Aramidstaub im Körper anrichten
+
+Ein Schnitt in den Finger tut sofort weh. Faserstaub tut das nicht. Du atmest ihn ein, merkst kaum etwas, und die Folgen können erst **Jahrzehnte später** kommen.
+
+### Winzige Nadeln in der Lunge
+
+Beim Schleifen, Bohren und Sägen brechen die Fasern. Dabei entstehen Bruchstücke, die so klein sind, dass sie bis in die **Lungenbläschen** gelangen, den tiefsten Teil der Lunge. Ein Teil davon hat genau die Form, die man von **Asbest** kennt: länger als 5 Mikrometer, dünner als 3 Mikrometer, also lang, dünn und spitz. Fachleute nennen sie **WHO-Fasern**. Zum Vergleich: Ein Haar ist etwa 20-mal so dick.
+
+Carbon baut der Körper **kaum ab**. Was in der Lunge ankommt, bleibt dort womöglich für immer.
+
+![Links: Eine Person ohne Atemschutz steht in einer Staubwolke beim Schleifen eines Carbonteils. Rechts im roten Kreis: eine Lunge voller schwarzer Faserpunkte](assets/bilder/sicherheit/folgen/carbon-lunge.svg "Faserbruchstücke gelangen bis in die Lungenbläschen.")
+
+### Der Krebsverdacht
+
+- Solche Faserbruchstücke aus Carbon stehen **im Verdacht, Krebs zu erzeugen**. Die Deutsche Gesetzliche Unfallversicherung (DGUV) ordnet sie in die **Kategorie 2** ein: Verdacht auf krebserzeugende Wirkung.
+- Im Labor lösen die Bruchstücke in Lungenzellen **Entzündungen, Zelltod und Schäden am Erbgut** aus.
+- Bei Asbest haben genau solche Fasern **Lungenkrebs** und **Mesotheliom** ausgelöst, einen Krebs des Rippenfells. Beide Krankheiten kamen **20 bis 40 Jahre** nach dem Einatmen und waren dann meist nicht mehr heilbar.
+- **Aramid** zerfasert beim Bearbeiten in feinste Fäserchen, die ebenfalls lungengängig sind. In Langzeitversuchen an Ratten vernarbte das Lungengewebe (**Fibrose**). Ob Aramidstaub Krebs auslöst, ist nicht geklärt.
+
+**Ehrlich gesagt:** Ob Carbon- und Aramidstaub beim Menschen Krebs auslösen, ist noch nicht abschließend erforscht. Genau das ist das Problem. Bei Asbest hat man es jahrzehntelang auch nicht gewusst, und noch heute sterben daran in Deutschland jedes Jahr weit über tausend Menschen. Darauf willst du es nicht ankommen lassen. Deshalb behandeln wir Faserstaub so, als wäre er sicher krebserzeugend.
+
+### Was sonst noch passiert
+
+- **Haut:** Die Faserstückchen stechen in die Haut. Die Folge ist starker **Juckreiz**, Rötungen und Hautentzündungen. Harzreste im Staub können **allergische Ekzeme** auslösen.
+- **Augen und Atemwege:** Brennen, Tränen, Husten, gereizte Bronchien.
+- **Staub reist mit:** Ohne Anzug trägst du den Staub an Kleidung und Haaren nach Hause, zu deiner Familie, in dein Bett.
+- **Staub leitet Strom:** Carbonstaub in Elektronik verursacht **Kurzschlüsse**, auch im Auto.
+- **Staub brennt:** Aufgewirbelter Carbonstaub ist brennbar und kann sogar explodieren.
+
+![Links: Eine Person ohne Schutzanzug ist mit Staub übersät, ein Pfeil zeigt zu einem Haus, in dem ebenfalls Staub liegt. Rechts im roten Kreis: eine Hand mit roten, juckenden Hautstellen](assets/bilder/sicherheit/folgen/carbon-zuhause.svg "Ohne Anzug trägst du den Staub bis nach Hause.")
+
+Was stimmt, was nicht? Ordne jede Aussage zu.
+
+:::zuordnen Stimmt das?
+Faserbruchstücke aus Carbon gelangen bis in die Lungenbläschen. => Stimmt | Sie sind so klein, dass sie bis in den tiefsten Teil der Lunge kommen.
+Carbon wird in der Lunge schnell abgebaut. => Stimmt nicht | Carbon baut der Körper kaum ab. Was in der Lunge ankommt, bleibt womöglich für immer.
+Krebs durch Faserstaub zeigt sich oft erst nach Jahrzehnten. => Stimmt | Bei Asbest kamen die Krankheiten 20 bis 40 Jahre nach dem Einatmen.
+Eine Schutzbrille schützt ausreichend vor Carbonstaub. => Stimmt nicht | Du brauchst eine Atemschutz-Vollmaske und einen Ganzkörperanzug.
+Weil der Krebsverdacht nicht bewiesen ist, reicht weniger Schutz. => Stimmt nicht | Gerade weil die Langzeitfolgen unklar sind, gilt voller Schutz.
 :::
 
 ## Harze und andere Gefahrstoffe
@@ -466,6 +693,40 @@ Du willst Harz anmischen. Die Nitrilhandschuhe sind leer, aber im Regal liegen n
 - [ ] Latexhandschuhe nehmen, die sind ja auch dünn und dicht > Latex schützt nicht zuverlässig gegen Harz. Und Latex kann selbst Allergien auslösen.
 - [x] Nicht anfangen, sondern Bescheid geben und auf neue Nitrilhandschuhe warten > Richtig: Ohne die richtigen Handschuhe wird kein Harz angefasst. Lieber eine Stunde warten als ein Leben lang allergisch sein.
 :::
+
+## Was passieren kann: Harz und Gefahrstoffe
+
+Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst.
+
+### Harz auf der Haut
+
+**Der Fehler:** Du fasst Harz ohne Nitrilhandschuhe an oder wischst es mit Lösungsmittel ab.
+
+**Was passiert:** Dein Immunsystem lernt das Harz als Feind kennen (Sensibilisierung). Das merkst du beim ersten Mal oft gar nicht.
+
+**Die Folge:** Eine **Allergie, die ein Leben lang bleibt**: rote, nässende, juckende Haut, schon bei kleinsten Mengen oder sogar durch Dämpfe in der Luft. Wer einmal allergisch ist, darf oft **nie wieder mit Harz arbeiten**, auch nicht später im Beruf.
+
+![Links: Eine Hand ohne Handschuh mit Harztropfen neben einem Becher Harz. Rechts im roten Kreis: eine Hand mit roten Ekzemstellen](assets/bilder/sicherheit/folgen/harz-haut.svg "Eine Harzallergie bleibt ein Leben lang.")
+
+### Zu viel Harz auf einmal
+
+**Der Fehler:** Du mischst einen großen Becher Harz an, damit es für alles reicht, und lässt ihn stehen.
+
+**Was passiert:** Harz und Härter erzeugen Wärme, und in einem großen Klumpen kann sie nicht entweichen. Das Gemisch wird **weit über 100 °C** heiß, der Becher schmilzt, es **qualmt giftig** und kann **Feuer fangen**.
+
+**Die Folge:** Verbrennungen, Atemwegsreizungen durch den Qualm und ein Brand mitten in der Werkstatt.
+
+![Links: Ein großer Becher mit angemischtem Harz qualmt und brennt, daneben „100 °C+“. Rechts im roten Kreis: eine Flamme](assets/bilder/sicherheit/folgen/harz-hitze.svg "Zu viel angemischtes Harz kann sich selbst entzünden.")
+
+### Gefahrstoff in der Getränkeflasche
+
+**Der Fehler:** Du füllst etwas Lösungsmittel oder Härter in eine leere Wasserflasche, weil gerade nichts anderes da ist.
+
+**Was passiert:** Jemand anderes hat Durst, sieht die Flasche und trinkt.
+
+**Die Folge:** **Vergiftung**, verätzter Mund und verätzte Speiseröhre. Manche Stoffe schädigen innere Organe dauerhaft.
+
+![Links: Aus einem Kanister mit Totenkopf-Symbol wird Flüssigkeit in eine Getränkeflasche gefüllt. Rechts im roten Kreis: ein Totenkopf](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Gefahrstoffe gehören nie in Getränkeflaschen.")
 
 ## Ordnung: vor und nach der Arbeit
 
@@ -551,10 +812,10 @@ Ohne Nachweis und ohne Einweisung an der Maschine keine Arbeit in der Werkstatt 
 - **Hochvolt (600 V):** Nur Team HV mit Schulung. Orange heißt Hochvolt – Finger weg. Steht das Auto unter Spannung: **nie vor, hinter oder neben dem Auto.**
 - **TSAL:** Rot blinkend oder rot und grün zugleich = **Finger weg vom Rennwagen.** Grün = Hochvolt aus, Arbeiten nur mit Freigabe. Dunkel = in der Regel sicher, außer Team HV sagt etwas anderes.
 - **Low Voltage (24 V):** nur nach Einweisung durch den Electrics Team Lead. Keine Ahnung? Finger weg.
-- **Rotierende Werkzeuge:** keine Handschuhe, Haare zusammen, Schutzbrille. An der **Ständerbohrmaschine** Werkstück einspannen und Schraubstock festschrauben.
+- **Rotierende Werkzeuge:** keine Handschuhe, kein Schal, kein Schmuck, Haare zusammen, Schutzbrille. Sonst drohen ausgerissene Finger, Strangulation oder eine abgerissene Kopfhaut. An der **Ständerbohrmaschine** Werkstück einspannen und Schraubstock festschrauben.
 - **Fräs- und Drehmaschine** nur mit gesonderter Einweisung. Ansprechpartner unbekannt? Projektleitung.
 - **Flex:** Gehörschutz, Schutzbrille bzw. Visier, Schutzhaube, Kleidung aus Baumwolle oder feuerfest – und **nur vor der Werkstatt** flexen. Deine Augen sind nicht ersetzbar.
-- **Carbon:** nur draußen bearbeiten, immer **Atemschutz-Vollmaske** und Ganzkörperanzug. **Harz:** Nitrilhandschuhe, nur kleine Mengen in geeigneten Gefäßen anmischen.
+- **Carbon und Aramid:** Faserstaub gelangt bis in die Lungenbläschen und steht im **Verdacht, Krebs auszulösen**, oft erst nach Jahrzehnten. Nur draußen bearbeiten, immer **Atemschutz-Vollmaske** und Ganzkörperanzug. **Harz:** Nitrilhandschuhe, nur kleine Mengen in geeigneten Gefäßen anmischen.
 - **Vorbereitung und Aufräumen sind Pflicht.** Im Notfall: Strom abschalten, **112**, Rettungswagen einweisen lassen, Erste Hilfe (orangefarbener Koffer am Eingang), Unfall melden.
 
 :::quiz anzahl=7
@@ -590,7 +851,7 @@ Ohne Nachweis und ohne Einweisung an der Maschine keine Arbeit in der Werkstatt 
 - [x] Atemschutz-Vollmaske, die das ganze Gesicht abdeckt
 - [x] Ganzkörperanzug
 - [ ] Eine Schutzbrille reicht für das Gesicht aus
-> Carbonstaub ist hochgiftig und kann Krebs auslösen. Deshalb immer eine Vollmaske mit Gesichtsschutz und einen Ganzkörperanzug. Mit einer Schutzbrille allein wäre das Gesicht dem Staub ausgesetzt.
+> Carbonstaub gelangt bis in die Lungenbläschen und steht im Verdacht, Krebs auszulösen. Deshalb immer eine Vollmaske mit Gesichtsschutz und einen Ganzkörperanzug. Mit einer Schutzbrille allein wäre das Gesicht dem Staub ausgesetzt.
 ~ Carbonstaub: Ganzkörperanzug und Atemschutz
 
 ?! Darfst du die Fräsmaschine benutzen, wenn du die allgemeine Werkstatt-Unterweisung hast?
@@ -753,4 +1014,39 @@ Ohne Nachweis und ohne Einweisung an der Maschine keine Arbeit in der Werkstatt 
 - [ ] Erst am Saisonende Bescheid geben
 > Auch kleine Verletzungen werden dokumentiert. Das ist wichtig, falls später Folgen auftreten.
 ~ Wenn etwas passiert
+
+? Warum ist ein Schal an einer drehenden Maschine lebensgefährlich?
+- [ ] Er kann Funken fangen
+- [x] Er wird aufgewickelt und kann dich strangulieren
+- [ ] Er verdeckt die Sicht auf das Werkstück
+> Das lose Ende wird von der Spindel aufgewickelt und zieht den Hals zur Maschine. Das kann in Sekunden tödlich sein.
+~ Was passieren kann: Handschuhe, Schals und Haare
+
+? Was kann passieren, wenn du an der Bohrmaschine Handschuhe trägst?
+- [x] Der Handschuh wird erfasst und Finger werden samt Sehne ausgerissen
+- [ ] Der Bohrer wird stumpf
+- [ ] Nichts, Handschuhe schützen immer
+> Der Bohrer wickelt den Handschuh auf und zieht die Hand mit. Solche Ausrissverletzungen lassen sich meist nicht mehr annähen.
+~ Was passieren kann: Handschuhe, Schals und Haare
+
+? Warum gilt für Carbon- und Aramidstaub voller Schutz, obwohl der Krebsverdacht nicht endgültig bewiesen ist?
+- [ ] Weil der Staub schlecht riecht
+- [x] Weil die Fasern in der Lunge bleiben und Krebs oft erst nach Jahrzehnten auftritt
+- [ ] Weil der Staub sofort giftig wirkt
+> Die Bruchstücke gelangen bis in die Lungenbläschen und werden kaum abgebaut. Bei Asbest kamen die Krankheiten 20 bis 40 Jahre später – darauf willst du es nicht ankommen lassen.
+~ Was Carbon- und Aramidstaub im Körper anrichten
+
+? Was passiert, wenn ein Ring beide Pole eines Akkus berührt?
+- [ ] Der Akku schaltet sich ab
+- [x] Der Ring wird in Sekunden glühend heiß und verbrennt den Finger
+- [ ] Nichts, 24 Volt sind harmlos
+> Bei einem Kurzschluss fließt ein riesiger Strom durch den Ring. Deshalb gilt: Schmuck ab, bevor du an Elektrik arbeitest.
+~ Was passieren kann: Kurzschluss und Akkubrand
+
+? Warum darf eine Flex nie ohne Schutzhaube benutzt werden?
+- [x] Zerplatzt die Scheibe, fliegen die Bruchstücke fast 300 km/h schnell
+- [ ] Ohne Haube schneidet sie schlechter
+- [ ] Die Haube hält nur den Lärm ab
+> Die Haube steht zwischen dir und der Scheibe. Bruchstücke können Augen zerstören und am Hals tödlich sein.
+~ Was passieren kann: an der Flex
 :::
