@@ -28,6 +28,7 @@
       "js/ui/icons.js",
       "js/ui/pictograms.js",
       "js/ui/pictograms-safety.js",
+      "js/ui/pictograms-disciplines.js",
       "js/ui/statusbar.js",
       "js/core/router.js",
       "js/core/store.js",

@@ -12,6 +12,12 @@
     margin: 0;
   }
 
+  /* Querformat über die ganze Spaltenbreite (groesse=breit). */
+  .pictogram-block--wide {
+    justify-items: stretch;
+    inline-size: 100%;
+  }
+
   .pictogram-block__caption {
     color: var(--color-text-muted);
     font-size: var(--step--1);

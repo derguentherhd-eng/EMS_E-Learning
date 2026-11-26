@@ -216,7 +216,7 @@
       installMotion(name, pictogram);
     }
     const svg = document.createElementNS(SVG_NS, "svg");
-    svg.setAttribute("viewBox", "0 0 200 200");
+    svg.setAttribute("viewBox", pictogram.viewBox ?? "0 0 200 200");
     svg.setAttribute("role", "img");
     svg.setAttribute("aria-label", label ?? pictogram.label);
     svg.innerHTML = pictogram.svg();
@@ -233,23 +233,58 @@
    * @param {boolean} loop
    */
   function setupPlayback(wrapper, loop) {
-    function play() {
+    const svg = wrapper.querySelector("svg");
+    // Manche Motive bewegen Teile zusätzlich auf einer Bahn (SVG <animateMotion>, z. B. das Auto
+    // auf der Rennstrecke). Diese Zeitleiste wird mit der CSS-Animation gestartet und gestoppt.
+    const hasTimeline =
+      svg?.querySelector("animateMotion, animate, animateTransform") != null;
+    const reducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+    function start() {
+      wrapper.classList.add("is-playing");
+      if (hasTimeline && !reducedMotion) {
+        svg.setCurrentTime(0);
+        svg.unpauseAnimations();
+      }
+    }
+
+    function stop() {
       wrapper.classList.remove("is-playing");
+      if (hasTimeline) {
+        svg.pauseAnimations();
+        // Grundzustand: Bahn-Bewegung am Anfang (z. B. Auto an der Startlinie).
+        svg.setCurrentTime(0);
+      }
+    }
+
+    function play() {
+      stop();
       // Neu starten: Stil einmal auswerten lassen, sonst läuft die Animation nicht von vorn.
       void wrapper.offsetWidth;
-      wrapper.classList.add("is-playing");
+      start();
+    }
+
+    if (hasTimeline) {
+      svg.pauseAnimations();
     }
     if (!("IntersectionObserver" in window)) {
-      wrapper.classList.add("is-playing");
+      start();
       return;
     }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (loop) {
-          wrapper.classList.toggle("is-playing", entry.isIntersecting);
+          if (entry.isIntersecting) {
+            start();
+          } else {
+            stop();
+          }
         } else if (entry.isIntersecting) {
           play();
           observer.disconnect();
+        } else {
+          stop();
         }
       }
     });
@@ -259,9 +294,7 @@
       wrapper.addEventListener("focusin", play);
       // Nach dem Abgang wieder die Pose zeigen (Grundzustand), nicht ein leeres Bild.
       // Alle Teile enden gleichzeitig – das erste Ende genügt.
-      wrapper.addEventListener("animationend", () => {
-        wrapper.classList.remove("is-playing");
-      });
+      wrapper.addEventListener("animationend", stop);
     }
   }
 

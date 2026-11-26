@@ -6,6 +6,11 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Teamonboarding: dynamische Disziplinen animiert (2026-11-26)
+
+- Skidpad, Acceleration, Autocross, Endurance und Efficiency sind animierte Piktogramme (`js/ui/pictograms-disciplines.js`), Aufbau wie die bisherigen Grafiken (die statischen SVGs sind entfernt). Skidpad: Einfahrt, zwei Runden rechts im Uhrzeigersinn, zwei links gegen den Uhrzeigersinn, Ausfahrt, mit Rundenzähler („wird gewertet“ bei Runde 2 und 4). Acceleration: Beschleunigen über 75 m, Stoppuhr, 3,5 s. Autocross: eine Runde auf dem Kurs. Endurance: Runden mit Fahrerwechsel in der Mitte. Efficiency: Akku leert sich über 22 km, zweimal Bremsenergie zurück.
+- Piktogramm-Engine: eigene viewBox je Motiv, SVG-Zeitleisten (`<animateMotion>`) starten und stoppen mit der CSS-Animation, bei „Bewegung reduzieren“ bleiben sie am Start stehen. Neue Größe `groesse=breit`.
+
 ### Piktogramme: Bewegungen realistischer, Carbon-Lunge neu (2026-11-26)
 
 - Carbonstaub: neue Frontansicht. Staub steigt beim Schleifen zum Mund, die Lunge im Brustkorb füllt sich in drei Stufen mit schwarzen Faserpunkten, dann steht die Lunge groß allein im Bild und ein Tumor wächst (Phase 3 länger: 2,4 s).

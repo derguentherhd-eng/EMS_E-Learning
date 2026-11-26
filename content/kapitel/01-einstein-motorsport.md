@@ -67,34 +67,34 @@ Bei den dynamischen Disziplinen fährt das Auto. Jede prüft etwas anderes.
 
 Das Auto fährt eine liegende Acht aus zwei Kreisen, mit maximaler Kurvengeschwindigkeit. Erst zwei Runden rechts im Uhrzeigersinn, dann zwei Runden links gegen den Uhrzeigersinn. Gewertet wird jeweils die zweite Runde, das Ergebnis ist der Durchschnitt.
 
-![Grafik: Zwei aneinanderliegende Kreise aus Pylonen bilden eine liegende Acht, das Auto fährt von unten ein](assets/bilder/onboarding/disziplinen/skidpad.svg "Skidpad: eine liegende Acht")
-
+:::piktogramm Skidpad: eine liegende Acht motiv=skidpad groesse=breit
+:::
 ### Acceleration
 
 Beschleunigung aus dem Stand auf einer 75 Meter langen Geraden. Gemessen wird die Zeit von der Start- bis zur Ziellinie. Unser AL26 hat das fahrerlos in 3,507 Sekunden geschafft.
 
-![Grafik: Eine gerade Strecke mit Start- und Ziellinie, dazwischen ein Pfeil mit der Beschriftung 75 Meter](assets/bilder/onboarding/disziplinen/acceleration.svg "Acceleration: 75 Meter aus dem Stand")
-
+:::piktogramm Acceleration: 75 Meter aus dem Stand motiv=acceleration groesse=breit
+:::
 ## Die dynamischen Disziplinen: Autocross, Endurance und Efficiency
 
 ### Autocross
 
 Eine Runde auf Zeit auf einem engen Handling-Kurs, kürzer als 1,5 km, mit Slaloms, Schikanen und Haarnadelkurven. Hier zählen Kurven, Bremsen und Beschleunigen im Wechsel.
 
-![Grafik: Ein enger, kurviger Rundkurs mit Pylonen und einer Start- und Ziellinie](assets/bilder/onboarding/disziplinen/autocross.svg "Autocross: eine Runde auf Zeit")
-
+:::piktogramm Autocross: eine Runde auf Zeit motiv=autocross groesse=breit
+:::
 ### Endurance
 
 Rund 22 Kilometer auf einem Rundkurs mit etwa 1 km pro Runde. Zwei Fahrer fahren je etwa 11 km, dazwischen ist ein Fahrerwechsel (höchstens 3 Minuten). Die Endurance bringt die meisten Punkte, das Auto muss vor allem eins: durchhalten.
 
-![Grafik: Ein Rundkurs mit dem Hinweis „Runde um Runde“ und der Angabe 22 km am Stück](assets/bilder/onboarding/disziplinen/endurance.svg "Endurance: 22 Kilometer am Stück")
-
+:::piktogramm Endurance: 22 Kilometer am Stück motiv=endurance groesse=breit
+:::
 ### Efficiency
 
 Gemessen wird während der Endurance: Wie viel Energie aus dem Akku braucht das Auto für die 22 Kilometer? Zurückgewonnene Bremsenergie wird zum Teil gutgeschrieben.
 
-![Grafik: Ein voller Akku vor der Endurance und ein teilweise leerer Akku danach, der Unterschied ist als „verbraucht“ markiert](assets/bilder/onboarding/disziplinen/efficiency.svg "Efficiency: Energie sparen während der Endurance")
-
+:::piktogramm Efficiency: Energie sparen während der Endurance motiv=efficiency groesse=breit
+:::
 ## So viele Punkte gibt es
 
 Insgesamt sind **1000 Punkte** zu holen. So waren sie bei Formula Student France 2026 verteilt:

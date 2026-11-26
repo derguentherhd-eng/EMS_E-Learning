@@ -133,6 +133,94 @@
     stroke-linecap: round;
   }
 
+  /* ── Disziplinen (js/ui/pictograms-disciplines.js): Strecke, Auto, Beschriftung ── */
+  .pg-label {
+    fill: var(--color-text-muted);
+  }
+
+  .pg-label-strong {
+    fill: currentcolor;
+  }
+
+  .pg-lane,
+  .pg-lane-arrow,
+  .pg-hand-line,
+  .pg-bracket {
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .pg-bracket {
+    stroke-width: 3;
+  }
+
+  .pg-guide {
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 3;
+    stroke-dasharray: 8 8;
+  }
+
+  .pg-road {
+    fill: none;
+    stroke: #2b2b2b;
+    stroke-linejoin: round;
+  }
+
+  .pg-asphalt {
+    fill: #2b2b2b;
+  }
+
+  .pg-centerline {
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 3;
+    stroke-dasharray: 10 9;
+  }
+
+  .pg-white {
+    fill: #fff;
+  }
+
+  .pg-speed-line,
+  .pg-lap-arrow {
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  .pg-lap-arrow {
+    stroke-width: 4;
+  }
+
+  .pg-car-tyre {
+    fill: #000;
+    stroke: #8a8a8a;
+  }
+
+  .pg-car-body {
+    fill: #534495;
+    stroke: currentcolor;
+    stroke-width: 2;
+  }
+
+  .pg-battery-frame {
+    fill: none;
+    stroke: var(--color-text-muted);
+    stroke-width: 5;
+  }
+
+  .pg-battery-cap {
+    fill: var(--color-text-muted);
+  }
+
+  .pg-bolt {
+    fill: #534495;
+  }
+
   .pg-danger-line {
     fill: none;
     stroke: var(--pg-danger);

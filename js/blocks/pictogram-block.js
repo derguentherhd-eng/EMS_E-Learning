@@ -8,7 +8,8 @@
  *   motiv             schutzbrille | stolpern | heben | fluchtweg (siehe js/ui/pictograms.js)
  *   schleife          ja = Endlosschleife, nein = einmal abspielen, sobald es sichtbar wird
  *                     (erneut bei Maus darüber oder Fokus). Standard: ja
- *   groesse           klein | mittel | gross. Standard: mittel
+ *   groesse           klein | mittel | gross | breit (ganze Spaltenbreite, für Querformate).
+ *                     Standard: mittel
  *   farbe             text (Schriftfarbe) | akzent (Gelb). Standard: akzent
  *
  * Wer „Bewegung reduzieren“ eingestellt hat, sieht nur die stehende Pose (Phase 2).
@@ -28,7 +29,12 @@
   const { PICTOGRAMS, createPictogram } = EM.require("js/ui/pictograms.js");
 
   /** Größen in der Kursdown-Schreibweise → CSS-Breite. */
-  const SIZES = { klein: "8rem", mittel: "12rem", gross: "16rem" };
+  const SIZES = {
+    klein: "8rem",
+    mittel: "12rem",
+    gross: "16rem",
+    breit: "100%",
+  };
   /** Farben → CSS-Wert (über currentColor). */
   const COLORS = { text: "", akzent: "var(--color-yellow)" };
 
@@ -80,7 +86,7 @@
             raw,
             raw.line,
             `Die Größe „${data.size}“ gibt es nicht.`,
-            "Möglich: klein, mittel, gross.",
+            "Möglich: klein, mittel, gross, breit.",
             "warnung",
           ),
         );
@@ -111,7 +117,9 @@
       }
       return el(
         "figure",
-        { class: "pictogram-block" },
+        {
+          class: `pictogram-block${data.size === "breit" ? " pictogram-block--wide" : ""}`,
+        },
         pictogram,
         data.title
           ? el(

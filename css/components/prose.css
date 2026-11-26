@@ -73,6 +73,10 @@
     justify-self: center;
   }
 
+  .media-split > .pictogram-block--wide {
+    justify-self: stretch;
+  }
+
   @media (width >= 64rem) {
     .media-split {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
