@@ -223,11 +223,11 @@
   }
 
   /** Motiv anmelden (immer mit gemeinsamem Takt). */
-  function define(name, label, description, svg, moves) {
+  function define(name, label, description, svg, moves, timing = TIMING) {
     registerPictogram(name, {
       label,
       description,
-      timing: TIMING,
+      timing,
       svg: () => scene(svg()),
       motion: moves,
     });
@@ -306,9 +306,9 @@
           [at("X", 0.1), { o: 1, e: "out" }],
           [
             at("X", 0.6),
-            { o: 1, t: "translate(26px, -42px) rotate(110deg)", d: 0 },
+            { o: 1, t: "translate(-6px, 20px) rotate(95deg)", d: 0 },
           ],
-          ["E", { o: 1, t: "translate(30px, -48px) rotate(130deg)", d: 0 }],
+          ["E", { o: 1, t: "translate(-6px, 20px) rotate(90deg)", d: 0 }],
         ],
       },
       ".pg-drops": appearAt("X+0.3"),
@@ -546,7 +546,35 @@
         ${stroke("M18 52 H30 L34 42 L38 62 L42 38 L46 64 L50 40 L54 58 L58 48 H74", 3.5, "pg-gap pg-heart-line", 'pathLength="1" stroke-linejoin="round"')}
       </g>`,
     motion(walkLegs(), enter("translateX(-10px)"), {
-      ".pg-body": { hold: "rotate(5deg)" },
+      ".pg-body": {
+        hold: "rotate(5deg)",
+        frames: [
+          ["X", { t: "hold", e: "out" }],
+          [at("X", 0.5), { t: "rotate(-55deg)" }],
+          ["E", { t: "rotate(-55deg)" }],
+        ],
+      },
+      ".pg-leg--front": {
+        frames: [
+          ["X", { t: "none", e: "out" }],
+          [at("X", 0.5), { t: "rotate(-78deg)" }],
+          ["E", { t: "rotate(-78deg)" }],
+        ],
+      },
+      ".pg-leg--back": {
+        frames: [
+          ["X", { t: "none", e: "out" }],
+          [at("X", 0.5), { t: "rotate(-60deg)" }],
+          ["E", { t: "rotate(-60deg)" }],
+        ],
+      },
+      ".pg-shin--front": {
+        frames: [
+          ["X", { t: "none", e: "out" }],
+          [at("X", 0.5), { t: "rotate(60deg)" }],
+          ["E", { t: "rotate(60deg)" }],
+        ],
+      },
       ".pg-arm--front": {
         hold: "rotate(-57deg)",
         frames: [
@@ -571,8 +599,8 @@
           [0, { t: "translateX(-70px)", e: "in" }],
           [0.5, { t: "hold" }],
           ["X", { t: "hold", e: "out" }],
-          [at("X", 0.5), { t: "translateX(-24px) rotate(-75deg)" }],
-          ["E", { t: "translateX(-24px) rotate(-75deg)" }],
+          [at("X", 0.5), { t: "translate(-14px, 27px)" }],
+          ["E", { t: "translate(-14px, 27px)" }],
         ],
       },
       ".pg-shock": {
@@ -935,11 +963,31 @@
           [at("H", -0.1), { t: "none", e: "in" }],
           ["H", { t: "hold" }],
           ["X", { t: "hold", e: "out" }],
-          [at("X", 0.4), { t: "rotate(40deg)" }],
-          ["E", { t: "rotate(40deg)" }],
+          [at("X", 0.4), { t: "rotate(35deg)" }],
+          ["E", { t: "rotate(35deg)" }],
         ],
       },
-      ".pg-belly": visibleFromHold(0.05),
+      ".pg-figure": {
+        hold: "translateX(-16px)",
+        frames: [
+          [0, { t: "translateX(-76px)", e: "in" }],
+          [0.5, { t: "hold" }],
+          ["X", { t: "hold", e: "out" }],
+          [at("X", 0.4), { t: "translateX(-38px)" }],
+          ["E", { t: "translateX(-38px)" }],
+        ],
+      },
+      ".pg-belly": {
+        frames: [
+          [0, { o: 0, t: "scale(0)" }],
+          [at("H", -0.05), { o: 0, t: "scale(0)", e: "in" }],
+          ["H", { o: 1, t: "scale(1.2)" }],
+          [at("H", 0.2), { o: 1, t: "scale(1)" }],
+          ["X", { o: 1, t: "none", e: "out" }],
+          [at("X", 0.4), { o: 1, t: "translate(-14px, 8px) scale(1.3)" }],
+          ["E", { o: 1, t: "translate(-14px, 8px) scale(1.3)" }],
+        ],
+      },
     }),
   );
 
@@ -1205,76 +1253,186 @@
     }),
   );
 
-  // 14. Carbonstaub in der Lunge
+  // 14. Carbonstaub in der Lunge – Frontansicht
+  //
+  // Eigene Figur von vorn (symmetrisch), damit die Lunge im Brustkorb sichtbar ist. Phase 1: Die
+  // Figur schleift ein Carbonteil, Staub steigt zum Mund. Phase 2: Die Lunge im Brustkorb ist voller
+  // schwarzer Faserpunkte. Phase 3: Die Figur verschwindet, die Lunge wird groß und steht allein im
+  // Bild, an ihr wächst ein Tumor (Krebsverdacht).
+
+  /** Lunge von vorn, Mittelpunkt (100, 88), mit Faserpunkten in mehreren Stufen. */
+  function lungs() {
+    /** Eine Stufe der Schwärzung (Gruppe von Faserpunkten). */
+    function stage(className, points) {
+      return `<g class="${className}">${dots(points, 2.4, "pg-soot")}</g>`;
+    }
+    return `<g class="pg-lungs" style="${origin([100, 90])}">
+      ${stroke("M100 62 V76 M100 76 L93 82 M100 76 L107 82", 4, "pg-airway")}
+      <path class="pg-gap-fill" d="M96 74 C84 70 72 86 72 102 C72 114 82 118 96 112 Z"/>
+      <path class="pg-gap-fill" d="M104 74 C116 70 128 86 128 102 C128 114 118 118 104 112 Z"/>
+      <path class="pg-lung" d="M95 77 C85 74 75 88 75 102 C75 111 83 114 95 109 Z"/>
+      <path class="pg-lung" d="M105 77 C115 74 125 88 125 102 C125 111 117 114 105 109 Z"/>
+      ${stage("pg-soot-1", [
+        [84, 90],
+        [116, 92],
+        [88, 102],
+        [112, 100],
+      ])}
+      ${stage("pg-soot-2", [
+        [80, 98],
+        [92, 86],
+        [120, 98],
+        [108, 86],
+        [84, 106],
+        [116, 106],
+      ])}
+      ${stage("pg-soot-3", [
+        [90, 94],
+        [110, 94],
+        [78, 104],
+        [122, 104],
+        [92, 106],
+        [108, 106],
+        [86, 84],
+        [114, 84],
+      ])}
+      <g class="pg-tumor" style="${origin([116, 98])}">
+        <path class="pg-danger" d="M116 90 C122 88 126 94 123 99 C127 103 121 108 116 105 C112 109 106 104 109 99 C106 94 111 89 116 90 Z"/>
+      </g>
+    </g>`;
+  }
+
+  /** Figur von vorn: Kopf, Rumpf, Arme, Beine, Hände halten ein Carbonteil vor dem Bauch. */
+  function frontFigure() {
+    return `<g class="pg-front">
+      ${capsule([92, 118], [90, 170], "pg-limb")}${capsule([108, 118], [110, 170], "pg-limb")}
+      ${capsule([100, 66], [100, 112], "pg-torso")}
+      <g class="pg-front-arms">
+        ${capsule([82, 70], [76, 96], "pg-limb")}${capsule([76, 96], [88, 118], "pg-limb")}
+        ${capsule([118, 70], [124, 96], "pg-limb")}${capsule([124, 96], [112, 118], "pg-limb")}
+      </g>
+      <g class="pg-panel" style="${origin([100, 122])}">${block(80, 118, 40, 8, 2, "pg-carbon")}</g>
+      <circle class="pg-gap-fill" cx="100" cy="40" r="17"/><circle class="pg-fill" cx="100" cy="40" r="14"/>
+      <g class="pg-mouth"><circle class="pg-gap-fill" cx="100" cy="47" r="3"/></g>
+    </g>`;
+  }
+
   define(
     "carbon-lunge",
-    "Carbon schleifen ohne Atemschutz: Fasern in der Lunge",
-    "Die Figur schleift Carbon ohne Atemschutz. Der Faserstaub steigt zum Gesicht und landet in der Lunge.",
+    "Carbonstaub eingeatmet: Fasern in der Lunge, Krebsverdacht",
+    "Eine Figur schleift Carbon ohne Atemschutz und atmet den Staub ein. Die Lunge füllt sich mit schwarzen Faserpunkten, dann wächst ein Tumor.",
     () =>
-      `${floor()}<g class="pg-table">${block(118, 120, 56, 6, 2)}${block(166, 126, 6, 50, 2)}${block(122, 112, 40, 8, 2)}</g>${figure()}<g class="pg-dust" style="${origin([128, 100])}">${dots(
+      `${floor()}${frontFigure()}${lungs()}<g class="pg-dust" style="${origin([100, 110])}">${dots(
         [
-          [130, 100],
-          [140, 92],
-          [124, 88],
-          [134, 80],
-          [118, 76],
-          [146, 84],
+          [92, 108],
+          [108, 106],
+          [100, 100],
+          [86, 98],
+          [114, 96],
+          [96, 90],
+          [104, 88],
         ],
-        3.5,
-      )}</g>` +
-      `<g class="pg-lungs" style="${origin([168, 46])}"><g transform="translate(18 -4)">
-        <path class="pg-fill" d="M146 26 C132 22 122 40 124 60 C125 72 136 74 146 68 Z"/>
-        <path class="pg-fill" d="M154 26 C168 22 178 40 176 60 C175 72 164 74 154 68 Z"/>
-        ${stroke("M150 14 V32", 5)}
-        ${dots(
-          [
-            [134, 44],
-            [140, 56],
-            [132, 60],
-            [164, 42],
-            [168, 56],
-            [160, 60],
-            [138, 34],
-            [162, 34],
-          ],
-          3,
-          "pg-danger pg-lung-dots",
-        )}
-      </g></g>`,
-    motion(walkLegs(), enter("translateX(-10px)"), {
-      ".pg-body": { hold: "rotate(20deg)" },
-      ".pg-arm--front": {
-        hold: "rotate(-43deg)",
+        2.6,
+        "pg-soot-light",
+      )}</g>`,
+    motion({
+      ".pg-front": {
         frames: [
-          [0.5, { t: "rotate(-30deg)" }],
-          [0.6, { t: "rotate(-48deg)" }],
-          [0.7, { t: "hold" }],
-          [1, { t: "rotate(-48deg)" }],
-          [1.3, { t: "hold" }],
+          [0, { o: 0, t: "translateY(20px)", e: "in" }],
+          [0.5, { o: 1, t: "none" }],
+          ["X", { o: 1, e: "out" }],
+          [at("X", 0.5), { o: 0 }],
+          ["E", { o: 0 }],
         ],
       },
-      ".pg-forearm--front": { hold: "rotate(-23deg)" },
+      ".pg-floor": {
+        frames: [
+          [0, { o: 0 }],
+          [0.4, { o: 1 }],
+          ["X", { o: 1 }],
+          [at("X", 0.5), { o: 0 }],
+          ["E", { o: 0 }],
+        ],
+      },
+      // Schleifbewegung: Carbonteil reibt hin und her.
+      ".pg-panel": {
+        frames: [
+          [0, { t: "none" }],
+          [0.25, { t: "translateX(-4px)" }],
+          [0.5, { t: "translateX(4px)" }],
+          [0.75, { t: "translateX(-4px)" }],
+          ["H", { t: "none" }],
+        ],
+      },
+      // Staub steigt vom Carbonteil zum Mund und wird eingeatmet.
       ".pg-dust": {
-        hold: "translate(-14px, -42px) scale(1.2)",
+        hold: "translateY(-56px) scale(0.35)",
+        opacity: 0.9,
         frames: [
           [0, { o: 0, t: "none" }],
           [0.3, { o: 1, t: "none", e: "in" }],
-          ["H", { o: 1, t: "hold" }],
-          ["X", { t: "hold", e: "out" }],
-          [at("X", 0.4), { o: 0, t: "translate(-26px, -46px) scale(0.4)" }],
+          ["H", { o: 0.9, t: "hold" }],
+          [at("H", 0.6), { o: 0, t: "translateY(-60px) scale(0.1)" }],
+          [at("H", 0.61), { o: 0, t: "none" }],
+          [at("H", 0.9), { o: 1, t: "none", e: "in" }],
+          [at("H", 1.5), { o: 0.9, t: "hold" }],
+          ["X", { o: 0, t: "translateY(-60px) scale(0.1)" }],
+          ["E", { o: 0 }],
         ],
       },
-      ".pg-lungs": appearAt("X+0.3"),
-      ".pg-head": {
+      // Lunge schwärzt sich nach und nach (drei Stufen Faserpunkte).
+      ".pg-soot-1": {
         frames: [
-          ["X", { t: "none" }],
-          [at("X", 0.4), { t: "rotate(20deg)" }],
-          [at("X", 0.55), { t: "rotate(-5deg)" }],
-          [at("X", 0.7), { t: "rotate(20deg)" }],
-          [at("X", 0.85), { t: "none" }],
+          [0, { o: 0 }],
+          [0.5, { o: 0 }],
+          ["H", { o: 1 }],
+        ],
+      },
+      ".pg-soot-2": {
+        frames: [
+          [0, { o: 0 }],
+          [at("H", 0.3), { o: 0 }],
+          [at("H", 0.7), { o: 1 }],
+        ],
+      },
+      ".pg-soot-3": {
+        opacity: 0,
+        frames: [
+          [0, { o: 0 }],
+          [at("H", 1.2), { o: 0 }],
+          [at("H", 1.6), { o: 1 }],
+          ["E", { o: 1 }],
+        ],
+      },
+      // Phase 3: Lunge allein, groß in der Bildmitte; Tumor wächst.
+      ".pg-lungs": {
+        frames: [
+          [0, { o: 0 }],
+          [0.4, { o: 1 }],
+          ["X", { t: "none", e: "in" }],
+          [at("X", 0.7), { t: "translateY(8px) scale(2.3)" }],
+          ["E", { t: "translateY(8px) scale(2.3)" }],
+        ],
+      },
+      ".pg-tumor": {
+        opacity: 0,
+        frames: [
+          [0, { o: 0, t: "scale(0)" }],
+          [at("X", 0.8), { o: 0, t: "scale(0)", e: "in" }],
+          [at("X", 1.3), { o: 1, t: "scale(1)" }],
+          [at("X", 1.55), { o: 1, t: "scale(1.15)" }],
+          [at("X", 1.8), { o: 1, t: "scale(1)" }],
+          ["E", { o: 1, t: "scale(1.1)" }],
+        ],
+      },
+      ".pg-airway": {
+        frames: [
+          ["X", { o: 1 }],
+          [at("X", 0.4), { o: 1 }],
         ],
       },
     }),
+    [0.8, 1.8, 2.4],
   );
 
   // 15. Carbonstaub nach Hause getragen
@@ -1530,11 +1688,23 @@
           [0, { t: "none" }],
           [0.5, { t: "rotate(-40deg)", e: "in" }],
           ["H", { t: "hold" }],
-          ["X", { t: "hold" }],
-          [at("X", 0.2), { t: "none" }],
+          ["X", { t: "hold", e: "out" }],
+          [at("X", 0.35), { t: "rotate(-41deg)" }],
+          [at("X", 0.8), { t: "rotate(-41deg)" }],
+          [at("X", 1.1), { t: "rotate(25deg)" }],
+          ["E", { t: "rotate(25deg)" }],
         ],
       },
-      ".pg-forearm--front": { hold: "rotate(-60deg)" },
+      ".pg-forearm--front": {
+        hold: "rotate(-60deg)",
+        frames: [
+          ["X", { t: "hold", e: "out" }],
+          [at("X", 0.35), { t: "rotate(-107deg)" }],
+          [at("X", 0.8), { t: "rotate(-107deg)" }],
+          [at("X", 1.1), { t: "rotate(-10deg)" }],
+          ["E", { t: "rotate(-10deg)" }],
+        ],
+      },
       ".pg-pour": {
         frames: [
           [0, { o: 0 }],
@@ -1564,8 +1734,10 @@
       ".pg-bottle": {
         frames: [
           ["X", { t: "none", e: "out" }],
-          [at("X", 0.35), { t: "translate(-40px, -70px) rotate(-120deg)" }],
-          ["E", { t: "translate(-40px, -70px) rotate(-120deg)" }],
+          [at("X", 0.35), { t: "translate(-14px, -42px) rotate(-45deg)" }],
+          [at("X", 0.8), { t: "translate(-14px, -42px) rotate(-45deg)" }],
+          [at("X", 1.1), { t: "translate(-40px, 40px) rotate(-90deg)" }],
+          ["E", { t: "translate(-40px, 40px) rotate(-90deg)" }],
         ],
       },
       ".pg-canister": {
@@ -1579,14 +1751,16 @@
       ".pg-head": {
         frames: [
           ["X", { t: "none" }],
-          [at("X", 0.35), { t: "rotate(-25deg)" }],
-          ["E", { t: "rotate(-25deg)" }],
+          [at("X", 0.35), { t: "rotate(-22deg)" }],
+          [at("X", 0.8), { t: "rotate(-22deg)" }],
+          [at("X", 1.1), { t: "rotate(-35deg)" }],
+          ["E", { t: "rotate(-35deg)" }],
         ],
       },
-      ".pg-skull": appearAt("X+0.6"),
+      ".pg-skull": appearAt("X+0.85"),
       ".pg-body": {
         frames: [
-          [at("X", 0.7), { t: "none", e: "out" }],
+          [at("X", 0.8), { t: "none", e: "out" }],
           [at("X", 1.1), { t: "rotate(-60deg)" }],
           ["E", { t: "rotate(-60deg)" }],
         ],

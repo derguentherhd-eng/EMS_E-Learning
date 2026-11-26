@@ -109,6 +109,30 @@
     fill: var(--pg-danger);
   }
 
+  /* Lunge (hell), Faserstaub (dunkel) und Carbonteil: feste Farben, damit die Schwärzung in
+   * beiden Farbschemata gleich wirkt. */
+  .pg-lung {
+    fill: #f4c7c1;
+  }
+
+  .pg-soot {
+    fill: #1e1e1e;
+  }
+
+  .pg-soot-light {
+    fill: #6b6b6b;
+  }
+
+  .pg-carbon {
+    fill: #3a3a3a;
+  }
+
+  .pg-airway {
+    fill: none;
+    stroke: #f4c7c1;
+    stroke-linecap: round;
+  }
+
   .pg-danger-line {
     fill: none;
     stroke: var(--pg-danger);

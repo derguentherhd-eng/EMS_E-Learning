@@ -6,6 +6,12 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Piktogramme: Bewegungen realistischer, Carbon-Lunge neu (2026-11-26)
+
+- Carbonstaub: neue Frontansicht. Staub steigt beim Schleifen zum Mund, die Lunge im Brustkorb füllt sich in drei Stufen mit schwarzen Faserpunkten, dann steht die Lunge groß allein im Bild und ein Tumor wächst (Phase 3 länger: 2,4 s).
+- Realistischer: abgerissener Finger fällt auf den Bohrtisch (statt nach oben zu fliegen), nach dem Stromschlag sackt die Figur zusammen (statt durch den Boden zu kippen), nach dem Treffer der Stange krümmt sich die Figur und taumelt aus dem Schwenkbereich, bei der Getränkeflasche greift die Figur die Flasche, trinkt und bricht zusammen, die Flasche fällt.
+- Teile, die nach dem Unfall ausgeblendet werden, erscheinen nicht mehr kurz vor dem Ende wieder.
+
 ### Sicherheitsunterweisung: animierte Unfall-Piktogramme (2026-11-26)
 
 - Die 18 statischen Folgen-Grafiken (`assets/bilder/sicherheit/folgen/`, entfernt) sind durch animierte Piktogramme ersetzt (`js/ui/pictograms-safety.js`): Phase 1 Handlung, Phase 2 Unfallmoment (stehende Fassung bei „Bewegung reduzieren“), Phase 3 Folge in Rot. Alle 12 Fassungen (Deutsch + 11 Übersetzungen) nutzen jetzt `:::piktogramm … motiv=… groesse=gross`; Bildunterschriften bleiben übersetzt.
