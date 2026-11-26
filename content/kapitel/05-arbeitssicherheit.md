@@ -186,6 +186,15 @@ Offene lange Haare => Kopfhaut abgerissen | Strähnen werden in Sekundenbruchtei
 Kunstfaser beim Flexen => Verbrennungen | Funken setzen Kunstfaser in Brand oder schmelzen sie auf die Haut.
 :::
 
+Was machst du? Zu jeder Antwort bekommst du eine Rückmeldung.
+
+:::szenario Ein kalter Tag in der Werkstatt
+Es ist Winter. Du trägst einen Schal und einen Hoodie mit langen Kordeln und willst schnell an der Ständerbohrmaschine ein Loch bohren.
+- [ ] Den Schal in den Hoodie stecken, das reicht > Ein loses Ende reicht, damit die Spindel den Schal erfasst. Dann wird dein Hals zur Maschine gezogen – Strangulation.
+- [x] Schal ab, Kordeln heraus oder Hoodie aus, Haare zusammen, Schmuck ab, dann bohren > Richtig: An drehenden Maschinen darf nichts Loses hängen. Sonst drohen Strangulation, eine abgerissene Kopfhaut oder ausgerissene Finger.
+- [ ] Mit Handschuhen bohren, damit die Hände wenigstens warm bleiben > Handschuhe sind an der Bohrmaschine verboten. Der Bohrer wickelt sie auf und reißt Finger samt Sehne aus der Hand.
+:::
+
 ## Hochvolt: 600 Volt – Finger weg
 
 Unser Rennwagen fährt elektrisch. Sein [[Hochvolt|Hochvoltsystem]] arbeitet mit **600 Volt**. Zum Vergleich: Eine Steckdose hat 230 Volt. Schon ein einziger Fehler kann **tödlich** sein – und man sieht einem Auto nicht an, ob es unter Spannung steht.
@@ -245,6 +254,23 @@ Strom sieht man nicht, hört man nicht und riecht man nicht. Bei 600 Volt gibt e
 ### Das Auto fährt los
 
 Steht das Auto unter Spannung, kann es ohne Vorwarnung anfahren, in weniger als 2,5 Sekunden auf 100 km/h. Wer davor oder dahinter steht, wird **überfahren oder eingeklemmt**. Deshalb gilt: nie vor, hinter oder neben einem Auto unter Spannung.
+
+Was droht bei welchem Fehler? Ordne zu.
+
+:::zuordnen Welche Folge droht?
+Orangefarbenes Kabel anfassen => Herzkammerflimmern | Strom durch die Brust bringt das Herz aus dem Takt – das ist ein Herzstillstand.
+Metallteil berührt zwei Hochvolt-Pole => Schwere Verbrennungen | Es entsteht ein Lichtbogen mit mehreren tausend Grad.
+Vor einem Auto unter Spannung stehen => Überfahren oder eingeklemmt | Das Auto kann ohne Vorwarnung anfahren, in unter 2,5 Sekunden auf 100 km/h.
+:::
+
+Und was tust du in diesem Fall?
+
+:::szenario Nach dem Schlag
+Ein Teammitglied hat am Auto kurz einen Stromschlag bekommen. Es lacht und sagt: „Alles gut, war nur kurz.“
+- [ ] Glauben und weiterarbeiten lassen > Herzrhythmusstörungen können noch Stunden später auftreten. „Fühlt sich gut an“ heißt nicht „ist in Ordnung“.
+- [x] Darauf bestehen, dass die Person sofort ärztlich untersucht wird, und den Unfall der Projektleitung melden > Richtig: Nach jedem Stromunfall muss ein Arzt untersuchen, auch wenn die Person sich gut fühlt.
+- [ ] Erst mal abwarten, ob es ihr in einer Stunde schlechter geht > Dann kann es zu spät sein. Kammerflimmern ist ein Herzstillstand – ohne Hilfe stirbt man in wenigen Minuten.
+:::
 
 ## Das TSAL: Rot heißt Finger weg
 
@@ -323,7 +349,7 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 
 **Die Folge:** **Verbrennungen bis auf den Knochen**, rund um den Finger. Deshalb gilt: Schmuck ab, bevor du an Elektrik arbeitest.
 
-![Links: Ein Ring an einer Hand liegt über beiden Polen eines Akkus und glüht. Rechts im roten Kreis: ein Finger mit glühendem Ring und roter Brandstelle](assets/bilder/sicherheit/folgen/lv-ring.svg "Ein Ring, der beide Pole berührt, wird in Sekunden glühend heiß.")
+![Links: Ein Finger mit Ring liegt über Plus- und Minuspol eines Akkus, der Ring glüht. Rechts im roten Kreis: ein Finger mit glühendem Ring und roter Brandstelle](assets/bilder/sicherheit/folgen/lv-ring.svg "Ein Ring, der beide Pole berührt, wird in Sekunden glühend heiß.")
 
 ### Ein beschädigter Akku
 
@@ -334,6 +360,22 @@ Beim Aufräumen findest du einen kleinen Lithium-Akku aus einem Testaufbau. Er i
 **Die Folge:** **Brand** in der Werkstatt und **giftige Gase**, darunter Fluorwasserstoff, der Atemwege und Lunge verätzt.
 
 ![Links: Ein aufgeblähter Akku, aus dem Flammen und Rauch aufsteigen. Rechts im roten Kreis: eine Rauchwolke mit Totenkopf](assets/bilder/sicherheit/folgen/akku-brand.svg "Ein brennender Lithium-Akku setzt giftige Gase frei.")
+
+Was folgt aus welchem Fehler? Ordne zu.
+
+:::zuordnen Welche Folge droht?
+Ring berührt beide Pole eines Akkus => Verbrennung bis auf den Knochen | Der Ring wird in Sekunden glühend heiß.
+Aufgeblähten Lithium-Akku laden => Brand und giftige Gase | Der Akku kann thermisch durchgehen und Fluorwasserstoff freisetzen.
+:::
+
+Wie gehst du vor?
+
+:::szenario Am Kabelbaum mithelfen
+Du sollst dem Electrics-Team am Niedervolt-Kabelbaum helfen. Du trägst einen Ring und eine Metalluhr.
+- [ ] Anlassen, 24 Volt spürt man ja kaum > Gefährlich ist nicht die Spannung, sondern der Strom bei einem Kurzschluss. Ein Ring wird dabei in Sekunden glühend heiß.
+- [x] Ring und Uhr ablegen und dir vom Electrics Team Lead zeigen lassen, was du anfassen darfst > Richtig: Schmuck ab und nur nach Einweisung arbeiten. So verbrennst du dich nicht und zerstörst keine Steuergeräte.
+- [ ] Die Uhr ablegen, den Ring mit Klebeband umwickeln > Klebeband schützt nicht zuverlässig. Schmuck kommt ab, bevor du an Elektrik arbeitest.
+:::
 
 ## Regeln in der Werkstatt
 
@@ -431,6 +473,23 @@ Die Ständerbohrmaschine verzeiht keine Abkürzung. Drei Fehler, die schnell pas
 
 ![Links: Ein Bohrfutterschlüssel fliegt aus der eingeschalteten Bohrmaschine auf den Kopf einer Person zu. Rechts im roten Kreis: ein verletztes Auge](assets/bilder/sicherheit/folgen/bohrfutterschluessel.svg "Ein vergessener Schlüssel wird zum Geschoss.")
 
+Ordne jedem Fehler seine Folge zu.
+
+:::zuordnen Welche Folge droht?
+Kleines Blech mit der Hand gehalten => Tiefe Schnitte | Das Blech reißt sich los und dreht wie ein Propeller mit scharfen Kanten.
+Lange Stange nicht gesichert => Bauch aufgeschlitzt | Die Stange reißt sich los und schlägt in Bauchhöhe im Kreis.
+Bohrfutterschlüssel steckt noch => Geschoss ins Gesicht | Beim Einschalten wird der Schlüssel weggeschleudert.
+:::
+
+Was tust du?
+
+:::szenario Ein Loch in eine lange Stange
+Du sollst in eine einen Meter lange Aluminiumstange ein Loch bohren. Der Schraubstock ist eigentlich zu klein für sie.
+- [ ] Die Stange am langen Ende mit der Hand festhalten, geht ja schnell > Verhakt sich der Bohrer, reißt die Stange dir aus der Hand und schlägt in Bauchhöhe im Kreis. Das kann tödlich sein.
+- [x] Fragen, wie die Stange richtig gespannt und mit einem Anschlag gegen Mitdrehen gesichert wird, und nicht im Schwenkbereich stehen > Richtig: Lange Werkstücke werden zusätzlich gesichert, und du stehst nie dort, wo das Ende herumschlagen kann.
+- [ ] Mit niedriger Drehzahl bohren, dann passiert schon nichts > Auch bei niedriger Drehzahl hat die Maschine genug Kraft, die Stange mitzureißen. Die Drehzahl ersetzt keine Sicherung.
+:::
+
 ## Bandschleifer sicher benutzen
 
 Am Bandschleifer läuft ein Schleifband schnell über zwei Rollen. Damit entgratest du Kanten oder schleifst kleine Teile in Form. Die Gefahren: Das Band kann **Haut in Sekunden abschleifen**, Funken und Schleifstaub fliegen **ins Gesicht**, und das Werkstück wird **heiß**.
@@ -492,6 +551,24 @@ Das Schleifband ist dafür gemacht, Metall abzutragen. Haut ist viel weicher.
 - **Aluminium und Stahl auf demselben Band:** Feiner Aluminiumstaub und Stahlfunken können heftig miteinander reagieren und **brennen**. Der Staub im Gerät kann sich entzünden.
 - **Werkstück direkt nach dem Schleifen anfassen:** Metall wird beim Schleifen schnell über 100 °C heiß. Die Folge sind **Brandblasen**.
 - **Mit eingerissenem Band schleifen:** Reißt das Band, peitscht es herum und kann dich an Hand oder Gesicht treffen.
+
+Ordne jedem Fehler seine Folge zu.
+
+:::zuordnen Welche Folge droht?
+Finger am Schleifband => Bis auf den Knochen abgeschliffen | Das Band zieht die Fingerspitze in den Spalt an der Auflage.
+Aluminium und Stahl auf demselben Band => Brand | Aluminiumstaub und Stahlfunken können heftig reagieren.
+Werkstück direkt nach dem Schleifen anfassen => Brandblasen | Metall wird beim Schleifen schnell über 100 °C heiß.
+Mit eingerissenem Band schleifen => Schlag an Hand oder Gesicht | Reißt das Band, peitscht es herum.
+:::
+
+Was tust du?
+
+:::szenario Ein winziges Teil entgraten
+Du willst ein sehr kleines Aluteil am Bandschleifer entgraten. Die Auflage steht ein ganzes Stück vom Band entfernt.
+- [ ] Das Teil zwischen zwei Fingern halten und vorsichtig ans Band führen > Bei einem winzigen Teil sind deine Fingerspitzen direkt am Band. Rutscht es in den Spalt, ist die Haut bis auf den Knochen abgeschliffen.
+- [x] Maschine aus, Auflage nah ans Band stellen und nach einer Halterung für kleine Teile fragen > Richtig: Kleine Teile werden nie freihändig geschliffen, und der Spalt an der Auflage bleibt so klein wie möglich.
+- [ ] Handschuhe anziehen, damit die Finger geschützt sind > Handschuhe sind an rotierenden Werkzeugen verboten. Das Band erfasst den Stoff und zieht die Hand hinein.
+:::
 
 ## Flex: Schutz, Scheibe und Brandschutz
 
@@ -579,15 +656,21 @@ Die Flex gehört zu den gefährlichsten Werkzeugen in der Werkstatt. Der Rand ei
 
 ![Links: In der Werkstatt fliegen Funken einer Flex auf einen Haufen Lappen, der zu brennen beginnt. Rechts im roten Kreis: ein brennendes Haus](assets/bilder/sicherheit/folgen/flex-funken.svg "Funken in der Werkstatt können die Arbeit einer ganzen Saison vernichten.")
 
-Ordne jedem Fehler die Folge zu, die ihm droht.
+Ordne jedem Fehler seine Folge zu.
 
 :::zuordnen Welche Folge droht?
-Werkstück an der Bohrmaschine mit der Hand gehalten => Tiefe Schnitte | Das Werkstück reißt sich los und dreht wie ein Propeller.
-Lange Stange nicht gesichert => Bauch aufgeschlitzt | Die Stange reißt sich los und schlägt in Bauchhöhe im Kreis.
-Bohrfutterschlüssel steckt noch => Geschoss ins Gesicht | Beim Einschalten wird der Schlüssel weggeschleudert.
-Finger am Schleifband => Bis auf den Knochen abgeschliffen | Das Band zieht die Fingerspitze in den Spalt.
 Flex ohne Schutzhaube => Bruchstücke im Gesicht | Zerplatzt die Scheibe, fliegen die Teile fast 300 km/h schnell.
-Flexen in der Werkstatt => Werkstattbrand | Funken entzünden Lappen und Harzreste.
+Flex mit einer Hand gehalten => Schnitt in den Oberschenkel | Verkantet die Scheibe, springt die Flex zurück auf dich zu.
+Flexen in der Werkstatt => Werkstattbrand | Funken entzünden Lappen und Harzreste, oft erst Minuten später.
+:::
+
+Was machst du?
+
+:::szenario Die Scheibe ist abgelaufen
+Du willst draußen ein Rohr abflexen. Auf der Trennscheibe ist das Verfallsdatum abgelaufen. Eine neue Scheibe ist gerade nicht da.
+- [ ] Trotzdem flexen, die Scheibe sieht doch noch gut aus > Abgelaufene Scheiben werden brüchig, ohne dass man es sieht. Zerplatzt sie, fliegen die Bruchstücke fast 300 km/h schnell.
+- [ ] Flexen, aber zur Sicherheit die Schutzhaube abnehmen, damit man besser sieht > Ohne Haube steht nichts mehr zwischen dir und der Scheibe. Das ist der gefährlichste Fehler an der Flex.
+- [x] Nicht flexen, die Scheibe aussortieren und Bescheid geben, dass neue gebraucht werden > Richtig: Eine abgelaufene oder beschädigte Scheibe wird nie benutzt. Lieber warten als ein Auge verlieren.
 :::
 
 ## Carbonstaub: Ganzkörperanzug und Atemschutz
@@ -663,6 +746,15 @@ Eine Schutzbrille schützt ausreichend vor Carbonstaub. => Stimmt nicht | Du bra
 Weil der Krebsverdacht nicht bewiesen ist, reicht weniger Schutz. => Stimmt nicht | Gerade weil die Langzeitfolgen unklar sind, gilt voller Schutz.
 :::
 
+Und was tust du in dieser Situation?
+
+:::szenario Nur kurz eine Kante
+Draußen musst du an einem Carbonteil nur eine kleine Kante abschleifen, vielleicht eine Minute. Der Schutzanzug ist im anderen Raum, eine FFP-Maske liegt griffbereit.
+- [ ] Mit FFP-Maske schleifen, ist ja nur eine Minute > Auch eine Minute erzeugt genug Feinstaub. Ohne Vollmaske liegen Augen und Gesicht im Staub, ohne Anzug trägst du ihn an Kleidung und Haaren nach Hause.
+- [x] Erst Vollmaske und Ganzkörperanzug holen und anziehen, dann schleifen > Richtig: Faserbruchstücke bleiben in der Lunge und stehen im Verdacht, Krebs auszulösen. Bei Carbon gibt es keine „kurze Ausnahme“.
+- [ ] Ohne Maske, aber mit dem Rücken zum Wind > Der Wind hält den Feinstaub nicht zuverlässig von dir fern. Was du einatmest, bleibt womöglich für immer in der Lunge.
+:::
+
 ## Harze und andere Gefahrstoffe
 
 Carbonbauteile entstehen mit **Harz** (meist Epoxidharz) und Härter. Beide sind [[Gefahrstoff|Gefahrstoffe]]. Das Tückische: Harz kann **Allergien auslösen, die ein Leben lang bleiben.** Wer einmal allergisch ist, darf oft nie wieder mit Harz arbeiten.
@@ -718,7 +810,7 @@ Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst
 
 **Die Folge:** Eine **Allergie, die ein Leben lang bleibt**: rote, nässende, juckende Haut, schon bei kleinsten Mengen oder sogar durch Dämpfe in der Luft. Wer einmal allergisch ist, darf oft **nie wieder mit Harz arbeiten**, auch nicht später im Beruf.
 
-![Links: Eine Hand ohne Handschuh mit Harztropfen neben einem Becher Harz. Rechts im roten Kreis: eine Hand mit roten Ekzemstellen](assets/bilder/sicherheit/folgen/harz-haut.svg "Eine Harzallergie bleibt ein Leben lang.")
+![Links: Eine Hand ohne Handschuh mit Harztropfen neben einem Becher Harz, darüber ein durchgestrichener Handschuh. Rechts im roten Kreis: eine Hand mit roten Ekzemstellen](assets/bilder/sicherheit/folgen/harz-haut.svg "Eine Harzallergie bleibt ein Leben lang.")
 
 ### Zu viel Harz auf einmal
 
@@ -739,6 +831,23 @@ Harz riecht harmlos und fühlt sich an wie Honig. Die Folgen sind trotzdem ernst
 **Die Folge:** **Vergiftung**, verätzter Mund und verätzte Speiseröhre. Manche Stoffe schädigen innere Organe dauerhaft.
 
 ![Links: Aus einem Kanister mit Totenkopf-Symbol wird Flüssigkeit in eine Getränkeflasche gefüllt. Rechts im roten Kreis: ein Totenkopf](assets/bilder/sicherheit/folgen/getraenkeflasche.svg "Gefahrstoffe gehören nie in Getränkeflaschen.")
+
+Ordne jedem Fehler seine Folge zu.
+
+:::zuordnen Welche Folge droht?
+Harz ohne Nitrilhandschuhe anfassen => Allergie ein Leben lang | Das Immunsystem wird sensibilisiert, oft schon beim ersten Kontakt.
+Großen Becher Harz anmischen und stehen lassen => Qualm und Brand | Die Wärme kann nicht entweichen, das Harz wird weit über 100 °C heiß.
+Gefahrstoff in eine Getränkeflasche füllen => Vergiftung | Jemand hält die Flasche für ein Getränk und trinkt daraus.
+:::
+
+Was tust du?
+
+:::szenario Harz auf dem Unterarm
+Beim Laminieren ist dir Harz auf den Unterarm getropft, oberhalb des Handschuhs. Daneben steht eine Flasche Aceton.
+- [ ] Mit Aceton abwischen, das löst Harz am schnellsten > Lösungsmittel treiben das Harz tiefer in die Haut. Das erhöht das Risiko einer lebenslangen Allergie.
+- [x] Sofort mit Wasser und Seife abwaschen und künftig lange Ärmel tragen > Richtig: Harz auf der Haut immer mit Wasser und Seife entfernen, nie mit Lösungsmittel.
+- [ ] Antrocknen lassen und später abziehen > Je länger das Harz auf der Haut bleibt, desto eher wird dein Immunsystem sensibilisiert.
+:::
 
 ## Ordnung: vor und nach der Arbeit
 

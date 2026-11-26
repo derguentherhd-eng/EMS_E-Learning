@@ -13,12 +13,12 @@
 <rect x="-11" y="-125" width="22" height="40" fill="#8A8A8A"/>
 <rect x="-18" y="-87" width="36" height="34" rx="4" fill="#C9C9C9"/>
 <rect x="-4" y="-53" width="8" height="53" fill="#C9C9C9"/>
-</g><path d="M136,160 A34,11 0 1 0 198,152" fill="none" stroke="#FFED00" stroke-width="4" marker-end="url(#ay)"/><circle cx="320" cy="170" r="30" fill="#C9C9C9"/><path d="M350,170 C360,120 300,120 292,160" stroke="#534495" stroke-width="20" fill="none" stroke-linecap="round"/><path d="M296,156 C260,150 230,150 196,165" stroke="#534495" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M150,160 Q170,146 190,160 Q206,172 194,184 Q170,196 152,182" stroke="#534495" stroke-width="8" fill="none"/><g transform="translate(330,260) scale(0.9)">
-<path d="M-46,70 L-46,22 Q-46,-6 -18,-8 L18,-8 Q46,-6 46,22 L46,70 Z" fill="#C9C9C9"/></g><path d="M370,120 L270,140" stroke="#FFED00" stroke-width="5" marker-end="url(#ay)"/>
+</g><path d="M136,160 A34,11 0 1 0 198,152" fill="none" stroke="#FFED00" stroke-width="4" marker-end="url(#ay)"/><g transform="translate(360,250) scale(1.0)"><circle cx="0" cy="-42" r="26" fill="#C9C9C9"/>
+<path d="M-46,70 L-46,22 Q-46,-6 -18,-8 L18,-8 Q46,-6 46,22 L46,70 Z" fill="#C9C9C9"/></g><path d="M386,206 C400,170 340,160 330,196 L330,250" stroke="#534495" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M336,200 C290,186 240,176 196,170" stroke="#534495" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M150,160 Q170,146 190,160 Q206,172 194,184 Q170,196 152,182" stroke="#534495" stroke-width="8" fill="none"/><path d="M310,130 L230,148" stroke="#FFED00" stroke-width="5" marker-end="url(#ay)"/>
 <path d="M478,200 L522,200" stroke="#E5332A" stroke-width="6" marker-end="url(#ar)"/>
 <circle cx="660" cy="185" r="118" fill="#3A1715" stroke="#E5332A" stroke-width="6"/>
 <text x="660" y="34" font-size="15" fill="#E5332A" text-anchor="middle" font-weight="700" letter-spacing="2">FOLGE</text>
-<g transform="translate(660,185)"><circle cx="0" cy="10" r="58" fill="#C9C9C9"/><path d="M-58,4 A58,58 0 0 1 58,4 C30,-12 -30,-12 -58,4 Z" fill="#E5332A"/><path d="M-20,-80 C-10,-60 10,-70 20,-50 M10,-88 C20,-70 34,-74 40,-58" stroke="#534495" stroke-width="8" fill="none" stroke-linecap="round"/><rect x="-30" y="66" width="60" height="18" fill="#C9C9C9"/></g>
+<g transform="translate(660,185)"><circle cx="0" cy="16" r="56" fill="#C9C9C9"/><path d="M-56,10 A56,56 0 0 1 56,10 C30,-6 -30,-6 -56,10 Z" fill="#E5332A"/><path d="M-30,-60 C-20,-80 10,-84 30,-66 L20,-56 C6,-70 -14,-68 -22,-52 Z" fill="#534495"/><path d="M-6,-44 L-12,-34 M6,-46 L10,-36" stroke="#E5332A" stroke-width="4" stroke-linecap="round"/><rect x="-28" y="70" width="56" height="20" fill="#C9C9C9"/></g>
 <text x="660" y="334" font-size="20" fill="#FFFFFF" text-anchor="middle" font-weight="700">Kopfhaut</text><text x="660" y="358" font-size="20" fill="#FFFFFF" text-anchor="middle" font-weight="700">abgerissen</text>
 </g>
 </svg>

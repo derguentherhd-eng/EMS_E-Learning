@@ -6,6 +6,11 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Sicherheit: Pflichtabfrage auf jeder Folgen-Seite (2026-11-26)
+
+- Piktogramme auf Verständlichkeit überarbeitet: Handschuh an der Bohrmaschine als Hand erkennbar, Person mit Haaren zusammenhängend, Ring sichtbar auf beiden Akkupolen, durchgestrichener Handschuh beim Harz.
+- Jede der acht Seiten „Was passieren kann: …“ endet mit zwei Übungen: einer Zuordnung „Welche Folge droht?“ (bzw. „Stimmt das?“ bei Carbon) und einem Szenario zum richtigen Handeln. „Weiter“ geht erst, wenn beide gelöst sind. Die frühere Sammel-Zuordnung auf der Flex-Seite ist auf die Seiten Bohrmaschine, Bandschleifer und Flex aufgeteilt.
+
 ### Prüfmodus in den Einstellungen (2026-11-26)
 
 - Neuer Schalter „Prüfmodus (für die Redaktion)“: „Weiter“ wird nicht mehr durch offene Übungen gesperrt, das Quiz der Sicherheitsunterweisung öffnet sofort und hat einen Link „Quiz überspringen“. Übersprungene Quizze zählen nicht als bestanden. Gespeichert als `reviewMode` in `js/core/store.js`, wirkt in `js/views/chapter.js` und `js/views/quiz-view.js`.

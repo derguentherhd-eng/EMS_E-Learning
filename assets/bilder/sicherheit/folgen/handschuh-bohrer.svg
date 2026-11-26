@@ -13,14 +13,17 @@
 <rect x="-11" y="-125" width="22" height="40" fill="#8A8A8A"/>
 <rect x="-18" y="-87" width="36" height="34" rx="4" fill="#C9C9C9"/>
 <rect x="-4" y="-53" width="8" height="53" fill="#C9C9C9"/>
-</g><path d="M216,160 A34,11 0 1 0 278,152" fill="none" stroke="#FFED00" stroke-width="4" marker-end="url(#ay)"/><path d="M420,380 L292,236" stroke="#C9C9C9" stroke-width="40" stroke-linecap="round"/><ellipse cx="270" cy="212" rx="34" ry="28" fill="#534495"/><path d="M236,190 Q250,176 266,190 Q282,204 290,190 M238,212 Q254,198 268,212 Q284,226 296,212" stroke="#FFED00" stroke-width="3" fill="none"/><path d="M444,330 L352,226" stroke="#FFED00" stroke-width="5" marker-end="url(#ay)"/>
+</g><path d="M216,160 A34,11 0 1 0 278,152" fill="none" stroke="#FFED00" stroke-width="4" marker-end="url(#ay)"/><path d="M430,390 L330,280" stroke="#C9C9C9" stroke-width="36" stroke-linecap="round"/><g transform="translate(300,250) rotate(-42) scale(0.85)"><rect x="-31" y="-62" width="14" height="62" rx="7" fill="#534495"/><rect x="-15" y="-70" width="14" height="70" rx="7" fill="#534495"/><rect x="1" y="-66" width="14" height="66" rx="7" fill="#534495"/><rect x="17" y="-54" width="14" height="54" rx="7" fill="#534495"/>
+<rect x="-32" y="-12" width="64" height="62" rx="16" fill="#534495"/>
+<rect x="-52" y="0" width="14" height="46" rx="7" fill="#534495" transform="rotate(-35 -45 23)"/>
+<rect x="-22" y="48" width="44" height="40" fill="#534495"/></g><path d="M232,176 Q250,164 268,176 M232,190 Q250,178 268,190 M234,204 Q250,192 266,204" stroke="#534495" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M262,196 L276,214" stroke="#534495" stroke-width="12" stroke-linecap="round"/><path d="M450,320 L360,222" stroke="#FFED00" stroke-width="5" marker-end="url(#ay)"/>
 <path d="M478,200 L522,200" stroke="#E5332A" stroke-width="6" marker-end="url(#ar)"/>
 <circle cx="660" cy="185" r="118" fill="#3A1715" stroke="#E5332A" stroke-width="6"/>
 <text x="660" y="34" font-size="15" fill="#E5332A" text-anchor="middle" font-weight="700" letter-spacing="2">FOLGE</text>
-<g transform="translate(660,185)"><g transform="translate(0,0) rotate(0) scale(1.0)"><rect x="-31" y="-62" width="14" height="62" rx="7" fill="#C9C9C9"/><rect x="-15" y="-14" width="14" height="10" rx="3" fill="#E5332A"/><rect x="1" y="-66" width="14" height="66" rx="7" fill="#C9C9C9"/><rect x="17" y="-54" width="14" height="54" rx="7" fill="#C9C9C9"/>
+<g transform="translate(660,185)"><g transform="translate(-14,10) rotate(0) scale(1.0)"><rect x="-31" y="-62" width="14" height="62" rx="7" fill="#C9C9C9"/><rect x="-15" y="-14" width="14" height="10" rx="3" fill="#E5332A"/><rect x="1" y="-66" width="14" height="66" rx="7" fill="#C9C9C9"/><rect x="17" y="-54" width="14" height="54" rx="7" fill="#C9C9C9"/>
 <rect x="-32" y="-12" width="64" height="62" rx="16" fill="#C9C9C9"/>
 <rect x="-52" y="0" width="14" height="46" rx="7" fill="#C9C9C9" transform="rotate(-35 -45 23)"/>
-<rect x="-22" y="48" width="44" height="40" fill="#C9C9C9"/></g><rect x="20" y="-104" width="14" height="70" rx="7" fill="#C9C9C9" transform="rotate(28 27 -69)"/><path d="M48,-42 C40,-20 30,-30 18,-10 C8,6 -2,-2 -8,-12" stroke="#E5332A" stroke-width="4" fill="none" stroke-linecap="round"/></g>
+<rect x="-22" y="48" width="44" height="40" fill="#C9C9C9"/></g><rect x="26" y="-84" width="14" height="46" rx="7" fill="#C9C9C9" transform="rotate(25 33 -61)"/><path d="M30,-40 C26,-36 18,-30 8,-24 C0,-18 -8,-12 -22,-4" stroke="#E5332A" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/></g>
 <text x="660" y="334" font-size="20" fill="#FFFFFF" text-anchor="middle" font-weight="700">Finger samt Sehne</text><text x="660" y="358" font-size="20" fill="#FFFFFF" text-anchor="middle" font-weight="700">ausgerissen</text>
 </g>
 </svg>
