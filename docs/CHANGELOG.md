@@ -6,6 +6,10 @@ Format: Datum · Was · Warum (falls nicht offensichtlich).
 
 ## Unveröffentlicht
 
+### Alle übrigen Grafiken animiert (2026-11-26)
+
+- Engineering Design (Zeichnung baut sich auf, Jury tritt auf, Frage erscheint), Cost & Manufacturing (Stückliste füllt sich Zeile für Zeile), Business Plan (Balken wachsen, Linie steigt), Slack: Bestätigungscode (E-Mail kommt an, Code wird Ziffer für Ziffer getippt), Profil und Channels (Mauszeiger klickt die Schritte 1–4 an) – in `js/ui/pictograms-graphics.js`. Die statischen SVGs sind entfernt; Fotos und Rasterbilder bleiben unverändert.
+
 ### Teamonboarding: dynamische Disziplinen animiert (2026-11-26)
 
 - Skidpad, Acceleration, Autocross, Endurance und Efficiency sind animierte Piktogramme (`js/ui/pictograms-disciplines.js`), Aufbau wie die bisherigen Grafiken (die statischen SVGs sind entfernt). Skidpad: Einfahrt, zwei Runden rechts im Uhrzeigersinn, zwei links gegen den Uhrzeigersinn, Ausfahrt, mit Rundenzähler („wird gewertet“ bei Runde 2 und 4). Acceleration: Beschleunigen über 75 m, Stoppuhr, 3,5 s. Autocross: eine Runde auf dem Kurs. Endurance: Runden mit Fahrerwechsel in der Mitte. Efficiency: Akku leert sich über 22 km, zweimal Bremsenergie zurück.

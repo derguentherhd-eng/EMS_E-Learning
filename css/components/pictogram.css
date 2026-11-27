@@ -221,6 +221,26 @@
     fill: #534495;
   }
 
+  /* ── Weitere Grafiken (js/ui/pictograms-graphics.js) ── */
+  .pg-label-fill {
+    fill: var(--color-text-muted);
+  }
+
+  .pg-label-line,
+  .pg-sheet-frame,
+  .pg-mail-line {
+    stroke: var(--color-text-muted);
+    stroke-width: 2;
+  }
+
+  .pg-mail-line {
+    stroke-width: 4;
+  }
+
+  .pg-avatar-ring {
+    stroke: currentcolor;
+  }
+
   .pg-danger-line {
     fill: none;
     stroke: var(--pg-danger);

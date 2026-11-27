@@ -45,20 +45,20 @@ Bei den statischen Disziplinen steht das Auto still. Hier zählt, wie gut das Te
 
 Eine internationale Jury bewertet, wie durchdacht die Konstruktion ist: Das Team erklärt, warum es die Bauteile so gelöst hat. Auch die Systeme fürs autonome Fahren (Hardware und Software) werden geprüft.
 
-![Grafik: Ein Rennwagen als Konstruktionszeichnung, daneben eine dreiköpfige Jury mit der Frage „Warum so gelöst?“](assets/bilder/onboarding/disziplinen/engineering-design.svg "Engineering Design: Konzept und Technik erklären")
-
+:::piktogramm Engineering Design: Konzept und Technik erklären motiv=engineering-design groesse=breit
+:::
 ### Cost & Manufacturing
 
 Vor dem Event reicht das Team eine Stückliste des ganzen Autos ein, mit Kosten und CO₂-Emissionen der Bauteile. Am Event diskutiert die Jury direkt am Auto: Stimmen die Zahlen, und ließe sich das Auto so fertigen?
 
-![Grafik: Eine Liste von Bauteilen mit den Spalten Bauteil, Euro und CO₂](assets/bilder/onboarding/disziplinen/cost-manufacturing.svg "Cost & Manufacturing: Kosten und Emissionen jedes Bauteils")
-
+:::piktogramm Cost & Manufacturing: Kosten und Emissionen jedes Bauteils motiv=cost-manufacturing groesse=breit
+:::
 ### Business Plan
 
 Das Team pitcht in höchstens 10 Minuten ein Geschäftsmodell, das auf unserem Auto oder einem Bauteil davon aufbaut. Die Jury spielt dabei mögliche Investoren.
 
-![Grafik: Eine Person präsentiert vor einem Bildschirm mit einem steigenden Balkendiagramm](assets/bilder/onboarding/disziplinen/business-plan.svg "Business Plan: eine Geschäftsidee pitchen")
-
+:::piktogramm Business Plan: eine Geschäftsidee pitchen motiv=business-plan groesse=breit
+:::
 ## Die dynamischen Disziplinen: Skidpad und Acceleration
 
 Bei den dynamischen Disziplinen fährt das Auto. Jede prüft etwas anderes.

@@ -106,6 +106,7 @@ als Daten-URL aus der Kopie (ein Bild von der Platte würde das Canvas „verunr
 | `js/ui/pictograms.js` | Animierte Sicherheits-Piktogramme: Skelett mit Gelenk-Gruppen (`--o` = Drehpunkt), Motive in `PICTOGRAMS`, Abspielen (Schleife/einmal) per IntersectionObserver. Bewegungen in `css/components/pictogram.css` (3 Phasen: 0–20 % Auftritt, 20–80 % Pose = `--hold`, 80–100 % Abgang). Baustein: `js/blocks/pictogram-block.js` |
 | `js/ui/pictograms-safety.js` | 18 Unfall-Motive der Sicherheitsunterweisung. Bewegungen als Daten (`timing`, `motion`), `installMotion()` in pictograms.js erzeugt daraus CSS-@keyframes. Baukasten: `drill`, `sander`, `battery`, `grinder`, `burst`, `skull`, `flame`, `cloud` |
 | `js/ui/pictograms-disciplines.js` | Dynamische Disziplinen (viewBox 800 × 400): Auto fährt die echte Fahrlinie per SVG `<animateMotion>` (rotate="auto", keyTimes/keyPoints aus dem Takt berechnet), Beschriftungen per CSS. Start/Stopp der SVG-Zeitleiste in `setupPlayback()` |
+| `js/ui/pictograms-graphics.js` | Weitere Grafiken als animierte Piktogramme: statische Disziplinen (Jury, Stückliste, Pitch) und Slack-Schritte (Code-Eingabe, Profil, Channels) mit Mauszeiger, der die nummerierten Schritte anklickt (`cursorPath()`) |
 | `js/views/*.js` | eine Ansicht pro Route (`view-types.js` beschreibt die Schnittstelle) |
 | `js/pages/pruefen.js` | Logik von `pruefen.html` (Quelle: Webspace, `inhalte.js` oder eingelesener Ordner; Bilder per `Image()`) |
 | `js/pages/tests.js` | Test-Runner für `tests.html` (sammelt, führt aus, zeigt an) |

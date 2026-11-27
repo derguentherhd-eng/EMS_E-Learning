@@ -271,7 +271,7 @@ nur die stehende Pose.
 | Angabe | Werte |
 |---|---|
 | Titel | Bildunterschrift, wird auch vorgelesen (optional) |
-| `motiv` | Grundmotive: `schutzbrille`, `stolpern`, `heben`, `fluchtweg`. Disziplinen (Querformat, mit `groesse=breit`): `skidpad`, `acceleration`, `autocross`, `endurance`, `efficiency`. Unfälle (Sicherheitsunterweisung): `handschuh-bohrer`, `schal-maschine`, `haare-maschine`, `hv-koerper`, `hv-lichtbogen`, `lv-ring`, `akku-brand`, `bohr-werkstueck`, `bohr-stange`, `bohrfutterschluessel`, `bandschleifer-spalt`, `flex-scheibe`, `flex-funken`, `carbon-lunge`, `carbon-zuhause`, `harz-haut`, `harz-hitze`, `getraenkeflasche` |
+| `motiv` | Grundmotive: `schutzbrille`, `stolpern`, `heben`, `fluchtweg`. Disziplinen (Querformat, mit `groesse=breit`): `skidpad`, `acceleration`, `autocross`, `endurance`, `efficiency`. Weitere Grafiken (Querformat, `groesse=breit`): `engineering-design`, `cost-manufacturing`, `business-plan`, `bestaetigungscode`, `profil`, `channels`. Unfälle (Sicherheitsunterweisung): `handschuh-bohrer`, `schal-maschine`, `haare-maschine`, `hv-koerper`, `hv-lichtbogen`, `lv-ring`, `akku-brand`, `bohr-werkstueck`, `bohr-stange`, `bohrfutterschluessel`, `bandschleifer-spalt`, `flex-scheibe`, `flex-funken`, `carbon-lunge`, `carbon-zuhause`, `harz-haut`, `harz-hitze`, `getraenkeflasche` |
 | `schleife` | `ja` = läuft endlos, `nein` = einmal, sobald es sichtbar wird (erneut bei Maus darüber) |
 | `groesse` | `klein`, `mittel`, `gross`, `breit` (ganze Spaltenbreite, für die Disziplinen) |
 | `farbe` | `akzent` (Gelb) oder `text` (Schriftfarbe) |

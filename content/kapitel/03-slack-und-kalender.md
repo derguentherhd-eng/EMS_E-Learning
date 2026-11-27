@@ -53,8 +53,8 @@ Gib deine private E-Mail-Adresse ein und klicke auf den Knopf darunter. Alternat
 
 Slack schickt dir eine E-Mail mit einem Bestätigungscode. Tipp den Code auf der Slack-Seite ein. Keine E-Mail da? Schau im Spam-Ordner nach.
 
-![Vereinfachte Darstellung: Links ein Briefumschlag für die E-Mail von Slack, rechts ein Fenster „Code eingeben“ mit sechs Kästchen](assets/bilder/onboarding/slack/bestaetigungscode.svg "Vereinfachte Darstellung: Code aus der E-Mail eingeben")
-
+:::piktogramm Vereinfachte Darstellung: Code aus der E-Mail eingeben motiv=bestaetigungscode groesse=breit
+:::
 ### Schritt 4: Vollen Namen eingeben
 
 Gib deinen vollen Namen (Vor- und Nachname) ein und klicke auf **Fortfahren**. Damit bist du in unserem Slack.
@@ -65,8 +65,8 @@ Gib deinen vollen Namen (Vor- und Nachname) ein und klicke auf **Fortfahren**. D
 
 Mit Foto erkennt dich das ganze Team. Klicke in der Seitenleiste auf dein Profilbild → Profil → Bearbeiten. Lade ein Foto hoch und klicke auf **Änderungen speichern**.
 
-![Vereinfachte Darstellung von Slack: 1 Profilbild in der Seitenleiste, 2 Menüpunkt „Profil“, 3 Knopf „Bearbeiten“, 4 Knopf „Foto hochladen“](assets/bilder/onboarding/slack/profil.svg "Vereinfachte Darstellung: Profilbild → Profil → Bearbeiten → Foto hochladen")
-
+:::piktogramm Vereinfachte Darstellung: Profilbild → Profil → Bearbeiten → Foto hochladen motiv=profil groesse=breit
+:::
 ### Schritt 6: App installieren
 
 Installiere die Slack-App auf deinem Laptop (Windows, Mac oder Linux) und auf deinem Handy. Melde dich dort mit derselben E-Mail-Adresse an.
@@ -77,8 +77,8 @@ Installiere die Slack-App auf deinem Laptop (Windows, Mac oder Linux) und auf de
 
 Klicke auf **Home** → **Verzeichnisse** → Registerkarte **Channels** (so heißen Kanäle in Slack). Wähle einen Kanal und klicke auf **Channel beitreten**. Tritt mindestens **#01_allgemein** und dem **Kanal deines Subteams** bei. In einen geschlossenen Kanal muss dich ein Mitglied hinzufügen.
 
-![Vereinfachte Darstellung von Slack: 1 Home, 2 Verzeichnisse, 3 Registerkarte Channels, 4 Knopf zum Beitreten neben #01_allgemein](assets/bilder/onboarding/slack/channels.svg "Vereinfachte Darstellung: Home → Verzeichnisse → Channels → beitreten")
-
+:::piktogramm Vereinfachte Darstellung: Home → Verzeichnisse → Channels → beitreten motiv=channels groesse=breit
+:::
 Bringe die sieben Schritte in die richtige Reihenfolge, per Maus oder mit den Pfeil-Knöpfen, und prüfe dann deine Lösung.
 
 :::reihenfolge Slack einrichten
